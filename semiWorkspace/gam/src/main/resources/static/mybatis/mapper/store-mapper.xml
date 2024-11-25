@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.semi.gam.store.mapper.StoreMapper">
+
+    <insert id="insertAttachment">
+        INSERT ALL
+        <foreach collection="list" item="x">
+            INTO ST_ATTACHMENT (NO,REF_ST_NO,CHANGE_NAME) VALUES ((SELECT GET_ST_ATTACHMENT_NO FROM DUAL),SEQ_STORE.CURRVAL,#{x})
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+
+</mapper>
