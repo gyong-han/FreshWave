@@ -1,4 +1,4 @@
-package com.semi.app.schedule.vo;
+package com.semi.gam.schedule.vo;
 
 public class ScheduleVo {
 }

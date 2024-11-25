@@ -1,4 +1,4 @@
-package com.semi.app.board.controller;
+package com.semi.gam.board.controller;
 
 import org.springframework.stereotype.Controller;
 

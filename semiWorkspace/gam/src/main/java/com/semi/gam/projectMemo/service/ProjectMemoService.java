@@ -1,4 +1,4 @@
-package com.semi.app.projectMemo.service;
+package com.semi.gam.projectMemo.service;
 
 public class ProjectMemoService {
 }

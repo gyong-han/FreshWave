@@ -1,4 +1,4 @@
-package com.semi.app.phoneReservation.vo;
+package com.semi.gam.phoneReservation.vo;
 
 public class PhoneReservationVo {
 }

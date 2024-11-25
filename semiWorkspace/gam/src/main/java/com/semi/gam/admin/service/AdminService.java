@@ -1,4 +1,4 @@
-package com.semi.app.admin.service;
+package com.semi.gam.admin.service;
 
 public class AdminService {
 }

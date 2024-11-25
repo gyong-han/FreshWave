@@ -1,4 +1,4 @@
-package com.semi.app.job.service;
+package com.semi.gam.job.service;
 
 public class JobService {
 }

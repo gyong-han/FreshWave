@@ -1,4 +1,4 @@
-package com.semi.app.dept.mapper;
+package com.semi.gam.dept.mapper;
 
 public class DeptMapper {
 }

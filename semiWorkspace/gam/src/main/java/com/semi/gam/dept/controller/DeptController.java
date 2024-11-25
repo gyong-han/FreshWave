@@ -1,4 +1,4 @@
-package com.semi.app.dept.controller;
+package com.semi.gam.dept.controller;
 
 public class DeptController {
 }

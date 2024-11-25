@@ -1,4 +1,4 @@
-package com.semi.app.board.vo;
+package com.semi.gam.board.vo;
 
 public class BoardVo {
 }

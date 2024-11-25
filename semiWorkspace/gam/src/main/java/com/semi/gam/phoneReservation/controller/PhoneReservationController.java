@@ -1,4 +1,4 @@
-package com.semi.app.phoneReservation.controller;
+package com.semi.gam.phoneReservation.controller;
 
 public class PhoneReservationController {
 }

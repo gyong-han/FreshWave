@@ -1,4 +1,4 @@
-package com.semi.app.job.vo;
+package com.semi.gam.job.vo;
 
 public class JobVo {
 }

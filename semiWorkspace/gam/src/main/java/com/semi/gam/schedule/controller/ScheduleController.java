@@ -1,4 +1,4 @@
-package com.semi.app.schedule.controller;
+package com.semi.gam.schedule.controller;
 
 public class ScheduleController {
 }

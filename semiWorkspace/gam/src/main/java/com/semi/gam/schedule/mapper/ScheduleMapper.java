@@ -1,4 +1,4 @@
-package com.semi.app.schedule.mapper;
+package com.semi.gam.schedule.mapper;
 
 public class ScheduleMapper {
 }

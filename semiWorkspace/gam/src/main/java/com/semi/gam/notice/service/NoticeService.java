@@ -1,4 +1,4 @@
-package com.semi.app.notice.service;
+package com.semi.gam.notice.service;
 
 public class NoticeService {
 }

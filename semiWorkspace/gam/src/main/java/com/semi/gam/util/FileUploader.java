@@ -1,4 +1,4 @@
-package com.semi.app.util;
+package com.semi.gam.util;
 
 public class FileUploader {
 }

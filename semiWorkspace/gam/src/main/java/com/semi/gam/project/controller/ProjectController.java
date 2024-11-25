@@ -1,4 +1,4 @@
-package com.semi.app.project.controller;
+package com.semi.gam.project.controller;
 
 public class ProjectController {
 }

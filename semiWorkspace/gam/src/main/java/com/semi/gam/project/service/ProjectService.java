@@ -1,4 +1,4 @@
-package com.semi.app.project.service;
+package com.semi.gam.project.service;
 
 public class ProjectService {
 }

@@ -1,4 +1,4 @@
-package com.semi.app.member.vo;
+package com.semi.gam.member.vo;
 
 public class MemberVo {
 }
