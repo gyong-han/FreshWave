@@ -15,6 +15,9 @@ public interface StoreMapper {
             """)
     int insert(StoreVo vo);
 
-    int insertAttachment(List<String> changeNameList);
-    
+
+    @Insert("""
+            INSERT INTO ST_ATTACHMENT (NO,REF_ST_NO,CHANGE_NAME) VALUES ((SELECT GET_ST_ATTACHMENT_NO FROM DUAL),SEQ_STORE.CURRVAL,#{x})
+            """)
+    int insertAttachment(String changeName);
 }

@@ -15,14 +15,9 @@ public class StoreService {
     private final StoreMapper mapper;
 
 
-    public int insert(StoreVo vo, List<String> changeNameList) {
+    public int insert(StoreVo vo, String changeName) {
         int result1 = mapper.insert(vo);
-        int result2 = 1;
-        if (changeNameList.size() > 0) {
-            System.out.println("111");
-            result2 = mapper.insertAttachment(changeNameList);
-            System.out.println("2222");
-        }
+        int result2 = mapper.insertAttachment(changeName);
         return result1 * result2;
     }
 }
