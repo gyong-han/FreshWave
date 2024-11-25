@@ -1,4 +1,4 @@
-package com.semi.app.business.vo;
+package com.semi.gam.business.vo;
 
 public class BusinessVo {
 }

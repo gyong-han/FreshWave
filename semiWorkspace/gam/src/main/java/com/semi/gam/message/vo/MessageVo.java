@@ -1,4 +1,4 @@
-package com.semi.app.message.vo;
+package com.semi.gam.message.vo;
 
 public class MessageVo {
 }

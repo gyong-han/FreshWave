@@ -1,4 +1,4 @@
-package com.semi.app.company.service;
+package com.semi.gam.company.service;
 
 public class CompanyService {
 }

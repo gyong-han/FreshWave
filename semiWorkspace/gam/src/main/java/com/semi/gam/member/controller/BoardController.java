@@ -1,4 +1,4 @@
-package com.semi.app.member.controller;
+package com.semi.gam.member.controller;
 
 public class BoardController {
 }

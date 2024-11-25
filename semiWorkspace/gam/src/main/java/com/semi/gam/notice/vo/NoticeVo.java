@@ -1,4 +1,4 @@
-package com.semi.app.notice.vo;
+package com.semi.gam.notice.vo;
 
 public class NoticeVo {
 }

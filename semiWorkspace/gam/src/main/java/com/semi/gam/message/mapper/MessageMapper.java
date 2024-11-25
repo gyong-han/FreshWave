@@ -1,4 +1,4 @@
-package com.semi.app.message.mapper;
+package com.semi.gam.message.mapper;
 
 public class MessageMapper {
 }

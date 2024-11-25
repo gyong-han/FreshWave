@@ -1,4 +1,4 @@
-package com.semi.app.member.service;
+package com.semi.gam.member.service;
 
 public class MemberService {
 }

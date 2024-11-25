@@ -1,4 +1,4 @@
-package com.semi.app.schedule.service;
+package com.semi.gam.schedule.service;
 
 public class ScheduleService {
 }

@@ -1,4 +1,4 @@
-package com.semi.app.company.controller;
+package com.semi.gam.company.controller;
 
 public class CompanyController {
 }

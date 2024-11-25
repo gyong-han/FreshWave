@@ -1,4 +1,4 @@
-package com.semi.app.business.mapper;
+package com.semi.gam.business.mapper;
 
 public class BusinessMapper {
 }

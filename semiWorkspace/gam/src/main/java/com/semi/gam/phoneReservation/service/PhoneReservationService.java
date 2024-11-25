@@ -1,4 +1,4 @@
-package com.semi.app.phoneReservation.service;
+package com.semi.gam.phoneReservation.service;
 
 public class PhoneReservationService {
 }

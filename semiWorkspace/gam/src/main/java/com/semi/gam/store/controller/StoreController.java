@@ -1,4 +1,4 @@
-package com.semi.app.store.controller;
+package com.semi.gam.store.controller;
 
 public class StoreController {
 }

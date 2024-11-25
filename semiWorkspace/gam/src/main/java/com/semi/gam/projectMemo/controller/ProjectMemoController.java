@@ -1,4 +1,4 @@
-package com.semi.app.projectMemo.controller;
+package com.semi.gam.projectMemo.controller;
 
 public class ProjectMemoController {
 }

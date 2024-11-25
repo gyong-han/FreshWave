@@ -1,4 +1,4 @@
-package com.semi.app.company.vo;
+package com.semi.gam.company.vo;
 
 public class CompanyVo {
 }

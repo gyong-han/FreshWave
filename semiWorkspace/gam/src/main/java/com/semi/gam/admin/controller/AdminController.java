@@ -1,4 +1,4 @@
-package com.semi.app.admin.controller;
+package com.semi.gam.admin.controller;
 
 public class AdminController {
 }

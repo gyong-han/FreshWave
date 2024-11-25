@@ -1,4 +1,4 @@
-package com.semi.app.job.mapper;
+package com.semi.gam.job.mapper;
 
 public class JobMapper {
 }

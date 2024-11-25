@@ -1,4 +1,4 @@
-package com.semi.app.message.service;
+package com.semi.gam.message.service;
 
 public class MessageService {
 }

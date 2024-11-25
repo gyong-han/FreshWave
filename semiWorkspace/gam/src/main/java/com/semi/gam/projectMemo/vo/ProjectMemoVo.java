@@ -1,4 +1,4 @@
-package com.semi.app.projectMemo.vo;
+package com.semi.gam.projectMemo.vo;
 
 public class ProjectMemoVo {
 }

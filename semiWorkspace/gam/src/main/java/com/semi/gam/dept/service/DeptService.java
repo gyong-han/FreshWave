@@ -1,4 +1,4 @@
-package com.semi.app.dept.service;
+package com.semi.gam.dept.service;
 
 public class DeptService
 {

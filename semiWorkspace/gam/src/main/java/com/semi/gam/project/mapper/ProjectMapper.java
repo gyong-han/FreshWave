@@ -1,4 +1,4 @@
-package com.semi.app.project.mapper;
+package com.semi.gam.project.mapper;
 
 public class ProjectMapper {
 }

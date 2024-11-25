@@ -1,4 +1,4 @@
-package com.semi.app.board.mapper;
+package com.semi.gam.board.mapper;
 
 public class BoardMapper {
 }

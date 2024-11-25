@@ -1,4 +1,4 @@
-package com.semi.app.store.vo;
+package com.semi.gam.store.vo;
 
 public class StoreVo {
 }

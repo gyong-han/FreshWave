@@ -1,4 +1,4 @@
-package com.semi.app.business.controller;
+package com.semi.gam.business.controller;
 
 public class BusinessController {
 }

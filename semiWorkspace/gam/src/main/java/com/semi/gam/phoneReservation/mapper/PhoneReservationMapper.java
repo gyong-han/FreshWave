@@ -1,4 +1,4 @@
-package com.semi.app.phoneReservation.mapper;
+package com.semi.gam.phoneReservation.mapper;
 
 public class PhoneReservationMapper {
 }

@@ -1,4 +1,4 @@
-package com.semi.app.store.mapper;
+package com.semi.gam.store.mapper;
 
 public class StoreMapper {
 }

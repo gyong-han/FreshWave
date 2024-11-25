@@ -1,4 +1,4 @@
-package com.semi.app.business.service;
+package com.semi.gam.business.service;
 
 public class BusinessService {
 }
