@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("home")
-    @ResponseBody
     public String home(){
-        return "홈페이지";
+        return "/common/header";
     }
 
 }
