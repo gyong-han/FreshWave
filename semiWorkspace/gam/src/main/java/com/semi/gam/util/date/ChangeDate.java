@@ -7,10 +7,12 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class ChangeDate {
-    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy-MM-dd");
+    private static DateTimeFormatter inputFormatter = null;
+    private static DateTimeFormatter outputFormatter = null;
 
     public static String changeDate(String x){
+        inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        outputFormatter = DateTimeFormatter.ofPattern("yy.MM.dd");
         LocalDate parse = LocalDate.parse(x, inputFormatter);
         String date = parse.format(outputFormatter);
         return date;

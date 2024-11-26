@@ -40,22 +40,31 @@ public class StoreController {
     }
 
     @PostMapping("insert")
-    public String insert(StoreVo vo, HttpSession session, @RequestParam(name = "f") List<MultipartFile> fileList) throws IOException {
-        List<String> changeNameList = new ArrayList<String>();
-        for (MultipartFile f : fileList) {
-            if(f.isEmpty()){break;}
-            String changeName = FileUploader.save(f,path);
-            changeNameList.add(changeName);
-        }
+    public String insert(StoreVo vo, HttpSession session, MultipartFile f) throws IOException {
+        String changeName = "";
+            if(!f.isEmpty()){
+                changeName = FileUploader.save(f,path);
+            }
+
         vo.setEduDate(date.changeDate(vo.getEndDate()));
         vo.setOpenDate(date.changeDate(vo.getOpenDate()));
         vo.setStartDate(date.changeDate(vo.getStartDate()));
         vo.setEndDate(date.changeDate(vo.getEndDate()));
 
-        int result = service.insert(vo,changeNameList);
-        if(result > 2){
+        int result = service.insert(vo,changeName);
+        if(result > 0){
             return "redirect:/home";
         }
         return "redirect:/error";
+    }
+
+    @GetMapping("list")
+    public String list(){
+        return "store/list";
+    }
+
+    @GetMapping("detail")
+    public String detail(){
+        return "store/detail";
     }
 }
