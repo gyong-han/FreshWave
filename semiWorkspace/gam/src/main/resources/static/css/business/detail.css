@@ -1,0 +1,21 @@
+body{
+    background-color: #F2F2F2;
+}
+
+.table-area{
+    border-collapse: collapse;
+}
+
+.table-area th{
+    border: 0.5px solid gray;
+    background-color: #1D64F2;
+    color: white;
+    width: 170px;
+    height: 30px;
+}
+
+.table-area td{
+    width: 350px;
+    border-bottom: 0.5px solid #D2D2D2;
+    border-left: 0.5px solid #D2D2D2;
+}

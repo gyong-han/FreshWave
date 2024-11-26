@@ -19,4 +19,7 @@ public class BusinessVo {
     private String bpNo;
     private String startDate;
     private String endDate;
+    private String managerName;
+    private String originName;
+    private String changeName;
 }

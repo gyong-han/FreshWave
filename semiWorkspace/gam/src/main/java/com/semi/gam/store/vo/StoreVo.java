@@ -21,6 +21,8 @@ public class StoreVo {
     private String openDate;
     private String status;
     private String closeDate;
+    private String originName;
+    private String changeName;
 
 
 }

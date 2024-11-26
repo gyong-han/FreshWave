@@ -44,8 +44,8 @@
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
-                <img src="/img/icon/client.svg" alt="client">
-                <span class="icon-text">고객관계 관리</span>
+                <img src="/img/icon/client.svg" alt="client" onclick="location.href='/store/home'">
+                <span class="icon-text" onclick="location.href='/store/home'">고객관계 관리</span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">

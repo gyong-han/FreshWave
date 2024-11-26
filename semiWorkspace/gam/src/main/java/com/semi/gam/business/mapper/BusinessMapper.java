@@ -1,8 +1,12 @@
 package com.semi.gam.business.mapper;
 
 import com.semi.gam.business.vo.BusinessVo;
+import com.semi.gam.business.vo.RankVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface BusinessMapper {
@@ -21,8 +25,48 @@ public interface BusinessMapper {
     int insertHistory(BusinessVo vo);
 
     @Insert("""
-            INSERT INTO BP_ATTACHMENT (NO,REF_BP_NO,CHANGE_NAME)
-            VALUES ((SELECT GET_BP_ATTACHMENT_NO FROM DUAL),SEQ_BUSINESS.CURRVAL,'changeName')
+            INSERT INTO BP_ATTACHMENT (NO,REF_BP_NO,CHANGE_NAME,ORIGIN_NAME)
+            VALUES ((SELECT GET_BP_ATTACHMENT_NO FROM DUAL),SEQ_BUSINESS.CURRVAL,#{changeName},#{originName})
             """)
-    int insertAttachment(String changeName);
+    int insertAttachment(String changeName, String originName);
+
+    @Select("""
+            SELECT B.NO,B.MANAGER_NO,B.BRN,B.BT_CODE,B.ADDRESS,B.DEL_YN,B.NAME,B.CEO,B.PHONE,M.NAME AS MANAGER_NAME,B.DEPT_NAME,
+            H.START_DATE,H.END_DATE,B.ENROLL_DATE,B.MODIFY_DATE,H.BP_NO
+            FROM BUSINESS B
+            JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
+            LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
+            WHERE DEL_YN = 'N'
+            ORDER BY NO DESC
+            """)
+    List<BusinessVo> getBusinessVoList();
+
+
+    @Select("""
+            SELECT B.NO,B.MANAGER_NO,B.BRN,B.BT_CODE,B.ADDRESS,B.DEL_YN,B.NAME,B.CEO,B.PHONE,M.NAME AS MANAGER_NAME,B.DEPT_NAME,
+            H.START_DATE,H.END_DATE,B.ENROLL_DATE,B.MODIFY_DATE,H.BP_NO,A.ORIGIN_NAME,A.CHANGE_NAME
+            FROM BUSINESS B
+            JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
+            LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
+            LEFT JOIN BP_ATTACHMENT A ON(B.NO = A.REF_BP_NO)
+            WHERE DEL_YN = 'N'
+            AND B.NO = ${bno}
+            """)
+    BusinessVo detail(String bno);
+
+    @Select("""
+            SELECT NAME, COUNT(*) AS TRANSACTIONNUM, RANK() OVER(ORDER BY COUNT(*) DESC) AS RANK
+            FROM(
+                SELECT B.NAME, B.DEPT_NAME
+                    FROM BUSINESS B
+                    JOIN MEMBER M ON (B.MANAGER_NO = M.EMP_NO)
+                    JOIN BUSINESS_HISTORY H ON (B.NO = H.BP_NO)
+                    WHERE B.DEL_YN = 'N'
+            )SUB
+            GROUP BY NAME
+            ORDER BY COUNT(*) DESC
+            FETCH FIRST 5 ROWS ONLY
+            """)
+    List<RankVo> getDataList();
+
 }
