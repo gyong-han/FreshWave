@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로젝트 메모 수정</title>
+<title>프로젝트 메모 상세조회</title>
 
 </head>
 <body>
@@ -15,9 +15,9 @@
     <div class="prj-detail-box">
         <div>
             <div>우선순위</div>
-                <input type="text" value="MIDDLE">
+                <input type="text" value="MIDDLE" readonly>
             <div>진행상태</div>
-                <input type="text" value="진행중">
+                <input type="text" value="진행중" readonly>
             <br>
             <div>
                 <div>시작날짜</div>
@@ -55,10 +55,14 @@
 
 
     </div>
-    <input type="submit" value="저장">
+    <input type="submit" value="수정">
     </form>
-    <form action="/projectMemo/detail">
-        <input type="submit" value="취소">
+    <form action="/projectMemo/list">
+        <input type="submit" value="삭제">
+    </form>
+
+    <form action="/projectMemo/list">
+        <input type="submit" value="목록">
     </form>
 
 </body>

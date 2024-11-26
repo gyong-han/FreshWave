@@ -1,5 +1,6 @@
 package com.semi.gam.project.service;
 
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.mapper.ProjectMapper;
 import com.semi.gam.project.vo.ProjectVo;
 import lombok.RequiredArgsConstructor;
@@ -17,4 +18,12 @@ public class ProjectService {
         return mapper.write(vo);
     }
 
+    public int edit(ProjectVo vo, MemberVo memberVo) {
+        return mapper.edit(vo, memberVo);
+    }
+
+    public ProjectVo delete(ProjectVo vo) {
+        return mapper.delete(vo);
+
+    }
 }
