@@ -5,10 +5,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="/css/common/header.css">
+<link rel="stylesheet" href="/css/common/font.css">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
 <script defer src="/js/common/header.js"></script>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FRESH WAVE</title>
+
+</head>
+<body>
 <header>
         <div class="logo">
             <img src="/img/logo/logo.png" alt="logo">
@@ -55,3 +64,6 @@
                 <div class="bluediv"></div>
             </div>
     </aside>
+
+    </body>
+    </html>
