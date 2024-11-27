@@ -28,7 +28,7 @@
         <div class="profile-area">
             <div id="profile"><img src="/img/profile/6.png" alt="user-profile"></div>
             <div id="userName"><span>이감자</span></div>
-            <div id="userDept"><span>영업부(사원)</span></div>
+            <div id="userDept"><span>영업부 (사원)</span></div>
         </div>
     </header>
 
