@@ -13,6 +13,7 @@
 </head>
 <body>
    <h1>Business insert ~ !</h1>
+
     <form action="/business/insert" method="post" enctype="multipart/form-data">
         <label>거래처명</label><br>
         <input type="text" placeholder="거래처명을 입력해주세요." name="name"><br>
@@ -50,7 +51,6 @@
         <hidden input type="text" id="sample4_jibunAddress" placeholder="지번주소">
         <hidden span id="guide" style="color:#999;display:none"></span>
         <hidden input type="text" id="sample4_extraAddress" placeholder="참고항목"><br>
-
 
     </form>
 

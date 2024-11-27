@@ -14,8 +14,8 @@ public class ProjectService {
 
     private final ProjectMapper mapper;
 
-    public int write(ProjectVo vo) {
-        return mapper.write(vo);
+    public int write(ProjectVo vo, MemberVo memberVo) {
+        return mapper.write(vo, memberVo);
     }
 
     public int edit(ProjectVo vo, MemberVo memberVo) {

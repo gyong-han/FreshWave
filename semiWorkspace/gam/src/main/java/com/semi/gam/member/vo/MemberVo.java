@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class MemberVo {
-
     private String no;
-    private String empNo;
+    private String id;
+    private String cpCode;
     private String name;
     private String pwd;
     private String nick;

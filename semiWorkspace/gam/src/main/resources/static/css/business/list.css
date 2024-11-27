@@ -8,12 +8,73 @@
     width: 150px;
 }
 
+.list-table thead th:last-child{
+    text-align: center;
+    border-bottom: 2px solid black;
+    width: 180px;
+}
+
 .list-table tbody td{
     text-align: center;
     height: 50px;
 }
 
+input[name="searchValue"]{
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    width: 300px;
+    padding: 0%;
+    margin: 0%;
+}
+
+input[type="submit"]{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 30px;
+    background-image: url('/img/icon/search.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+}
+
 a{
     text-decoration: none;
     color: black;
+}
+
+.list-table tbody tr:hover td{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+
+.list-table tbody tr:hover td:nth-child(2) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.list-table tbody tr:hover td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#insert{
+    background-color: #1D64F2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 90px;
+}
+
+#insert:hover{
+    cursor: pointer;
 }

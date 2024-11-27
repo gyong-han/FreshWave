@@ -2,6 +2,7 @@ package com.semi.gam.store.service;
 
 import com.semi.gam.store.mapper.StoreMapper;
 import com.semi.gam.store.vo.StoreVo;
+import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +22,15 @@ public class StoreService {
         return result1 * result2;
     }
 
-    public List<StoreVo> getStoreVoList() {
-        return mapper.getStoreVoList();
+    public List<StoreVo> getStoreVoList(PageVo pvo, String searchType, String searchValue) {
+        return mapper.getStoreVoList(pvo,searchType,searchValue);
     }
 
-    public StoreVo detail(String bno) {
-        return mapper.detail(bno);
+    public StoreVo detail(String no) {
+        return mapper.detail(no);
+    }
+
+    public int getStoreCnt(String searchType, String searchValue) {
+        return mapper.getStoreCnt(searchValue,searchType);
     }
 }

@@ -3,7 +3,6 @@ package com.semi.gam.project.mapper;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.vo.ProjectVo;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface ProjectMapper {
@@ -11,8 +10,7 @@ public interface ProjectMapper {
     @Insert("""
             INSERT INTO PROJECT
             (
-                KEY
-                , WRITER_NO
+                 WRITER_NO
                 , PRIORITY
                 , ACCESS_LEVEL
                 , NAME
@@ -21,17 +19,16 @@ public interface ProjectMapper {
             )
             VALUES
             (
-                #{key}
-                , #{writerNo}
-                , #{priority}
-                , #{accessLevel}
-                , #{name}
-                , #{startDate}
-                , #{endDate}
+                 #{memberVo.empNo}
+                , #{vo.priority}
+                , #{vo.accessLevel}
+                , #{vo.name}
+                , #{vo.startDate}
+                , #{vo.endDate}
             )
             
             """)
-    int write(ProjectVo vo);
+    int write(ProjectVo vo, MemberVo memberVo);
 
 
     @Update("""
