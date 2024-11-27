@@ -1,7 +1,9 @@
 package com.semi.gam.project.controller;
 
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.service.ProjectService;
 import com.semi.gam.project.vo.ProjectVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,6 @@ public class ProjectController {
             return "redirect:/error";
         }
         return "redirect:/project/cardList";
-
-
     }
 
     @GetMapping("cardList")
@@ -39,16 +39,15 @@ public class ProjectController {
         return "/project/cardList";
     }
 
-
     @GetMapping("list")
     //프로젝트 목록 (리스트)
     public void list(){
     }
 
-    @GetMapping("selectOne")
+    @GetMapping("detail")
     //프로젝트 상세조회
     public String selectOne(){
-        return "/project/selectOne";
+        return "/project/detail";
     }
 
     @GetMapping("edit")
@@ -57,26 +56,21 @@ public class ProjectController {
         return "/project/edit";
     }
 
+    @PostMapping("edit")
+    public String edit(ProjectVo vo, HttpSession session, MemberVo memberVo){
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        memberVo.setEmpNo(loginMemberVo.getNo());
+        int result = service.edit(vo, memberVo);
+        if(result < 1){
+            return "redirect:/error";
+        }
+        return "redirect:/project/detail";
+    }
+
     @GetMapping("delete")
     //프로젝트 삭제
-    public String delete(){
-        return "/project/delete";
+    public String delete(ProjectVo vo){
+        service.delete(vo);
+        return "redirect:/board/list";
     }
-
-    @GetMapping("select")
-    //프로젝트 검색
-    public String select(){
-        return "/project/select";
-    }
-
-    @GetMapping("addMember")
-    //프로젝트 인원추가
-    public String addMember(){
-        return "/project/addMember";
-    }
-
-
-
-
-
 }
