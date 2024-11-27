@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>헬로월드</title>
+<title>게시판 작성</title>
 
 </head>
 <body>

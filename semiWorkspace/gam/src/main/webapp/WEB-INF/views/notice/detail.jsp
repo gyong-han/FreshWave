@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>삳세조회</title>
+<title>상세조회</title>
 </head>
 <body>
 
