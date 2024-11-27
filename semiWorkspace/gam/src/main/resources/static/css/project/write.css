@@ -1,0 +1,8 @@
+const selectTag = document.querySelector("select[#writer-select]");
+
+const optionTag = document.createElement("option");
+
+optionTag.setAttribute("value" , 1);
+optionTag.innerText = "홍길동"
+
+selectTag.appendChild(optionTag);
