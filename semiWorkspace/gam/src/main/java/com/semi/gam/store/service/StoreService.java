@@ -15,9 +15,17 @@ public class StoreService {
     private final StoreMapper mapper;
 
 
-    public int insert(StoreVo vo, String changeName) {
+    public int insert(StoreVo vo, String changeName, String originName) {
         int result1 = mapper.insert(vo);
-        int result2 = mapper.insertAttachment(changeName);
+        int result2 = mapper.insertAttachment(changeName,originName);
         return result1 * result2;
+    }
+
+    public List<StoreVo> getStoreVoList() {
+        return mapper.getStoreVoList();
+    }
+
+    public StoreVo detail(String bno) {
+        return mapper.detail(bno);
     }
 }
