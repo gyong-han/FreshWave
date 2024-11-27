@@ -2,6 +2,9 @@ package com.semi.gam.schedule.vo;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 public class ScheduleVo {
     private String no;
@@ -21,4 +24,9 @@ public class ScheduleVo {
     private String almTime;
     private String shareYn;
     private String delYn;
+
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private LocalTime beginTime;
+    private LocalTime endTime;
 }

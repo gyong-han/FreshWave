@@ -10,17 +10,15 @@
 <body>
         <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <main>
-        <form action="/sch/write" method="post">
+        <form action="/sch/edit" method="post">
             <input type="text" name="title" placeholder="제목을 입력해주세요.">
             <br>
-            <input type="date" name="beginDate">
-            <input type="time" name="beginTime">
-            <input type="date" name="endDate">
-            <input type="time" name="endTime">
+            <input type="date" name="startDate">
+            <input type="time" name="startTime">
+            <input type="date" name="finishDate">
+            <input type="time" name="finishTime">
             <input type="checkbox" name="allDay"> 하루종일
             <input type="text" name="userAdd">
-            <select name="priority">
-            </select>
             <textarea name="content"></textarea>
             <br>
             <input type="submit" value="작성하기">
