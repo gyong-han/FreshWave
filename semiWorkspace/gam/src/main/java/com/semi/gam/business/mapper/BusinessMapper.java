@@ -2,6 +2,7 @@ package com.semi.gam.business.mapper;
 
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
+import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -30,16 +31,7 @@ public interface BusinessMapper {
             """)
     int insertAttachment(String changeName, String originName);
 
-    @Select("""
-            SELECT B.NO,B.MANAGER_NO,B.BRN,B.BT_CODE,B.ADDRESS,B.DEL_YN,B.NAME,B.CEO,B.PHONE,M.NAME AS MANAGER_NAME,B.DEPT_NAME,
-            H.START_DATE,H.END_DATE,B.ENROLL_DATE,B.MODIFY_DATE,H.BP_NO
-            FROM BUSINESS B
-            JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
-            LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
-            WHERE DEL_YN = 'N'
-            ORDER BY NO DESC
-            """)
-    List<BusinessVo> getBusinessVoList();
+    List<BusinessVo> getBusinessVoList(PageVo pvo, String searchType, String searchValue);
 
 
     @Select("""
@@ -49,10 +41,10 @@ public interface BusinessMapper {
             JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
             LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
             LEFT JOIN BP_ATTACHMENT A ON(B.NO = A.REF_BP_NO)
-            WHERE DEL_YN = 'N'
-            AND B.NO = ${bno}
+            WHERE B.NO = ${no}
+            AND DEL_YN = 'N'
             """)
-    BusinessVo detail(String bno);
+    BusinessVo detail(String no);
 
     @Select("""
             SELECT NAME, COUNT(*) AS TRANSACTIONNUM, RANK() OVER(ORDER BY COUNT(*) DESC) AS RANK
@@ -69,4 +61,5 @@ public interface BusinessMapper {
             """)
     List<RankVo> getDataList();
 
+    int getBusinessCnt(String searchValue, String searchType);
 }

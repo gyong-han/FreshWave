@@ -4,6 +4,7 @@ import com.semi.gam.store.service.StoreService;
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.FileUploader;
 import com.semi.gam.util.date.ChangeDate;
+import com.semi.gam.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,25 +58,36 @@ public class StoreController {
     }
 
     @GetMapping("list")
-    public String list(){
-        return "store/list";
-    }
-
-    @GetMapping("list/data")
-    @ResponseBody
-    public List<StoreVo> getStoreVoList(){
-        List<StoreVo> storeVoList = service.getStoreVoList();
+    public String getStoreVoList(Model model,@RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
+        int listCount = service.getStoreCnt(searchType,searchValue);
+        int pageLimit = 5;
+        int boardLimit = 8;
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+        List<StoreVo> storeVoList = service.getStoreVoList(pvo,searchType,searchValue);
         for (StoreVo storeVo : storeVoList) {
             String changePhone = storeVo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
             storeVo.setPhone(changePhone);
         }
-        return storeVoList;
+        model.addAttribute("storeVoList",storeVoList);
+        model.addAttribute("pvo",pvo);
+        model.addAttribute("searchValue",searchValue);
+        model.addAttribute("searchType",searchType);
+        return "store/list";
     }
 
     @GetMapping("detail")
-    public String detail(String bno, Model model){
-        StoreVo vo = service.detail(bno);
+    public String detail(String no, Model model){
+        StoreVo vo = service.detail(no);
+
+        String changePhone = vo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{6})", "$1-$2-$3");
+        String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
+        String changeCeoPhone = vo.getCeoPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
+        vo.setPhone(changePhone);
+        vo.setBrn(changeBrn);
+        vo.setCeoPhone(changeCeoPhone);
+
         model.addAttribute("vo",vo);
         return "store/detail";
     }
+
 }

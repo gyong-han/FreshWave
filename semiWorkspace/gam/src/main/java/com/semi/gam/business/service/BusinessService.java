@@ -3,6 +3,7 @@ package com.semi.gam.business.service;
 import com.semi.gam.business.mapper.BusinessMapper;
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
+import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,19 @@ public class BusinessService {
         return result1 * result2;
     }
 
-    public List<BusinessVo> getBusinessVoList() {
-        return mapper.getBusinessVoList();
+    public List<BusinessVo> getBusinessVoList(PageVo pvo, String searchType, String searchValue) {
+        return mapper.getBusinessVoList(pvo,searchType,searchValue);
     }
 
-    public BusinessVo detail(String bno) {
-        return mapper.detail(bno);
+    public BusinessVo detail(String no) {
+        return mapper.detail(no);
     }
 
     public List<RankVo> getDataList() {
         return mapper.getDataList();
+    }
+
+    public int getBusinessCnt(String searchValue, String searchType) {
+        return mapper.getBusinessCnt(searchValue,searchType);
     }
 }

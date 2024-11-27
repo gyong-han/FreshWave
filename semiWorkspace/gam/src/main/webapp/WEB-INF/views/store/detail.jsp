@@ -11,13 +11,13 @@
     <script defer src="/js/store/detail.js"></script>
 </head>
 <body>
-    <div><h1>역삼 1호점</h1></div>
+    <div><h1>${vo.name}</h1></div>
     <div id="map" style="width:350px;height:350px;" ></div><br>
     <table class="table-area">
         <!--td는 inputTag로 바꾸기-->
         <tr>
-            <th>가맹점명</th>
-            <td>${vo.name}</td>
+            <th>가맹점장</th>
+            <td>${vo.ceo}</td>
         </tr>
         <tr>
             <th>가맹점 전화번호</th>

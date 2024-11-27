@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,12 +12,29 @@
     <script defer src="/js/store/list.js"></script>
 </head>
 <body>
-    <h1>가맹점 목록조회</h1>
+    <h1><a href="/store/list">가맹점 목록조회</a></h1>
+
+    <div class="search-area">
+        <form action="/store/list?pno=1">
+            <!-- 검색 카테고리 -->
+            <select name="searchType">
+                <option value="name" ${param.searchType == 'name' ? 'selected' : ''}>가맹점명</option>
+                <option value="ceo" ${param.searchType == 'ceo' ? 'selected' : ''}>가맹점장</option>
+            </select>
+    
+            <!-- 검색 창-->
+            <input type="text" name="searchValue" value="${searchValue}" placeholder="검색어를 입력하세요!">
+    
+            <!-- 검색 버튼-->
+            <input type="submit" value=""><br>
+        </form>
+    </div><br>
+
     <table class="list-table">
         <thead>
             <tr>
                 <th>가맹점명</th>
-                <th>대표자명</th>
+                <th>가맹점장</th>
                 <th>가맹점 전화번호</th>
                 <th>가맹점 상태</th>
                 <th>오픈일</th>
@@ -24,9 +42,35 @@
             </tr>
         </thead>
         <tbody>
-
+            <c:forEach items="${storeVoList}" var="vo">
+                <tr>
+                    <td hidden>${vo.no}</td>
+                    <td>${vo.name}</td>
+                    <td>${vo.ceo}</td>
+                    <td>${vo.phone}</td>
+                    <td>${vo.status}</td>
+                    <td>${vo.openDate}</td>
+                    <td>${vo.startDate} ~ ${vo.endDate}</td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
-    <button onclick="location.href='/store/insert'">가맹점 추가</button>
+    <button id="insert" onclick="location.href='/store/insert'">가맹점 추가</button>
+
+    <div class="page-area">
+        <c:if test="${pvo.startPage != 1}" >
+            <a href="/store/list?pno=${pvo.startPage-1}&searchType=${searchType}&searchValue=${searchValue}">⬅️</a>
+        </c:if>
+
+        <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+            <a href="/store/list?pno=${i}&searchType=${searchType}&searchValue=${searchValue}">${i}</a>
+        </c:forEach>
+
+        <c:if test="${pvo.endPage != pvo.maxPage}">
+            <a href="/store/list?pno=${pvo.endPage+1}&searchType=${searchType}&searchValue=${searchValue}">➡️</a>
+        </c:if>
+
+    </div>
+
 </body>
 </html>
