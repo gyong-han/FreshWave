@@ -5,20 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/notice/write.css">
 <title>공지사항 작성</title>
-
 </head>
 <body>
-
-	<h1>게시글 작성</h1>
-
-    <form action="/notice/write" method="post">
-        <input type="text" name="title" placeholder="제목">
-        <br>
-        <textarea name="content" placeholder="내용"></textarea>
-        <br>
-        <input type="submit" value="작성하기">
-    </form>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <main class="main-container">
+        <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
+        <h1>게시글 작성</h1>
+        
+        <form action="/notice/write" method="post">
+            <input type="text" name="title" placeholder="제목">
+            <br>
+            <textarea name="content" placeholder="내용"></textarea>
+            <br>
+            <input type="submit" value="작성하기">
+        </form>
+    </main>
 
 
 

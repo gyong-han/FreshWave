@@ -1,3 +1,7 @@
+.main-container {
+    display: flex;
+}
+
 main .table-area tbody tr:hover{
     background-color: #1D64F2;
     color: white;
