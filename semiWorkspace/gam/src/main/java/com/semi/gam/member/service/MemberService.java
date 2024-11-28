@@ -1,5 +1,8 @@
 package com.semi.gam.member.service;
 
+import com.semi.gam.member.mapper.MemberMapper;
+import com.semi.gam.member.vo.MemberVo;
+import lombok.RequiredArgsConstructor;
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
@@ -21,25 +24,22 @@ public class MemberService {
 
     private final MemberMapper mapper;
 
-    public MemberVo login(MemberVo mvo) {
+    public List<MemberVo> getEmpVo() {
+        return mapper.getEmpVo();
+    }
+
+    public MemberVo login (MemberVo mvo){
         return mapper.loginMember(mvo);
 
     }
 
-    public AdminVo loginAdmin(AdminVo avo) {
+    public AdminVo loginAdmin (AdminVo avo){
         return mapper.loginAdmin(avo);
     }
 
-    public MemberVo loginMember(MemberVo mvo) {
+    public MemberVo loginMember (MemberVo mvo){
         return mapper.loginMember(mvo);
     }
-
-    public int join(MemberVo mvo, EmployeeVo evo) {
-        int result1 = mapper.Company(evo);
-        int result2 = mapper.join(mvo);
-        return result2*result1;
-    }
-
 
     public List<JobVo> getJobVoList() {
         return mapper.getJobVoList();
@@ -48,4 +48,12 @@ public class MemberService {
     public List<DeptVo> getDeptVoList() {
         return mapper.getDeptVoList();
     }
+
+    public int join (MemberVo mvo, EmployeeVo evo){
+        int result1 = mapper.Company(evo);
+        int result2 = mapper.join(mvo);
+        return result2 * result1;
+    }
+
+
 }

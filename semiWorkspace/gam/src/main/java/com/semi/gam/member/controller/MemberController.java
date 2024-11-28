@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("member")
 @Slf4j
-public class MemberController {
+public class MemberController{
 
     private final MemberService service;
 

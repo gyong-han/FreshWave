@@ -6,13 +6,17 @@ import com.semi.gam.employee.vo.EmployeeVo;
 import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.vo.MemberVo;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper
 public interface MemberMapper {
+
+    @Select("""
+            SELECT EMP_NO , NAME
+            FROM MEMBER
+            """)
+    List<MemberVo> getEmpVo();
 
     @Select("""
             SELECT
@@ -100,4 +104,5 @@ public interface MemberMapper {
             FROM DEPT
             """)
     List<DeptVo> getDeptVoList();
+
 }
