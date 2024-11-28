@@ -1,32 +1,23 @@
 package com.semi.gam.member.mapper;
 
-<<<<<<< HEAD
-import com.semi.gam.member.vo.MemberVo;
-=======
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
 import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.vo.MemberVo;
 import org.apache.ibatis.annotations.Insert;
->>>>>>> 5e412a01822d795dc01dfb9bae757f28dc21d6b5
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper
 public interface MemberMapper {
-
-<<<<<<< HEAD
 
     @Select("""
             SELECT EMP_NO , NAME
             FROM MEMBER
             """)
     List<MemberVo> getEmpVo();
-}
-=======
+
     @Select("""
             SELECT
                 E.CP_CODE
@@ -113,5 +104,5 @@ public interface MemberMapper {
             FROM DEPT
             """)
     List<DeptVo> getDeptVoList();
+
 }
->>>>>>> 5e412a01822d795dc01dfb9bae757f28dc21d6b5

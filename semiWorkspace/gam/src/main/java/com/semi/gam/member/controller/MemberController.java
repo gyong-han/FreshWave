@@ -1,8 +1,5 @@
 package com.semi.gam.member.controller;
 
-<<<<<<< HEAD
-public class MemberController {
-=======
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
@@ -25,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("member")
 @Slf4j
-public class MemberController {
+public class MemberController{
 
     private final MemberService service;
 
@@ -92,5 +89,4 @@ public class MemberController {
 
     }
 
->>>>>>> 5e412a01822d795dc01dfb9bae757f28dc21d6b5
 }

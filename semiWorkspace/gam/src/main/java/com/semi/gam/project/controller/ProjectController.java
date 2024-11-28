@@ -34,19 +34,19 @@ public class ProjectController {
         return "project/write";
     }
 
-    @PostMapping("write")
-    public String write(ProjectVo vo , MemberVo memberVo, HttpSession session){
-        MemberVo loginMemberVo1 = memberVo; //TODO 로그인정보 만들어지면 지우기
-        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
-        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setEmpNo("1");        //TODO 로그인정보 만들어지면 지우기
-        memberVo.setEmpNo(loginMemberVo.getEmpNo());
-        int result = service.write(vo, memberVo);
-        if(result != 1){
-            return "redirect:/error";
-        }
-        return "redirect:/project/cardList";
-    }
+//    @PostMapping("write")
+//    public String write(ProjectVo vo , MemberVo memberVo, HttpSession session){
+//        MemberVo loginMemberVo1 = memberVo; //TODO 로그인정보 만들어지면 지우기
+//        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
+//        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+//        loginMemberVo.setEmpNo("1");        //TODO 로그인정보 만들어지면 지우기
+//        memberVo.setEmpNo(loginMemberVo.getEmpNo());
+//        int result = service.write(vo, memberVo);
+//        if(result != 1){
+//            return "redirect:/error";
+//        }
+//        return "redirect:/project/cardList";
+//    }
 
     @GetMapping("cardList")
     //프로젝트 목록(카드)
@@ -75,16 +75,16 @@ public class ProjectController {
         return "/project/edit";
     }
 
-    @PostMapping("edit")
-    public String edit(ProjectVo vo, HttpSession session, MemberVo memberVo){
-        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        memberVo.setEmpNo(loginMemberVo.getNo());
-        int result = service.edit(vo, memberVo);
-        if(result < 1){
-            return "redirect:/error";
-        }
-        return "redirect:/project/detail";
-    }
+//    @PostMapping("edit")
+//    public String edit(ProjectVo vo, HttpSession session, MemberVo memberVo){
+//        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+//        memberVo.setEmpNo(loginMemberVo.getNo());
+//        int result = service.edit(vo, memberVo);
+//        if(result < 1){
+//            return "redirect:/error";
+//        }
+//        return "redirect:/project/detail";
+//    }
 
     @GetMapping("delete")
     //프로젝트 삭제
