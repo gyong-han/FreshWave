@@ -33,4 +33,12 @@ public class StoreService {
     public int getStoreCnt(String searchType, String searchValue) {
         return mapper.getStoreCnt(searchValue,searchType);
     }
+
+    public int delete(String bno) {
+        return mapper.delete(bno);
+    }
+
+    public int edit(StoreVo svo) {
+        return mapper.edit(svo);
+    }
 }

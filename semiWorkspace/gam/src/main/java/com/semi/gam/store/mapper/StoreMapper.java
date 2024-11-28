@@ -2,9 +2,7 @@ package com.semi.gam.store.mapper;
 
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.page.PageVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,7 +11,7 @@ public interface StoreMapper {
 
     @Insert("""
             INSERT INTO STORE (NO,MANAGER_NO,NAME,CEO,BRN,START_DATE,END_DATE,ADDRESS,PHONE,CEO_PHONE,ENROLL_DATE,EDU_DATE,OPEN_DATE,STATUS)
-            VALUES(SEQ_STORE.NEXTVAL,'1',#{name},#{ceo},#{brn},#{startDate},#{endDate},#{address},#{phone},#{ceoPhone},SYSDATE,#{eduDate},#{openDate},#{status})
+            VALUES(SEQ_STORE.NEXTVAL,#{managerNo},#{name},#{ceo},#{brn},#{startDate},#{endDate},#{address},#{phone},#{ceoPhone},SYSDATE,#{eduDate},#{openDate},#{status})
             """)
     int insert(StoreVo vo);
 
@@ -27,7 +25,7 @@ public interface StoreMapper {
     List<StoreVo> getStoreVoList(PageVo pvo, String searchType, String searchValue);
 
     @Select("""
-            SELECT S.NAME,S.CEO,S.PHONE,S.CEO_PHONE,S.BRN,S.EDU_DATE,S.OPEN_DATE,S.CLOSE_DATE,S.STATUS,S.START_DATE,S.END_DATE,
+            SELECT S.NO,S.MANAGER_NO,S.NAME,S.CEO,S.PHONE,S.CEO_PHONE,S.BRN,S.EDU_DATE,S.OPEN_DATE,S.CLOSE_DATE,S.STATUS,S.START_DATE,S.END_DATE,
             S.ADDRESS,A.ORIGIN_NAME
             FROM STORE S
             LEFT JOIN ST_ATTACHMENT A ON(S.NO = A.REF_ST_NO)
@@ -37,4 +35,29 @@ public interface StoreMapper {
     StoreVo detail(String no);
 
     int getStoreCnt(String searchValue, String searchType);
+
+    @Update("""
+            UPDATE STORE
+            SET DEL_YN = 'Y'
+            WHERE NO = #{bno}
+            """)
+    int delete(String bno);
+
+
+    @Update("""
+            UPDATE STORE
+            SET CEO = #{ceo},
+            START_DATE = #{startDate},
+            END_DATE = #{endDate},
+            ADDRESS = #{address},
+            PHONE = #{phone},
+            CEO_PHONE = #{ceoPhone},
+            MODIFY_DATE = SYSDATE,
+            EDU_DATE = #{eduDate},
+            OPEN_DATE = #{openDate},
+            STATUS = #{status},
+            CLOSE_DATE = #{closeDate}
+            WHERE NO = #{no}
+            """)
+    int edit(StoreVo svo);
 }

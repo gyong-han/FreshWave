@@ -18,10 +18,9 @@
         <form action="/business/list?pno=1">
             <!-- 검색 카테고리 -->
             <select name="searchType">
-                <option value="name" ${param.searchType == 'name' ? 'selected' : ''}>거래처명</option>
-                <option value="managerName" ${param.searchType == 'managerName' ? 'selected' : ''}>담당자</option>
-                <option value="ceo" ${param.searchType == 'ceo' ? 'selected' : ''}>대표자</option>
-
+                <option value="name" ${searchType == 'name' ? 'selected' : ''}>거래처명</option>
+                <option value="managerName" ${searchType == 'managerName' ? 'selected' : ''}>담당자</option>
+                <option value="ceo" ${searchType == 'ceo' ? 'selected' : ''}>대표자</option>
             </select>
     
             <!-- 검색 창-->

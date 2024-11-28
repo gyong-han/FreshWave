@@ -21,6 +21,11 @@ function combineAddress() {
     const detailAddress = document.getElementById("sample4_detailAddress").value;
 
     let addressTag = document.querySelector("#address");
-    addressTag.value = roadAddress + ", " + detailAddress;
+
+    if(!detailAddress){
+        addressTag.value = roadAddress;
+    }else{
+        addressTag.value = roadAddress + ", " + detailAddress;
+    }
 }
 combineAddress();

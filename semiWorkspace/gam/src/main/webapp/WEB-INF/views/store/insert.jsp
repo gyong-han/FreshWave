@@ -18,36 +18,31 @@
         <input type="text" placeholder="가맹점명을 입력해주세요." name="name"><br>
 
         <label>영업상태</label><br>
-        <select name="status">
-            <option value="영업 준비 중">영업 준비중</option>
-            <option value="영업중">영업중</option>
-            <option value="휴업중">휴업중</option>
-            <option value="폐업">폐업</option>
-        </select><br>
+        <br>
 
         <label>사업자 등록번호</label><br>
-        <input type="number" placeholder="01212312345(-없이 입력)" name="brn"><br>
+        <input type="number" placeholder="01212312345(-없이 입력)" name="brn" max="9999999999"><br>
 
         <label>가맹점 전화번호</label><br>
-        <input type="number" placeholder="021234567(-없이 입력)" name="phone"><br>
+        <input type="number" placeholder="021234567(-없이 입력)" name="phone" max="99999999999"><br>
 
         <label>가맹점장</label><br>
         <input type="text" placeholder="홍길동" name="ceo"><br>
 
         <label>가맹점장 전화번호</label><br>
-        <input type="number" placeholder="01012345678(-없이 입력)" name="ceoPhone"><br>
+        <input type="number" placeholder="01012345678(-없이 입력)" name="ceoPhone" max="99999999999"><br>
 
         <label>교육일자</label><br>
-        <input type="date" placeholder="2024-12-18" name="eduDate"><br>
+        <input type="date" name="eduDate"><br>
 
         <label>영업 시작일</label><br>
-        <input type="date" placeholder="2024-12-18" name="openDate"><br>
+        <input type="date" name="openDate"><br>
 
         <label>계약 시작일</label><br>
-        <input type="date" placeholder="2024-12-18" name="startDate"><br>
+        <input type="date" name="startDate"><br>
 
         <label>계약 종료일</label><br>
-        <input type="date" placeholder="2024-12-18" name="endDate"><br>
+        <input type="date" name="endDate"><br>
 
 
         <input type="text" id="sample4_roadAddress"  placeholder="주소" size="30">

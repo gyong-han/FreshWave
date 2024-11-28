@@ -9,11 +9,3 @@ const tbodyTag = document.querySelector(".list-table tbody");
         location.href=`/business/detail?no=${no}`
     })
 
-function m01(){
-
-    let typeTag = document.querySelector("select[name = searchType]").value;
-    if(typeTag == "name"){
-
-    }
-    
-}

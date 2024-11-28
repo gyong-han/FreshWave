@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class StoreVo {
     private String no;
-    private String manager_no;
+    private String managerNo;
     private String name;
     private String ceo;
     private String brn;

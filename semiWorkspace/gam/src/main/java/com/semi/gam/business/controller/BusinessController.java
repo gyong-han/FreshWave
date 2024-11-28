@@ -3,9 +3,11 @@ package com.semi.gam.business.controller;
 import com.semi.gam.business.service.BusinessService;
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.util.FileUploader;
 import com.semi.gam.util.date.ChangeDate;
 import com.semi.gam.util.page.PageVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,7 @@ public class BusinessController {
     }
 
     @PostMapping("insert")
-    public String insert(BusinessVo vo, MultipartFile f) throws IOException {
+    public String insert(BusinessVo vo, MultipartFile f, HttpSession session) throws IOException {
         String changeName = "";
         String originName = f.getOriginalFilename();
         if(!f.isEmpty()){
@@ -41,9 +43,13 @@ public class BusinessController {
         vo.setStartDate(date.changeDate(vo.getStartDate()));
         vo.setEndDate(date.changeDate(vo.getEndDate()));
 
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        String writerNo = loginMemberVo.getId();
+        vo.setManagerNo(writerNo);
+
         int result = service.insert(vo,changeName,originName);
         if(result == 1){
-            return "redirect:/home";
+            return "redirect:/business/list";
         }
         return "redirect:/error";
     }
@@ -55,7 +61,9 @@ public class BusinessController {
         int pageLimit = 5;
         int boardLimit = 8;
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
         List<BusinessVo> businessVoList = service.getBusinessVoList(pvo,searchType,searchValue);
+
         for (BusinessVo businessVo : businessVoList) {
             String changePhone = businessVo.getPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
             businessVo.setPhone(changePhone);
@@ -85,4 +93,34 @@ public class BusinessController {
         List<RankVo> rankDataList = service.getDataList();
         return rankDataList;
     }
+
+    @GetMapping("delete")
+    public String delete(String no){
+        int result = service.delete(no);
+        return "redirect:/business/list";
+    }
+
+    @GetMapping("edit")
+    public String edit(String no, Model model){
+        BusinessVo vo = service.detail(no);
+
+        vo.setStartDate(date.changeDate1(vo.getStartDate()));
+        vo.setEndDate(date.changeDate1(vo.getEndDate()));
+        vo.setBrn(vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3"));
+        model.addAttribute("vo",vo);
+        return "business/edit";
+    }
+
+    @PostMapping("edit")
+    public String edit(BusinessVo bvo,Model model){
+        bvo.setStartDate(date.changeDate(bvo.getStartDate()));
+        bvo.setEndDate(date.changeDate(bvo.getEndDate()));
+        int result= service.edit(bvo);
+        if(result != 1){
+            return "redirect:/error";
+        }
+        detail(bvo.getNo(),model);
+        return "business/detail";
+    }
+
 }

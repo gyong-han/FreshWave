@@ -1,5 +1,6 @@
 package com.semi.gam.store.controller;
 
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.store.service.StoreService;
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.FileUploader;
@@ -50,9 +51,13 @@ public class StoreController {
         vo.setStartDate(date.changeDate(vo.getStartDate()));
         vo.setEndDate(date.changeDate(vo.getEndDate()));
 
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        String writerNo = loginMemberVo.getId();
+        vo.setManagerNo(writerNo);
+
         int result = service.insert(vo,changeName,originName);
         if(result > 0){
-            return "redirect:/home";
+            return "redirect:/store/list";
         }
         return "redirect:/error";
     }
@@ -90,4 +95,41 @@ public class StoreController {
         return "store/detail";
     }
 
+    @GetMapping("delete")
+    public String delete(String bno){
+        int result = service.delete(bno);
+        return "redirect:/store/list";
+    }
+
+    @GetMapping("edit")
+    public String edit(String no, Model model){
+
+        StoreVo vo = service.detail(no);
+
+        vo.setEduDate(date.changeDate1(vo.getEndDate()));
+        vo.setOpenDate(date.changeDate1(vo.getOpenDate()));
+        vo.setStartDate(date.changeDate1(vo.getStartDate()));
+        vo.setEndDate(date.changeDate1(vo.getEndDate()));
+
+        vo.setBrn(vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3"));
+        model.addAttribute("vo",vo);
+        return "store/edit";
+    }
+
+    @PostMapping("edit")
+    public String edit(StoreVo svo, Model model){
+        System.out.println("svo = " + svo);
+        svo.setEduDate(date.changeDate(svo.getEndDate()));
+        svo.setOpenDate(date.changeDate(svo.getOpenDate()));
+        svo.setStartDate(date.changeDate(svo.getStartDate()));
+        svo.setEndDate(date.changeDate(svo.getEndDate()));
+        if(!svo.getCloseDate().equals("")){svo.setCloseDate(date.changeDate(svo.getCloseDate()));}
+        else{svo.setCloseDate("-");}
+        int result= service.edit(svo);
+        if(result != 1){
+            return "redirect:/error";
+        }
+        detail(svo.getNo(),model);
+        return "store/detail";
+    }
 }

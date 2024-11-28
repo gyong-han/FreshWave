@@ -36,4 +36,14 @@ public class BusinessService {
     public int getBusinessCnt(String searchValue, String searchType) {
         return mapper.getBusinessCnt(searchValue,searchType);
     }
+
+    public int delete(String no) {
+        return mapper.delete(no);
+    }
+
+    public int edit(BusinessVo vo) {
+        int result1 = mapper.edit(vo);
+        int result2 = mapper.editHistory(vo);
+        return result1 * result2;
+    }
 }

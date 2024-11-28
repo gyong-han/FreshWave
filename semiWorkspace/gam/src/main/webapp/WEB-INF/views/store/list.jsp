@@ -18,8 +18,8 @@
         <form action="/store/list?pno=1">
             <!-- 검색 카테고리 -->
             <select name="searchType">
-                <option value="name" ${param.searchType == 'name' ? 'selected' : ''}>가맹점명</option>
-                <option value="ceo" ${param.searchType == 'ceo' ? 'selected' : ''}>가맹점장</option>
+                <option value="name" ${searchType == 'name' ? 'selected' : ''}>가맹점명</option>
+                <option value="ceo" ${searchType == 'ceo' ? 'selected' : ''}>가맹점장</option>
             </select>
     
             <!-- 검색 창-->
