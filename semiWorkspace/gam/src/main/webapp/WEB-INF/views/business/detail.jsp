@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,8 +12,8 @@
     <script defer src="/js/business/detail.js"></script>
 </head>
 <body>
-    <div><h1>KH 식품</h1></div>
-    <div id="map" style="width:350px;height:350px;" ></div><br>
+    <div><h1>${vo.name}</h1></div>
+    <div id="map" style="width:250px;height:250px;" ></div><br>
     <table class="table-area">
         <!--td는 inputTag로 바꾸기-->
         <tr>
@@ -58,8 +59,14 @@
         </tr>
     </table>
 
+    <button onclick="location.href='/business/list'">목록</button>
+
+    <c:if test="${loginMemberVo.id == vo.managerNo}">
+        <button onclick="location.href='/business/edit?no=${vo.no}'">수정</button>    
+        <button onclick="businessDelete(`${vo.no}`)">삭제</button>
+    </c:if>
+
     <input type="hidden" id="address" value="${vo.address}">
     <input type="hidden" id="name" value="${vo.name}">
-    <button onclick="location.href='/business/list'">목록</button>
 </body>
 </html>

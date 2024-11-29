@@ -17,4 +17,12 @@ public class ChangeDate {
         String date = parse.format(outputFormatter);
         return date;
     }
+
+    public static String changeDate1(String x){
+        inputFormatter = DateTimeFormatter.ofPattern("yy.MM.dd");
+        outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parsedDate = LocalDate.parse(x, inputFormatter);
+        String formattedDate = parsedDate.format(outputFormatter);
+        return formattedDate;
+    }
 }

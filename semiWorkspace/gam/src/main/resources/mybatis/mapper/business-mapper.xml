@@ -9,7 +9,7 @@
         SELECT B.NO,B.MANAGER_NO,B.BRN,B.BT_CODE,B.ADDRESS,B.DEL_YN,B.NAME,B.CEO,B.PHONE,M.NAME AS MANAGER_NAME,B.DEPT_NAME,
         H.START_DATE,H.END_DATE,B.ENROLL_DATE,B.MODIFY_DATE,H.BP_NO
         FROM BUSINESS B
-        JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
+        JOIN MEMBER M ON(B.MANAGER_NO = M.ID)
         LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
         WHERE DEL_YN = 'N'
         <if test="searchType == 'name'">
@@ -28,7 +28,7 @@
     <select id="getBusinessCnt">
         SELECT COUNT(*)
         FROM BUSINESS B
-        JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
+        JOIN MEMBER M ON(B.MANAGER_NO = M.ID)
         WHERE DEL_YN='N'
         <if test="searchType == 'name'">
             AND B.NAME LIKE '%${searchValue}%'

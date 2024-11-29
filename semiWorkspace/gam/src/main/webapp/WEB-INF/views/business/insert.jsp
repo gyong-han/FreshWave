@@ -19,7 +19,7 @@
         <input type="text" placeholder="거래처명을 입력해주세요." name="name"><br>
 
         <label>사업자 등록번호</label><br>
-        <input type="number" placeholder="01212312345(-없이 입력)" name="brn"><br>
+        <input type="number" placeholder="01212312345(-없이 입력)" name="brn" max="99999999999"><br>
 
         <label>업태</label><br>
         <input type="number" placeholder="008123" name="btCode"><br>
@@ -28,10 +28,26 @@
         <input type="text" placeholder="홍길동" name="ceo"><br>
 
         <label>대표자 전화번호</label><br>
-        <input type="number" placeholder="01012345678(-없이 입력)" name="phone"><br>
+        <input type="number" placeholder="01012345678(-없이 입력)" name="phone" max="99999999999"><br>
 
         <label>담당부서</label><br>
-        <input type="text" placeholder="영업 2팀" name="deptName"><br>
+        <select name="deptName">
+            <option value="영업부">영업부</option>
+            <option value="관리부" >관리부</option>
+            <option value="마케팅부" >마케팅부</option>
+            <option value="개발부">개발부</option>
+            <option value="CS부">CS부</option>
+            <option value="생산부">생산부</option>
+            <option value="인사부">인사부</option>
+            <option value="재무부">재무부</option>
+            <option value="총무부">총무부</option>
+            <option value="기획부">기획부</option>
+            <option value="법무부">법무부</option>
+            <option value="홍보부">홍보부</option>
+            <option value="IT부">IT부</option>
+            <option value="물류부">물류부</option>
+        </select>
+        <br>
 
         <label>계약 시작일</label><br>
         <input type="date" placeholder="2024-12-18" name="startDate"><br>

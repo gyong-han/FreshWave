@@ -6,6 +6,7 @@ import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface BusinessMapper {
 
     @Insert("""
             INSERT INTO BUSINESS (NO,MANAGER_NO,DEPT_NAME,NAME,CEO,BRN,BT_CODE,ADDRESS,PHONE)
-            VALUES(SEQ_BUSINESS.NEXTVAL,'1',#{deptName},#{name},#{ceo},#{brn},#{btCode},#{address},#{phone})
+            VALUES(SEQ_BUSINESS.NEXTVAL,#{managerNo},#{deptName},#{name},#{ceo},#{brn},#{btCode},#{address},#{phone})
             """)
     int insert(BusinessVo vo);
 
@@ -38,7 +39,7 @@ public interface BusinessMapper {
             SELECT B.NO,B.MANAGER_NO,B.BRN,B.BT_CODE,B.ADDRESS,B.DEL_YN,B.NAME,B.CEO,B.PHONE,M.NAME AS MANAGER_NAME,B.DEPT_NAME,
             H.START_DATE,H.END_DATE,B.ENROLL_DATE,B.MODIFY_DATE,H.BP_NO,A.ORIGIN_NAME,A.CHANGE_NAME
             FROM BUSINESS B
-            JOIN MEMBER M ON(B.MANAGER_NO = M.EMP_NO)
+            JOIN MEMBER M ON(B.MANAGER_NO = M.ID)
             LEFT JOIN BUSINESS_HISTORY H ON(B.NO = H.BP_NO)
             LEFT JOIN BP_ATTACHMENT A ON(B.NO = A.REF_BP_NO)
             WHERE B.NO = ${no}
@@ -51,7 +52,6 @@ public interface BusinessMapper {
             FROM(
                 SELECT B.NAME, B.DEPT_NAME
                     FROM BUSINESS B
-                    JOIN MEMBER M ON (B.MANAGER_NO = M.EMP_NO)
                     JOIN BUSINESS_HISTORY H ON (B.NO = H.BP_NO)
                     WHERE B.DEL_YN = 'N'
             )SUB
@@ -62,4 +62,29 @@ public interface BusinessMapper {
     List<RankVo> getDataList();
 
     int getBusinessCnt(String searchValue, String searchType);
+
+    @Update("""
+            UPDATE BUSINESS
+            SET DEL_YN = 'Y'
+            WHERE NO = #{no}
+            """)
+    int delete(String no);
+
+    @Update("""
+            UPDATE BUSINESS
+            SET CEO = #{ceo},
+            ADDRESS = #{address},
+            PHONE = #{phone},
+            MODIFY_DATE = SYSDATE
+            WHERE NO = #{no}
+            """)
+    int edit(BusinessVo vo);
+
+    @Update("""
+            UPDATE BUSINESS_HISTORY
+            SET START_DATE = #{startDate},
+            END_DATE = #{endDate}
+            WHERE BP_NO = #{no}
+            """)
+    int editHistory(BusinessVo vo);
 }
