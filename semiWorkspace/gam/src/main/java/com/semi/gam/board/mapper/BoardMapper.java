@@ -25,7 +25,7 @@ public interface BoardMapper {
             JOIN EMPLOYEE E
             ON B.WRITER_NO = E.EMP_NO
             JOIN MEMBER M
-            ON E.EMP_NO = M.EMP_NO
+            ON E.EMP_NO = M.ID
             WHERE DEL_YN = 'N'
             ORDER BY ENROLL_DATE DESC
             OFFSET #{offset} ROWS FETCH NEXT  #{boardLimit} ROWS ONLY
@@ -49,9 +49,9 @@ public interface BoardMapper {
                 , #{writerNo}
                 , #{title}
                 , #{content}
-                , #{enrollDate}
-                , #{hit}
-                , #{delYn}
+                , SYSDATE
+                , 0
+                , 'N'
             )
             """)
     int write(BoardVo vo);
@@ -77,11 +77,11 @@ public interface BoardMapper {
             JOIN EMPLOYEE E
             ON B.WRITER_NO = E.EMP_NO
             JOIN MEMBER M 
-            ON E.EMP_NO = M.EMP_NO
+            ON E.EMP_NO = M.ID
             LEFT JOIN BOARD_COMMENT C
             ON B.NO = C.BOARD_NO
             LEFT JOIN MEMBER CM
-            ON C.COM_WRI_NO = CM.EMP_NO
+            ON C.COM_WRI_NO = CM.ID
             WHERE B.NO = #{bno} 
             AND B.DEL_YN = 'N'    
             """)
@@ -109,7 +109,7 @@ public interface BoardMapper {
                 JOIN EMPLOYEE E
                 ON B.WRITER_NO = E.EMP_NO
                 JOIN MEMBER M
-                ON E.EMP_NO = M.EMP_NO
+                ON E.EMP_NO = M.ID
                 WHERE B.DEL_YN = 'N'
                 ORDER BY B.ENROLL_DATE DESC
             )

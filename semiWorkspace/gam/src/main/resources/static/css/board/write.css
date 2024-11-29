@@ -1,3 +1,66 @@
 .main-container {
     display: flex;
 }
+
+.area-container{
+    flex-grow: 1;
+    padding: 40px; /* 내부 여백 */
+    margin: 20px; /* 외부 여백 */
+    border-radius: 15px; /* 둥근 모서리 */
+}
+
+.area-container input[type="text"] {
+    width: 100%; /* 전체 너비 사용 */
+    padding: 10px 15px; /* 내부 여백 */
+    margin-bottom: 20px; /* 아래 간격 */
+    font-size: 18px; /* 글씨 크기 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+}
+
+/* 스마트 에디터 텍스트 영역 */
+textarea#smarteditor {
+    width: 100%; /* 전체 너비 사용 */
+    min-height: 300px; /* 최소 높이 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    padding: 10px; /* 내부 여백 */
+    font-size: 16px; /* 글씨 크기 */
+    background-color: #fdfdfd; /* 밝은 배경 */
+    resize: none; /* 크기 조절 금지 */
+}
+
+/* 버튼 영역 */
+.area-container input[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    font-size: 16px; /* 글씨 크기 */
+    color: #fff; /* 텍스트 색상 */
+    background-color: #1D64F2; /* 파란색 배경 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    margin-top: 20px; /* 위 간격 */
+}
+
+.area-container .bottom-button-area button{
+    display: inline-block;
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    font-size: 16px; /* 글씨 크기 */
+    color: #fff; /* 텍스트 색상 */
+    background-color: black; /* 파란색 배경 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    margin-top: 20px; /* 위 간격 */
+}
+
+.area-container label input[type="checkbox"] {
+    margin-right: 10px; /* 체크박스와 텍스트 사이 여백 */
+}
+
+.bottom-button-area{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

@@ -29,6 +29,8 @@ public class NoticeController {
     // 공지사항 작성 처리
     @PostMapping("write")
     public String write(NoticeVo vo){
+        vo.setWriterNo("240102");
+
         int result = service.write(vo);
 
         if(result != 1) {

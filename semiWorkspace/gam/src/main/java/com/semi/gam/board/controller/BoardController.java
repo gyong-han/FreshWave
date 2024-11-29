@@ -39,7 +39,7 @@ public class BoardController {
     @PostMapping("write")
     public void insert(BoardVo vo){
 
-        vo.setWriterNo("102");
+        vo.setWriterNo("240102");
         //service
         int result = service.write(vo);
         System.out.println("vo = " + vo);

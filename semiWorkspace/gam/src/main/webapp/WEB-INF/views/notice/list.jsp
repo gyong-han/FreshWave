@@ -15,9 +15,10 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
-        <div class="table-area">
-            <table>
-                <thead>
+        <div class="area-container">
+            <div class="table-area">
+                <table>
+                    <thead>
                     <tr>
                         <th>말머리</th>
                         <th>제목</th>
@@ -32,7 +33,7 @@
                     <c:forEach items="${voList}" var="vo"> 
                         <tr>
                             <td>${vo.urgentStatus}</td>
-                            <td>${vo.title}</td>
+                            <td><a href="/notice/detail?bno=${vo.no}">${vo.title}</a></td>
                             <td>${vo.name}</td>
                             <td>${vo.deptName}</td>
                             <td>${vo.hit}</td>
@@ -42,17 +43,18 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </div>
-        <div class="page-area">
-            <c:if test="${pvo.startPage != 1}">
-                <a href="/notice/list?pno=${pvo.startPage-1}"><</a>
-            </c:if>
-            <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
-                <a href="/notice/list?pno=${i}">${i}</a>
-            </c:forEach>
-            <c:if test = "${pvo.endPage != pvo.maxPage}">
-                <a href="/notice/list?pno=${pvo.endPage+1}">></a>
-            </c:if>
+            </div>
+            <div class="page-area">
+                <c:if test="${pvo.startPage != 1}">
+                    <a href="/notice/list?pno=${pvo.startPage-1}"><</a>
+                </c:if>
+                <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                    <a href="/notice/list?pno=${i}">${i}</a>
+                </c:forEach>
+                <c:if test = "${pvo.endPage != pvo.maxPage}">
+                    <a href="/notice/list?pno=${pvo.endPage+1}">></a>
+                </c:if>
+            </div>
         </div>
     </main>
 </body>

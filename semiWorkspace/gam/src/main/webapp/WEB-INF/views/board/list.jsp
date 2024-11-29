@@ -14,25 +14,27 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
-        <div class="table-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>글번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>등록일</th>
-                        <th>조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+        <div class="area-container">
+            <div class="table-area">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>글번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>등록일</th>
+                            <th>조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="main-bottom-area">
+                <button onclick="location.href='/board/write'">게시글 작성</button>
+            </div>
+            <div class="page-area"></div>
         </div>
-        <div class="main-bottom-area">
-            <button onclick="location.href='/board/write'">게시글 작성</button>
-        </div>
-        <div class="page-area"></div>
     </main>
 </body>
 </html>
