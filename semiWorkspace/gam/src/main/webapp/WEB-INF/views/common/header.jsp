@@ -30,40 +30,9 @@
             <div id="userName"><span>이감자</span></div>
             <div id="userDept"><span>영업부 (사원)</span></div>
         </div>
-    </header>
+</header>
 
-    <aside>
-            <div class="icon">
-                <img src="/img/icon/home.svg" alt="home">
-                <span class="icon-text">홈</span>
-                <div class="bluediv"></div>
-            </div>
-            <div class="icon">
-                <img src="/img/icon/project.svg" alt="project">
-                <span class="icon-text">프로젝트 관리</span>
-                <div class="bluediv"></div>
-            </div>
-            <div class="icon">
-                <img src="/img/icon/client.svg" alt="client" onclick="location.href='/store/home'">
-                <span class="icon-text" onclick="location.href='/store/home'">고객관계 관리</span>
-                <div class="bluediv"></div>
-            </div>
-            <div class="icon">
-                <img src="/img/icon/calendar.svg" alt="calendar">
-                <span class="icon-text">일정 관리</span>
-                <div class="bluediv"></div>
-            </div>
-            <div class="icon">
-                <img src="/img/icon/board.svg" alt="board">
-                <span class="icon-text">게시판</span>
-                <div class="bluediv"></div>
-            </div>
-            <div class="icon">
-                <img src="/img/icon/callcenter.svg" alt="callcenter">
-                <span class="icon-text">고객센터</span>
-                <div class="bluediv"></div>
-            </div>
-    </aside>
+    
 
     </body>
     </html>
