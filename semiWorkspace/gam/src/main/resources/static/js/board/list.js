@@ -59,6 +59,8 @@ function loardBoardList(){
                 const tdTag2 = document.createElement("td");
                 tdTag2.innerText = vo.title;
                 trTag.appendChild(tdTag2);
+                tdTag2.innerHTML = `<a href='/board/detail?bno=${vo.no}'>${vo.title}</a>`;
+    
 
                 const tdTag3 = document.createElement("td");
                 tdTag3.innerText = vo.nick;

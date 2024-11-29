@@ -27,10 +27,10 @@ public interface NoticeMapper {
                 , #{writerNo}
                 , #{title}
                 , #{content}
-                , #{urgentYn}
-                , #{hit}
-                , #{enrollDate}
-                , #{delYn}
+                , 'N'
+                , 0
+                , SYSDATE
+                , 'N'
             )
             """)
     int write(NoticeVo vo);
@@ -57,7 +57,7 @@ public interface NoticeMapper {
                 FROM NOTICE N
                 JOIN EMPLOYEE E ON N.WRITER_NO = E.EMP_NO
                 JOIN DEPT D ON E.DEPT_CODE = D.DEPT_CODE
-                JOIN MEMBER M ON E.EMP_NO = M.EMP_NO
+                JOIN MEMBER M ON E.EMP_NO = M.ID
                 WHERE N.DEL_YN = 'N'
                 ORDER BY ENROLL_DATE DESC
                 OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
@@ -80,7 +80,7 @@ public interface NoticeMapper {
             JOIN EMPLOYEE E
             ON N.WRITER_NO = E.EMP_NO
             JOIN MEMBER M
-            ON E.EMP_NO = M.EMP_NO
+            ON E.EMP_NO = M.ID
             JOIN DEPT D
             ON E.DEPT_CODE = D.DEPT_CODE
             LEFT JOIN NOTICE_ATTACHMENT A
