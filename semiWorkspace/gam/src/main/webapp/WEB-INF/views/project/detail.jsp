@@ -9,36 +9,36 @@
 </head>
 <body>
 
-<h1>역삼 1호점 프로젝트</h1>
+<h1>${projectVo.name}</h1>
 <form action="/project/edit">
 <div class="prj-detail-box">
     <div>
         <div>생성자</div>
-            <input type="text" value="이감자" readonly>
+            <input type="text" value="${projectVo.memberName}" readonly>
         <div>우선순위</div>
-            <input type="text" value="MIDDLE" readonly>
+            <input type="text" value="${projectVo.priorityName}" readonly>
         <br>
         <div>
             <div>시작날짜</div>
-            <input type="text" value="24.11.30" readonly>
+            <input type="text" value="${projectVo.startDate}" readonly>
             <div>마감날짜</div>
-            <input type="text" value="24.12.30" readonly>
+            <input type="text" value="${projectVo.endDate}" readonly>
         </div>
         <div>프로젝트 권한 설정</div>
-            <input type="text" value="비공개">
+            <input type="text" value="${projectVo.accessName}">
     </div>
 
     <div>
         <div>참여인원</div>
         <table>
             <tbody>
-                <tr>
-                    <td>프로필사진</td>
-                    <td>김두철</td>
-                    <td>개발부</td>
-                    <td>(부장)</td>
-                    <td>수정권한</td>
-                </tr>
+                    <tr>
+                        <td>${add.profileName}</td>
+                        <td>${add.name}</td>
+                        <td>${add.deptName}</td>
+                        <td>${add.jobName}</td>
+                        <td>${add.pmAccess}</td>
+                    </tr>
             </tbody>
         </table>
     </div>
