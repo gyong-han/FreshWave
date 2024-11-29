@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -7,6 +8,8 @@
 <meta charset="UTF-8">
 <title>프로젝트 목록</title>
     <link rel="stylesheet" href="/list.js">
+    <script defer src="/js/project/list.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -18,20 +21,34 @@
                     <td>부서</td>
                     <td>프로젝트 생성자</td>
                     <td>중요도</td>
-                    <td>등록일</td>
-                    <td>수정일</td>
+                    <td>시작일</td>
+                    <td>종료일</td>
                 </tr>
                 <hr>
             </thead>
             <tbody>
+
+            <c:forEach items="${projectVoList}" var="vo">
                 <tr>
-                    <td>역삼 1호점 프로젝트</td>
-                    <td>개발부</td>
-                    <td>이감자</td>
-                    <td>HIGH</td>
-                    <td>24.11.11</td>
-                    <td>24.11.12</td>
+                    <td><a href="/project/detail?projectNo=${vo.key}">${vo.name}</a></td>
+                    <td>${vo.deptName}</td>
+                    <td>${vo.memberName}</td>
+                    <td>${vo.priorityName}</td>
+                    <td>${vo.startDate}</td>
+                    <td>${vo.endDate}</td>
                 </tr>
+            </c:forEach>
+            <c:forEach items="${projectVoList1}" var="vo">
+                <tr>
+                    <td><a href="/project/detail?projectNo=${vo.key}">${vo.name}</a></td>
+                    <td>${vo.deptName}</td>
+                    <td>${vo.memberName}</td>
+                    <td>${vo.priorityName}</td>
+                    <td>${vo.startDate}</td>
+                    <td>${vo.endDate}</td>
+                </tr>
+            </c:forEach>
+
             </tbody>
         </table>
        <form action="/project/write">

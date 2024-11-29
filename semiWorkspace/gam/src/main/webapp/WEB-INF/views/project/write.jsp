@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -26,9 +26,9 @@
         <br>
         <label> 사용자 초대 </label>
         <br>
-        <select name="empNo">
+        <select name="id">
             <c:forEach items="${empVoList}" var="empVo">
-                <option value="${empVo.empNo}">${empVo.name}</option>
+                <option value="${empVo.id}">${empVo.name}</option>
             </c:forEach>
         </select>
         <br>

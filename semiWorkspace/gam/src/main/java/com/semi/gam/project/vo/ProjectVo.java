@@ -16,4 +16,10 @@ public class ProjectVo {
     private String modifyDate;
     private String delYn;
 
+    private String deptName;
+    private String memberName;
+    private String priorityName;
+    private String accessName;
+
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface MemberMapper {
 
     @Select("""
-            SELECT EMP_NO , NAME
+            SELECT ID , NAME
             FROM MEMBER
             """)
     List<MemberVo> getEmpVo();
