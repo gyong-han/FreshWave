@@ -38,11 +38,11 @@ public class BoardController {
     //게시글 작성
     @PostMapping("write")
     public void insert(BoardVo vo){
-        //data -> obj
-        System.out.println("title ::: " + vo.getTitle());
+
+        vo.setWriterNo("102");
         //service
         int result = service.write(vo);
-
+        System.out.println("vo = " + vo);
         //result
         if(result == 1){
             System.out.println("게시글 작성 성공 !");

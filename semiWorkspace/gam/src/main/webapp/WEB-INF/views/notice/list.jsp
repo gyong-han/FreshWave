@@ -12,7 +12,9 @@
 <!-- <script defer src="/js/notice/list.js"></script> -->
 </head>
 <body>
-    <main>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <main class="main-container">
+        <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="table-area">
             <table>
                 <thead>

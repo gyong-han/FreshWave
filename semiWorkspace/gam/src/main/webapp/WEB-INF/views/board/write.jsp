@@ -6,19 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 작성</title>
-
+<link rel="stylesheet" href="/css/board/write.css">
 </head>
 <body>
-
-	<h1>게시글 작성</h1>
-
-    <form action="/board/write" method="post">
-        <input type="text" name="title" placeholder="제목">
-        <br>
-        <textarea name="content" placeholder="내용"></textarea>
-        <br>
-        <input type="submit" value="작성하기">
-    </form>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <main class="main-container">
+        <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
+        <h1>게시글 작성</h1>
+        
+        <form action="/board/write" method="post">
+            <input type="text" name="title" placeholder="제목">
+            <br>
+            <textarea name="content" placeholder="내용"></textarea>
+            <br>
+            <input type="submit" value="작성하기">
+        </form>
+    </main>
 
 
 
