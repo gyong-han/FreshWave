@@ -1,5 +1,6 @@
 package com.semi.gam.store.mapper;
 
+import com.semi.gam.store.vo.StatusVo;
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.*;
@@ -60,4 +61,16 @@ public interface StoreMapper {
             WHERE NO = #{no}
             """)
     int edit(StoreVo svo);
+
+    @Select("""
+            SELECT STATUS,COUNT(*) AS "COUNT"
+            FROM(
+                SELECT STATUS
+                FROM STORE
+                WHERE DEL_YN = 'N'
+            )SUB
+            GROUP BY STATUS
+            ORDER BY COUNT(*)DESC
+            """)
+    List<StatusVo> storeData();
 }
