@@ -1,6 +1,7 @@
 package com.semi.gam.store.service;
 
 import com.semi.gam.store.mapper.StoreMapper;
+import com.semi.gam.store.vo.StatusVo;
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,9 @@ public class StoreService {
 
     public int edit(StoreVo svo) {
         return mapper.edit(svo);
+    }
+
+    public List<StatusVo> storeData() {
+        return mapper.storeData();
     }
 }

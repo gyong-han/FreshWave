@@ -2,6 +2,7 @@ package com.semi.gam.store.controller;
 
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.store.service.StoreService;
+import com.semi.gam.store.vo.StatusVo;
 import com.semi.gam.store.vo.StoreVo;
 import com.semi.gam.util.FileUploader;
 import com.semi.gam.util.date.ChangeDate;
@@ -33,11 +34,13 @@ public class StoreController {
         return "store/home";
     }
 
+    //작성 화면
     @GetMapping("insert")
     public String insert(){
         return "store/insert";
     }
 
+    //작성 처리
     @PostMapping("insert")
     public String insert(StoreVo vo, HttpSession session, MultipartFile f) throws IOException {
         String changeName = "";
@@ -62,6 +65,7 @@ public class StoreController {
         return "redirect:/error";
     }
 
+    //목록조회
     @GetMapping("list")
     public String getStoreVoList(Model model,@RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
         int listCount = service.getStoreCnt(searchType,searchValue);
@@ -80,6 +84,7 @@ public class StoreController {
         return "store/list";
     }
 
+    //상세조회
     @GetMapping("detail")
     public String detail(String no, Model model){
         StoreVo vo = service.detail(no);
@@ -95,12 +100,14 @@ public class StoreController {
         return "store/detail";
     }
 
+    //삭제
     @GetMapping("delete")
     public String delete(String bno){
         int result = service.delete(bno);
         return "redirect:/store/list";
     }
 
+    //수정화면
     @GetMapping("edit")
     public String edit(String no, Model model){
 
@@ -116,6 +123,7 @@ public class StoreController {
         return "store/edit";
     }
 
+    //수정 처리
     @PostMapping("edit")
     public String edit(StoreVo svo, Model model){
         System.out.println("svo = " + svo);
@@ -131,5 +139,16 @@ public class StoreController {
         }
         detail(svo.getNo(),model);
         return "store/detail";
+    }
+    
+    //원형 차트 데이터 가져오기
+    @GetMapping("data")
+    @ResponseBody
+    public List<StatusVo> storeData(){
+        List<StatusVo> statusList = service.storeData();
+        for (StatusVo statusVo : statusList) {
+            System.out.println("statusVo = " + statusVo);
+        }
+        return statusList;
     }
 }

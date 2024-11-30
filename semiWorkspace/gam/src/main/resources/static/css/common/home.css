@@ -18,22 +18,3 @@ main > .sidebar {
     gap: 20px;
     background-color: #ffffff;
 }
-
-
-
-.barChart-area{
-    display: inline-block;
-    height: 400px;
-    width: 400px;
-}
-
-.pieChart-area{
-    display: inline-block;
-    height: 400px;
-    width: 400px;
-}
-
-#myBarChart{
-    width: 400px;
-    height: 400px;
-}
