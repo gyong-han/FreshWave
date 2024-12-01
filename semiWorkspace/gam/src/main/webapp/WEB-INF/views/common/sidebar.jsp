@@ -43,7 +43,7 @@
             </div>
             <div class="icon">
                 <img src="/img/icon/board.svg" alt="board">
-                <span class="icon-text">게시판</span>
+                <span class="icon-text"><a href="/board/home">게시판</a></span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">

@@ -1,3 +1,59 @@
+/* 파일: detail.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
 .main-container {
-    display: flex;
+    display: flex;    
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.content-block {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.content-block h3 {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #0078d7;
+}
+
+button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+.attachment {
+    margin-top: 20px;
+    color: #0078d7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.attachment:hover {
+    text-decoration: underline;
 }

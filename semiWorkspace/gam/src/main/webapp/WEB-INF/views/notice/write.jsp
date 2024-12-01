@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script defer src="/js/notice/write.js"></script>
 <link rel="stylesheet" href="/css/notice/write.css">
 <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <title>공지사항 작성</title>
@@ -14,14 +15,21 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
-            <form action="/notice/write" method="post">
+            <form action="/notice/write" method="post" enctype="multipart/form-data">
                 <div class="input-checkbox-container">
                     <input type="text" name="title" placeholder="제목을 입력하세요.">
                     <label>
-                        <input type="checkbox" name="urgent"> 긴급
+                        <input type="checkbox" name="urgentYn" value="Y"> 긴급
                     </label>
                 </div>
                 <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content"></textarea>
+                <br>
+                <label for="fileInput">
+                    <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
+                </label>
+                <input type="file" id="fileInput" name="f" multiple>
+                <div class="preview-area">
+                </div>
                 <div class="bottom-button-area">
                     <button type="button" onclick="goback();">취소</button>
                     <input type="submit" value="저장" onclick="submitContents(this)">

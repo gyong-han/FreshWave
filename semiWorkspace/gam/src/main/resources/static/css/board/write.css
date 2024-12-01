@@ -64,3 +64,12 @@ textarea#smarteditor {
     justify-content: flex-end;
     gap: 10px;
 }
+.attach-icon {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none; 
+}

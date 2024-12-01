@@ -6,8 +6,10 @@ import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BoardMapper {
@@ -58,7 +60,7 @@ public interface BoardMapper {
 
 
     @Select("""
-            SELECT
+            SELECT DISTINCT
                  B.NO
                 ,B.WRITER_NO
                 ,B.TITLE
@@ -78,6 +80,8 @@ public interface BoardMapper {
             ON B.WRITER_NO = E.EMP_NO
             JOIN MEMBER M 
             ON E.EMP_NO = M.ID
+            LEFT JOIN BOARD_ATTACHMENT A
+            ON B.NO = A.REF_BOARD_NO
             LEFT JOIN BOARD_COMMENT C
             ON B.NO = C.BOARD_NO
             LEFT JOIN MEMBER CM
@@ -139,4 +143,15 @@ public interface BoardMapper {
              WHERE ROWNUM <= 8
             """)
     List<NoticeVo> getNoticeHomeList();
+
+    int insertBoardAttachment(List<String> changeNameList);
+
+    @Update("""
+               UPDATE BOARD
+                            SET
+                                HIT = HIT + 1
+                        WHERE NO = #{bno}
+                        AND DEL_YN = 'N'
+            """)
+    int increseHit(String bno);
 }

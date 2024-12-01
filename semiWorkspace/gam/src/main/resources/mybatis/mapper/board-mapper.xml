@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi.gam.board.mapper.BoardMapper">
+    <insert id="insertBoardAttachment">
+        INSERT ALL
+        <foreach collection="list" item="x">
+            INTO BOARD_ATTACHMENT (NO,REF_BOARD_NO,CHANGE_NAME,STATUS ,ENROLL_DATE) VALUES((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL, #{x} ,'Y' , SYSDATE)
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+</mapper>

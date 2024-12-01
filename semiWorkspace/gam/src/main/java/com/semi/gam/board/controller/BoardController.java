@@ -2,13 +2,20 @@ package com.semi.gam.board.controller;
 
 import com.semi.gam.board.service.BoardService;
 import com.semi.gam.board.vo.BoardVo;
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.vo.NoticeVo;
+import com.semi.gam.util.FileUploader;
 import com.semi.gam.util.page.PageVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +25,9 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService service;
+
+    @Value("#{pathInfo.getBoardAttachmentPath()}")
+    private String path;
 
     //홈 화면
     @GetMapping("home")
@@ -31,17 +41,32 @@ public class BoardController {
 
     //게시글 작성(화면)
     @GetMapping("write")
-    public String insert(){
+    public String insert(HttpSession session){
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
         return "board/write";
     }
 
     //게시글 작성
     @PostMapping("write")
-    public void insert(BoardVo vo){
+    public void insert(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
+        System.out.println("loginMemberVo = " + loginMemberVo);
 
-        vo.setWriterNo("240102");
+        List<String> changeNameList = new ArrayList<>();
+        List<String> originNameList = new ArrayList<>();
+
+        for (MultipartFile f : fileList){
+            if(f.isEmpty()){break;}
+            String originName = f.getOriginalFilename();
+            vo.setOriginName(originName);
+            String changeName = FileUploader.save(f, path);
+            changeNameList.add(changeName);
+        }
         //service
-        int result = service.write(vo);
+        int result = service.write(vo , changeNameList);
         System.out.println("vo = " + vo);
         //result
         if(result == 1){
