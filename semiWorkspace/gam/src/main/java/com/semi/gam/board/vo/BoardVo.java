@@ -20,4 +20,6 @@ public class BoardVo {
     private String comContent;
     private String comEnrollDate;
     private String comModifyDate;
+
+    private String originName;
 }

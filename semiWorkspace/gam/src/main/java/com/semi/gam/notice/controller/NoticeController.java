@@ -1,16 +1,23 @@
 package com.semi.gam.notice.controller;
 
+import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.service.NoticeService;
 import com.semi.gam.notice.vo.NoticeVo;
+import com.semi.gam.util.FileUploader;
 import com.semi.gam.util.page.PageVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,18 +27,32 @@ public class NoticeController {
 
     private final NoticeService service;
 
+    @Value(("#{pathInfo.getNoticeAttachmentPath()}"))
+    private String path;
+
     // 공지사항 작성 화면
     @GetMapping("write")
-    public void write(){
-
+    public String write(HttpSession session){
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
+        return "notice/write";
     }
 
     // 공지사항 작성 처리
     @PostMapping("write")
-    public String write(NoticeVo vo){
-        vo.setWriterNo("240102");
+    public String write(NoticeVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , @RequestParam(name = "urgentYn" , defaultValue = "N") String urgentYn, HttpSession session ) throws IOException {
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
+        List<String> changeNameList = new ArrayList<>();
 
-        int result = service.write(vo);
+        for(MultipartFile f : fileList){
+            if(f.isEmpty()){break;}
+            String changeName = FileUploader.save(f, path);
+            changeNameList.add(changeName);
+        }
+
+        int result = service.write(vo , changeNameList);
 
         if(result != 1) {
             new IllegalStateException("[ERROR] NOTICE > Controller > write");

@@ -5,6 +5,7 @@ import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface NoticeMapper {
                 , #{writerNo}
                 , #{title}
                 , #{content}
-                , 'N'
+                , #{urgentYn}
                 , 0
                 , SYSDATE
                 , 'N'
@@ -59,13 +60,14 @@ public interface NoticeMapper {
                 JOIN DEPT D ON E.DEPT_CODE = D.DEPT_CODE
                 JOIN MEMBER M ON E.EMP_NO = M.ID
                 WHERE N.DEL_YN = 'N'
-                ORDER BY ENROLL_DATE DESC
+                ORDER BY N.URGENT_YN DESC
+                ,N.ENROLL_DATE DESC
                 OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
             """)
     List<NoticeVo> getNoticeList(PageVo pvo);
 
     @Select("""
-            SELECT
+            SELECT DISTINCT
                 N.NO ,
                 N.TITLE ,
                 N.CONTENT ,
@@ -89,4 +91,15 @@ public interface NoticeMapper {
             AND N.DEL_YN = 'N'
             """)
     NoticeVo getNoticeDetail(String bno);
+
+    int insertNoticeAttachment(List<String> changeNameList);
+
+    @Update("""
+            UPDATE NOTICE
+                    SET
+                        HIT = HIT + 1
+                    WHERE NO = #{bno}
+                    AND DEL_YN = 'N'
+            """)
+    int increseHit(String bno);
 }

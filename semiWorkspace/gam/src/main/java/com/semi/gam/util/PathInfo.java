@@ -24,4 +24,20 @@ public class PathInfo {
                 + "attachment" + File.separator;
         return path;
     }
+
+    public String getBoardAttachmentPath() {
+        String path = staticPath
+                + "img" + File.separator
+                + "board" + File.separator
+                + "attachment" + File.separator;
+        return path;
+    }
+
+    public String getNoticeAttachmentPath() {
+        String path = staticPath
+                + "img" + File.separator
+                + "notice" + File.separator
+                + "attachment" + File.separator;
+        return path;
+    }
 }

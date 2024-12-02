@@ -8,16 +8,24 @@
 <meta charset="UTF-8">
 <title>게시판 작성</title>
 <link rel="stylesheet" href="/css/board/write.css">
+<script defer src="/js/board/write.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
-            <form action="/board/write" method="post">
+            <form action="/board/write" method="post" enctype="multipart/form-data">
                 <input type="text" name="title" placeholder="제목">
                 <br>
                 <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content"></textarea>
+                <br>
+                <label for="fileInput">
+                    <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
+                </label>
+                <input type="file" id="fileInput" name="f" multiple>
+                <div class="preview-area">
+                </div>
                 <div class="bottom-button-area">
                     <button type="button" onclick="goback();">취소</button>
                     <input type="submit" value="저장" onclick="submitContents(this)">

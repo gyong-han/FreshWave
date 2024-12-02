@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>목록조회</title>
 <link rel="stylesheet" href="/css/notice/list.css">
-<!-- <script defer src="/js/notice/list.js"></script> -->
+<script defer src="/js/notice/list.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -23,7 +23,7 @@
                         <th>말머리</th>
                         <th>제목</th>
                         <th>작성자</th>
-                        <th>부서</th>
+                        <th id="sortDept" data-column="deptName" data-order="desc">부서 ▼</th>
                         <th>조회수</th>
                         <th>등록일</th>
                         <th>수정일</th>
@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${voList}" var="vo"> 
-                        <tr>
+                        <tr class="${vo.urgentYn == 'Y' ? 'urgent-row' : ''}">
                             <td>${vo.urgentStatus}</td>
                             <td><a href="/notice/detail?bno=${vo.no}">${vo.title}</a></td>
                             <td>${vo.name}</td>
