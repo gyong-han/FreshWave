@@ -15,6 +15,16 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
+            <div class="search-area">
+                <form action="/board/list?pno=1" onsubmit="return submitSearchForm();">
+                    <select name="searchType">
+                        <option value="title">제목</option>
+                        <option value="nick">작성자</option>
+                    </select>
+                    <input type="text" name="searchValue" placeholder="검색할 제목">
+                    <input type="submit" value="검색">
+                </form>
+            </div>
             <div class="table-area">
                 <table>
                     <thead>

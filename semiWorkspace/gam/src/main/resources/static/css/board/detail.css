@@ -95,6 +95,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    justify-content: end;
 }
 
 .comment-section button:hover {
@@ -102,11 +103,13 @@ body {
 }
 
 .button-container {
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
 }
 
-.button-container button {
+.left-button {
     padding: 10px 20px;
     background-color: #555;
     color: #fff;
@@ -114,8 +117,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    margin-right: auto;
 }
 
-.button-container button:hover {
-    background-color: #333;
+.right-buttons button{
+    margin-left: 10px;
 }
+
+

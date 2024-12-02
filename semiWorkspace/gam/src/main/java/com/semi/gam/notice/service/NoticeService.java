@@ -33,8 +33,12 @@ public class NoticeService {
         return mapper.getNoticeCnt();
     }
 
-    public List<NoticeVo> getNoticeList(PageVo pvo) {
-        return mapper.getNoticeList(pvo);
+    public List<NoticeVo> getNoticeList(PageVo pvo , String searchValue) {
+        String str = "";
+        if(searchValue != null && searchValue.length() > 0){
+            str = "AND TITLE LIKE '%" + searchValue + "%'";
+        }
+        return mapper.getNoticeList(pvo , str);
     }
 
     public NoticeVo getNoticeDetail(String bno) {

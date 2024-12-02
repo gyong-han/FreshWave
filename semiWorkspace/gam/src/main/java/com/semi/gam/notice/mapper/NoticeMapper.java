@@ -60,11 +60,12 @@ public interface NoticeMapper {
                 JOIN DEPT D ON E.DEPT_CODE = D.DEPT_CODE
                 JOIN MEMBER M ON E.EMP_NO = M.ID
                 WHERE N.DEL_YN = 'N'
+                ${str}
                 ORDER BY N.URGENT_YN DESC
                 ,N.ENROLL_DATE DESC
-                OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
+                OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
             """)
-    List<NoticeVo> getNoticeList(PageVo pvo);
+    List<NoticeVo> getNoticeList(PageVo pvo , String str);
 
     @Select("""
             SELECT DISTINCT

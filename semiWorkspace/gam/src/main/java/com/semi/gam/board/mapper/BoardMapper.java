@@ -1,5 +1,6 @@
 package com.semi.gam.board.mapper;
 
+import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
@@ -14,26 +15,7 @@ import java.util.Map;
 @Mapper
 public interface BoardMapper {
 
-    @Select("""
-            SELECT B.NO
-                ,B.WRITER_NO
-                ,B.TITLE
-                ,B.CONTENT
-                ,B.ENROLL_DATE
-                ,B.HIT
-                ,B.DEL_YN
-                ,M.NICK
-            FROM BOARD B
-            JOIN EMPLOYEE E
-            ON B.WRITER_NO = E.EMP_NO
-            JOIN MEMBER M
-            ON E.EMP_NO = M.ID
-            WHERE DEL_YN = 'N'
-            ORDER BY ENROLL_DATE DESC
-            OFFSET #{offset} ROWS FETCH NEXT  #{boardLimit} ROWS ONLY
-            """)
-
-    List<BoardVo> getBoardList(PageVo pvo);
+    List<BoardVo> getBoardList(PageVo pvo , String searchType , String searchValue);
 
     @Insert("""
             INSERT INTO BOARD
@@ -91,12 +73,7 @@ public interface BoardMapper {
             """)
     BoardVo getBoardDetail(String bno);
 
-    @Select("""
-                SELECT COUNT(NO)
-                FROM BOARD
-                WHERE DEL_YN = 'N'
-            """)
-    int getBoardCnt();
+    int getBoardCnt(String searchType , String searchValue);
 
     @Select("""
             SELECT *
@@ -154,4 +131,30 @@ public interface BoardMapper {
                         AND DEL_YN = 'N'
             """)
     int increseHit(String bno);
+
+    @Update("""
+            UPDATE BOARD
+            SET TITLE = #{title}
+                ,CONTENT =#{content}
+            WHERE NO = #{bno}
+            """)
+    int getBoardEdit(BoardVo vo);
+
+    @Update("""
+            UPDATE BOARD
+            SET DEL_YN = 'Y'
+                , MODIFY_DATE = SYSDATE
+            WHERE NO = #{bno}
+            """)
+    int del(String bno);
+
+    @Select("""
+            SELECT *
+            FROM BOARD_ATTACHMENT
+            WHERE REF_BOARD_NO = #{bno}
+            ORDER BY NO DESC
+            """)
+    List<AttachmentVo> getAttachmentVoList(String bno);
+
+    int updateBoardAttachment(List<String> changeNameList, String no);
 }
