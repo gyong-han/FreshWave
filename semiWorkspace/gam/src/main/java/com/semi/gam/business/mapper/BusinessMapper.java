@@ -1,5 +1,6 @@
 package com.semi.gam.business.mapper;
 
+import com.semi.gam.business.vo.BtCodeVo;
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
 import com.semi.gam.util.page.PageVo;
@@ -87,4 +88,7 @@ public interface BusinessMapper {
             WHERE BP_NO = #{no}
             """)
     int editHistory(BusinessVo vo);
+
+    @Select("SELECT NO,CODE,NAME FROM BT_CODE")
+    List<BtCodeVo> getBtCodeList();
 }

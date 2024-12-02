@@ -6,7 +6,7 @@
 /* 사이드바: 고정된 너비 */
 main > .sidebar {
     width: 250px; /* 적절히 조정 가능 */
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
 }
 
 /* 콘텐츠 Wrapper: 나머지 화면 차지 */
@@ -16,5 +16,4 @@ main > .sidebar {
     flex-grow: 1; /* 사이드바 제외 나머지 공간 사용 */
     padding: 20px;
     gap: 20px;
-    background-color: #ffffff;
 }

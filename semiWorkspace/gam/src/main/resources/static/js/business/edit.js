@@ -23,11 +23,12 @@ function combineAddress() {
     let addressTag = document.querySelector("#address");
     if(!detailAddress){
         addressTag.value = roadAddress;
+        console.log(addressTag.value);
+        
     }else{
         addressTag.value = roadAddress + ", " + detailAddress;
+        console.log(addressTag.value);
     }
-    
-    const value = document.querySelector("input[id=address]").value
 }
 
 function searchlocation(){
@@ -43,7 +44,9 @@ function searchlocation(){
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
-    const addressTag = document.querySelector("#searchAddress").value;
+    const addressTag = document.querySelector("#sample4_roadAddress").value;
+    
+    
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(addressTag, function(result, status) {
 
@@ -59,6 +62,7 @@ function searchlocation(){
             });
 
             const nameTag = document.querySelector("#name").value;
+            
             
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({

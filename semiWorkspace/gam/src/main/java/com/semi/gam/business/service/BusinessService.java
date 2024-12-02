@@ -1,6 +1,7 @@
 package com.semi.gam.business.service;
 
 import com.semi.gam.business.mapper.BusinessMapper;
+import com.semi.gam.business.vo.BtCodeVo;
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
 import com.semi.gam.util.page.PageVo;
@@ -45,5 +46,9 @@ public class BusinessService {
         int result1 = mapper.edit(vo);
         int result2 = mapper.editHistory(vo);
         return result1 * result2;
+    }
+
+    public List<BtCodeVo> getBtCodeList() {
+        return mapper.getBtCodeList();
     }
 }

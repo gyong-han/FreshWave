@@ -74,8 +74,11 @@ public class StoreController {
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
         List<StoreVo> storeVoList = service.getStoreVoList(pvo,searchType,searchValue);
         for (StoreVo storeVo : storeVoList) {
-            String changePhone = storeVo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
-            storeVo.setPhone(changePhone);
+            if(storeVo.getPhone() != null){
+                String changePhone = storeVo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
+                storeVo.setPhone(changePhone);
+            }
+
         }
         model.addAttribute("storeVoList",storeVoList);
         model.addAttribute("pvo",pvo);
@@ -88,13 +91,16 @@ public class StoreController {
     @GetMapping("detail")
     public String detail(String no, Model model){
         StoreVo vo = service.detail(no);
-
-        String changePhone = vo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{6})", "$1-$2-$3");
+        String changePhone = "";
+        if(vo.getPhone() != null){
+            changePhone = vo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{6})", "$1-$2-$3");
+        }
         String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
         String changeCeoPhone = vo.getCeoPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
         vo.setPhone(changePhone);
         vo.setBrn(changeBrn);
         vo.setCeoPhone(changeCeoPhone);
+        vo.setEnrollDate(vo.getEnrollDate().substring(0,10));
 
         model.addAttribute("vo",vo);
         return "store/detail";
@@ -119,6 +125,7 @@ public class StoreController {
         vo.setEndDate(date.changeDate1(vo.getEndDate()));
 
         vo.setBrn(vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3"));
+        vo.setEnrollDate(vo.getEnrollDate().substring(0,10));
         model.addAttribute("vo",vo);
         return "store/edit";
     }
@@ -146,9 +153,6 @@ public class StoreController {
     @ResponseBody
     public List<StatusVo> storeData(){
         List<StatusVo> statusList = service.storeData();
-        for (StatusVo statusVo : statusList) {
-            System.out.println("statusVo = " + statusVo);
-        }
         return statusList;
     }
 }
