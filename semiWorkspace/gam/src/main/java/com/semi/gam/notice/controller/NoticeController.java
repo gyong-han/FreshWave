@@ -62,13 +62,14 @@ public class NoticeController {
 
     // 공지사항 목록
     @GetMapping("list")
-    public String list(Model model , @RequestParam(name="pno" , defaultValue = "1" , required = false) int currentPage){
+    public String list(Model model , @RequestParam(name="pno" , defaultValue = "1") int currentPage
+                        ,String searchValue){
         int listCount = service.getNoticeCnt();
         int pageLimit = 5;
         int boardLimit = 8;
 
         PageVo pvo = new PageVo(listCount , currentPage, pageLimit, boardLimit);
-        List<NoticeVo> voList = service.getNoticeList(pvo);
+        List<NoticeVo> voList = service.getNoticeList(pvo , searchValue);
 
         for (NoticeVo notice : voList) {
             if ("Y".equals(notice.getUrgentYn())) {
@@ -80,7 +81,7 @@ public class NoticeController {
 
         model.addAttribute("voList" , voList);
         model.addAttribute("pvo" , pvo);
-
+        model.addAttribute("searchValue" , searchValue);
 //        for(int i = 0; i < voList.size(); i++){
 //            if(voList.get(i).getUrgentYn() == "Y"){
 //        }

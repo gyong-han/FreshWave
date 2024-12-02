@@ -1,5 +1,6 @@
 function paintPageArea(pvo){
     const pageArea = document.querySelector(".page-area");
+    pageArea.innerHTML = "";
 
     //이전 버튼
     if(pvo.startPage != 1){
@@ -26,7 +27,7 @@ function paintPageArea(pvo){
     }
 }
 
-function loardBoardList(){
+function loardBoardList(searchType, searchValue){
 
     // tbody 내용 채우기
     const tbodyTag = document.querySelector("main table > tbody");
@@ -41,10 +42,17 @@ function loardBoardList(){
     // ajax
     $.ajax({
         url : `/board/list/data?pno=${pno}`,
+        data : {
+            searchType , 
+            searchValue ,
+        },
         success : function(x){
             const boardVoList = x.a;
             const pvo = x.b;
             paintPageArea(pvo);
+
+            console.log(boardVoList);
+            
 
             tbodyTag.innerHTML = "";
 
@@ -84,3 +92,22 @@ function loardBoardList(){
 }
 
 loardBoardList();
+
+function submitSearchForm(){
+    const searchType = document.querySelector("select[name=searchType]").value;
+
+    const titleTagValue = document.querySelector("input[name=searchValue]").value;
+    const nickTagValue = document.querySelector("input[name=searchValue]").value;
+
+    let searchValue = "";
+    if(searchType == "title"){
+        searchValue = titleTagValue;
+    }else{
+        searchValue = nickTagValue;
+    }
+    
+    loardBoardList(searchType , searchValue);
+
+    return false;
+}
+    

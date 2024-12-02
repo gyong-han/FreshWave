@@ -35,7 +35,9 @@
 
             <div class="file-section">
                 <h3>첨부파일</h3>
-                ${vo.originName}
+                <c:forEach items="${attachmentVoList}" var="attachVo">
+                    <img src="/img/board/attachment/${attachVo.changName}" alt="${attachVo.originName}" width="80px" , height="80px">
+                </c:forEach>
             </div>
 
             <div class="comment-section">
@@ -44,7 +46,13 @@
                 <button type="button">등록</button>
             </div>
             <div class="button-container">
-                <button onclick="history.back()">목록</button>
+                <button class="left-button" onclick="history.back()">목록</button>
+                <div class="right-buttons">
+                    <c:if test="${loginMemberVo.id == vo.writerNo}">
+                        <button onclick="location.href='/board/edit?bno=${vo.no}'">수정</button>
+                        <button onclick="location.href='/board/del?bno=${vo.no}'">삭제</button>
+                    </c:if>
+                </div>
             </div>
         </div>
         
