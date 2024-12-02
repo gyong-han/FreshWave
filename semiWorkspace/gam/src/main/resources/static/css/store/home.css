@@ -1,3 +1,6 @@
+body{
+    background-color: #F2F2F2;
+}
 /* 메인 컨테이너: 사이드바와 콘텐츠를 가로로 배치 */
 .main-container {
     display: flex;
@@ -6,34 +9,63 @@
 /* 사이드바: 고정된 너비 */
 main > .sidebar {
     width: 250px; /* 적절히 조정 가능 */
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
 }
 
 /* 콘텐츠 Wrapper: 나머지 화면 차지 */
 .content-wrapper {
-    display: flex;
+    display: grid;
     flex-direction: row; /* 공지사항과 게시판 세로 배치 */
     flex-grow: 1; /* 사이드바 제외 나머지 공간 사용 */
     padding: 20px;
     gap: 20px;
-    background-color: #ffffff;
+    grid-template-columns: 0.5fr 5fr 5fr 0.5fr;
+    grid-template-rows: 0.5fr 5fr;
+    place-items: center center;
 }
 
+.home-title{
+    display: grid;
+    grid-template-columns: 5fr 1fr ;
+}
 
+.title{
+    place-items: center center;
+    padding-left: 160px;
+}
+
+.button-area{
+    display: grid;
+    place-items: end end;
+}
+
+.content-wrapper button{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+}
+
+.content-wrapper button:hover{
+    cursor: pointer;
+}
 
 .barChart-area{
     display: inline-block;
-    height: 400px;
-    width: 400px;
+    padding-left: 20px;
+    height: 500px;
+    width: 500px;
 }
 
 .pieChart-area{
     display: inline-block;
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
 }
 
 #myBarChart{
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
 }

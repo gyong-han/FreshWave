@@ -18,6 +18,7 @@ public class StoreService {
 
 
     public int insert(StoreVo vo, String changeName, String originName) {
+
         int result1 = mapper.insert(vo);
         int result2 = mapper.insertAttachment(changeName,originName);
         return result1 * result2;

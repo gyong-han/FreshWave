@@ -2,3 +2,146 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+
+body{
+  background-color: #F2F2F2;
+}
+
+.table-area{
+  border-collapse: collapse;
+  width: 700px;
+  height: 400px;
+}
+
+.table-area th{
+  border: 0.5px solid gray;
+  background-color: #1D64F2;
+  color: white;
+  width: 170px;
+  height: 30px;
+}
+
+.table-area td{
+  width: 350px;
+  border-bottom: 0.5px solid #D2D2D2;
+  border-left: 0.5px solid #D2D2D2;
+}
+
+/* 메인 컨테이너: 사이드바와 콘텐츠를 가로로 배치 */
+.main-container {
+  display: flex;
+}
+
+/* 사이드바: 고정된 너비 */
+main > .sidebar {
+  width: 250px; /* 적절히 조정 가능 */
+  /* background-color: #f4f4f4; */
+}
+
+.content-wrapper {
+  display: grid;
+  flex-direction: row; /* 공지사항과 게시판 세로 배치 */
+  flex-grow: 1; /* 사이드바 제외 나머지 공간 사용 */
+  gap: 20px;
+  grid-template-columns: 1fr 8fr 1fr;
+}
+
+.detail-area{
+  display: grid;
+  grid-template-rows: 6fr 0.2fr 0.5fr;
+}
+
+#detail-main{
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: 1fr 6fr;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}
+
+.btn-area{
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+}
+
+#edit-delete-btn{
+  display: flex;
+  justify-content: flex-end;
+}
+
+h1{
+  margin-left: 10px;
+}
+
+#detail-main > div:nth-child(2){
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+#cancel{
+  background-color: black;
+  border: none;
+  color: white;
+  border-radius: 7px;
+  height: 30px;
+  width: 120px;
+  cursor: pointer;
+}
+
+#save{
+  background-color: #1D64F2;
+  border: none;
+  color: white;
+  border-radius: 7px;
+  height: 30px;
+  width: 120px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+h4{
+  margin-right: 10px;
+}
+
+#map{
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  margin-top: 80px;
+}
+
+.table-div{
+  display: flex;
+  align-items: center;
+}
+
+.table-area tr td input{
+  border: none;
+  background-color: #FFFFFF;
+  width: 250px;
+  height: 30px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+#search-address{
+width: 80px;
+height: 30px;
+border-radius: 10px;
+cursor: pointer;
+}
+
+#sample4_detailAddress{
+margin-top: 3px;
+}
+
+#f{
+background-color: initial;
+border-radius: 0;
+border: none;
+}
+
+#sample4_roadAddress{
+  width: 350px;
+}

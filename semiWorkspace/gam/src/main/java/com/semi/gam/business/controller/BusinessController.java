@@ -1,6 +1,7 @@
 package com.semi.gam.business.controller;
 
 import com.semi.gam.business.service.BusinessService;
+import com.semi.gam.business.vo.BtCodeVo;
 import com.semi.gam.business.vo.BusinessVo;
 import com.semi.gam.business.vo.RankVo;
 import com.semi.gam.member.vo.MemberVo;
@@ -28,7 +29,12 @@ public class BusinessController {
     private String path;
 
     @GetMapping("insert")
-    public String insert(){
+    public String insert(Model model){
+        List<BtCodeVo> btCodeList = service.getBtCodeList();
+        for (BtCodeVo codeVo : btCodeList) {
+            System.out.println("codeVo = " + codeVo);
+        }
+        model.addAttribute("BtCodeList",btCodeList);
         return "business/insert";
     }
 
@@ -46,7 +52,7 @@ public class BusinessController {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         String writerNo = loginMemberVo.getId();
         vo.setManagerNo(writerNo);
-
+        System.out.println(vo.getAddress());
         int result = service.insert(vo,changeName,originName);
         if(result == 1){
             return "redirect:/business/list";
@@ -83,6 +89,7 @@ public class BusinessController {
         String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
         vo.setPhone(changePhone);
         vo.setBrn(changeBrn);
+        vo.setEnrollDate(vo.getEnrollDate().substring(0,10));
         model.addAttribute("vo",vo);
         return "business/detail";
     }
@@ -107,6 +114,7 @@ public class BusinessController {
         vo.setStartDate(date.changeDate1(vo.getStartDate()));
         vo.setEndDate(date.changeDate1(vo.getEndDate()));
         vo.setBrn(vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3"));
+        vo.setEnrollDate(vo.getEnrollDate().substring(0,10));
         model.addAttribute("vo",vo);
         return "business/edit";
     }
