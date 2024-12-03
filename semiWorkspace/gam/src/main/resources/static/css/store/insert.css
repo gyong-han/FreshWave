@@ -23,12 +23,22 @@ main > .sidebar {
   padding: 20px;
   gap: 20px;
   grid-template-columns: 2fr 6fr 2fr;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .insert-form{
   display: grid;
   grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr 2fr;
   grid-template-columns: 1fr 1fr;
+}
+
+.insert-form div{
+  height: 85px;
+}
+
+.insert-form div input{
+  margin-top: 5px;
 }
 
 input{
@@ -65,7 +75,7 @@ input{
 #search-address{
   width: 80px;
   height: 30px;
-  margin-top: 5px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -86,4 +96,17 @@ input[type=file]::file-selector-button{
 #sample4_roadAddress{
   width: 450px;
   margin-bottom: 10px;
+}
+
+#btn-area input{
+  margin-top: 50px;
+}
+
+select[name=status]{
+  border: none;
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 5px;
 }

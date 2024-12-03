@@ -76,3 +76,21 @@ function searchlocation(){
     });
 }
 searchlocation();
+
+
+document.querySelector(".detail-area").addEventListener('submit',function(){
+    function checkEdit(){
+        $.ajax({
+            url : "",
+            method : "post",
+            success : function(){
+                
+            },
+            error : function(){
+    
+            }
+        })
+    }
+}
+
+)

@@ -71,7 +71,7 @@ aside{
     align-items: start;
     justify-content: center;
     gap: 50px;
-    width: 250px;
+    width: 300px;
     font-family: "Pretendard-SemiBold";
     font-size: 1.2rem;
 }
@@ -79,6 +79,7 @@ aside{
 .icon{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 

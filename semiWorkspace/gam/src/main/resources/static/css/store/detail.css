@@ -50,6 +50,7 @@ body{
     grid-template-rows: 1fr 6fr;
     border: 0.5px solid black;
     border-radius: 5px;
+    height: 540px;
 }
 
 .btn-area{
@@ -111,10 +112,9 @@ h4{
     margin-left: 100px;
     margin-right: 100px;
     margin-bottom: 100px;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .table-div{
-    display: flex;
-    align-items: center;
+    margin-top: 10px;
 }
