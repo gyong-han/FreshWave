@@ -7,6 +7,7 @@ import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.vo.MemberVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface MemberMapper {
             LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
             WHERE E.QUIT_YN = 'N'
             AND CP_CODE = #{cpCode}
-            AND ID = #{id}
+            AND ID = ${id}
             AND PWD = #{pwd}
             """)
     MemberVo loginMember(MemberVo mvo);
@@ -47,48 +48,44 @@ public interface MemberMapper {
     @Insert("""
             INSERT INTO MEMBER
             (
-                NO
-                , ID
-                , NAME
-                , PWD
-                , ID_NUM
-                , GENDER
-                , PHONE
-                , EMAIL
-                , ADDRESS
-                , ID_NUM
+                NO,
+                ID,
+                NAME,
+                PWD,
+                ID_NUM,
+                GENDER,
+                PHONE,
+                EMAIL,
+                ADDRESS
             )
             VALUES
             (
-                SEQ_MEMBER.NEXTVAL
-                ,#{id}
-                ,#{name}
-                ,#{pwd}
-                ,#{idNum}
-                ,#{gender}
-                ,#{phone}
-                ,#{email}
-                ,#{address}
-                ,#{idNsum}
+                SEQ_MEMBER.NEXTVAL,
+                (SELECT MAX(EMP_NO) FROM EMPLOYEE),
+                #{name},
+                #{pwd},
+                #{idNum},
+                #{gender},
+                #{phone},
+                #{email},
+                #{address}
             )
             """)
     int join(MemberVo mvo);
 
     @Insert("""
             INSERT INTO EMPLOYEE
-            (
-                EMP_NO
-                ,CP_CODE
-                ,JOB_CODE
-                ,DEPT_CODE
-            )
-            VALUES
-            (
-                 '2401' || LPAD(SEQ_EMPLOYEE.NEXTVAL, 2, '0')
-                 ,'A001'
-                 ,#{jobCode}
-                 ,#{deptCode}
-            )
+                (
+                    CP_CODE,
+                    JOB_CODE,
+                    DEPT_CODE
+                )
+                VALUES
+                (
+                    'A001',
+                    #{jobCode},
+                    #{deptCode}
+                )
             """)
     int Company(EmployeeVo evo);
 
@@ -105,4 +102,10 @@ public interface MemberMapper {
             """)
     List<DeptVo> getDeptVoList();
 
+    @Update("""
+            UPDATE EMPLOYEE
+                SET START_TIME = SYSDATE
+            WHERE QUIT_YN = 'N'
+            """)
+    int stratlogin(EmployeeVo evo);
 }
