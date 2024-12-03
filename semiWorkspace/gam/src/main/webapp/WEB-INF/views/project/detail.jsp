@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -10,7 +11,6 @@
 <body>
 
 <h1>${projectVo.name}</h1>
-<form action="/project/edit">
 <div class="prj-detail-box">
     <div>
         <div>생성자</div>
@@ -25,33 +25,29 @@
             <input type="text" value="${projectVo.endDate}" readonly>
         </div>
         <div>프로젝트 권한 설정</div>
-            <input type="text" value="${projectVo.accessName}">
+            <input type="text" value="${projectVo.disclosure}"readonly>
     </div>
 
     <div>
         <div>참여인원</div>
         <table>
             <tbody>
+                <c:forEach items="${add}" var="vo">
                     <tr>
-                        <td>${add.profileName}</td>
-                        <td>${add.name}</td>
-                        <td>${add.deptName}</td>
-                        <td>${add.jobName}</td>
-                        <td>${add.pmAccess}</td>
+                        <td>${vo.profileName}</td>
+                        <td>${vo.name}</td>
+                        <td>${vo.deptName}</td>
+                        <td>${vo.jobName}</td>
+                        <td>${vo.modiAuth}</td>
                     </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
-<input type="submit" value="수정">
-</form>
-<form action="/project/list">
-    <input type="submit" value="삭제">
-</form>
-
-<form action="/project/list">
-    <input type="submit" value="목록">
-</form>
+<button onclick="location.href='/project/edit?projectNo=${projectVo.key}'">수정</button>
+<button onclick="location.href='/project/delete?projectNo=${projectVo.key}'">삭제</button>
+<button onclick="location.href='/project/list'">목록</button>
 
 </body>
 </html>

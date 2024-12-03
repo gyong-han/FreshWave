@@ -32,19 +32,12 @@
             </c:forEach>
         </select>
         <br>
-        편집 권한 설정
-        <br>
-        <select name="accessLevel">
-            <option value="1">수정</option>
-            <option value="2">읽기</option>
-        </select>
-        <br>
         프로젝트 권한 설정*
         <br>
-        <select name="prjPublic">
-            <option value="1">비공개</option>
-            <option value="2">부서공개</option>
-            <option value="3">전체공개</option>
+        <select name="disclosure">
+            <option value="전체공개">전체공개</option>
+            <option value="부서공개">부서공개</option>
+            <option value="비공개">비공개</option>
         </select>
         <br>
         시작날짜
@@ -56,7 +49,5 @@
         <br>
         <input type="submit" value="작성하기" onclick="removeHyphen();">
     </form>
-
-
 </body>
 </html>
