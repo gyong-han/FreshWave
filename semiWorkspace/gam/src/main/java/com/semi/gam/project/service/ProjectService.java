@@ -21,12 +21,23 @@ public class ProjectService {
         return mapper.write(vo, memberVo);
     }
 
-    public int edit(ProjectVo vo, MemberVo memberVo) {
-        return mapper.edit(vo, memberVo);
+    public int edit(ProjectVo vo, MemberVo loginMemberVo) {
+        String[] access = vo.getAccess();
+        String[] empNo = vo.getEmpNo();
+
+        for(int i = 0; i < access.length; i++){
+            if(access[i].equals("수정")){
+                mapper.addMemberEdit(empNo[i], access[i], vo);
+            }
+            if(access[i].equals("읽기")){
+                mapper.addMemberRead(empNo[i],access[i], vo);
+            }
+        }
+        return mapper.edit(vo, loginMemberVo);
     }
 
-    public ProjectVo delete(ProjectVo vo) {
-        return mapper.delete(vo);
+    public int delete(String vo, MemberVo loginMemberVo) {
+        return mapper.delete(vo , loginMemberVo);
 
     }
 
@@ -38,19 +49,16 @@ public class ProjectService {
         return mapper.getProject(key,loginMemberVo);
     }
 
-//    public List<ProjectVo> getProjectAddMemberVo(MemberVo loginMemberVo) {
-//        return mapper.getProjectAddMemberVo(loginMemberVo);
-//    }
-
-    public ProjectVo getProject1(String key, MemberVo loginMemberVo) {
-        return mapper.getProject1(key,loginMemberVo);
-    }
 
     public List<ProjectVo> getProjectAddMemberVo(MemberVo loginMemberVo) {
         return mapper.getProjectAddMemberVo(loginMemberVo);
     }
 
-    public ProjectMemberVo getAddMember(String key, MemberVo loginMemberVo) {
-        return mapper.getAddMember(key, loginMemberVo);
+    public List<ProjectMemberVo> getAddMember(String key) {
+        return mapper.getAddMember(key);
+    }
+
+    public int deleteMember(String empNo, String key) {
+        return mapper.deleteMember(empNo, key);
     }
 }

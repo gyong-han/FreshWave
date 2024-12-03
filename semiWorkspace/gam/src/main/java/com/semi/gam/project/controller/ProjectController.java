@@ -1,7 +1,6 @@
 package com.semi.gam.project.controller;
 
-import com.semi.gam.dept.service.DeptService;
-import com.semi.gam.dept.vo.DeptVo;
+
 import com.semi.gam.member.service.MemberService;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.service.ProjectService;
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 @Controller
@@ -24,7 +22,6 @@ public class ProjectController {
 
         public final ProjectService service;
         public final MemberService memberService;
-//        public final DeptService deptService;
 
 
     //프로젝트 작성
@@ -42,7 +39,7 @@ public class ProjectController {
         MemberVo loginMemberVo1 = memberVo; //TODO 로그인정보 만들어지면 지우기
         session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setId("3");        //TODO 로그인정보 만들어지면 지우기
+        loginMemberVo.setId("1");        //TODO 로그인정보 만들어지면 지우기
         memberVo.setId(loginMemberVo.getId());
         int result = service.write(vo, memberVo);
         if(result != 1){
@@ -83,35 +80,62 @@ public class ProjectController {
         ProjectVo projectVo = service.getProject(key,loginMemberVo);
         model.addAttribute("projectVo" , projectVo);
 
-        ProjectMemberVo vo = service.getAddMember(key, loginMemberVo);
+        List<ProjectMemberVo> vo = service.getAddMember(key);
 
         model.addAttribute("add" , vo);
-        System.out.println("vo = " + vo);
-        System.out.println("model = " + model);
-        return "/project/detail";
+
+        return "project/detail";
     }
 
     @GetMapping("edit")
     //프로젝트 수정
-    public String edit(){
-        return "/project/edit";
+    public String edit(Model model, @RequestParam("projectNo") String key, HttpSession session){
+        //로그인 정보 가져오기
+        MemberVo loginMemberVo1 = new MemberVo(); //TODO 로그인정보 만들어지면 지우기
+        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        loginMemberVo.setId("1"); //TODO 로그인정보 만들어지면 지우기
+        //로그인 정보와 수정권한이 일치하면 수정 가능
+
+        //로그인 정보와 작성자 정보가 일치하면 수정 가능
+
+        //화면 정보 가져오기
+        ProjectVo projectVo = service.getProject(key,loginMemberVo);
+        List<ProjectMemberVo> vo = service.getAddMember(key);
+        model.addAttribute("projectVo" , projectVo);
+        model.addAttribute("add" , vo);
+
+        return "project/edit";
     }
 
     @PostMapping("edit")
-    public String edit(ProjectVo vo, HttpSession session, MemberVo memberVo){
+    public String edit(ProjectVo vo, HttpSession session){
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        memberVo.setId(loginMemberVo.getNo());
-        int result = service.edit(vo, memberVo);
-        if(result < 1){
-            return "redirect:/error";
-        }
-        return "redirect:/project/detail";
+        int result = service.edit(vo, loginMemberVo);
+
+
+        return "redirect:/project/detail?projectNo=" + vo.getKey() ;
     }
 
     @GetMapping("delete")
     //프로젝트 삭제
-    public String delete(ProjectVo vo){
-        service.delete(vo);
-        return "redirect:/board/list";
+    public String delete( @RequestParam("projectNo") String vo, HttpSession session){
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        int result = service.delete(vo, loginMemberVo);
+        if(result != 1){
+            return "redirect:/error";
+        }
+        return "redirect:/project/list";
     }
+
+    @PostMapping("delMember")
+    @ResponseBody
+    public int deleteMember(String empNo, String key){
+        int result = service.deleteMember(empNo, key);
+
+        return result;
+    }
+
+
 }
+
