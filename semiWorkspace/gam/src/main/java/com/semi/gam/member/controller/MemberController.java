@@ -29,38 +29,35 @@ public class MemberController{
     //직급 목록
     @GetMapping("job")
     @ResponseBody
-    public List<JobVo> job(){
-        return service.getJobVoList();
-    }
+    public List<JobVo> job(){return service.getJobVoList();}
 
     //부서 목록
     @GetMapping("dept")
     @ResponseBody
-    public List<DeptVo> dept(){
-        return service.getDeptVoList();
-    }
+    public List<DeptVo> dept(){return service.getDeptVoList();}
 
     //로그인(화면)
     @GetMapping("login")
-    public String login(){
-        return "member/login";
-    }
+    public String login(){return "member/login";}
 
     //로그인(데이터 처리)
     @PostMapping("login")
-    public String login(MemberVo mvo, AdminVo avo, HttpSession session){
+    public String login(MemberVo mvo, AdminVo avo, EmployeeVo evo, HttpSession session){
        if(avo.getId().equals("ADMIN")){
            AdminVo loginAdminVo = service.loginAdmin(avo);
            if(loginAdminVo == null){
                throw new IllegalStateException("error-admin");
            }
+           session.setAttribute("loginAdminVo",loginAdminVo);
            return "redirect:/admin/home";
 
        }
         MemberVo loginMemberVo = service.loginMember(mvo);
+        int result = service.stratlogin(evo);
         if(loginMemberVo == null){
             throw new IllegalStateException("error-member");
         }
+        session.setAttribute("loginMemberVo",loginMemberVo);
         return "redirect:/home";
 
     }
@@ -85,8 +82,10 @@ public class MemberController{
             throw new IllegalStateException("error-join");
         }
         session.setAttribute("alertMsg","회원추가 완료");
-        return "redirect:/member/detail";
+        return "redirect:/admin/list";
 
     }
+
+
 
 }

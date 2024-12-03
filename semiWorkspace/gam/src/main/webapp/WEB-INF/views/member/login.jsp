@@ -23,6 +23,12 @@
                 <input type="password" name="pwd" id="password" placeholder=" " required>
                 <label for="password">비밀번호</label>
             </div>
+            <div>
+                <label>
+                    <input type="checkbox" id="startTime">
+                    출근하기
+                </label>
+            </div>
             <input type="submit" value="LOGIN">
         </form>
     </div>

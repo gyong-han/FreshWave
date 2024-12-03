@@ -22,5 +22,11 @@ function combineAddress() {
 
     let addressTag = document.querySelector("#address");
     addressTag.value = roadAddress + ", " + detailAddress;
+
+    //주민번호 합치기
+     const front = document.getElementById('idNumFront').value;
+     const back = document.getElementById('idNumBack').value;
+     document.getElementById('idNum').value = front + back; // 합쳐서 hidden input에 저장
 }
 combineAddress();
+

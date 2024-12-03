@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="join-contain">
-        <form action="/saveEmployee" method="post" onsubmit="combineAddress()">
+        <form action="/member/join" method="post" onsubmit="combineAddress()">
             <!-- 부서 선택 -->
             <div class="left-join">
                 <label>
@@ -78,16 +78,16 @@
                 <!-- 주민등록번호 -->
                 <label>
                     주민등록번호<br>
-                    <input type="text" name="idNum" placeholder="앞자리" required> -
-                    <input type="password" name="idNum" placeholder="뒷자리" required>
-                    <input type="hidden" name="idNum" id="idNum" name="idNum"> <!-- 전체 주소 저장 -->
+                    <input type="text" id="idNumFront" placeholder="앞자리" maxlength="6" required> -
+                    <input type="password" id="idNumBack" placeholder="뒷자리" maxlength="7" required>
+                    <input type="hidden" name="idNum" id="idNum"> <!-- 합친 주민등록번호를 저장 -->
                 </label>
                 <br><br>
 
                 <!-- 비밀번호 -->
                 <label>
                     비밀번호<br>
-                    <input type="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                    <input type="password" name="pwd" placeholder="비밀번호를 입력하세요" required>
                 </label>
                 <br><br>
 
@@ -102,8 +102,8 @@
                 <!-- 성별 -->
                 <label>
                     성별<br>
-                    여 <input type="radio" name="gender" value="female" required>
-                    남 <input type="radio" name="gender" value="male" required>
+                    여 <input type="radio" name="gender" value="F" required>
+                    남 <input type="radio" name="gender" value="M" required>
                 </label>
                 <br><br>
             </div>
