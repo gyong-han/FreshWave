@@ -108,9 +108,10 @@ public class StoreController {
 
     //삭제
     @GetMapping("delete")
-    public String delete(String bno){
+    @ResponseBody
+    public int delete(String bno){
         int result = service.delete(bno);
-        return "redirect:/store/list";
+        return result;
     }
 
     //수정화면

@@ -34,11 +34,13 @@
                             </div>
                             <div>
                                 <label>사업자 등록번호</label><br>
-                                <input type="number" placeholder="01212312345(-없이 입력)" name="brn" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
+                                <input type="number" placeholder="01212312345(-없이 입력)" name="brn"
+                                    oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
                             </div>
                             <div>
                                 <label>가맹점 전화번호</label><br>
-                                <input type="number" placeholder="021234567(-없이 입력)" name="phone"  oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);">
+                                <input type="number" placeholder="021234567(-없이 입력)" name="phone"
+                                    oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);">
                             </div>
                             <div>
                                 <label>가맹점장</label><br>
@@ -47,7 +49,7 @@
                             <div>
                                 <label>가맹점장 전화번호</label><br>
                                 <input type="number" placeholder="01012345678(-없이 입력)" name="ceoPhone"
-                                oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);">
+                                    oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);">
                             </div>
                             <div>
                                 <label>교육일자</label><br>
@@ -73,10 +75,10 @@
                                 <input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"
                                     id="search-address">
                             </div>
-                            <div>
+                            <div id="btn-area">
                                 <input type="file" name="f" id="file">
                             </div>
-                            <div>
+                            <div id="btn-area">
                                 <input type="button" value="취소" id="cancel" onclick="location.href='/business/list'">
                                 <input type="submit" value="등록" id="enroll" onclick="combineAddress();">
                                 <input type="hidden" id="address" name="address">
@@ -85,7 +87,7 @@
                         <div></div>
                     </div>
             </main>
-            
+
             <hidden input type="text" id="sample4_postcode" placeholder="우편번호"><br>
                 <hidden input type="text" id="sample4_jibunAddress" placeholder="지번주소">
                     <hidden span id="guide" style="color:#999;display:none"></span>

@@ -102,9 +102,10 @@ public class BusinessController {
     }
 
     @GetMapping("delete")
-    public String delete(String no){
+    @ResponseBody
+    public int delete(String no){
         int result = service.delete(no);
-        return "redirect:/business/list";
+        return result;
     }
 
     @GetMapping("edit")
@@ -120,14 +121,15 @@ public class BusinessController {
     }
 
     @PostMapping("edit")
-    public String edit(BusinessVo bvo,Model model){
-        bvo.setStartDate(date.changeDate(bvo.getStartDate()));
-        bvo.setEndDate(date.changeDate(bvo.getEndDate()));
-        int result= service.edit(bvo);
+    public String edit(BusinessVo vo,Model model){
+        vo.setStartDate(date.changeDate(vo.getStartDate()));
+        vo.setEndDate(date.changeDate(vo.getEndDate()));
+        int result= service.edit(vo);
+        String no = "";
         if(result != 1){
             return "redirect:/error";
         }
-        detail(bvo.getNo(),model);
+        detail(vo.getNo(),model);
         return "business/detail";
     }
 

@@ -7,12 +7,14 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Store Edit</title>
+            <!-- <link rel="stylesheet" href="/css/store/detail.css"> -->
             <link rel="stylesheet" href="/css/store/edit.css">
-            <link rel="stylesheet" href="/css/store/detail.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
             <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcd1d93cc41be251252d5ca5e6380217&libraries=services"></script>
             <script defer src="/js/store/detail.js"></script>
             <script defer src="/js/store/edit.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
 
         <body>
@@ -44,7 +46,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>사업자 등록번호</th>
-                                                    <td>${vo.brn}</td>
+                                                    <td>&nbsp${vo.brn}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>가맹점장 전화번호</th>
@@ -72,7 +74,7 @@
                                                             <option value="폐업" ${vo.status=='폐업' ? 'selected' : '' }>폐업</option>
                                                         </select></td>
                                                 </tr>
-                                                <tr>/
+                                                <tr>
                                                     <th>계약 시작일</th>
                                                     <td><input type="date" value="${vo.startDate}" name="startDate"></td>
                                                 </tr>

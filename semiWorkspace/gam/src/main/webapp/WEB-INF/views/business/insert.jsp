@@ -73,6 +73,7 @@
                                     <input type="date" placeholder="2024-12-18" name="endDate">
                                 </div>
                                 <div class="address">
+                                    <label>주소</label><br>
                                     <input type="text" id="sample4_roadAddress" placeholder="주소">
                                     <input type="text" id="sample4_detailAddress" placeholder="상세주소">
                                 </div>
@@ -80,10 +81,10 @@
                                     <input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"
                                         id="search-address">
                                 </div>
-                                <div>
+                                <div id="btn-area">
                                     <input type="file" name="f" id="file">
                                 </div>
-                                <div>
+                                <div id="btn-area">
                                     <input type="button" value="취소" id="cancel" onclick="location.href='/business/list'">
                                     <input type="submit" value="등록" id="enroll" onclick="combineAddress();">
                                     <input type="hidden" id="address" name="address">

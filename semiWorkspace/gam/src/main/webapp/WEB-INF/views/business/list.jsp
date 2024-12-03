@@ -24,8 +24,7 @@
 
                                     <select name="searchType" id="search-type">
                                         <option value="name" ${searchType=='name' ? 'selected' : '' }>거래처명</option>
-                                        <option value="managerName" ${searchType=='managerName' ? 'selected' : '' }>담당자
-                                        </option>
+                                        <option value="managerName" ${searchType=='managerName' ? 'selected' : '' }>담당자</option>
                                         <option value="ceo" ${searchType=='ceo' ? 'selected' : '' }>대표자</option>
                                     </select>
 

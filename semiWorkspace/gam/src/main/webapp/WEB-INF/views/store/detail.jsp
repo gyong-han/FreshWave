@@ -8,9 +8,11 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Store Detail</title>
             <link rel="stylesheet" href="/css/store/detail.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
             <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcd1d93cc41be251252d5ca5e6380217&libraries=services"></script>
             <script defer src="/js/store/detail.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
 
         <body>
@@ -91,10 +93,10 @@
                                         <button onclick="location.href='/store/list'" id="list">목록</button>
                                     </div>
                                     <div id="edit-delete-btn">
-                                        <c:if test="${loginMemberVo.id == vo.managerNo}">
+                                        
                                             <button onclick="storeDelete(`${vo.no}`)" id="delete">삭제</button>
                                             <button onclick="location.href='/store/edit?no=${vo.no}'" id="edit">수정</button>
-                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
