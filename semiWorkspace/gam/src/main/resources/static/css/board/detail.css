@@ -86,21 +86,6 @@ body {
     resize: none;
 }
 
-.comment-section button {
-    display: block;
-    background-color: #0066cc;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    justify-content: end;
-}
-
-.comment-section button:hover {
-    background-color: #004d99;
-}
 
 .button-container {
     display: flex;
@@ -122,6 +107,30 @@ body {
 
 .right-buttons button{
     margin-left: 10px;
+}
+
+#comment-list-area{
+    width: 100%;
+    display: grid;
+}
+
+#comment-write-area{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#comment-write-area input[type="text"]{
+    flex :1;
+    height: 300px;
+    width: 100%;
+}
+
+#comment-write-area button {
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 

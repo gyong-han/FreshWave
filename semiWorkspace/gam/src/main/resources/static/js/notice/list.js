@@ -17,3 +17,19 @@ $(document).ready(function(){
         window.location.href = `/notice/list${query}`;
     });
 });
+
+// function submitSearchForm(){
+//     const searchType = document.querySelector("select[name=searchType]").value;
+
+//     const titleTagValue = document.querySelector("input[name=searchValue]").value;
+//     const nameTagValue = document.querySelector("input[name=searchValue]").value;
+
+//     let searchValue = "";
+//     if(searchType == "title"){
+//         searchValue = titleTagValue;
+//     }else{
+//         searchValue = nameTagValue;
+//     }
+
+//     return false;
+// }

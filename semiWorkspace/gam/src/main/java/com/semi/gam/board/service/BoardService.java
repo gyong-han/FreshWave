@@ -3,6 +3,7 @@ package com.semi.gam.board.service;
 import com.semi.gam.board.mapper.BoardMapper;
 import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
+import com.semi.gam.board.vo.CommentVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
@@ -77,5 +78,17 @@ public class BoardService {
 
     public List<AttachmentVo> getAttachmentVoList(String bno) {
         return mapper.getAttachmentVoList(bno);
+    }
+
+    public int commentWrite(CommentVo vo) {
+        return mapper.commentWrite(vo);
+    }
+
+    public List<CommentVo> getBoardCommentList(String boardNo) {
+        return mapper.getBoardCommentList(boardNo);
+    }
+
+    public int commentDel(CommentVo vo) {
+        return mapper.commentDel(vo);
     }
 }

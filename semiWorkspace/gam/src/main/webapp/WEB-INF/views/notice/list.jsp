@@ -17,8 +17,12 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <div class="search-area">
-                <form action="/notice/list">
-                    <input type="text" name="searchValue" value="${searchValue}" placeholder="검색할 제목 입력">
+                <form action="/notice/list" onsubmit="return submitSearchForm();">
+                    <select name="searchType">
+                        <option value="title">제목</option>
+                        <option value="name">작성자</option>
+                    </select>
+                    <input type="text" name="searchValue" placeholder="검색할 제목 입력">
                     <input type="submit" name="" id="" value="검색">
                 </form>
             </div>
@@ -52,13 +56,13 @@
             </div>
             <div class="page-area">
                 <c:if test="${pvo.startPage != 1}">
-                    <a href="/notice/list?pno=${pvo.startPage-1}&searchValue=${searchValue}"><</a>
+                    <a href="/notice/list?pno=${pvo.startPage-1}&searchType=${searchType}&searchValue=${searchValue}"><</a>
                 </c:if>
                 <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
-                    <a href="/notice/list?pno=${i}&searchValue=${searchValue}">${i}</a>
+                    <a href="/notice/list?pno=${i}&searchType=${searchType}&searchValue=${searchValue}">${i}</a>
                 </c:forEach>
                 <c:if test = "${pvo.endPage != pvo.maxPage}">
-                    <a href="/notice/list?pno=${pvo.endPage+1}$searchValue=${searchValue}">></a>
+                    <a href="/notice/list?pno=${pvo.endPage+1}&searchType=${searchType}&searchValue=${searchValue}">></a>
                 </c:if>
             </div>
         </div>

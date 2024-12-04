@@ -1,5 +1,6 @@
 package com.semi.gam.notice.mapper;
 
+import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
@@ -36,36 +37,9 @@ public interface NoticeMapper {
             """)
     int write(NoticeVo vo);
 
-    @Select("""
-            SELECT COUNT(*)
-            FROM NOTICE
-            WHERE DEL_YN = 'N'
-            """)
-    int getNoticeCnt();
+    int getNoticeCnt(String searchType , String searchValue);
 
-    @Select("""
-            SELECT
-                  N.NO
-                , N.WRITER_NO
-                , N.TITLE
-                , N.CONTENT
-                , N.URGENT_YN
-                , N.HIT
-                , N.ENROLL_DATE
-                , N.DEL_YN
-                , D.DEPT_NAME
-                , M.NAME
-                FROM NOTICE N
-                JOIN EMPLOYEE E ON N.WRITER_NO = E.EMP_NO
-                JOIN DEPT D ON E.DEPT_CODE = D.DEPT_CODE
-                JOIN MEMBER M ON E.EMP_NO = M.ID
-                WHERE N.DEL_YN = 'N'
-                ${str}
-                ORDER BY N.URGENT_YN DESC
-                ,N.ENROLL_DATE DESC
-                OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
-            """)
-    List<NoticeVo> getNoticeList(PageVo pvo , String str);
+    List<NoticeVo> getNoticeList(PageVo pvo , String searchType, String searchValue);
 
     @Select("""
             SELECT DISTINCT
@@ -103,4 +77,44 @@ public interface NoticeMapper {
                     AND DEL_YN = 'N'
             """)
     int increseHit(String bno);
+
+    @Update("""
+            UPDATE NOTICE
+            SET
+                TITLE = #{title},
+                CONTENT = #{content},
+                URGENT_YN = #{urgentYn},
+                MODIFY_DATE = SYSDATE
+            WHERE NO = #{no} 
+            AND DEL_YN = 'N'
+            """)
+    int edit(NoticeVo vo);
+
+    @Select("""
+            SELECT 
+            N.NO
+            ,N.TITLE
+            ,N.CONTENT,
+            N.HIT ,
+            N.ENROLL_DATE ,
+            N.MODIFY_DATE ,
+            N.DEL_YN ,
+            M.NAME
+            FROM NOTICE N
+            JOIN EMPLOYEE E
+            ON N.WRITER_NO = E.EMP_NO
+            JOIN MEMBER M
+            ON E.EMP_NO = M.ID
+            WHERE N.NO = #{no}
+            AND N.DEL_YN = 'N'
+            """)
+    NoticeVo getNoticeByNo(String no);
+
+    @Update("""
+            UPDATE NOTICE
+            SET DEL_YN = 'Y',
+            MODIFY_DATE = SYSDATE
+            WHERE NO = #{no} AND DEL_YN = 'N'
+            """)
+    int del(NoticeVo vo);
 }

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>상세조회</title>
     <link rel="stylesheet" href="/css/board/detail.css">
+    <script defer src="/js/board/detail.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -36,14 +37,17 @@
             <div class="file-section">
                 <h3>첨부파일</h3>
                 <c:forEach items="${attachmentVoList}" var="attachVo">
-                    <img src="/img/board/attachment/${attachVo.changName}" alt="${attachVo.originName}" width="80px" , height="80px">
+                    <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" , height="80px">
                 </c:forEach>
             </div>
-
+            <hr>
             <div class="comment-section">
                 <h3>댓글</h3>
-                <textarea placeholder="댓글을 입력하세요..."></textarea>
-                <button type="button">등록</button>
+                <div id="comment-write-area">
+                    <input type="text" name="content" placeholder="댓글을 작성하세요.">
+                    <button onclick="writeComment(${vo.no});">등록</button>
+                </div>
+                <div id="comment-list-area" boardNo = "${vo.no}"></div>
             </div>
             <div class="button-container">
                 <button class="left-button" onclick="history.back()">목록</button>

@@ -45,6 +45,9 @@
             <div class="button-container">
                 <button onclick="history.back()">목록</button>
             </div>
+
+            <button onclick="location.href='/notice/edit?no=${vo.no}'">수정</button>
+            <button onclick="location.href='/notice/del?no=${vo.no}'">삭제</button>
         </div>
     </main>
 </body>
