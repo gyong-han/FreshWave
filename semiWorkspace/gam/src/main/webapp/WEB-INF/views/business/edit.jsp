@@ -9,10 +9,9 @@
             <title>Business Edit</title>
             <link rel="stylesheet" href="/css/business/edit.css">
             <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-            <script type="text/javascript"
-                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcd1d93cc41be251252d5ca5e6380217&libraries=services"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcd1d93cc41be251252d5ca5e6380217&libraries=services"></script>
             <script defer src="/js/business/edit.js"></script>
-        </head>
+        </head> 
 
         <body>
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -21,8 +20,7 @@
                         <div class="content-wrapper">
                             <div></div> <!--공란-->
                             <div>
-                                <form action="/business/edit?no=${vo.no}" method="post" enctype="multipart/form-data"
-                                    class="detail-area">
+                                <form action="/business/edit?no=${vo.no}" method="post" enctype="multipart/form-data" class="detail-area">
                                     <div id="detail-main">
                                         <div>
                                             <h1>${vo.name}</h1>
@@ -30,7 +28,7 @@
                                         <div>
                                             <h4>등록일 : ${vo.enrollDate}</h4>
                                         </div>
-                                        <div id="map" style="width:350px;height:350px;"></div>
+                                        <div id="map" style="width:450px;height:350px;"></div>
                                         <div class="table-div">
                                             <table class="table-area">
                                                 <tr>
@@ -80,7 +78,10 @@
 
                                                 <tr>
                                                     <th>첨부파일</th>
-                                                    <td>&nbsp<input type="file" style="pointer-events: none;" id="f"><span>${vo.originName}</span>
+                                                    <td>
+                                                        <label for="f" class="custom-file-button" id="file-label">파일 선택</label>
+                                                        <input type="file" name="ff" id="f">
+                                                        <span id="fileName">${vo.originName}</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -92,6 +93,7 @@
                                         <input type="submit" value="수정" onclick="combineAddress();" id="save">
                                         <input type="hidden" id="address" value="${vo.address}" name="address">
                                         <input type="hidden" id="name" value="${vo.name}">
+                                        <input type="hidden" id="no" value="${vo.no}">
                                     </div>
                                 </form>
                             </div>

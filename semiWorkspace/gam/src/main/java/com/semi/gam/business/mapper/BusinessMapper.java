@@ -91,4 +91,12 @@ public interface BusinessMapper {
 
     @Select("SELECT NO,CODE,NAME FROM BT_CODE")
     List<BtCodeVo> getBtCodeList();
+
+    @Update("""
+            UPDATE BP_ATTACHMENT
+            SET CHANGE_NAME = #{changeName},
+            ORIGIN_NAME = #{originName}
+            WHERE REF_BP_NO = #{vo.no}
+            """)
+    int editAttachment(BusinessVo vo, String originName, String changeName);
 }

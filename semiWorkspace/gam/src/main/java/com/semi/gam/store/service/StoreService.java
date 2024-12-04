@@ -40,8 +40,13 @@ public class StoreService {
         return mapper.delete(bno);
     }
 
-    public int edit(StoreVo svo) {
-        return mapper.edit(svo);
+    public int edit(StoreVo svo, String changeName, String originName) {
+        int result1 =  mapper.edit(svo);
+        int result2 = 1;
+        if(!originName.isEmpty() && !changeName.isEmpty()){
+            result2 = mapper.editAttachment(svo,originName,changeName);
+        }
+        return result1 * result2;
     }
 
     public List<StatusVo> storeData() {

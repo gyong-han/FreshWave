@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,14 +31,22 @@ public class StoreController {
     private String path;
 
     @GetMapping("home")
-    public String storeHome(){
-        return "store/home";
+    public String storeHome(HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo != null){
+            return "store/home";
+        }
+        return "redirect:/member/login";
     }
 
     //작성 화면
     @GetMapping("insert")
-    public String insert(){
-        return "store/insert";
+    public String insert(HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo != null){
+            return "store/insert";
+        }
+        return "redirect:/member/login";
     }
 
     //작성 처리
@@ -67,7 +76,11 @@ public class StoreController {
 
     //목록조회
     @GetMapping("list")
-    public String getStoreVoList(Model model,@RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
+    public String getStoreVoList(HttpSession session,Model model,@RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         int listCount = service.getStoreCnt(searchType,searchValue);
         int pageLimit = 5;
         int boardLimit = 8;
@@ -89,7 +102,11 @@ public class StoreController {
 
     //상세조회
     @GetMapping("detail")
-    public String detail(String no, Model model){
+    public String detail(String no, Model model,HttpSession session){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         StoreVo vo = service.detail(no);
         String changePhone = "";
         if(vo.getPhone() != null){
@@ -116,8 +133,11 @@ public class StoreController {
 
     //수정화면
     @GetMapping("edit")
-    public String edit(String no, Model model){
-
+    public String edit(String no, Model model, HttpSession session){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         StoreVo vo = service.detail(no);
 
         vo.setEduDate(date.changeDate1(vo.getEndDate()));
@@ -133,19 +153,29 @@ public class StoreController {
 
     //수정 처리
     @PostMapping("edit")
-    public String edit(StoreVo svo, Model model){
-        System.out.println("svo = " + svo);
+    public String edit(StoreVo svo, Model model,HttpSession session,MultipartFile f) throws IOException {
         svo.setEduDate(date.changeDate(svo.getEndDate()));
         svo.setOpenDate(date.changeDate(svo.getOpenDate()));
         svo.setStartDate(date.changeDate(svo.getStartDate()));
         svo.setEndDate(date.changeDate(svo.getEndDate()));
-        if(!svo.getCloseDate().equals("")){svo.setCloseDate(date.changeDate(svo.getCloseDate()));}
-        else{svo.setCloseDate("-");}
-        int result= service.edit(svo);
-        if(result != 1){
-            return "redirect:/error";
+        if(!svo.getCloseDate().equals("")){
+            svo.setCloseDate(date.changeDate(svo.getCloseDate()));
         }
-        detail(svo.getNo(),model);
+        else{
+            svo.setCloseDate("-");
+        }
+
+        String changeName = "";
+        String originName = "";
+        if(f != null){
+            originName = f.getOriginalFilename();
+            changeName = FileUploader.save(f,path);
+        }
+
+        int result= service.edit(svo,changeName,originName);
+
+        session.setAttribute("alertNo",result);
+        detail(svo.getNo(),model,session);
         return "store/detail";
     }
     

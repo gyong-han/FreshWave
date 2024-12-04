@@ -91,3 +91,31 @@ function businessDelete(no) {
       ;
 
 }
+
+
+function editSuccess() {
+  Swal.fire({
+      title: "수정완료!",
+      icon: "success",
+      confirmButtonColor: "#1D64F2",
+      confirmButtonText: "확인"
+  });
+}
+
+function editFail() {
+  Swal.fire({
+      title: "수정실패..",
+      icon: "error",
+      confirmButtonColor: "#1D64F2",
+      confirmButtonText: "확인"
+  })
+}
+
+function imgOpen(changeName){
+  Swal.fire({
+    imageUrl: `/img/business/attachment/${changeName}`,
+    imageHeight: 700,
+    imageWidth : 700,
+    confirmButtonText: "닫기"
+  });
+}

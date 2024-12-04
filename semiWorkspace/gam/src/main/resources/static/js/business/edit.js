@@ -77,20 +77,13 @@ function searchlocation(){
 }
 searchlocation();
 
+document.querySelector("#f").addEventListener('change', function() {
+    const fileTag = document.querySelector("#f");
+    const labelTag = document.querySelector("#file-label");
+    const spanTag = document.querySelector("#fileName");
 
-document.querySelector(".detail-area").addEventListener('submit',function(){
-    function checkEdit(){
-        $.ajax({
-            url : "",
-            method : "post",
-            success : function(){
-                
-            },
-            error : function(){
-    
-            }
-        })
-    }
-}
-
-)
+    fileTag.style.display = "inline";
+    fileTag.setAttribute("name","f");
+    labelTag.style.display = "none";
+    spanTag.style.display = 'none';
+  });

@@ -71,7 +71,7 @@ main > .sidebar {
 }
 
 h1{
-  margin-left: 10px;
+  margin-left: 50px;
 }
 
 #detail-main > div:nth-child(2){
@@ -102,12 +102,12 @@ h1{
 }
 
 h4{
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 #map{
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 50px;
+  margin-right: 50px;
   margin-bottom: 100px;
   margin-top: 40px;
 }
@@ -136,12 +136,35 @@ h4{
   margin-top: 3px;
 }
 
-#f{
-  background-color: initial;
-  border-radius: 0;
-  border: none;
-}
-
 #sample4_roadAddress{
   width: 350px;
+}
+
+#f{
+  background-color: initial;
+  border: none;
+  display: none;
+  margin-top: 2px;
+  height: 25px;
+}
+
+.custom-file-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E5E5E5;
+  border: 1px solid lightslategray;
+  color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 12px;
+  height :24px;
+  width: 73px;
+  margin-left: 5px;
+}
+
+#fileName{
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  color: initial;
 }

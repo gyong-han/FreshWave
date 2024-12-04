@@ -25,15 +25,16 @@ import java.util.List;
 public class BusinessController {
     private final BusinessService service;
     private final ChangeDate date;
-    @Value("#{pathInfo.getStorePath()}")
+    @Value("#{pathInfo.getBusinessPath()}")
     private String path;
 
     @GetMapping("insert")
-    public String insert(Model model){
-        List<BtCodeVo> btCodeList = service.getBtCodeList();
-        for (BtCodeVo codeVo : btCodeList) {
-            System.out.println("codeVo = " + codeVo);
+    public String insert(Model model,HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
         }
+        List<BtCodeVo> btCodeList = service.getBtCodeList();
         model.addAttribute("BtCodeList",btCodeList);
         return "business/insert";
     }
@@ -52,7 +53,6 @@ public class BusinessController {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         String writerNo = loginMemberVo.getId();
         vo.setManagerNo(writerNo);
-        System.out.println(vo.getAddress());
         int result = service.insert(vo,changeName,originName);
         if(result == 1){
             return "redirect:/business/list";
@@ -62,7 +62,12 @@ public class BusinessController {
 
 
     @GetMapping("list")
-    public String getBusinessVoList(Model model, @RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
+    public String getBusinessVoList(Model model, @RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,
+                                    String searchValue,HttpSession session){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         int listCount = service.getBusinessCnt(searchValue,searchType);
         int pageLimit = 5;
         int boardLimit = 8;
@@ -83,7 +88,11 @@ public class BusinessController {
     }
 
     @GetMapping("detail")
-    public String detail(String no,Model model){
+    public String detail(String no,Model model,HttpSession session){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         BusinessVo vo = service.detail(no);
         String changePhone = vo.getPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
         String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
@@ -109,7 +118,11 @@ public class BusinessController {
     }
 
     @GetMapping("edit")
-    public String edit(String no, Model model){
+    public String edit(String no, Model model,HttpSession session){
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");ㅡ
+//        if(loginMemberVo == null){
+//            return "redirect:/member/login";
+//        }
         BusinessVo vo = service.detail(no);
 
         vo.setStartDate(date.changeDate1(vo.getStartDate()));
@@ -121,15 +134,20 @@ public class BusinessController {
     }
 
     @PostMapping("edit")
-    public String edit(BusinessVo vo,Model model){
+    public String edit(BusinessVo vo,HttpSession session,Model model,MultipartFile f) throws IOException {
         vo.setStartDate(date.changeDate(vo.getStartDate()));
         vo.setEndDate(date.changeDate(vo.getEndDate()));
-        int result= service.edit(vo);
-        String no = "";
-        if(result != 1){
-            return "redirect:/error";
+
+        String changeName = "";
+        String originName = "";
+        if(f != null){
+            originName = f.getOriginalFilename();
+            changeName = FileUploader.save(f,path);
         }
-        detail(vo.getNo(),model);
+        int result = service.edit(vo,originName,changeName);
+
+        session.setAttribute("alertNo",result);
+        detail(vo.getNo(),model,session);
         return "business/detail";
     }
 
