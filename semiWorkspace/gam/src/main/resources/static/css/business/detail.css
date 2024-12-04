@@ -66,7 +66,7 @@ body{
 }
 
 h1{
-    margin-left: 10px;
+    margin-left: 50px;
 }
 
 #detail-main > div:nth-child(2){
@@ -107,16 +107,22 @@ h1{
 }
 
 h4{
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 #map{
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
     margin-bottom: 100px;
     margin-top: 40px;
 }
 
 .table-div{
     margin-top: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }

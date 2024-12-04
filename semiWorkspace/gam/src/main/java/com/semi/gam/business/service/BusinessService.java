@@ -7,11 +7,13 @@ import com.semi.gam.business.vo.RankVo;
 import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BusinessService {
     private final BusinessMapper mapper;
 
@@ -42,10 +44,14 @@ public class BusinessService {
         return mapper.delete(no);
     }
 
-    public int edit(BusinessVo vo) {
+    public int edit(BusinessVo vo, String originName, String changeName) {
         int result1 = mapper.edit(vo);
         int result2 = mapper.editHistory(vo);
-        return result1 * result2;
+        int result3 = 1;
+        if(!originName.isEmpty() && !changeName.isEmpty()){
+            result3 = mapper.editAttachment(vo,originName,changeName);
+        }
+        return result1 * result2 * result3;
     }
 
     public List<BtCodeVo> getBtCodeList() {

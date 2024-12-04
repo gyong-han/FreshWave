@@ -13,6 +13,21 @@
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcd1d93cc41be251252d5ca5e6380217&libraries=services"></script>
             <script defer src="/js/business/detail.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    <c:if test="${not empty alertNo}">
+                        console.log(${alertNo});
+
+                        <c:if test="${alertNo == 1}">
+                            editSuccess();
+                        </c:if>
+                        <c:if test="${alertNo == 0}">
+                            editFail();
+                        </c:if>
+                        <c:remove var="alertNo" scope="session" />
+                    </c:if>
+                });
+            </script>
         </head>
 
         <body>
@@ -29,7 +44,7 @@
                                     <div>
                                         <h4>등록일 : ${vo.enrollDate}</h4>
                                     </div>
-                                    <div id="map" style="width:350px;height:350px;"></div>
+                                    <div id="map" style="width:450px;height:350px;"></div>
                                     <div class="table-div">
                                         <table class="table-area">
                                             <tr>
@@ -71,9 +86,7 @@
 
                                             <tr>
                                                 <th>첨부파일</th>
-                                                <td>&nbsp<input type="file"
-                                                        style="pointer-events: none;"><span>${vo.originName}</span>
-                                                </td>
+                                                <td><a onclick="imgOpen(`${vo.changeName}`);">&nbsp${vo.originName}</a></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -84,12 +97,14 @@
                                         <button onclick="location.href='/business/list'" id="list">목록</button>
                                     </div>
                                     <div id="edit-delete-btn">
+                                        <c:if test="${loginMemberVo.id == vo.managerNo}">
                                             <button onclick="businessDelete(`${vo.no}`)" id="delete">삭제</button>
                                             <button onclick="location.href='/business/edit?no=${vo.no}'" id="edit">수정</button>
+                                        </c:if>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                             <div></div> <!--공란-->
                         </div>

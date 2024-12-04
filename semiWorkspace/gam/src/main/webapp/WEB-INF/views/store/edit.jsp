@@ -33,7 +33,7 @@
                                         <div>
                                             <h4>등록일 : ${vo.enrollDate}</h4>
                                         </div>
-                                        <div id="map" style="width:350px;height:350px;"></div>
+                                        <div id="map" style="width:450px;height:350px;"></div>
                                         <div class="table-div">
                                             <table class="table-area">
                                                 <tr>
@@ -93,8 +93,11 @@
                                                 </tr>
                                                 <tr>
                                                     <th>첨부파일</th>
-                                                    <td><input type="file"
-                                                            style="pointer-events: none;"><span>${vo.originName}</span></td>
+                                                    <td>
+                                                        <label for="f" class="custom-file-button" id="file-label">파일 선택</label>
+                                                        <input type="file" name="ff" id="f">
+                                                        <span id="fileName">${vo.originName}</span>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>

@@ -27,7 +27,7 @@ public interface StoreMapper {
 
     @Select("""
             SELECT S.NO,S.MANAGER_NO,S.NAME,S.CEO,S.PHONE,S.CEO_PHONE,S.BRN,S.EDU_DATE,S.OPEN_DATE,S.CLOSE_DATE,S.STATUS,S.START_DATE,S.END_DATE,
-            S.ADDRESS,A.ORIGIN_NAME,S.ENROLL_DATE
+            S.ADDRESS,A.ORIGIN_NAME,S.ENROLL_DATE,A.CHANGE_NAME
             FROM STORE S
             LEFT JOIN ST_ATTACHMENT A ON(S.NO = A.REF_ST_NO)
             WHERE DEL_YN = 'N'
@@ -73,4 +73,12 @@ public interface StoreMapper {
             ORDER BY COUNT(*)DESC
             """)
     List<StatusVo> storeData();
+
+    @Update("""
+            UPDATE ST_ATTACHMENT
+            SET CHANGE_NAME = #{changeName},
+            ORIGIN_NAME = #{originName}
+            WHERE REF_ST_NO = #{svo.no}
+            """)
+    int editAttachment(StoreVo svo, String originName, String changeName);
 }
