@@ -22,16 +22,19 @@ public class ProjectService {
     }
 
     public int edit(ProjectVo vo, MemberVo loginMemberVo) {
-        String[] access = vo.getAccess();
-        String[] empNo = vo.getEmpNo();
 
-        for(int i = 0; i < access.length; i++){
-            if(access[i].equals("수정")){
-                mapper.addMemberEdit(empNo[i], access[i], vo);
-            }
-            if(access[i].equals("읽기")){
-                mapper.addMemberRead(empNo[i],access[i], vo);
-            }
+       if(vo.getAccess() != null){
+           String[] access = vo.getAccess();
+           String[] empNo = vo.getEmpNo();
+
+           for(int i = 0; i < access.length; i++){
+               if(access[i].equals("수정")){
+                   mapper.addMemberEdit(empNo[i], access[i], vo);
+               }
+               if(access[i].equals("읽기")){
+                   mapper.addMemberRead(empNo[i],access[i], vo);
+               }
+           }
         }
         return mapper.edit(vo, loginMemberVo);
     }
@@ -60,5 +63,36 @@ public class ProjectService {
 
     public int deleteMember(String empNo, String key) {
         return mapper.deleteMember(empNo, key);
+    }
+
+    public List<ProjectMemberVo> getAddMemberVo() {
+        return mapper.getAddMemberVo();
+    }
+
+
+    public ProjectMemberVo addMemberVo(ProjectMemberVo empNo) {
+        return mapper.addMemberVp(empNo);
+    }
+
+    public String getProjectKey(ProjectVo vo, MemberVo loginMemberVo) {
+
+        return mapper.getProjectKey(vo, loginMemberVo);
+    }
+
+    public int setAddMember(ProjectMemberVo projectMemberVo, String prjKey) {
+
+        int result = 0;
+        String[] empNo = projectMemberVo.getEmpNoArr();
+        String[] modiAuth = projectMemberVo.getModiAuthArr();
+
+        if(empNo != null){
+            for(int i = 0; i < empNo.length; i++){
+                String empNoArr = empNo[i];
+                String modiAuthArr = modiAuth[i];
+                result = mapper.setAddMember(empNoArr, modiAuthArr, prjKey);
+            }
+        }
+
+        return result;
     }
 }

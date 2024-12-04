@@ -130,6 +130,7 @@ public interface ProjectMapper {
                 , J.JOB_NAME
                 , M.MODI_AUTH
                 , E.EMP_NO
+                , B.PROFILE     AS  profileName
             FROM PROJECT_MEMBER M
             JOIN MEMBER B ON (B.ID = M.EMP_NO)
             JOIN EMPLOYEE E ON (E.EMP_NO = M.EMP_NO)
@@ -168,4 +169,60 @@ public interface ProjectMapper {
             AND EMP_NO = #{empNo}
             """)
     int deleteMember(String empNo, String key);
+
+
+    @Select("""
+            SELECT
+                M.PROFILE   AS  profileName
+                , M.NAME    AS  memberName
+                , D.DEPT_NAME
+                , J.JOB_NAME
+                , E.EMP_NO
+            FROM MEMBER M
+            JOIN EMPLOYEE E ON (E.EMP_NO = M.ID)
+            JOIN JOB J ON (J.JOB_CODE = E.JOB_CODE)
+            JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
+            """)
+    List<ProjectMemberVo> getAddMemberVo();
+
+    @Select("""
+            SELECT
+                M.PROFILE   AS  profileName
+                , M.NAME    AS  memberName
+                , D.DEPT_NAME
+                , J.JOB_NAME
+                , E.EMP_NO
+            FROM MEMBER M
+            JOIN EMPLOYEE E ON (E.EMP_NO = M.ID)
+            JOIN JOB J ON (J.JOB_CODE = E.JOB_CODE)
+            JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
+            WHERE E.EMP_NO = #{empNo}
+            """)
+    ProjectMemberVo addMemberVp(ProjectMemberVo empNo);
+
+    @Select("""
+            SELECT KEY
+            FROM PROJECT
+            WHERE NAME = #{vo.name}
+            AND WRITER_NO = #{loginMemberVo.id}
+            """)
+    String getProjectKey(ProjectVo vo, MemberVo loginMemberVo);
+
+    @Insert("""
+            INSERT INTO PROJECT_MEMBER
+            (
+                NO
+                , PRJ_KEY
+                , EMP_NO
+                , MODI_AUTH
+            )
+             VALUES
+             (
+                 SEQ_PROJECT_MEMBER.NEXTVAL
+                 , #{prjKey}
+                 , #{s}
+                 , #{s1}
+             )
+            """)
+    int setAddMember(String s, String s1, String prjKey);
 }

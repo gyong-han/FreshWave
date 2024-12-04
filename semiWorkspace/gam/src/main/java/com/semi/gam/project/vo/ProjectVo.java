@@ -17,6 +17,7 @@ public class ProjectVo {
     private String no;
     private String disclosure;
     private String prjKey;
+    private String writerName;
 
     private String deptName;
     private String memberName;
