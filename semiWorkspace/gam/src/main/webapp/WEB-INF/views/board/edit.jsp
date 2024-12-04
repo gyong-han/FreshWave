@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
- <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
-<title>게시판 수정</title>
+<script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<title>게시글 수정</title>
 <link rel="stylesheet" href="/css/board/write.css">
 <script defer src="/js/board/write.js"></script>
 </head>
@@ -16,24 +16,24 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <form action="/board/edit" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="no" id="${vo.no}">
+                <input type="hidden" name="no" value="${vo.no}">
                 <input type="text" name="title" placeholder="제목" value="${vo.title}">
                 <br>
                 <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content">${vo.content}</textarea>
                 <br>
-                <c:forEach items="${attachmentVoList}" var="attachVo">
-                    <img 
-                        src="/img/board/attachment/${attachVo.changeName}" 
-                        alt="${attachVo.originName}" 
-                        width="80px" 
-                        height="80px"
-                </c:forEach>
+                <label for="fileInput">
+                    <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
+                </label>
+                <div class="board-img-area">
+                    <c:forEach items = "${attachmentVoList}" var="attachVo">
+                        <img src="/img/board/attachment/${attachVo.changeName}" alt="" width="80px" height="80px">
+                    </c:forEach>
+                </div>
+                <input type="file" id="fileInput" name="f" multiple>
                 <div class="preview-area">
                 </div>
-                <div class="bottom-button-area">
-                    <button type="button" onclick="goback();">취소</button>
-                    <input type="submit" value="수정" onclick="submitContents(this)">
-                </div>
+                <button type="button" onclick="goback();">취소</button>
+                <input type="submit" value="수정" onclick="submitContents(this)">
             </form>
         </div>
     </main>
@@ -64,11 +64,9 @@
                 if (document.referrer) {
                     history.back(); // 이전 페이지로 이동
                 } else {
-                    window.location.href = "/board/list"; // 기본 페이지로 이동
+                    window.location.href = "/board/detail?bno=${vo.no}"; // 기본 페이지로 이동
                 }
             }
         </script>
-
-
 </body>
 </html>

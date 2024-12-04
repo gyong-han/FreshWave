@@ -1,11 +1,12 @@
 function paintPageArea(pvo){
+    
     const pageArea = document.querySelector(".page-area");
     pageArea.innerHTML = "";
 
     //이전 버튼
     if(pvo.startPage != 1){
         const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.startPage-1}`);
+        aTag.setAttribute("href" , `/board/list?pno=${pvo.startPage-1}&searchType=${searchType}&searchValue=${searchValue}`);
         aTag.innerText = "<";
         pageArea.appendChild(aTag);
     }
@@ -13,7 +14,7 @@ function paintPageArea(pvo){
     //페이지 버튼
     for(let i = pvo.startPage; i <= pvo.endPage; i++){
         const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${i}`);
+        aTag.setAttribute("href" , `/board/list?pno=${i}&searchType=${searchType}&searchValue=${searchValue}`);
         aTag.innerText = i;
         pageArea.appendChild(aTag);
     }
@@ -21,13 +22,13 @@ function paintPageArea(pvo){
     //다음 버튼
     if(pvo.endPage != pvo.maxPage){
         const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.endPage + 1}`);
+        aTag.setAttribute("href" , `/board/list?pno=${pvo.endPage + 1}&searchType=${searchType}&searchValue=${searchValue}`);
         aTag.innerText = ">";
         pageArea.appendChild(aTag);
     }
 }
 
-function loardBoardList(searchType, searchValue){
+function loadBoardList(searchType = "", searchValue = ""){
 
     // tbody 내용 채우기
     const tbodyTag = document.querySelector("main table > tbody");
@@ -49,7 +50,7 @@ function loardBoardList(searchType, searchValue){
         success : function(x){
             const boardVoList = x.a;
             const pvo = x.b;
-            paintPageArea(pvo);
+            paintPageArea(pvo, searchType, searchValue);
 
             console.log(boardVoList);
             
@@ -91,7 +92,7 @@ function loardBoardList(searchType, searchValue){
     });
 }
 
-loardBoardList();
+loadBoardList();
 
 function submitSearchForm(){
     const searchType = document.querySelector("select[name=searchType]").value;
@@ -106,7 +107,7 @@ function submitSearchForm(){
         searchValue = nickTagValue;
     }
     
-    loardBoardList(searchType , searchValue);
+    loadBoardList(searchType , searchValue);
 
     return false;
 }

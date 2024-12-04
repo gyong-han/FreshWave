@@ -12,10 +12,17 @@
 
     <insert id="updateBoardAttachment">
         INSERT ALL
-        <foreach collection="changNameList" item="x">
-            INTO BOARD_ATTACHMENT (NO,REF_BOARD_NO,CHANGE_NAME,STATUS ,ENROLL_DATE) VALUES((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL, #{x} ,'Y' , SYSDATE)
+        <foreach collection="changeNameList" item="x">
+            INTO BOARD_ATTACHMENT (NO, REF_BOARD_NO, CHANGE_NAME, STATUS, ENROLL_DATE)
+            VALUES (
+            (SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL),
+            #{no},
+            #{x},
+            'Y',
+            SYSDATE
+            )
         </foreach>
-        SELECT 1 FROM DUAL
+        SELECT * FROM DUAL
     </insert>
 
     <select id="getBoardList">

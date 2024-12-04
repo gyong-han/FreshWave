@@ -2,12 +2,10 @@ package com.semi.gam.board.mapper;
 
 import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
+import com.semi.gam.board.vo.CommentVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -51,12 +49,6 @@ public interface BoardMapper {
                 ,B.HIT
                 ,B.DEL_YN
                 ,M.NICK
-                ,C.NO AS COM_NO
-                ,C.COM_WRI_NO 
-                ,C.CONTENT AS COM_CONTENT
-                ,C.ENROLL_DATE AS COM_ENROLL_DATE
-                ,C.MODIFY_DATE AS COM_MODIFY_DATE
-                ,CM.NICK AS COM_WRI_NICK
             FROM BOARD B
             JOIN EMPLOYEE E
             ON B.WRITER_NO = E.EMP_NO
@@ -64,10 +56,6 @@ public interface BoardMapper {
             ON E.EMP_NO = M.ID
             LEFT JOIN BOARD_ATTACHMENT A
             ON B.NO = A.REF_BOARD_NO
-            LEFT JOIN BOARD_COMMENT C
-            ON B.NO = C.BOARD_NO
-            LEFT JOIN MEMBER CM
-            ON C.COM_WRI_NO = CM.ID
             WHERE B.NO = #{bno} 
             AND B.DEL_YN = 'N'    
             """)
@@ -136,7 +124,7 @@ public interface BoardMapper {
             UPDATE BOARD
             SET TITLE = #{title}
                 ,CONTENT =#{content}
-            WHERE NO = #{bno}
+            WHERE NO = #{no}
             """)
     int getBoardEdit(BoardVo vo);
 
@@ -157,4 +145,43 @@ public interface BoardMapper {
     List<AttachmentVo> getAttachmentVoList(String bno);
 
     int updateBoardAttachment(List<String> changeNameList, String no);
+
+    @Insert("""
+            INSERT INTO BOARD_COMMENT
+                (NO
+                ,BOARD_NO
+                ,COM_WRI_NO
+                ,CONTENT
+                ,ENROLL_DATE
+            )
+            VALUES
+                (SEQ_BOARD_COMMENT.NEXTVAL
+                ,#{boardNo}
+                ,#{comWriNo}
+                ,#{content}
+                ,SYSDATE
+            )
+            """)
+    int commentWrite(CommentVo vo);
+
+    @Select("""
+            SELECT DISTINCT
+                C.NO
+                ,C.BOARD_NO
+                ,C.COM_WRI_NO
+                ,C.CONTENT
+                ,C.ENROLL_DATE
+                ,C.MODIFY_DATE
+                ,M.NICK
+            FROM BOARD_COMMENT C
+            JOIN MEMBER M ON (C.COM_WRI_NO = M.ID)
+            WHERE C.BOARD_NO = ${boardNo}
+            """)
+    List<CommentVo> getBoardCommentList(String boardNo);
+
+    @Delete("""
+            DELETE BOARD_COMMENT
+            WHERE NO = #{no}
+            """)
+    int commentDel(CommentVo vo);
 }

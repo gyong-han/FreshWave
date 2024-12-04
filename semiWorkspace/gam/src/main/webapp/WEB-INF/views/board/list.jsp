@@ -16,12 +16,12 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <div class="search-area">
-                <form action="/board/list?pno=1" onsubmit="return submitSearchForm();">
+                <form action="/board/list" onsubmit="return submitSearchForm();">
                     <select name="searchType">
                         <option value="title">제목</option>
                         <option value="nick">작성자</option>
                     </select>
-                    <input type="text" name="searchValue" placeholder="검색할 제목">
+                    <input type="text" name="searchValue" placeholder="검색할 제목" value="${searchValue}">
                     <input type="submit" value="검색">
                 </form>
             </div>
@@ -44,6 +44,9 @@
                 <button onclick="location.href='/board/write'">게시글 작성</button>
             </div>
             <div class="page-area"></div>
+            <input type="hidden" id="searchType" value="${searchType}">
+            <input type="hidden" id="searchValue" value="${searchValue}">
+
         </div>
     </main>
 </body>

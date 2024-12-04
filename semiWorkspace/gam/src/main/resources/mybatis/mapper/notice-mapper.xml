@@ -39,4 +39,46 @@
 <!--        </choose>-->
 <!--        OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY-->
 <!--    </select>-->
+    <select id="getNoticeCnt">
+        SELECT COUNT(N.NO)
+        FROM NOTICE N
+        JOIN EMPLOYEE E ON N.WRITER_NO = E.EMP_NO
+        JOIN MEMBER M ON E.EMP_NO = M.ID
+        WHERE N.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND N.TITLE LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'name'">
+            AND M.NAME LIKE '%${searchValue}%'
+        </if>
+    </select>
+
+    <select id="getNoticeList">
+        SELECT
+        N.NO
+        , N.WRITER_NO
+        , N.TITLE
+        , N.CONTENT
+        , N.URGENT_YN
+        , N.HIT
+        , N.ENROLL_DATE
+        , N.MODIFY_DATE
+        , N.DEL_YN
+        , D.DEPT_NAME
+        , M.NAME
+        FROM NOTICE N
+        JOIN EMPLOYEE E ON N.WRITER_NO = E.EMP_NO
+        JOIN DEPT D ON E.DEPT_CODE = D.DEPT_CODE
+        JOIN MEMBER M ON E.EMP_NO = M.ID
+        WHERE N.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND N.TITLE LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'name'">
+            AND M.NAME LIKE '%${searchValue}%'
+        </if>
+        ORDER BY N.URGENT_YN DESC
+        ,N.ENROLL_DATE DESC
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+    </select>
 </mapper>

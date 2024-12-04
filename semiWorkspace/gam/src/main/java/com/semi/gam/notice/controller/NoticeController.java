@@ -1,5 +1,6 @@
 package com.semi.gam.notice.controller;
 
+import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.service.NoticeService;
 import com.semi.gam.notice.vo.NoticeVo;
@@ -63,13 +64,14 @@ public class NoticeController {
     // 공지사항 목록
     @GetMapping("list")
     public String list(Model model , @RequestParam(name="pno" , defaultValue = "1") int currentPage
-                        ,String searchValue){
-        int listCount = service.getNoticeCnt();
+                        ,String searchValue
+                        ,String searchType){
+        int listCount = service.getNoticeCnt(searchType , searchValue);
         int pageLimit = 5;
         int boardLimit = 8;
 
         PageVo pvo = new PageVo(listCount , currentPage, pageLimit, boardLimit);
-        List<NoticeVo> voList = service.getNoticeList(pvo , searchValue);
+        List<NoticeVo> voList = service.getNoticeList(pvo , searchType ,  searchValue);
 
         for (NoticeVo notice : voList) {
             if ("Y".equals(notice.getUrgentYn())) {
@@ -81,6 +83,7 @@ public class NoticeController {
 
         model.addAttribute("voList" , voList);
         model.addAttribute("pvo" , pvo);
+        model.addAttribute("searchType" ,searchType);
         model.addAttribute("searchValue" , searchValue);
 //        for(int i = 0; i < voList.size(); i++){
 //            if(voList.get(i).getUrgentYn() == "Y"){
@@ -96,4 +99,34 @@ public class NoticeController {
         model.addAttribute("vo", vo);
         return "notice/detail";
     }
+
+    // 공지사항 수정(화면)
+    @GetMapping("edit")
+    public void edit(Model model , String no){
+        NoticeVo vo = service.getNoticeByNo(no);
+        model.addAttribute("vo", vo);
+    }
+
+    // 공지사항 수정 처리
+    @PostMapping("edit")
+    public String edit(NoticeVo vo){
+        int result =service.edit(vo);
+        if(result != 1){
+            throw new IllegalStateException("공지사항 수정 중 에러발생");
+        }
+        return "redirect:/notice/list";
+    }
+
+    // 공지사항 삭제
+    @GetMapping("del")
+    public String del(NoticeVo vo , HttpSession session){
+        int result = service.del(vo);
+
+        if(result != 1){
+            throw new IllegalStateException("공지사항 삭제 실패");
+        }
+        session.setAttribute("alertMsg" , "공지사항 삭제");
+        return "redirect:/notice/list";
+    }
+
 }

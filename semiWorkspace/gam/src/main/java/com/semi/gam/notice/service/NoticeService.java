@@ -1,5 +1,6 @@
 package com.semi.gam.notice.service;
 
+import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.notice.mapper.NoticeMapper;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
@@ -29,16 +30,12 @@ public class NoticeService {
         return result1 * result2;
     }
 
-    public int getNoticeCnt() {
-        return mapper.getNoticeCnt();
+    public int getNoticeCnt(String searchType , String searchValue) {
+        return mapper.getNoticeCnt(searchType , searchValue);
     }
 
-    public List<NoticeVo> getNoticeList(PageVo pvo , String searchValue) {
-        String str = "";
-        if(searchValue != null && searchValue.length() > 0){
-            str = "AND TITLE LIKE '%" + searchValue + "%'";
-        }
-        return mapper.getNoticeList(pvo , str);
+    public List<NoticeVo> getNoticeList(PageVo pvo , String searchType, String searchValue) {
+        return mapper.getNoticeList(pvo , searchType , searchValue);
     }
 
     public NoticeVo getNoticeDetail(String bno) {
@@ -49,5 +46,17 @@ public class NoticeService {
             throw new IllegalStateException(errMsg);
         }
         return mapper.getNoticeDetail(bno);
+    }
+
+    public int edit(NoticeVo vo) {
+        return mapper.edit(vo);
+    }
+
+    public NoticeVo getNoticeByNo(String no) {
+        return mapper.getNoticeByNo(no);
+    }
+
+    public int del(NoticeVo vo) {
+        return mapper.del(vo);
     }
 }

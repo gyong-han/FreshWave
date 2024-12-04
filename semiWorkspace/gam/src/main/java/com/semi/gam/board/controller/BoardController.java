@@ -3,6 +3,7 @@ package com.semi.gam.board.controller;
 import com.semi.gam.board.service.BoardService;
 import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
+import com.semi.gam.board.vo.CommentVo;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.FileUploader;
@@ -19,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,7 +69,7 @@ public class BoardController {
         }
         //service
         int result = service.write(vo , changeNameList);
-        System.out.println("vo = " + vo);
+        System.out.println("changeNameList = " + changeNameList);
         //result
         if(result == 1){
             System.out.println("게시글 작성 성공 !");
@@ -86,16 +86,19 @@ public class BoardController {
     // 게시글 목록조회(데이터)
     @GetMapping("list/data")
     @ResponseBody
-    public HashMap boardVoList(@RequestParam(name = "pno" , defaultValue = "1" , required = false) int currentPage
+    public HashMap boardVoList(@RequestParam(name = "pno" , defaultValue = "1") int currentPage
                         ,String searchType
-                        ,String searchValue){
-        int listCount = service.getBoardCnt(searchValue ,searchValue);
+                        ,String searchValue
+                        ,Model model){
+        int listCount = service.getBoardCnt(searchType ,searchValue);
         int pageLimit = 5;
         int boardLimit = 8;
         PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
 
-        List<BoardVo> boardVoList = service.getBoardList(pvo ,searchType ,searchValue);
 
+        List<BoardVo> boardVoList = service.getBoardList(pvo ,searchType ,searchValue);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchValue", searchValue);
         System.out.println("boardVoList = " + boardVoList);
         HashMap map = new HashMap<>();
         map.put("a" , boardVoList);
@@ -124,6 +127,7 @@ public class BoardController {
             return "redirect:/member/login";
         }
         model.addAttribute("vo", vo);
+        model.addAttribute("attachmentVoList" , attachmentVoList);
         return "board/edit";
     }
 
@@ -132,7 +136,6 @@ public class BoardController {
     public String edit(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
-        vo.setNo("126");
         List<String> changeNameList = new ArrayList<>();
 
         for(MultipartFile f :fileList){
@@ -140,6 +143,7 @@ public class BoardController {
             String changeName = FileUploader.save(f,path);
             changeNameList.add(changeName);
         }
+        System.out.println("changeNameList = " + changeNameList);
         System.out.println("vo2 = " + vo);
         service.edit( vo ,changeNameList);
         session.setAttribute("alertMsg" , "게시글 수정 성공");
@@ -159,6 +163,36 @@ public class BoardController {
     }
 
     // 게시글 댓글 작성
+    @PostMapping("comment/write")
+    @ResponseBody
+    public int commentWrite(CommentVo vo , HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setComWriNo(loginMemberVo.getId());
+        int result = service.commentWrite(vo);
+        return result;
+    }
 
+    // 게시글 댓글 목록 조회
+    @GetMapping("comment/list")
+    @ResponseBody
+    public List<CommentVo> getBoardCommentList(String boardNo){
+        List<CommentVo> BoardCommentVoList = service.getBoardCommentList(boardNo);
+        System.out.println("boardNo = " + boardNo);
+        return BoardCommentVoList;
+    }
+
+    // 게시글 댓글 삭제
+    @PostMapping("comment/del")
+    @ResponseBody
+    public String commentDel(CommentVo vo , HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        System.out.println("vo = " + vo);
+        vo.setComWriNo(loginMemberVo.getId());
+        int result  = service.commentDel(vo);
+        if(result == 0){
+            return "bad";
+        }
+        return "good";
+    }
 }
 
