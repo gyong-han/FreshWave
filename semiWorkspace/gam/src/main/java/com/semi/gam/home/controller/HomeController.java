@@ -5,10 +5,10 @@ import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.project.vo.PriorityVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.eclipse.tags.shaded.org.apache.xalan.xsltc.dom.NthIterator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -23,12 +23,17 @@ public class HomeController {
     public String home(Model model,HttpSession session){
         List<NoticeVo> redNoticeList = service.getRedNoticeList();
         List<NoticeVo> blueNoticeList = service.getBlueNoticeList();
-        List<PriorityVo> chartList = service.getPriorityList();
 
-        System.out.println("chartList = " + chartList);
         model.addAttribute("redNoticeList",redNoticeList);
         model.addAttribute("blueNoticeList",blueNoticeList);
         return "home";
     }
 
+    @GetMapping("home/data")
+    @ResponseBody
+    public List<PriorityVo> projectData(){
+        List<PriorityVo> chartList = service.getPriorityList();
+        System.out.println("chartList = " + chartList);
+        return chartList;
+    }
 }
