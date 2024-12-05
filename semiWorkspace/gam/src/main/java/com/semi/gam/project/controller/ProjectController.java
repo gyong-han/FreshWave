@@ -33,20 +33,14 @@ public class ProjectController {
 
     @PostMapping("write")
     public String write(ProjectVo vo , MemberVo memberVo, HttpSession session, ProjectMemberVo projectMemberVo){
-        MemberVo loginMemberVo1 = memberVo; //TODO 로그인정보 만들어지면 지우기
-        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setId("1");        //TODO 로그인정보 만들어지면 지우기
         memberVo.setId(loginMemberVo.getId());
         int result = service.write(vo, memberVo);
         String prjKey = service.getProjectKey(vo, loginMemberVo);
         int result2 = service.setAddMember(projectMemberVo, prjKey);
-
-
         if(result != 1){
             return "redirect:/error";
         }
-
         return "redirect:/project/cardList";
     }
 
@@ -59,11 +53,7 @@ public class ProjectController {
     @GetMapping("list")
     //프로젝트 목록 (리스트)
     public String list(Model model, HttpSession session){
-        MemberVo loginMemberVo1 = new MemberVo(); //TODO 로그인정보 만들어지면 지우기
-        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setId("1"); //TODO 로그인정보 만들어지면 지우기
-
         List<ProjectVo> projectVoList = service.getProjectList(loginMemberVo);
         List<ProjectVo> projectVoList1 = service.getProjectAddMemberVo(loginMemberVo);
 
@@ -75,10 +65,7 @@ public class ProjectController {
     @GetMapping("detail")
     //프로젝트 상세조회
     public String selectOne(Model model,@RequestParam("projectNo") String key, HttpSession session){
-        MemberVo loginMemberVo1 = new MemberVo(); //TODO 로그인정보 만들어지면 지우기
-        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setId("1"); //TODO 로그인정보 만들어지면 지우기
         ProjectVo projectVo = service.getProject(key,loginMemberVo);
         model.addAttribute("projectVo" , projectVo);
         List<ProjectMemberVo> vo = service.getAddMember(key);
@@ -91,13 +78,7 @@ public class ProjectController {
     //프로젝트 수정
     public String edit(Model model, @RequestParam("projectNo") String key, HttpSession session){
         //로그인 정보 가져오기
-        MemberVo loginMemberVo1 = new MemberVo(); //TODO 로그인정보 만들어지면 지우기
-        session.setAttribute("loginMemberVo" , loginMemberVo1);//TODO 로그인정보 만들어지면 지우기
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        loginMemberVo.setId("1"); //TODO 로그인정보 만들어지면 지우기
-        //로그인 정보와 수정권한이 일치하면 수정 가능
-
-        //로그인 정보와 작성자 정보가 일치하면 수정 가능
 
         //화면 정보 가져오기
         List<ProjectMemberVo> empVoList = service.getAddMemberVo();

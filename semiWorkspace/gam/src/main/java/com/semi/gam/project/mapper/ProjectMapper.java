@@ -74,7 +74,7 @@ public interface ProjectMapper {
             JOIN PRIORITY R ON (P.PRIORITY = R.NO)
             JOIN EMPLOYEE E ON (P.WRITER_NO = E.EMP_NO)
             JOIN DEPT D ON (E.DEPT_CODE = D.DEPT_CODE)
-            JOIN MEMBER B ON (E.EMP_NO = B.NO)
+            JOIN MEMBER B ON (E.EMP_NO = B.ID)
             WHERE P.DEL_YN = 'N'
             AND P.WRITER_NO = #{id}
             ORDER BY P.ENROLL_DATE DESC
