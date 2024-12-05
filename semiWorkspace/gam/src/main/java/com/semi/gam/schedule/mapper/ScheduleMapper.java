@@ -13,24 +13,24 @@ public interface ScheduleMapper {
     @Select("""
             SELECT
                 S.NO
-                , WRITER_NO
-                , PRIORITY
+                , S.WRITER_NO
+                , S.PRIORITY
                 , P.NAME    AS PRIORITY_NAME
-                , TITLE
-                , CONTENT
-                , LOCATION
-                , START_DATE
-                , FINISH_DATE
-                , START_TIME
-                , FINISH_TIME
-                , ALLDAY
-                , SHARE_YN
-                , DEL_YN
+                , S.TITLE
+                , S.CONTENT
+                , S.LOCATION
+                , S.START_DATE
+                , S.FINISH_DATE
+                , S.START_TIME
+                , S.FINISH_TIME
+                , S.ALLDAY
+                , S.SHARE_YN
+                , S.DEL_YN
             FROM SCHEDULE S
             JOIN PRIORITY P ON (S.PRIORITY = P.NO)
             WHERE WRITER_NO = #{writerNo}
-                AND SHARE_YN = 'N'
-                AND DEL_YN = 'N'
+                AND S.SHARE_YN = 'N'
+                AND S.DEL_YN = 'N'
             """)
     List<ScheduleVo> getSchVoList(ScheduleVo vo);
 
@@ -95,8 +95,8 @@ public interface ScheduleMapper {
             JOIN PRIORITY P ON (S.PRIORITY = P.NO)
             WHERE WRITER_NO = ${writerNo}
                 AND S.NO = ${sno}
-                AND SHARE_YN = 'N'
-                AND DEL_YN = 'N'
+                AND S.SHARE_YN = 'N'
+                AND S.DEL_YN = 'N'
             """)
     ScheduleVo getEventByNo(String sno, String writerNo);
 
