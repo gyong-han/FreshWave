@@ -29,6 +29,18 @@
     border: 1px solid #ddd; /* 셀 경계선 */
 }
 
+.search-area form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-area select,
+.search-area input[type="text"]{
+    font-size: 16px;
+    
+}
+
 .page-area a {
     margin: 0 5px;
     text-decoration: none;
@@ -61,4 +73,11 @@ main .table-area tbody tr:hover{
     background-color: #1D64F2;
     color: white;
     cursor: pointer;
+}
+
+.page-area button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
 }

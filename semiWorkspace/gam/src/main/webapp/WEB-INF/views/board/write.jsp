@@ -16,9 +16,11 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <form action="/board/write" method="post" enctype="multipart/form-data">
+                <h2>게시판 제목</h2>
                 <input type="text" name="title" placeholder="제목">
                 <br>
-                <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content"></textarea>
+                <h2>게시판 내용</h2>
+                <textarea id="smarteditor" rows="20" cols="100" style="width: 100%;" name="content"></textarea>
                 <br>
                 <label for="fileInput">
                     <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">

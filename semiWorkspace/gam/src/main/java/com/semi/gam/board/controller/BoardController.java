@@ -33,11 +33,14 @@ public class BoardController {
 
     //홈 화면
     @GetMapping("home")
-    public String home(Model model){
+    public String home(Model model , HttpSession session){
         List<BoardVo> boardVoList = service.getBoardHomeList();
         List<NoticeVo> noticeVoList = service.getNoticeHomeList();
         model.addAttribute("boardVoList", boardVoList);
         model.addAttribute("noticeVoList", noticeVoList);
+
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        model.addAttribute("jobCode" , loginMemberVo.getJobCode());
         return "board/home";
     }
 
@@ -95,11 +98,13 @@ public class BoardController {
         int boardLimit = 8;
         PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
 
-
         List<BoardVo> boardVoList = service.getBoardList(pvo ,searchType ,searchValue);
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchValue", searchValue);
+
         System.out.println("boardVoList = " + boardVoList);
+        System.out.println("listCount = " + listCount);
+
         HashMap map = new HashMap<>();
         map.put("a" , boardVoList);
         map.put("b" , pvo);
@@ -135,6 +140,7 @@ public class BoardController {
     @PostMapping("edit")
     public String edit(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        System.out.println("loginMemberVo = " + loginMemberVo);
         vo.setWriterNo(loginMemberVo.getId());
         List<String> changeNameList = new ArrayList<>();
 

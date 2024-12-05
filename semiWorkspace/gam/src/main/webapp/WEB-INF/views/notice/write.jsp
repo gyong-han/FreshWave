@@ -16,13 +16,18 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <form action="/notice/write" method="post" enctype="multipart/form-data">
-                <div class="input-checkbox-container">
-                    <input type="text" name="title" placeholder="제목을 입력하세요.">
-                    <label>
-                        <input type="checkbox" name="urgentYn" value="Y"> 긴급
-                    </label>
+                <div class="input-container">
+                    <h2>공지사항 제목</h2>
+                    <div class="input-checkbox-container">
+                        <input type="text" name="title" placeholder="제목을 입력하세요.">
+                        <label>
+                            <input type="checkbox" name="urgentYn" value="Y"> 긴급
+                        </label>
+                    </div>
                 </div>
-                <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content"></textarea>
+                <br>
+                <h2>공지사항 내용</h2>
+                <textarea id="smarteditor" rows="20" cols="100" style="width: 100%;" name="content"></textarea>
                 <br>
                 <label for="fileInput">
                     <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
@@ -31,7 +36,7 @@
                 <div class="preview-area">
                 </div>
                 <div class="bottom-button-area">
-                    <button type="button" onclick="goback();">취소</button>
+                    <button type="button" onclick="location.href='/board/home'">취소</button>
                     <input type="submit" value="저장" onclick="submitContents(this)">
                 </div>
             </form>
@@ -59,7 +64,8 @@
                     const content = document.getElementById("smarteditor").value;
                     document.getElementById("form").submit();
                 }
-            </script>
+
+        </script>
 
 
 
