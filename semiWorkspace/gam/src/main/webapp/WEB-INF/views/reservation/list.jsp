@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FRESH WAVE</title>
-<link rel="stylesheet" href="/css/common/home.css">
+<link rel="stylesheet" href="/css/reservation/list.css">
 <script defer src="/js/reservation/list.js"></script>
 </head>
 <body>

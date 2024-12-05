@@ -19,14 +19,15 @@
     </update>
 
     <select id="getReservationCnt">
-        SELECT COUNT(NO)
-        FROM PHONE_RESERVATION
-        WHERE DEL_YN = 'N'
+        SELECT COUNT(P.NO)
+        FROM PHONE_RESERVATION P
+        JOIN MEMBER M ON (P.WRITER_NO = M.ID)
+        WHERE P.DEL_YN = 'N'
         <if test="searchType == 'title'">
             AND TITLE LIKE '%${searchValue}%'
         </if>
         <if test="searchType == 'writerName'">
-            AND WRITER_NAME LIKE '%${searchValue}%'
+            AND M.NAME LIKE '%${searchValue}%'
         </if>
     </select>
 
