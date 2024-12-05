@@ -39,13 +39,18 @@ function loadReservationList(rno){
 
     // rno
     if(!rno){
-        const url = new URL(location);
-        let rno = url.searchParams.get("rno");
+        url = new URL(location);
+        rno = url.searchParams.get("rno");
         if(rno == null){
             rno = 1;
         }
     }
     
+    if(searchType == 'title'){
+        searchValue = nameValue;
+    }else if(searchType == 'writerName'){
+        searchValue = nameValue;
+    }
     
     // tbody 채우기
     $.ajax({
@@ -103,12 +108,6 @@ function loadReservationList(rno){
 loadReservationList();
 
 function submitSearchForm(){
-
-    if(searchType == 'title'){
-        searchValue = nameValue;
-    }else if(searchType == 'writerName'){
-        searchValue = nameValue;
-    }
 
     loadReservationList();
     return false;
