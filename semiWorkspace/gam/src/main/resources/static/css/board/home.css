@@ -41,10 +41,12 @@ main > .sidebar {
 }
 
 .notice-row {
+    display: flex;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #ffffff;
+    justify-content: space-between;
 }
 
 /* 게시판 항목 */
@@ -56,25 +58,47 @@ main > .sidebar {
 }
 
 .board-row {
+    display: flex;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #ffffff;
+    justify-content: space-between;
 }
 
 .title-area{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-
-.title-area h2 img{
-    margin-right: 1px;
+.title-icon{
+    display: flex;
+    margin: 10px;
+    align-items: center;
 }
-
+.title-icon img {
+    margin-right: 8px;
+}
+.title-icon h2 {
+    line-height: 1;
+}
+.action-icons{
+    display: flex;
+    align-items: center;
+}
 .action-icons a {
     margin-left: 1px;
 }
 
 .action-icons img{
     cursor: pointer;
+    vertical-align: middle;
+}
+
+.front-title-hit{
+    align-items: center;
+}
+
+.front-title-hit img{
+    vertical-align: middle;
 }

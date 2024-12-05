@@ -45,6 +45,7 @@ public class NoticeController {
     public String write(NoticeVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , @RequestParam(name = "urgentYn" , defaultValue = "N") String urgentYn, HttpSession session ) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
+
         List<String> changeNameList = new ArrayList<>();
 
         for(MultipartFile f : fileList){

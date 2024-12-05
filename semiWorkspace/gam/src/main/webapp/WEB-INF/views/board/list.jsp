@@ -22,7 +22,9 @@
                         <option value="nick">작성자</option>
                     </select>
                     <input type="text" name="searchValue" placeholder="검색할 제목" value="${searchValue}">
-                    <input type="submit" value="검색">
+                        <button type="submit" id="searchButton">
+                            <img src="/img/icon/search.svg" alt="검색버튼">
+                        </button>
                 </form>
             </div>
             <div class="table-area">
@@ -44,9 +46,6 @@
                 <button onclick="location.href='/board/write'">게시글 작성</button>
             </div>
             <div class="page-area"></div>
-            <input type="hidden" id="searchType" value="${searchType}">
-            <input type="hidden" id="searchValue" value="${searchValue}">
-
         </div>
     </main>
 </body>

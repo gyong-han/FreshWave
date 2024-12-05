@@ -1,5 +1,7 @@
 package com.semi.gam.member.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -50,7 +54,6 @@ public class MemberController{
            }
            session.setAttribute("loginAdminVo",loginAdminVo);
            return "redirect:/admin/home";
-
        }
         MemberVo loginMemberVo = service.loginMember(mvo);
         int result = service.stratlogin(evo);
@@ -58,6 +61,7 @@ public class MemberController{
             throw new IllegalStateException("error-member");
         }
         session.setAttribute("loginMemberVo",loginMemberVo);
+        System.out.println("loginMemberVo = " + loginMemberVo);
         return "redirect:/home";
 
     }
@@ -86,6 +90,48 @@ public class MemberController{
 
     }
 
+    // 닉네임 중복체크
+    @PostMapping("dup-nick")
+    @ResponseBody
+    public String checkDupNick(String nick) throws Exception {
+        HashMap<String,String> m = new HashMap<>();
+        m.put("data",nick);
+
+        boolean isDup = service.checkDupNick(nick);
+        if(isDup){
+            m.put("status", "bad");
+        }else{
+            m.put("status","good");
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String str = objectMapper.writeValueAsString(m);
+        return str;
+    }
+
+    //마이페이지
+    @GetMapping("mypage")
+    public String mypage(HttpSession session){
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
+        return "member/mypage";
+    }
+
+    //마이페이지에서 회원 수정
+    @PostMapping("edit")
+    public String edit(MemberVo vo, HttpSession session, MultipartFile profile){
+        System.out.println("vo = " + vo);
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute(("loginMemberVo"));
+        MemberVo updateMember = service.edit(vo);
+        updateMember.setId(loginMemberVo.getId());
+
+        session.setAttribute("loginMemberVo",updateMember);
+
+        if(updateMember == null){
+            throw new IllegalStateException("ERROR-MYPAGE-EDIT");
+        }
+        return "redirect:/member/mypage";
+    }
 
 
 }

@@ -5,40 +5,57 @@ function paintPageArea(pvo){
 
     //이전 버튼
     if(pvo.startPage != 1){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.startPage-1}&searchType=${searchType}&searchValue=${searchValue}`);
-        aTag.innerText = "<";
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.innerText = "<";
+        btnTag.setAttribute("onclick" , `return loadBoardList(${pvo.startPage - 1});`);
+        pageArea.appendChild(btnTag);
     }
 
     //페이지 버튼
     for(let i = pvo.startPage; i <= pvo.endPage; i++){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${i}&searchType=${searchType}&searchValue=${searchValue}`);
-        aTag.innerText = i;
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.setAttribute("href" , `/board/list?pno=${i}`);
+        btnTag.innerText = i;
+        btnTag.setAttribute("onclick" , `return loadBoardList(${i});`);
+        pageArea.appendChild(btnTag);
     }
 
     //다음 버튼
     if(pvo.endPage != pvo.maxPage){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.endPage + 1}&searchType=${searchType}&searchValue=${searchValue}`);
-        aTag.innerText = ">";
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.innerText = ">";
+        btnTag.setAttribute("onclick" , `return loadBoardList(${pvo.endPage + 1});`);
+        pageArea.appendChild(btnTag);
     }
 }
 
-function loadBoardList(searchType = "", searchValue = ""){
+function loadBoardList(pno){
+    //데이터 가져오기 (searchType , searchValue)
+    const searchType = document.querySelector("select[name=searchType]").value;
+    const titleTagValue = document.querySelector("input[name=searchValue]").value;
+    const nickTagValue = document.querySelector("input[name=searchValue]").value;
+    let searchValue = "";
+    if(searchType == "title"){
+        searchValue = titleTagValue;
+    }else{
+        searchValue = nickTagValue;
+    }
 
     // tbody 내용 채우기
     const tbodyTag = document.querySelector("main table > tbody");
 
-    // url(pno)
-    const url = new URL(location);
-    let pno = url.searchParams.get("pno");
-    if(pno == null){
-        pno = 1;
+    // url 에서 pno 가져오기
+    console.log("pno : " , pno);
+    console.log("!pno : " , !pno);
+    if(!pno){
+        console.log("if 통과함 ~~~");
+        const url = new URL(location);
+        pno = url.searchParams.get("pno");
+        if(pno == null){
+            pno = 1;
+        }
     }
+    
 
     // ajax
     $.ajax({
@@ -50,7 +67,7 @@ function loadBoardList(searchType = "", searchValue = ""){
         success : function(x){
             const boardVoList = x.a;
             const pvo = x.b;
-            paintPageArea(pvo, searchType, searchValue);
+            paintPageArea(pvo);
 
             console.log(boardVoList);
             
@@ -95,20 +112,7 @@ function loadBoardList(searchType = "", searchValue = ""){
 loadBoardList();
 
 function submitSearchForm(){
-    const searchType = document.querySelector("select[name=searchType]").value;
-
-    const titleTagValue = document.querySelector("input[name=searchValue]").value;
-    const nickTagValue = document.querySelector("input[name=searchValue]").value;
-
-    let searchValue = "";
-    if(searchType == "title"){
-        searchValue = titleTagValue;
-    }else{
-        searchValue = nickTagValue;
-    }
-    
-    loadBoardList(searchType , searchValue);
-
+    loadBoardList();
     return false;
 }
     

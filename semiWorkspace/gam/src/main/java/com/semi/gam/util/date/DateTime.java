@@ -30,11 +30,17 @@ public class DateTime {
         return time;
     }
 
-    public static void dateTimeList(String dateStr, String timeStr){
+    public static LocalDate dateList(String dateStr){
         dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
         LocalDate date = LocalDate.parse(dateStr, dateFormatter);
+
+        return date;
+    }
+
+    public  static LocalTime timeList(String timeStr){
+        timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime time = LocalTime.parse(timeStr, timeFormatter);
+
+        return time;
     }
 }

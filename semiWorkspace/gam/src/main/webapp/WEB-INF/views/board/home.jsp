@@ -17,22 +17,28 @@
             <!-- 공지 영역 -->
             <div class="main-notice">
                 <div class="title-area">
-                    <h2>
+                    <div class="title-icon">
                         <img src="/img/icon/carbon_book.svg" alt="icon">
-                        공지사항
-                    </h2>
+                        <h2>공지사항</h2>
+                    </div>
                     <div class="action-icons">
                         <a href="/notice/list"><img src="/img/icon/prime_list.svg" alt=""></a>
-                        <a href="/notice/write"><img src="/img/icon/mynaui_plus.svg" alt=""></a>
+                        <c:if test="${jobCode > 2}">
+                            <a href="/notice/write"><img src="/img/icon/mynaui_plus.svg" alt=""></a>
+                        </c:if>
                     </div>
                 </div>
                 <div class="notice-container">
                     <c:forEach items="${noticeVoList}" var="noticeVo">
                         <div class="notice-row">
-                            <strong>${noticeVo.title}</strong><br>
-                            부서: ${noticeVo.deptName}<br>
-                            조회수: ${noticeVo.hit}<br>
-                            등록일: ${noticeVo.enrollDate}<br>
+                            <div class="front-title-hit">
+                                <strong>${noticeVo.title}</strong><br>
+                                <img src="/img/icon/mdi-light_eye.svg" alt=""> ${noticeVo.hit}<br>
+                            </div>
+                            <div class="back-date-dept">
+                                ${noticeVo.enrollDate}
+                                ${noticeVo.deptName}
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
@@ -41,10 +47,10 @@
             <!-- 게시판 영역 -->
             <div class="main-board">
                 <div class="title-area">
-                    <h2>
+                    <div class="title-icon">
                         <img src="/img/icon/carbon_book.svg" alt="icon">
-                        게시판
-                    </h2>
+                        <h2>게시판</h2>
+                    </div>
                     <div class="action-icons">
                         <a href="/board/list"><img src="/img/icon/prime_list.svg" alt=""></a>
                         <a href="/board/write"><img src="/img/icon/mynaui_plus.svg" alt=""></a>
@@ -53,10 +59,14 @@
                 <div class="board-container">
                     <c:forEach items="${boardVoList}" var="boardVo">
                         <div class="board-row">
-                            <strong>${boardVo.title}</strong><br>
-                            작성자: ${boardVo.nick}<br>
-                            등록일: ${boardVo.enrollDate}<br>
-                            조회수: ${boardVo.hit}<br>
+                            <div class="front-title-hit">
+                                <strong>${boardVo.title}</strong><br>
+                                <img src="/img/icon/mdi-light_eye.svg" alt=""> ${boardVo.hit}<br>
+                            </div>
+                            <div class="back-date-dept">
+                                ${boardVo.enrollDate}
+                                ${boardVo.nick}
+                            </div>
                         </div>
                     </c:forEach>
                 </div>

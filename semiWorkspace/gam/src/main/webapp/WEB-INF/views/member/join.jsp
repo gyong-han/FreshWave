@@ -110,7 +110,7 @@
 
             <!-- 저장 및 취소 버튼 -->
             <div>
-                <button type="button" onclick="history.back()">취소</button>
+                <button type="button">취소</button>
                 <button type="submit">저장</button>
             </div>
         </form>

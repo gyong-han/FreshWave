@@ -24,12 +24,31 @@ public interface MemberMapper {
                 E.CP_CODE
                 ,M.ID
                 ,M.PWD
-            FROM EMPLOYEE E
-            LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
+                ,M.NAME
+                ,M.NICK
+                ,M.ID_NUM
+                ,M.GENDER
+                ,M.PHONE
+                ,M.EMAIL
+                ,M.ADDRESS
+                ,M.PROFILE
+                ,E.JOB_CODE
+                ,E.DEPT_CODE
+                ,E.START_TIME
+                ,E.FINISH_DATE
+                ,E.HIRE_DATE
+                ,E.QUIT_DATE
+                ,E.QUIT_YN
+                ,D.DEPT_NAME
+                ,J.JOB_NAME
+            FROM MEMBER M
+            LEFT OUTER JOIN EMPLOYEE E ON (E.EMP_NO = M.ID)
+            LEFT OUTER JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
+            LEFT OUTER JOIN JOB J ON (J.JOB_CODE = E.JOB_CODE)
             WHERE E.QUIT_YN = 'N'
-            AND CP_CODE = #{cpCode}
-            AND ID = ${id}
-            AND PWD = #{pwd}
+            AND E.CP_CODE = #{cpCode}
+            AND M.ID = ${id}
+            AND M.PWD = #{pwd}
             """)
     MemberVo loginMember(MemberVo mvo);
 
@@ -108,4 +127,34 @@ public interface MemberMapper {
             WHERE QUIT_YN = 'N'
             """)
     int stratlogin(EmployeeVo evo);
+
+
+    int edit(MemberVo vo);
+
+
+    @Select("""
+            SELECT
+                M.NAME
+                , M.PROFILE
+                , D.DEPT_NAME
+                , J.JOB_NAME
+                , M.NICK
+                , M.PWD
+                , M. PHONE
+                , M. ADDRESS
+            FROM MEMBER M
+            LEFT OUTER JOIN EMPLOYEE E ON (E.EMP_NO = M.ID)
+            LEFT OUTER JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
+            LEFT OUTER JOIN JOB J ON (J.JOB_CODE = E.JOB_CODE)
+            WHERE M.ID = #{id}
+            """)
+    MemberVo getMember(MemberVo vo);
+
+    @Select("""
+            SELECT *
+            FROM MEMBER
+            WHERE NICK = #{nick}
+            """)
+    MemberVo checkDupNick(String nick);
+
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>홈</title>
+<title>FRESH WAVE</title>
 <link rel="stylesheet" href="/css/common/home.css">
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script defer src="/js/common/home.js"></script>

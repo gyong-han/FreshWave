@@ -1,14 +1,45 @@
 package com.semi.gam.schedule.mapper;
 
+import com.semi.gam.schedule.vo.PriorityVo;
 import com.semi.gam.schedule.vo.ScheduleVo;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 public interface ScheduleMapper {
+
+    @Select("""
+            SELECT
+                S.NO
+                , WRITER_NO
+                , PRIORITY
+                , P.NAME    AS PRIORITY_NAME
+                , TITLE
+                , CONTENT
+                , LOCATION
+                , START_DATE
+                , FINISH_DATE
+                , START_TIME
+                , FINISH_TIME
+                , ALLDAY
+                , SHARE_YN
+                , DEL_YN
+            FROM SCHEDULE S
+            JOIN PRIORITY P ON (S.PRIORITY = P.NO)
+            WHERE WRITER_NO = #{writerNo}
+                AND SHARE_YN = 'N'
+                AND DEL_YN = 'N'
+            """)
+    List<ScheduleVo> getSchVoList(ScheduleVo vo);
+
     @Insert("""
             INSERT INTO SCHEDULE
             (
                 NO
                 , WRITER_NO
+                , PRIORITY
                 , TITLE
                 , CONTENT
                 , LOCATION
@@ -20,7 +51,8 @@ public interface ScheduleMapper {
             VALUES
             (
                 SEQ_SCHEDULE.NEXTVAL
-                , 1
+                , #{writerNo}
+                , #{priority}
                 , #{title}
                 , #{content}
                 , #{location}
@@ -32,11 +64,23 @@ public interface ScheduleMapper {
             """)
     int writePersonal(ScheduleVo vo);
 
-    @Insert("""
-            INSERT INTO SCHEDULE
-            (
-                NO
+    int edit(ScheduleVo vo);
+
+    @Update("""
+            UPDATE SCHEDULE
+                SET
+                    DEL_YN = 'Y'
+            WHERE WRITER_NO = ${vo.writerNo}
+                AND NO = ${sno}
+            """)
+    int del(String sno, ScheduleVo vo);
+
+    @Select("""
+            SELECT
+                S.NO
                 , WRITER_NO
+                , PRIORITY
+                , P.NAME    AS PRIORITY_NAME
                 , TITLE
                 , CONTENT
                 , LOCATION
@@ -44,26 +88,23 @@ public interface ScheduleMapper {
                 , FINISH_DATE
                 , START_TIME
                 , FINISH_TIME
+                , ALLDAY
                 , SHARE_YN
-            )
-            VALUES
-            (
-                SEQ_SCHEDULE.NEXTVAL
-                , 1
-                , #{title}
-                , #{content}
-                , #{location}
-                , #{startDate}
-                , #{finishDate}
-                , #{startTime}
-                , #{finishTime}
-                , 'Y'
-            )
+                , DEL_YN
+            FROM SCHEDULE S
+            JOIN PRIORITY P ON (S.PRIORITY = P.NO)
+            WHERE WRITER_NO = ${writerNo}
+                AND S.NO = ${sno}
+                AND SHARE_YN = 'N'
+                AND DEL_YN = 'N'
             """)
-    int writeShare(ScheduleVo vo);
+    ScheduleVo getEventByNo(String sno, String writerNo);
 
-    @Insert("""
-            
+    @Select("""
+            SELECT
+                NO
+                , NAME
+            FROM PRIORITY
             """)
-    int addUser(ScheduleVo vo);
+    List<PriorityVo> getPriorityVo();
 }

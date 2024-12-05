@@ -73,7 +73,6 @@ public class AdminController {
         EmployeeVo vo = service.getMember(no);
         List<DeptVo> deptVoList = ms.getDeptVoList();
         List<JobVo> jobVoList = ms.getJobVoList();
-        System.out.println("vo = " + vo);
         model.addAttribute("vo",vo);
         model.addAttribute("deptVoList",deptVoList);
         model.addAttribute("jobVoList",jobVoList);
@@ -88,7 +87,7 @@ public class AdminController {
         if(result != 1){
             throw new IllegalStateException("ERROR-ADMIN-MEMBER-EDIT");
         }
-        return "redirect:/admin/list";
+        return "redirect:/admin/detail?no="+vo.getNo();
 
 
     }
