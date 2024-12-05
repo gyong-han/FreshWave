@@ -14,6 +14,8 @@ public class MemberVo {
     private String idNum;
     private String deptName;
     private String jobName;
+    private String jobCode;
+    private String deptCode;
     private String gender;
     private String phone;
     private String email;
