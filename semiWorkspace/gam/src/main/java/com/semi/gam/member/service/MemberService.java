@@ -57,4 +57,19 @@ public class MemberService {
     public int stratlogin(EmployeeVo evo) {
         return mapper.stratlogin(evo);
     }
+
+    public MemberVo edit(MemberVo vo) {
+        int result = mapper.edit(vo);
+//        if(result != 1){
+////            throw new IllegalStateException("ERROR-MYPAGE-EDIT-SERVICE");
+//        }
+        MemberVo updateMemberVo = mapper.getMember(vo);
+        return updateMemberVo;
+    }
+
+
+    public boolean checkDupNick(String nick) {
+        MemberVo vo = mapper.checkDupNick(nick);
+        return vo != null;
+    }
 }

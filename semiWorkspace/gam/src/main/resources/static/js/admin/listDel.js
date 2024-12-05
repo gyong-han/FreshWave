@@ -13,10 +13,10 @@ function paintPageArea(pvo){
 
     //페이지버튼
     for(let i = pvo.startPage ; i <= pvo.endPage; ++i ){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/admin/list?pno=${i}`);
-        aTag.innerText = i;
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.setAttribute("onclick" , `loadBoardList(${i});`);
+        btnTag.innerText = i;
+        pageArea.appendChild(btnTag);
     }
 
     //다음버튼
@@ -29,14 +29,29 @@ function paintPageArea(pvo){
 
 }
 
-function loadBoardList(searchType, searchValue){
-    const tbodyTag = document.querySelector("main table>tbody");
+function loadBoardList(pno){
 
-    const url = new URL(location);
-    let pno = url.searchParams.get("pno");
-    if(pno == null){
-        pno = 1;
+    //searchType, searchValue 준비
+    const searchType = document.querySelector("select[name=searchType]").value;
+    const nameTagValue = document.querySelector("input[name=searchValue]").value;
+    const deptTagValue = document.querySelector("select[name=searchValue]").value;
+    let searchValue = "";
+    if(searchType == "memberName"){
+        searchValue = nameTagValue;
+    }else{
+        searchValue = deptTagValue;
     }
+
+    const tbodyTag = document.querySelector("main table>tbody");
+    //pno 셋팅
+    if(!pno){
+        const url = new URL(location);
+        pno = url.searchParams.get("pno");
+        if(pno == null){
+            pno = 1;
+        }
+    }
+
     $.ajax({
         url : `/admin/listDel/data?pno=${pno}` ,
         data : {
@@ -103,23 +118,11 @@ function formSearchType(x){
 }
 
 function searchForm() {
-    const searchType = document.querySelector("select[name=searchType]").value;
-
-    const nameTagValue = document.querySelector("input[name=searchValue]").value;
-    const deptTagValue = document.querySelector("select[name=searchValue]").value;
-
-    let searchValue = "";
-    if(searchType == "memberName"){
-        searchValue = nameTagValue;
-    }else{
-        searchValue = deptTagValue;
-    }
-
-    loadBoardList(searchType , searchValue);
-
+    loadBoardList();
     return false;
 }
 
+//상세조회로 넘어가기
 const tbodyTag = document.querySelector("main .list-member tbody");
 
 tbodyTag.addEventListener("click" , function(evt){

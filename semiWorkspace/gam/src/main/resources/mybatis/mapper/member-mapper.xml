@@ -3,76 +3,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.gam.admin.mapper.AdminMapper">
+<mapper namespace="com.semi.gam.member.mapper.MemberMapper">
 
-    <select id="getMemberList">
-        SELECT
-            E.EMP_NO
-            , M.NAME  AS MEMBER_NAME
-            , D.DEPT_NAME
-            , J.JOB_NAME
-            , M.EMAIL
-        FROM EMPLOYEE E
-        LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
-        LEFT OUTER JOIN DEPT D ON(D.DEPT_CODE = E.DEPT_CODE)
-        LEFT OUTER JOIN JOB J ON(J.JOB_CODE = E.JOB_CODE)
-        WHERE E.QUIT_YN = 'N'
-        <if test="searchType == 'memberName'">
-            AND M.NAME LIKE '%${searchValue}%'
+    <update id="edit">
+        UPDATE MEMBER
+        SET
+        NICK = #{nick}
+        , PHONE = #{phone}
+        , ADDRESS = #{address}
+        , PROFILE = #{profile}
+        <if test="pwd != ''">
+            ,PWD = #{pwd}
         </if>
-        <if test="searchType == 'dept'">
-            AND D.DEPT_CODE = #{searchValue}
-        </if>
-        ORDER BY E.EMP_NO DESC
-        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
-    </select>
-
-    <select id="getMemberCnt" resultType="int">
-        SELECT COUNT(E.EMP_NO)
-        FROM EMPLOYEE E
-        LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
-        WHERE E.QUIT_YN = 'N'
-        <if test="searchType == 'memberName'">
-            AND M.NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'dept'">
-            AND E.DEPT_CODE = #{searchValue}
-        </if>
-
-    </select><select id="getMemberCntDel" resultType="int">
-        SELECT COUNT(E.EMP_NO)
-        FROM EMPLOYEE E
-        LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
-        WHERE E.QUIT_YN = 'Y'
-        <if test="searchType == 'memberName'">
-            AND M.NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'dept'">
-            AND E.DEPT_CODE = #{searchValue}
-        </if>
-    </select>
-
-    <select id="getMemberListDel">
-        SELECT
-        E.EMP_NO
-        , M.NAME  AS MEMBER_NAME
-        , D.DEPT_NAME
-        , J.JOB_NAME
-        , M.EMAIL
-        FROM EMPLOYEE E
-        LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
-        LEFT OUTER JOIN DEPT D ON(D.DEPT_CODE = E.DEPT_CODE)
-        LEFT OUTER JOIN JOB J ON(J.JOB_CODE = E.JOB_CODE)
-        WHERE E.QUIT_YN = 'Y'
-        <if test="searchType == 'memberName'">
-            AND M.NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'dept'">
-            AND D.DEPT_CODE = #{searchValue}
-        </if>
-        ORDER BY E.EMP_NO DESC
-        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
-    </select>
+        WHERE ID = #{id}
+    </update>
 
 
 </mapper>
