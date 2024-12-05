@@ -77,10 +77,10 @@ public class StoreController {
     //목록조회
     @GetMapping("list")
     public String getStoreVoList(HttpSession session,Model model,@RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,String searchValue){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         int listCount = service.getStoreCnt(searchType,searchValue);
         int pageLimit = 5;
         int boardLimit = 8;
@@ -103,10 +103,10 @@ public class StoreController {
     //상세조회
     @GetMapping("detail")
     public String detail(String no, Model model,HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         StoreVo vo = service.detail(no);
         String changePhone = "";
         if(vo.getPhone() != null){
@@ -134,10 +134,10 @@ public class StoreController {
     //수정화면
     @GetMapping("edit")
     public String edit(String no, Model model, HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         StoreVo vo = service.detail(no);
 
         vo.setEduDate(date.changeDate1(vo.getEndDate()));

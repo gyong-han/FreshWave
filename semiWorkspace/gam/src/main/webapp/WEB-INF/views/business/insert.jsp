@@ -21,23 +21,23 @@
                         <div></div>
                         <form class="insert-form" action="/business/insert" method="post" enctype="multipart/form-data">
                                 <div>
-                                    <label>거래처명</label><br>
+                                    <label id="bu-label">거래처명</label><br>
                                     <input type="text" placeholder="거래처명을 입력해주세요." name="name">
                                 </div>
                                 <div>
-                                    <label>사업자 등록번호</label><br>
+                                    <label id="bu-label">사업자 등록번호</label><br>
                                     <input type="number" placeholder="01212312345(-없이 입력)" name="brn" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
                                 </div>
                                 <div>
-                                    <label>대표자명</label><br>
+                                    <label id="bu-label">대표자명</label><br>
                                     <input type="text" placeholder="홍길동" name="ceo">
                                 </div>
                                 <div>
-                                    <label>대표자 전화번호</label><br>
+                                    <label id="bu-label">대표자 전화번호</label><br>
                                     <input type="number" placeholder="01012345678(-없이 입력)" name="phone" oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);">
                                 </div>
                                 <div>
-                                    <label>업태</label><br>
+                                    <label id="bu-label">업태</label><br>
                                     <input list="Bt_Code" id="input_Bt_Code" name="btCode"/>
                                     <datalist id="Bt_Code">
                                         <c:forEach items="${BtCodeList}" var="BtCode">
@@ -46,7 +46,7 @@
                                     </datalist>
                                 </div>
                                 <div>
-                                    <label>담당부서</label><br>
+                                    <label id="bu-label">담당부서</label><br>
                                     <select name="deptName">
                                         <option value="영업부">영업부</option>
                                         <option value="관리부">관리부</option>
@@ -65,15 +65,15 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label>계약 시작일</label><br>
+                                    <label id="bu-label">계약 시작일</label><br>
                                     <input type="date" placeholder="2024-12-18" name="startDate">
                                 </div>
                                 <div>
-                                    <label>계약 종료일</label><br>
+                                    <label id="bu-label">계약 종료일</label><br>
                                     <input type="date" placeholder="2024-12-18" name="endDate">
                                 </div>
                                 <div class="address">
-                                    <label>주소</label><br>
+                                    <label id="bu-label">주소</label><br>
                                     <input type="text" id="sample4_roadAddress" placeholder="주소">
                                     <input type="text" id="sample4_detailAddress" placeholder="상세주소">
                                 </div>
