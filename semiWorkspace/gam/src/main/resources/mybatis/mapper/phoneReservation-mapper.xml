@@ -4,19 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.gam.phoneReservation.mapper.PhoneReservationMapper">
-    <update id="edit">
-        UPDATE PHONE_RESERVATION
-        SET
-        MODIFY_DATE = SYSDATE
-        , CP_CODE = ?
-        , RDATE = ?
-        , RTIME = ?
-        , PHONE = ?
-        , CONTENT = ?
-        WHERE WRITER_NO = ?
-        AND NO = ?
-        AND DEL_YN = 'N'
-    </update>
+<!--    <update id="edit">-->
+<!--        UPDATE PHONE_RESERVATION-->
+<!--        SET-->
+<!--        MODIFY_DATE = SYSDATE-->
+<!--        <if test="cpCode != ''">-->
+<!--            , CP_CODE = #{cpCode}-->
+<!--        </if>-->
+<!--        <if test="rdate != ''">-->
+<!--            , RDATE = #{rdate}-->
+<!--        </if>-->
+<!--        <if test="rtime != ''">-->
+<!--            , RTIME = #{rtime}-->
+<!--        </if>-->
+<!--        <if test="phone != ''">-->
+<!--            , PHONE = #{phone}-->
+<!--        </if>-->
+<!--        <if test="title != ''">-->
+<!--            , TITLE = #{title}-->
+<!--        </if>-->
+<!--        <if test="content != ''">-->
+<!--            , CONTENT = #{content}-->
+<!--        </if>-->
+<!--        WHERE WRITER_NO = #{writerNo}-->
+<!--        AND NO = #{no}-->
+<!--        AND DEL_YN = 'N'-->
+<!--    </update>-->
 
     <select id="getReservationCnt">
         SELECT COUNT(P.NO)

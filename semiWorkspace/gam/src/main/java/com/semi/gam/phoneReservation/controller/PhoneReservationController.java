@@ -55,7 +55,10 @@ public class PhoneReservationController {
         if(loginMemberVo.getId() == null){
             return "redirect:/member/login";
         }
-        PhoneReservationVo vo = service.getReservation();
+
+        String id = loginMemberVo.getId();
+
+        PhoneReservationVo vo = service.getReservationByNo(rno, id);
         model.addAttribute("vo", vo);
 
         return "reservation/edit";
@@ -63,8 +66,8 @@ public class PhoneReservationController {
 
     @PostMapping("edit")
     public String edit(PhoneReservationVo vo, HttpSession session){
-        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-        vo.setWriterNo(loginMemberVo.getId());
+//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+//        vo.setWriterNo(loginMemberVo.getId());
 
         int result = service.edit(vo);
 
@@ -77,8 +80,17 @@ public class PhoneReservationController {
 
     // 예약문의 삭제하기
     @GetMapping("del")
-    public void del(String rno){
+    public String del(String rno, HttpSession session, PhoneReservationVo vo){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
 
+        int result = service.del(rno, vo);
+
+        if(result != 1){
+            throw new IllegalStateException("[ERR-PRV-300] 고객센터 삭제하기 오류 발생");
+        }
+
+        return "redirect:/reservation/list";
     }
 
 
@@ -107,5 +119,14 @@ public class PhoneReservationController {
     }
 
     // 예약문의 상세조회하기
+    @GetMapping("detail")
+    public String detail(String rno, Model model, HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String id = loginMemberVo.getId();
+
+        PhoneReservationVo vo = service.getReservationByNo(rno, id);
+        model.addAttribute("vo", vo);
+        return "reservation/detail";
+    }
 
 }

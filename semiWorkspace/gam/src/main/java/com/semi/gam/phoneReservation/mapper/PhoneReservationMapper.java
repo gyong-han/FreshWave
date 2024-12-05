@@ -5,6 +5,7 @@ import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public interface PhoneReservationMapper {
                 SEQ_PHONE_RESERVATION.NEXTVAL
                 , #{writerNo}
                 , #{cpCode}
-                , #{rDate}
-                , #{rTime}
+                , #{rdate}
+                , #{rtime}
                 , #{phone}
                 , #{title}
                 , #{content}
@@ -37,6 +38,19 @@ public interface PhoneReservationMapper {
             """)
     int write(PhoneReservationVo vo);
 
+    @Update("""
+            UPDATE PHONE_RESERVATION
+                SET
+                    MODIFY_DATE = SYSDATE
+                    , CP_CODE = #{cpCode}
+                    , RDATE = #{rdate}
+                    , RTIME = #{rtime}
+                    , PHONE = #{phone}
+                    , TITLE = #{title}
+                    , CONTENT = #{content}
+            WHERE NO = #{no}
+                AND DEL_YN = 'N'
+            """)
     int edit(PhoneReservationVo vo);
 
     int getReservationCnt(String searchType, String searchValue);
@@ -63,4 +77,36 @@ public interface PhoneReservationMapper {
     PhoneReservationVo getReservation();
 
     List<PhoneReservationVo> getReservationVoList(PageVo pvo, String searchType, String searchValue);
+
+    @Select("""
+            SELECT
+                P.NO
+                , P.WRITER_NO
+                , M.NAME AS WRITER_NAME
+                , P.CP_CODE
+                , P.RDATE
+                , P.RTIME
+                , P.PHONE
+                , P.TITLE
+                , P.CONTENT
+                , P.ENROLL_DATE
+                , P.MODIFY_DATE
+                , P.DEL_YN
+            FROM PHONE_RESERVATION P
+            JOIN MEMBER M ON (P.WRITER_NO = M.ID)
+            WHERE P.NO = ${rno}
+                AND P.WRITER_NO = ${id}
+                AND P.DEL_YN = 'N'
+            ORDER BY P.NO DESC
+            """)
+    PhoneReservationVo getReservationByNo(String rno, String id);
+
+    @Update("""
+            UPDATE PHONE_RESERVATION
+                SET
+                    DEL_YN = 'Y'
+            WHERE NO = ${rno}
+                AND WRITER_NO = ${vo.writerNo}
+            """)
+    int del(String rno, PhoneReservationVo vo);
 }

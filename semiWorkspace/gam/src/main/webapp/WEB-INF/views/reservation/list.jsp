@@ -38,6 +38,7 @@
 
                 </tbody>
             </table>
+            <button onclick="location.href='/reservation/write'">작성하기</button>
             <div class="page-area"></div>
         </div>
     </main>

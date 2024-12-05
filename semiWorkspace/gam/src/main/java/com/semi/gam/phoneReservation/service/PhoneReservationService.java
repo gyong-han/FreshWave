@@ -26,12 +26,12 @@ public class PhoneReservationService {
         if(vo.getContent() == null){
             errCode = "[ERR-PRV-001] 내용은 필수로 입력해주세요";
         }
-//        if(vo.getCpCode() != null && vo.getCpCode() != loginMemberVo.getCpCode()){
-//            errCode = "[ERR-PRV-002] 회사코드가 로그인 정보와 일치하지 않습니다. 다시 입력해주세요.";
-//        }
-//        if(vo.getPhone() != null && vo.getPhone() != loginMemberVo.getPhone()){
-//            errCode = "[ERR-PRV-003] 전화번호가 로그인 정보와 일치하지 않습니다. 다시 입력해주세요.";
-//        }
+        if(vo.getCpCode() == null && vo.getCpCode() != loginMemberVo.getCpCode()){
+            errCode = "[ERR-PRV-002] 회사코드가 로그인 정보와 일치하지 않습니다. 다시 입력해주세요.";
+        }
+        if(vo.getPhone() == null && vo.getPhone() != loginMemberVo.getPhone()){
+            errCode = "[ERR-PRV-003] 전화번호가 로그인 정보와 일치하지 않습니다. 다시 입력해주세요.";
+        }
 
         if(errCode != null){
             log.warn(errCode);
@@ -45,9 +45,7 @@ public class PhoneReservationService {
 
     public int edit(PhoneReservationVo vo) {
 
-        int result = mapper.edit(vo);
-
-        return result;
+        return mapper.edit(vo);
     }
 
     public void verification(PhoneReservationVo vo){
@@ -80,5 +78,13 @@ public class PhoneReservationService {
 
     public List<PhoneReservationVo> getReservationVoList(PageVo pvo, String searchType, String searchValue) {
         return mapper.getReservationVoList(pvo,searchType,searchValue);
+    }
+
+    public PhoneReservationVo getReservationByNo(String rno, String id) {
+        return mapper.getReservationByNo(rno, id);
+    }
+
+    public int del(String rno, PhoneReservationVo vo) {
+        return mapper.del(rno, vo);
     }
 }

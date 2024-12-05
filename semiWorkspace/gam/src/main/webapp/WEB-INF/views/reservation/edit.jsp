@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FRESH WAVE</title>
+<link rel="stylesheet" href="/css/reservation/edit.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -13,13 +14,12 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
             <h1>상담 예약 문의</h1>
-            <form action="/reservation/write" method="post">
+            <form action="/reservation/edit" method="post">
                 <label>문의 제목</label>
-                <input type="text" name="title" placeholder="문의 제목을 입력해주세요.">
+                <input type="text" name="title" value="${vo.title}">
                 <br>
                 <label>문의 내용</label>
-                <textarea name="content" placeholder="문의 내용을 작성해주시면 보다 정확한 상담이 가능합니다.
-                민감한 정보(카드, 계좌번호) 작성에 유의하시기 바랍니다."></textarea>
+                <textarea name="content" value="${vo.content}"></textarea>
                 <br>
                 <label>회사코드</label>
                 <input type="text" name="cpCode" value="${loginMemberVo.cpCode}">
@@ -27,8 +27,8 @@
                 <input type="text" name="phone" value="${loginMemberVo.phone}">
                 <br>
                 <label>문의시간</label>
-                <input type="date" name="rdate">
-                <input type="time" name="rtime">
+                <input type="date" name="rdate" value=${vo.rdate}>
+                <input type="time" name="rtime" value=${vo.rtime}>
                 <br>
                 <input type="submit" value="작성하기">
             </form>
