@@ -1,0 +1,115 @@
+function paintPageArea(pvo){
+    const pageArea = document.querySelector('.page-area');
+    pageArea.innerHTML = '';
+
+    // 이전버튼
+    if(pvo.startPage != 1){
+        const preTag = document.createElement('a');
+        preTag.setAttribute('href', `/reservation/list?rno=${pvo.startPage-1}`);
+        preTag.innerText = '<';
+        pageArea.appendChild(preTag);
+    }
+
+    // 페이지 버튼
+    for(let i = pvo.startPage; i <= pvo.endPage; i++){
+        const btnTag = document.createElement('button');
+        btnTag.setAttribute('onclick', `loadReservationList(${i});`);
+        btnTag.innerText = i;
+        pageArea.appendChild(btnTag);
+    }
+
+    // 다음버튼
+    if(pvo.endPage != pvo.maxPage){
+        const nextTag = document.createElement('a');
+        nextTag.setAttribute('href', `/reservation/list?rno=${pvo.endPage+1}`)
+        nextTag.innerText = '>';
+        pageArea.appendChild(nextTag);
+    }
+}
+
+function loadReservationList(rno){
+    const tbodyTag = document.querySelector('.content-wrapper table tbody');
+    
+    //searchType, searchValue 준비
+    const searchType = document.querySelector('select[name=searchType]').value;
+    const nameValue = document.querySelector('input[name=searchValue]').value;
+
+    let searchValue = '';
+
+
+    // rno
+    if(!rno){
+        const url = new URL(location);
+        let rno = url.searchParams.get("rno");
+        if(rno == null){
+            rno = 1;
+        }
+    }
+    
+    
+    // tbody 채우기
+    $.ajax({
+        url : `/reservation/list/data?rno=${rno}`,
+        data : {
+            searchType,
+            searchValue
+        },
+        method : 'GET',
+        success : function(x){
+            const reservationVoList = x.r;
+            const pvo = x.p;
+
+            paintPageArea(pvo);
+
+            console.log(reservationVoList);
+            
+
+            tbodyTag.innerHTML = '';
+
+            for(const vo of reservationVoList){
+                const trTag = document.createElement('tr');
+
+                const noTag = document.createElement('td');
+                noTag.innerText = vo.no;
+                trTag.appendChild(noTag);
+
+                const titleTag = document.createElement('td');
+                titleTag.innerText = vo.title;
+                trTag.appendChild(titleTag);
+
+                const rdateTag = document.createElement('td');
+                rdateTag.innerText = vo.rdate;
+                trTag.appendChild(rdateTag);
+
+                const nameTag = document.createElement('td');
+                nameTag.innerText = vo.writerName;
+                trTag.appendChild(nameTag);
+
+                const enrollDateTag = document.createElement('td');
+                enrollDateTag.innerText = vo.enrollDate;
+                trTag.appendChild(enrollDateTag);
+
+                tbodyTag.appendChild(trTag);
+            }
+        },
+        error : function(){
+            console.log("유선문의 목록조회 실패");
+            
+        }
+    });
+    
+}
+
+loadReservationList();
+
+function submitSearchForm(){
+
+    if(searchType == 'title'){
+        searchValue = nameValue;
+    }else if(searchType == 'writerName'){
+        searchValue = nameValue;
+    }
+
+    loadReservationList();
+    return false;
+}

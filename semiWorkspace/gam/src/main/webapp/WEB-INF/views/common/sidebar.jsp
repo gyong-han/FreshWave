@@ -37,8 +37,8 @@
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
-                <img src="/img/icon/calendar.svg" alt="calendar">
-                <span class="icon-text">일정 관리</span>
+                <img src="/img/icon/calendar.svg" alt="calendar" onclick="location.href='/schedule/home'">
+                <span class="icon-text" onclick="location.href='/schedule/home'">일정 관리</span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
@@ -47,8 +47,8 @@
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
-                <img src="/img/icon/callcenter.svg" alt="callcenter">
-                <span class="icon-text">고객센터</span>
+                <img src="/img/icon/callcenter.svg" alt="callcenter" onclick="location.href='/reservation/list'">
+                <span class="icon-text" onclick="location.href='/reservation/list'">고객센터</span>
                 <div class="bluediv"></div>
             </div>
     </aside>
