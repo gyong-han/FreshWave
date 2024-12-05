@@ -47,6 +47,7 @@
             AND M.NICK LIKE '%${searchValue}%'
         </if>
         ORDER BY ENROLL_DATE DESC
+        ,NO DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT  #{pvo.boardLimit} ROWS ONLY
     </select>
 

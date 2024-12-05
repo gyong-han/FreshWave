@@ -23,7 +23,9 @@
                         <option value="name">작성자</option>
                     </select>
                     <input type="text" name="searchValue" placeholder="검색할 제목 입력">
-                    <input type="submit" name="" id="" value="검색">
+                    <button type="submit" style="border: none; background: none; padding: 0;">
+                        <img src="/img/icon/search.svg" alt="검색 버튼">
+                    </button>
                 </form>
             </div>
             <div class="table-area">
