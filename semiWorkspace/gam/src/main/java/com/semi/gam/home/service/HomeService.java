@@ -23,7 +23,11 @@ public class HomeService {
         return mapper.getBlueNoticeList();
     }
 
-    public List<PriorityVo> getPriorityList() {
-        return mapper.getPriorityList();
+    public List<PriorityVo> getPriorityList1(String id) {
+        return mapper.getPriorityList1(id);
+    }
+
+    public List<PriorityVo> getPriorityList2(String id) {
+        return mapper.getPriorityList2(id);
     }
 }

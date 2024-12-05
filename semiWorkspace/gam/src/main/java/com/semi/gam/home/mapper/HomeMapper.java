@@ -29,16 +29,27 @@ public interface HomeMapper {
     List<NoticeVo> getBlueNoticeList();
 
     @Select("""
+                SELECT PRIORITY,COUNT(*) AS "COUNT"
+                FROM(
+                    SELECT R.NAME AS PRIORITY
+                    FROM PROJECT P
+                    JOIN PRIORITY R ON(P.PRIORITY = R.NO)
+                    WHERE P.WRITER_NO = ${id}
+                )SUB
+                GROUP BY PRIORITY
+            """)
+    List<PriorityVo> getPriorityList1(String id);
+
+    @Select("""
             SELECT PRIORITY,COUNT(*) AS "COUNT"
             FROM(
                 SELECT R.NAME AS PRIORITY
                 FROM PROJECT P
                 LEFT JOIN PROJECT_MEMBER M ON (P.KEY = M.PRJ_KEY)
                 JOIN PRIORITY R ON(P.PRIORITY = R.NO)
-                WHERE M.EMP_NO = '240102'
-                OR P.WRITER_NO = '240102'
+                WHERE M.EMP_NO = ${id}
             )SUB
             GROUP BY PRIORITY
             """)
-    List<PriorityVo> getPriorityList();
+    List<PriorityVo> getPriorityList2(String id);
 }
