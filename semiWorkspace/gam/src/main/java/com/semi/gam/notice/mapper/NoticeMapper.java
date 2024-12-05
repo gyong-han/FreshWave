@@ -1,5 +1,6 @@
 package com.semi.gam.notice.mapper;
 
+import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
@@ -117,4 +118,12 @@ public interface NoticeMapper {
             WHERE NO = #{no} AND DEL_YN = 'N'
             """)
     int del(NoticeVo vo);
+
+    @Select("""
+            SELECT *
+            FROM NOTICE_ATTACHMENT
+            WHERE REF_NOTI_NO = #{bno}
+            ORDER BY NO DESC
+            """)
+    List<AttachmentVo> getAttachmentVoList(String bno);
 }

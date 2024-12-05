@@ -1,5 +1,6 @@
 package com.semi.gam.notice.controller;
 
+import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.service.NoticeService;
@@ -45,6 +46,7 @@ public class NoticeController {
     public String write(NoticeVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , @RequestParam(name = "urgentYn" , defaultValue = "N") String urgentYn, HttpSession session ) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
+        vo.setUrgentYn(urgentYn);
 
         List<String> changeNameList = new ArrayList<>();
 
@@ -53,7 +55,7 @@ public class NoticeController {
             String changeName = FileUploader.save(f, path);
             changeNameList.add(changeName);
         }
-
+        System.out.println("urgentYn = " + urgentYn);
         int result = service.write(vo , changeNameList);
 
         if(result != 1) {
@@ -97,7 +99,9 @@ public class NoticeController {
     @GetMapping("detail")
     public String detail(String bno, Model model){
         NoticeVo vo = service.getNoticeDetail(bno);
+        List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
         model.addAttribute("vo", vo);
+        model.addAttribute("attachmentVoList" , attachmentVoList);
         return "notice/detail";
     }
 
