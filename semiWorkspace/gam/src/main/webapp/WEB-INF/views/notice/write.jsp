@@ -20,8 +20,9 @@
                     <h2>공지사항 제목</h2>
                     <div class="input-checkbox-container">
                         <input type="text" name="title" placeholder="제목을 입력하세요.">
+                        <input type="hidden" name="urgentYn" value="N" id="hiddenUrgentYn">
                         <label>
-                            <input type="checkbox" name="urgentYn" value="Y"> 긴급
+                            <input type="checkbox" name="urgentYn" value="Y" onchange="updateHiddenValue(this)"> 긴급
                         </label>
                     </div>
                 </div>
@@ -64,7 +65,14 @@
                     const content = document.getElementById("smarteditor").value;
                     document.getElementById("form").submit();
                 }
-
+                function updateHiddenValue(checkbox) {
+                    const hiddenInput = document.getElementById('hiddenUrgentYn');
+                    if (checkbox.checked) {
+                        hiddenInput.disabled = true; // hidden 필드 무효화
+                    } else {
+                        hiddenInput.disabled = false; // hidden 필드 활성화
+                    }
+                }
         </script>
 
 

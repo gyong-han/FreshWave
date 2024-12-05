@@ -77,8 +77,13 @@
         <if test="searchType == 'name'">
             AND M.NAME LIKE '%${searchValue}%'
         </if>
-        ORDER BY N.URGENT_YN DESC
-        ,N.ENROLL_DATE DESC
+        ORDER BY
+            N.URGENT_YN DESC,
+            CASE
+                WHEN N.URGENT_YN = 'N' THEN 1
+                ELSE 0
+        END,
+        N.ENROLL_DATE DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 </mapper>

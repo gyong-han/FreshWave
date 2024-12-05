@@ -1,5 +1,6 @@
 package com.semi.gam.notice.service;
 
+import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.notice.mapper.NoticeMapper;
 import com.semi.gam.notice.vo.NoticeVo;
@@ -58,5 +59,9 @@ public class NoticeService {
 
     public int del(NoticeVo vo) {
         return mapper.del(vo);
+    }
+
+    public List<AttachmentVo> getAttachmentVoList(String bno) {
+        return mapper.getAttachmentVoList(bno);
     }
 }
