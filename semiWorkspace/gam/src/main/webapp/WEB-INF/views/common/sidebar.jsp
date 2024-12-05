@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/css/common/font.css">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-<script defer src="/js/common/header.js"></script>
+<script defer defer src="/js/common/header.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -23,12 +23,12 @@
     <aside>
             <div class="icon">
                 <img src="/img/icon/home.svg" alt="home">
-                <span class="icon-text">홈</span>
+                <span class="icon-text" onclick="location.href='/home'">홈</span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
                 <img src="/img/icon/project.svg" alt="project">
-                <span class="icon-text">프로젝트 관리</span>
+                <span class="icon-text" onclick="location.href='/project/list'">프로젝트 관리</span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
@@ -43,7 +43,7 @@
             </div>
             <div class="icon">
                 <img src="/img/icon/board.svg" alt="board">
-                <span class="icon-text"><a href="/board/home">게시판</a></span>
+                <span class="icon-text" onclick="location.href='/board/home'">게시판</span>
                 <div class="bluediv"></div>
             </div>
             <div class="icon">
