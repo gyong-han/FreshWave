@@ -8,8 +8,8 @@ public class PhoneReservationVo {
     private String writerNo;
     private String writerName;
     private String cpCode;
-    private String rDate;
-    private String rTime;
+    private String rdate;
+    private String rtime;
     private String phone;
     private String title;
     private String content;

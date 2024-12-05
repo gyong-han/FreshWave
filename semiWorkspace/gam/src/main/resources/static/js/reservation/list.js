@@ -112,3 +112,16 @@ function submitSearchForm(){
     loadReservationList();
     return false;
 }
+
+// 상세조회로 넘어가기
+const tbodyTag = document.querySelector('.content-wrapper table tbody');
+
+tbodyTag.addEventListener("click", function(evt){
+    if(evt.target.tagName != "TD"){
+        return;
+    }
+    const rno = evt.target.parentNode.children[0].innerText;
+    console.log(rno);
+    
+    location.href = `/reservation/detail?rno=${rno}`;
+});
