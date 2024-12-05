@@ -30,7 +30,7 @@
 
             <c:forEach items="${projectVoList}" var="vo">
                 <tr>
-                    <td><a href="/project/detail?projectNo=${vo.key}">${vo.name}</a></td>
+                    <td><a href="/projectMemo/list?projectNo=${vo.key}">${vo.name}</a></td>
                     <td>${vo.deptName}</td>
                     <td>${vo.memberName}</td>
                     <td>${vo.priorityName}</td>
@@ -40,7 +40,7 @@
             </c:forEach>
             <c:forEach items="${projectVoList1}" var="vo">
                 <tr>
-                    <td><a href="/project/detail?projectNo=${vo.key}">${vo.name}</a></td>
+                    <td><a href="/projectMemo/list?projectNo=${vo.key}">${vo.name}</a></td>
                     <td>${vo.deptName}</td>
                     <td>${vo.memberName}</td>
                     <td>${vo.priorityName}</td>
