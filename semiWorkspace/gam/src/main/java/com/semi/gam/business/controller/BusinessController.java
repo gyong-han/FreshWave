@@ -64,10 +64,10 @@ public class BusinessController {
     @GetMapping("list")
     public String getBusinessVoList(Model model, @RequestParam(name="pno",required = false,defaultValue = "1") int currentPage,String searchType,
                                     String searchValue,HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         int listCount = service.getBusinessCnt(searchValue,searchType);
         int pageLimit = 5;
         int boardLimit = 8;
@@ -89,10 +89,10 @@ public class BusinessController {
 
     @GetMapping("detail")
     public String detail(String no,Model model,HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         BusinessVo vo = service.detail(no);
         String changePhone = vo.getPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
         String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
@@ -119,10 +119,10 @@ public class BusinessController {
 
     @GetMapping("edit")
     public String edit(String no, Model model,HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");ㅡ
-//        if(loginMemberVo == null){
-//            return "redirect:/member/login";
-//        }
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         BusinessVo vo = service.detail(no);
 
         vo.setStartDate(date.changeDate1(vo.getStartDate()));

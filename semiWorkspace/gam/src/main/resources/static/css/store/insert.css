@@ -100,6 +100,7 @@ input[type=file]::file-selector-button{
 
 #btn-area input{
   margin-top: 50px;
+  font-family: "Pretendard-Bold"
 }
 
 select[name=status]{
@@ -109,4 +110,12 @@ select[name=status]{
   height: 40px;
   border-radius: 5px;
   margin-top: 5px;
+}
+
+#bu-label{
+  font-family: "Pretendard-Bold"
+}
+
+input{
+  font-family: "Pretendard-Regular"
 }

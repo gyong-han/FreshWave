@@ -25,8 +25,8 @@
                     <h1>거래처 분석</h1>
                 </div>
                 <div class="button-area">
-                    <button onclick="location.href='/business/insert'">거래처 등록</button>
-                    <button onclick="location.href='/business/list'">거래처 목록조회</button>
+                    <button onclick="location.href='/business/insert'" id="home-btn">거래처 등록</button>
+                    <button onclick="location.href='/business/list'" id="home-btn">거래처 목록조회</button>
                 </div>
             </div>
 
@@ -35,8 +35,8 @@
                     <h1>가맹점 분석</h1>
                 </div>
                 <div  class="button-area">
-                    <button onclick="location.href='/store/insert'">가맹점 등록</button>
-                    <button onclick="location.href='/store/list'">가맹점 목록조회</button>
+                    <button onclick="location.href='/store/insert'" id="home-btn">가맹점 등록</button>
+                    <button onclick="location.href='/store/list'" id="home-btn">가맹점 목록조회</button>
                 </div>
             </div>
 

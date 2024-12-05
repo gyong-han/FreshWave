@@ -8,4 +8,3 @@ const tbodyTag = document.querySelector(".list-table tbody");
         
         location.href=`/business/detail?no=${no}`
     })
-

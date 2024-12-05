@@ -102,6 +102,7 @@ input[type=file]::file-selector-button{
 
 #btn-area input{
   margin-top: 70px;
+  font-family: "Pretendard-Bold"
 }
 
 select[name=deptName]{
@@ -111,4 +112,12 @@ select[name=deptName]{
   height: 40px;
   border-radius: 5px;
   margin-top: 5px;
+}
+
+#bu-label{
+  font-family: "Pretendard-Bold"
+}
+
+input{
+  font-family: "Pretendard-Regular"
 }
