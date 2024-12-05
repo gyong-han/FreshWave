@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>홈</title>
+<title>FRESH WAVE</title>
 <link rel="stylesheet" href="/css/common/home.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
-          
+
         </div>
     </main>
 </body>
