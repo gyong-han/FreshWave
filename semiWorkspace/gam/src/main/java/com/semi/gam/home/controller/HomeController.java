@@ -39,10 +39,29 @@ public class HomeController {
     public List<PriorityVo> projectData(HttpSession session){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         String id = loginMemberVo.getId();
-        List<PriorityVo> chartList1 = service.getPriorityList1(id);
-        List<PriorityVo> chartList2 = service.getPriorityList2(id);
-        System.out.println("chartList1 = " + chartList1);
-        System.out.println("chartList2 = " + chartList2);
-        return chartList1;
+        List<PriorityVo> originChartList1 = service.getPriorityList1(id);
+        List<PriorityVo> originChartList2 = service.getPriorityList2(id);
+        List<PriorityVo> changeChartList1 = null;
+        List<PriorityVo> changeChartList2 = null;
+
+        if(originChartList1.size() > originChartList2.size()){
+            changeChartList1 = originChartList1;
+            changeChartList2 = originChartList2;
+        }else{
+            changeChartList1 = originChartList2;
+            changeChartList2 = originChartList1;
+        }
+
+        for (PriorityVo vo1 : changeChartList1) {
+            for (PriorityVo vo2 : changeChartList2) {
+                if(vo1.getPriority().equals(vo2.getPriority())){
+                    int combineCnt = Integer.parseInt(vo1.getCount()) + Integer.parseInt(vo2.getCount());
+                    String cnt = String.valueOf(combineCnt);
+                    vo1.setCount(cnt);
+                    break;
+                }
+            }
+        }
+        return changeChartList1;
     }
 }
