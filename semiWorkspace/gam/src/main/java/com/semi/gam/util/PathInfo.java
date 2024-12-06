@@ -49,4 +49,12 @@ public class PathInfo {
                 + "attachment" + File.separator;
         return path;
     }
+
+    public String getMemberPath() {
+        String path = staticPath
+                + "img" + File.separator
+                + "profile" + File.separator;
+        return path;
+        
+    }
 }
