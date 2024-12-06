@@ -33,17 +33,19 @@
 
 
         <!-- 메인 폼 -->
-        <form id="edit-member" action="/member/edit" method="post" class="form-container">
+        <form id="edit-member" action="/member/edit" method="post" class="form-container" enctype="multipart/form-data">
             <div class="container">
                     <!-- 프로필 섹션 -->
                     <div class="member-profile">
-                        ${loginMemberVo.profile}
+                        <div class="profile">
+                            <img src="http://127.0.0.1/img/profile/${loginMemberVo.profile}" width="100px" height="100px">
+                        </div>
                         <h2>${loginMemberVo.name}</h2>
                         <br>
                         <p>${loginMemberVo.deptName}(${loginMemberVo.jobName})</p>
                         <p>${loginMemberVo.email}</p>
                         <label for="file-upload" class="custom-file-upload">사진 변경</label>
-                        <input id="file-upload" name="profile" type="file" accept=".png,.jpg,.jpeg,.svg">
+                        <input id="file-upload" name="f" type="file" accept=".png,.jpg,.jpeg,.svg">
                     </div>
                     <br>
             <input type="hidden" name="id" value="${loginMemberVo.id}">
