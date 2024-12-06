@@ -1,6 +1,5 @@
 package com.semi.gam.member.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
@@ -8,9 +7,11 @@ import com.semi.gam.employee.vo.EmployeeVo;
 import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.service.MemberService;
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.util.FileUploader;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ import java.util.List;
 @RequestMapping("member")
 @Slf4j
 public class MemberController{
+
+    @Value("#{pathInfo.getMemberPath()}")
+    private String profilePath;
 
     private final MemberService service;
 
@@ -119,8 +123,10 @@ public class MemberController{
 
     //마이페이지에서 회원 수정
     @PostMapping("edit")
-    public String edit(MemberVo vo, HttpSession session, MultipartFile profile){
-        System.out.println("vo = " + vo);
+    public String edit(MemberVo vo, HttpSession session, MultipartFile f) throws Exception {
+        String changeName = FileUploader.save(f , profilePath);
+        vo.setProfile(changeName);
+
         MemberVo loginMemberVo = (MemberVo)session.getAttribute(("loginMemberVo"));
         MemberVo updateMember = service.edit(vo);
         updateMember.setId(loginMemberVo.getId());
@@ -131,6 +137,22 @@ public class MemberController{
             throw new IllegalStateException("ERROR-MYPAGE-EDIT");
         }
         return "redirect:/member/mypage";
+    }
+
+    //로그아웃
+    @PostMapping("logout")
+    public String logout(HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute(("loginMemberVo"));
+        session.setAttribute("loginMemberVo",null);
+
+        return "redirect:/member/login";
+    }
+
+    //퇴근버튼 누르고 로그아웃
+    @PostMapping("finishLogOut")
+    public void finishLogOut(HttpSession session, EmployeeVo vo){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute(("loginMemberVo"));
+
     }
 
 
