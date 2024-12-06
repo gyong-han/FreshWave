@@ -28,8 +28,8 @@
                         <div id="content">
                             <div id="side">
                                 <img src="/img/icon/sounds.svg" id="side-logo"><br>
-                                <input type="text" id="noti-txt" value="공지사항">
-                                <input type="text" id="noti-priority" value="긴급">
+                                <input type="text" id="noti-txt" value="공지사항" disabled>
+                                <input type="text" id="noti-priority" value="긴급" disabled>
                             </div>
                             <div class="noti-table-area">
                                 <table id="noti-table">
@@ -48,8 +48,8 @@
                         <div id="content">
                             <div id="side">
                                 <img src="/img/icon/sounds.svg" id="side-logo"><br>
-                                <input type="text" id="noti-txt" value="공지사항">
-                                <input type="text" id="noti-priority2" value="일반">
+                                <input type="text" id="noti-txt" value="공지사항" disabled>
+                                <input type="text" id="noti-priority2" value="일반" disabled>
                             </div>
                             <div class="noti-table-area">
                                 <table id="noti-table">
