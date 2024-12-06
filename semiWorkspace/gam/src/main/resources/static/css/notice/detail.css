@@ -18,33 +18,61 @@ body {
     margin: 20px;
     border-radius: 10px;
 }
-
-.content-block {
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 행 간격 */
     margin-bottom: 20px;
-    line-height: 1.6;
-    color: #555;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
-.content-block h3 {
-    display: inline-block;
-    margin-right: 10px;
+.detail-col{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    gap: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    flex: 1;
+    width: 50%;
+}
+
+
+.detail-label {
     font-weight: bold;
-    color: #0078d7;
+    color: #333;
+    width: 150px; /* 항목 이름 고정 폭 */
+    text-align: left;
 }
 
-button {
-    background-color: #0078d7;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 20px;
+.detail-value {
+    flex: 1;
+    color: #555;
+    text-align: left;
 }
 
-button:hover {
-    background-color: #005bb5;
+.detail-value.urgent {
+    color: red; /* 긴급 */
+}
+
+.detail-value:not(.urgent) {
+    color: black; /* 일반 */
+}
+
+.content-block .detail-value {
+    line-height: 1.6;
+    white-space: pre-wrap; /* 줄바꿈 유지 */
+    height: 300px;
 }
 
 .attachment {
@@ -56,4 +84,45 @@ button:hover {
 
 .attachment:hover {
     text-decoration: underline;
+}
+
+.button-container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.left-button {
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: auto;
+}
+
+.right-buttons .btn-del{
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: auto;
+}
+
+
+.right-buttons .btn-edit{
+    padding: 10px 20px;
+    background-color: #1D64F2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: auto;
 }

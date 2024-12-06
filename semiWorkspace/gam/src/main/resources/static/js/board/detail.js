@@ -50,6 +50,7 @@ function paintCommentList(voList){
 
     for(const vo of voList){
         const commmentDiv = document.createElement("div");
+        commmentDiv.classList.add("comment-item");
 
         const div01 = document.createElement("div");
         div01.innerText = vo.nick;

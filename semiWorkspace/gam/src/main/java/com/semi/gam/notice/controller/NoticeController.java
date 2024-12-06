@@ -1,7 +1,6 @@
 package com.semi.gam.notice.controller;
 
 import com.semi.gam.board.vo.AttachmentVo;
-import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.service.NoticeService;
 import com.semi.gam.notice.vo.NoticeVo;
@@ -88,33 +87,41 @@ public class NoticeController {
         model.addAttribute("pvo" , pvo);
         model.addAttribute("searchType" ,searchType);
         model.addAttribute("searchValue" , searchValue);
-//        for(int i = 0; i < voList.size(); i++){
-//            if(voList.get(i).getUrgentYn() == "Y"){
-//        }
+//
 
         return "notice/list";
     }
 
     // 공지사항 상세
     @GetMapping("detail")
-    public String detail(String bno, Model model){
+    public String detail(String bno, Model model , HttpSession session){
         NoticeVo vo = service.getNoticeDetail(bno);
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        System.out.println("loginMemberVo.getId() = " + loginMemberVo.getId());
+        System.out.println("vo.getWriterNo() = " + vo.getWriterNo());
         List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
         model.addAttribute("vo", vo);
         model.addAttribute("attachmentVoList" , attachmentVoList);
+        model.addAttribute("loginMemberVo" , loginMemberVo);
         return "notice/detail";
     }
 
     // 공지사항 수정(화면)
     @GetMapping("edit")
-    public void edit(Model model , String no){
+    public String edit(HttpSession session, Model model , String no){
         NoticeVo vo = service.getNoticeByNo(no);
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
         model.addAttribute("vo", vo);
+        return "notice/edit";
     }
 
     // 공지사항 수정 처리
     @PostMapping("edit")
-    public String edit(NoticeVo vo){
+    public String edit(NoticeVo vo , HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
         int result =service.edit(vo);
         if(result != 1){
             throw new IllegalStateException("공지사항 수정 중 에러발생");

@@ -16,10 +16,12 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <form action="/board/edit" method="post" enctype="multipart/form-data">
+                <h2>게시판 제목</h2>
                 <input type="hidden" name="no" value="${vo.no}">
                 <input type="text" name="title" placeholder="제목" value="${vo.title}">
                 <br>
-                <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content">${vo.content}</textarea>
+                <h2>게시판 내용</h2>
+                <textarea id="smarteditor" rows="20" cols="100" style="width: 100%;" name="content">${vo.content}</textarea>
                 <br>
                 <label for="fileInput">
                     <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
@@ -32,8 +34,10 @@
                 <input type="file" id="fileInput" name="f" multiple>
                 <div class="preview-area">
                 </div>
-                <button type="button" onclick="goback();">취소</button>
-                <input type="submit" value="수정" onclick="submitContents(this)">
+                <div class="bottom-button-area">
+                    <button type="button" onclick="goback();">취소</button>
+                    <input type="submit" value="수정" onclick="submitContents(this)">
+                </div>
             </form>
         </div>
     </main>
