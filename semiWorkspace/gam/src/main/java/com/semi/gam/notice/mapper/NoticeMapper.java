@@ -45,6 +45,7 @@ public interface NoticeMapper {
     @Select("""
             SELECT DISTINCT
                 N.NO ,
+                N.WRITER_NO ,
                 N.TITLE ,
                 N.CONTENT ,
                 N.URGENT_YN ,

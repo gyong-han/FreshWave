@@ -18,27 +18,35 @@
 
         <!-- Content -->
         <div class="content-container">
-            <div class="detail-header">
-                <div class="title-section">
-                    <h3>제목</h3>
-                    <p>${vo.title}</p>
+            <div class="detail-container">
+                <div class="detail-col">
+                    <div class="detail-row">
+                        <div class="detail-label">제목</div>
+                        <div class="detail-value">${vo.title}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">조회수</div>
+                        <div class="detail-value">${vo.hit}</div>
+                    </div>
                 </div>
-                <div class="info-section">
-                    <p>${vo.nick} | 조회수 ${vo.hit}</p>
+                <div class="detail-col">
+                    <div class="detail-row">
+                        <div class="detail-label">작성인</div>
+                        <div class="detail-value">${vo.nick}<br>${vo.enrollDate}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">첨부파일</div>
+                        <div class="detail-value">
+                            <c:forEach items="${attachmentVoList}" var="attachVo">
+                                <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" , height="80px">
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="content-section">
-                <h3>내용</h3>
-                <p>${vo.content}</p>
-                
-            </div>
-
-            <div class="file-section">
-                <h3>첨부파일</h3>
-                <c:forEach items="${attachmentVoList}" var="attachVo">
-                    <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" , height="80px">
-                </c:forEach>
+                <div class="detail-row content-block">
+                    <div class="detail-label">내용</div>
+                    <div class="detail-value">${vo.content}</div>
+                </div>
             </div>
             <hr>
             <div class="comment-section">
@@ -53,8 +61,8 @@
                 <button class="left-button" onclick="history.back()">목록</button>
                 <div class="right-buttons">
                     <c:if test="${loginMemberVo.id == vo.writerNo}">
-                        <button onclick="location.href='/board/edit?bno=${vo.no}'">수정</button>
-                        <button onclick="location.href='/board/del?bno=${vo.no}'">삭제</button>
+                        <button class="btn-del" onclick="location.href='/board/del?bno=${vo.no}'">삭제</button>
+                        <button class="btn-edit" onclick="location.href='/board/edit?bno=${vo.no}'">수정</button>
                     </c:if>
                 </div>
             </div>

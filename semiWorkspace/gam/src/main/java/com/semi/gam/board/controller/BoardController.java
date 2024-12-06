@@ -1,5 +1,6 @@
 package com.semi.gam.board.controller;
 
+import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.board.service.BoardService;
 import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
@@ -40,7 +41,12 @@ public class BoardController {
         model.addAttribute("noticeVoList", noticeVoList);
 
         MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        AdminVo loginAdminVo = (AdminVo)session.getAttribute("loginAdminVo");
         model.addAttribute("jobCode" , loginMemberVo.getJobCode());
+        model.addAttribute("loginAdminVo" , loginAdminVo);
+
+        System.out.println("loginAdminVo = " + loginAdminVo);
+        System.out.println("loginMemberVo = " + loginMemberVo);
         return "board/home";
     }
 
