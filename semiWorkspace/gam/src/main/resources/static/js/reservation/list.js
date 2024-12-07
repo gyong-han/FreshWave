@@ -13,6 +13,7 @@ function paintPageArea(pvo){
     // 페이지 버튼
     for(let i = pvo.startPage; i <= pvo.endPage; i++){
         const btnTag = document.createElement('button');
+        btnTag.setAttribute('class', 'page-btn');
         btnTag.setAttribute('onclick', `loadReservationList(${i});`);
         btnTag.innerText = i;
         pageArea.appendChild(btnTag);
@@ -83,7 +84,8 @@ function loadReservationList(rno){
                 trTag.appendChild(titleTag);
 
                 const rdateTag = document.createElement('td');
-                rdateTag.innerText = vo.rdate;
+                const date = vo.rdate;
+                rdateTag.innerText = date;
                 trTag.appendChild(rdateTag);
 
                 const nameTag = document.createElement('td');
@@ -91,7 +93,7 @@ function loadReservationList(rno){
                 trTag.appendChild(nameTag);
 
                 const enrollDateTag = document.createElement('td');
-                enrollDateTag.innerText = vo.enrollDate;
+                enrollDateTag.innerText = vo.enrollDate.slice(0,10);
                 trTag.appendChild(enrollDateTag);
 
                 tbodyTag.appendChild(trTag);

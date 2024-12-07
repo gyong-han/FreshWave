@@ -50,6 +50,10 @@ function calendarEvt() {
 
         events : evtVoList,
 
+        // 중요도에 따른 색 지정
+        
+        
+
         // 날짜 클릭했을 때 실행(새 일정 추가)
         dateClick : function(info){
             addEventToCalendar(calendar, info);
@@ -101,6 +105,7 @@ function detailEvent(calendar, info){
             const modalDiv = document.querySelector('#detailModal');
 
             modalDiv.setAttribute("sno" , sno);
+
             // title
             if(document.querySelector('#titleDiv')){
                 const divTag1 = document.querySelector('#titleDiv')
@@ -162,10 +167,24 @@ function detailEvent(calendar, info){
             dbody.appendChild(contentDiv);
 
             // location
+            if(document.querySelector('#locationDiv')){
+                const divTag1 = document.querySelector('#locationDiv')
+                divTag1.remove();
+            }
+            const locationDiv = document.createElement('div');
+            locationDiv.setAttribute('id', 'locationDiv');
+            locationDiv.innerText = data.location;
+            dbody.appendChild(locationDiv);
 
             // priority
-
-            // userAdd
+            if(document.querySelector('#priorityDiv')){
+                const divTag1 = document.querySelector('#priorityDiv')
+                divTag1.remove();
+            }
+            const priorityDiv = document.createElement('div');
+            priorityDiv.setAttribute('id', 'priorityDiv');
+            priorityDiv.innerText = data.priorityName;
+            dbody.appendChild(priorityDiv);
 
             detailModal.show();
         },
@@ -193,6 +212,7 @@ function addEventToCalendar(calendar, info){
     const finishDateTag = document.querySelector('.modal-body input[name=finishDate]');
     const finishTimeTag = document.querySelector('.modal-body input[name=finishTime]');
     const priorityTag = document.querySelector('#priority');
+    const locationTag = document.querySelector('#address');
 
     titleTag.value = '';
     contentTag.value = '';
@@ -201,6 +221,7 @@ function addEventToCalendar(calendar, info){
     finishDateTag.value = '';
     finishTimeTag.value = '';
     priorityTag.value = '';
+    locationTag.value = '';
 
     let addModal = new bootstrap.Modal(document.querySelector('#addModal'));
     addModal.show();
@@ -220,6 +241,7 @@ function addEventToCalendar(calendar, info){
         const finishDate = finishDateTag.value;
         const finishTime = finishTimeTag.value;
         const priority = priorityTag.value;
+        const location = locationTag.value;
 
         // 입력 값 유효성 검사
         // 함수실행
@@ -235,7 +257,7 @@ function addEventToCalendar(calendar, info){
                 startTime,
                 finishDate,
                 finishTime,
-                // location,
+                location,
                 priority,
                 // allDay,
             },
@@ -320,10 +342,12 @@ function delEvent(delBtn){
         success : function(){
             // no로 이벤트 객체 찾기
             const event = calendar.getEventById(sno);
-            const dmodal = document.querySelector('.modal-content');
-            event.remove();
-            detailModal.remove();
-            location.reload();
+
+            $("#detailModal").modal('hide');
+            // const dmodal = document.querySelector('.modal-content');
+            // event.remove();
+            // detailModal.remove();
+            // location.reload();
         },
         error : function(){
             console.log("삭제하기 실행 안됨");
@@ -340,3 +364,15 @@ const faildatemsg3 = document.querySelector('.faildate-msg3');
 // if(startDate > finishDate){
 //     failmsg2.classList.add
 // }
+
+// 주소
+function kakaopost() {
+    new daum.Postcode({
+      oncomplete: function (data) {
+        document.querySelector("#zipcode").value = data.zonecode;
+        document.querySelector("#address").value = data.address
+      }
+    }).open();
+  }
+
+

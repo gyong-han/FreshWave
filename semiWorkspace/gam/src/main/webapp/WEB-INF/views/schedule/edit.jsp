@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script defer src="/js/schedule/write.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script defer src="/js/schedule/edit.js"></script>
 <link rel="stylesheet" href="/css/schedule/write.css">
 <title>FRESH WAVE</title>
 </head>
@@ -22,15 +23,24 @@
                 <input type="text" id="calTitle" name="title" value="${vo.title}">
                 <br>
                 <input type="date" id="calStartDate" name="startDate" value="${vo.startDate}">
-                <div class="faildate-msg1">시작일을 선택해주세요.</div>
                 <input type="time" id="calStartTime" name="startTime" value="${vo.startTime}">
                 <span>-</span>
                 <input type="date" id="calEndDate" name="finishDate" value="${vo.finishDate}">
-                <div class="faildate-msg2">종료일을 선택해주세요.</div>
-                <div class="faildate-msg3">종료일이 시작일보다 빠릅니다. 일정을 다시 선택해주세요.</div>
                 <input type="time" id="calEndTime" name="finishTime" value="${vo.finishTime}">
                 <br>
-                <input type="text" name="location" value="${vo.location}">
+                <table border="1">
+                    <tr>
+                      <td width="200">우편번호</td>
+                      <td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
+                        <input type="button" value="우편번호찾기" onclick="kakaopost();">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>주소</td>
+                      <td><input type="text" name="location" id="address" size="70" value="${vo.location}">
+                      </td>
+                    </tr>
+                  </table>
                 <br>
                 <label>중요도 : </label>
                 <select name="priority">
@@ -39,9 +49,7 @@
                     </c:forEach>
                 </select>
                 <br>
-                <input type="text" name="userAdd" placeholder="사용자 추가">
-                <br>
-                <textarea name="content" id="calContent" value="${vo.content}"></textarea>
+                <textarea name="content" id="calContent">${vo.content}</textarea>
                 <input type="submit" value="작성하기">
             </form>
         </div>

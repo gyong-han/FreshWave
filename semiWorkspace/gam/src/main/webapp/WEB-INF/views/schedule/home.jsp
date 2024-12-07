@@ -10,6 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- address -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- home.js -->
 <script defer src="/js/schedule/home.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -36,20 +38,27 @@
                 <input type="text" id="calTitle" name="title" placeholder="일정 제목을 입력해주세요!">
                 <br>
                 <input type="date" id="calStartDate" name="startDate">
-                <div class="faildate-msg1">시작일을 선택해주세요.</div>
                 <input type="time" id="calStartTime" name="startTime">
                 <span>-</span>
                 <input type="date" id="calEndDate" name="finishDate">
-                <div class="faildate-msg2">종료일을 선택해주세요.</div>
-                <div class="faildate-msg3">종료일이 시작일보다 빠릅니다. 일정을 다시 선택해주세요.</div>
                 <input type="time" id="calEndTime" name="finishTime">
                 <br>
-                <input type="text" name="location" placeholder="주소를 입력해주세요.">
+                <table border="1">
+                    <tr>
+                      <td width="200">우편번호</td>
+                      <td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
+                        <input type="button" value="우편번호찾기" onclick="kakaopost();">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>주소</td>
+                      <td><input type="text" name="location" id="address" size="70">
+                      </td>
+                    </tr>
+                  </table>
                 <br>
                 <label>중요도 : </label>
                 <select name="priority" id="priority"></select>
-                <br>
-                <input type="text" name="userAdd">
                 <br>
                 <textarea name="content" id="calContent" placeholder="내용을 입력해주세요."></textarea>
             </div>

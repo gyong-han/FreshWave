@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FRESH WAVE</title>
+<link rel="stylesheet" href="/css/reservation/write.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
