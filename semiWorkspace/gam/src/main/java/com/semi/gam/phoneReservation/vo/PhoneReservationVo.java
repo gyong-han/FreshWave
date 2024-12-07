@@ -14,4 +14,5 @@ public class PhoneReservationVo {
     private String title;
     private String content;
     private String enrollDate;
+    private String modifyDate;
 }

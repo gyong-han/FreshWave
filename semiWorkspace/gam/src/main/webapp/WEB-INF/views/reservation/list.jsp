@@ -14,6 +14,8 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
+            <div></div>
+            <!-- 검색 -->
             <div class="search-area">
                 <form action="/reservation/list?rno=1" onsubmit="return submitSearchForm();">
                     <select name="searchType">
@@ -21,26 +23,32 @@
                         <option value="writerName">작성자</option>
                     </select>
                     <input type="text" name="searchValue" placeholder="검색어를 입력해주세요.">
-                    <input type="submit" value="검색하기">
+                    <input type="submit" value="">
                 </form>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>게시글 번호</th>
-                        <th>문의 제목</th>
-                        <th>예약 날짜</th>
-                        <th>에약자</th>
-                        <th>등록일</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div></div>
+            <div></div>
+            <div class="list-area">
+                <table class="list-table">
+                    <thead>
+                        <tr>
+                            <th>게시글 번호</th>
+                            <th>문의 제목</th>
+                            <th>예약 날짜</th>
+                            <th>에약자</th>
+                            <th>등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                </tbody>
-            </table>
-            <button onclick="location.href='/reservation/write'">작성하기</button>
-            <div class="page-area"></div>
-        </div>
+                    </tbody>
+                </table>
+                <div id="insert-area">
+                    <button id="write-btn" onclick="location.href='/reservation/write'">작성하기</button>
+                </div>
+                <div class="page-area"></div>
+            </div>
+            </div>
     </main>
 </body>
 </html>

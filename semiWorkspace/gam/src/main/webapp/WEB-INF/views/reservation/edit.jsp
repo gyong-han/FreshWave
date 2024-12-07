@@ -15,11 +15,12 @@
         <div class="content-wrapper">
             <h1>상담 예약 문의</h1>
             <form action="/reservation/edit" method="post">
+                <input type="hidden" name="no" value="${vo.no}">
                 <label>문의 제목</label>
                 <input type="text" name="title" value="${vo.title}">
                 <br>
                 <label>문의 내용</label>
-                <textarea name="content" value="${vo.content}"></textarea>
+                <textarea name="content">${vo.content}</textarea>
                 <br>
                 <label>회사코드</label>
                 <input type="text" name="cpCode" value="${loginMemberVo.cpCode}">
@@ -30,7 +31,7 @@
                 <input type="date" name="rdate" value=${vo.rdate}>
                 <input type="time" name="rtime" value=${vo.rtime}>
                 <br>
-                <input type="submit" value="작성하기">
+                <input type="submit" value="수정하기">
             </form>
         </div>
     </main>

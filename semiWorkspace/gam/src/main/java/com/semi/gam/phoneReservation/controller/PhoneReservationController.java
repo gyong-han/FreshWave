@@ -66,16 +66,18 @@ public class PhoneReservationController {
 
     @PostMapping("edit")
     public String edit(PhoneReservationVo vo, HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        vo.setWriterNo(loginMemberVo.getId());
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
 
         int result = service.edit(vo);
+
+        System.out.println("vo = " + vo);
 
         if(result != 1){
             throw new IllegalStateException("[ERR-PRV-200 고객센터 수정하기 오류 발생]");
         }
 
-        return "redirect:/reservation/detail";
+        return "redirect:/reservation/detail?rno="+vo.getNo();
     }
 
     // 예약문의 삭제하기
