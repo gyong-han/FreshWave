@@ -4,10 +4,6 @@ $.ajax({
         const labels = chartList.map(item => item.priority);
         const cntData = chartList.map(item => parseInt(item.count, 10));
         
-        console.log(labels);
-        console.log(cntData);
-        
-        
         const ctx = document.getElementById('myPieChart').getContext('2d');
 
         // 데이터 설정

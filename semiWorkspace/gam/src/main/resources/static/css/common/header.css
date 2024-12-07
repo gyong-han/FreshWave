@@ -126,3 +126,7 @@ aside{
     font-family: "Pretendard-SemiBold";
     color: #1D64F2;
 }
+
+#message-icon{
+    cursor: pointer;
+}
