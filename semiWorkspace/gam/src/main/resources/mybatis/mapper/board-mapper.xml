@@ -5,7 +5,7 @@
     <insert id="insertBoardAttachment">
         INSERT ALL
         <foreach collection="list" item="x">
-            INTO BOARD_ATTACHMENT (NO,REF_BOARD_NO,CHANGE_NAME,STATUS ,ENROLL_DATE) VALUES((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL, #{x} ,'Y' , SYSDATE)
+            INTO BOARD_ATTACHMENT (NO,REF_BOARD_NO,CHANGE_NAME,STATUS ,ENROLL_DATE ) VALUES((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL, #{x} ,'Y' , SYSDATE )
         </foreach>
         SELECT 1 FROM DUAL
     </insert>

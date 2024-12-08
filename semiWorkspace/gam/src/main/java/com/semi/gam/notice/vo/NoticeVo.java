@@ -18,4 +18,7 @@ public class NoticeVo {
     private String name;
 
     private String deptName;
+
+    private String originName;
+    private String changeName;
 }

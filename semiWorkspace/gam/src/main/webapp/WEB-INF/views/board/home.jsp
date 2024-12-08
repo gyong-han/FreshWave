@@ -18,7 +18,7 @@
             <div class="main-notice">
                 <div class="title-area">
                     <div class="title-icon">
-                        <img src="/img/icon/carbon_book.svg" alt="icon">
+                        <img src="/img/icon/carbon_book.svg" alt="icon" style="background-color: #1D64F2; border-radius: 5px;">
                         <h2>공지사항</h2>
                     </div>
                     <div class="action-icons">
@@ -33,11 +33,15 @@
                         <div class="notice-row">
                             <div class="front-title-hit">
                                 <strong>${noticeVo.title}</strong><br>
-                                <img src="/img/icon/mdi-light_eye.svg" alt=""> ${noticeVo.hit}<br>
                             </div>
-                            <div class="back-date-dept">
-                                ${noticeVo.enrollDate}
-                                ${noticeVo.deptName}
+                            <div class="info-row">
+                                <div class="left-info">
+                                    <img src="/img/icon/mdi-light_eye.svg" alt=""> ${noticeVo.hit}
+                                </div>
+                                <div class="right-info">
+                                    ${noticeVo.enrollDate}
+                                    ${noticeVo.deptName}
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
@@ -48,7 +52,7 @@
             <div class="main-board">
                 <div class="title-area">
                     <div class="title-icon">
-                        <img src="/img/icon/carbon_book.svg" alt="icon">
+                        <img src="/img/icon/carbon_book.svg" alt="icon" style="background-color: #BFF205; border-radius: 5px;">
                         <h2>게시판</h2>
                     </div>
                     <div class="action-icons">
@@ -61,11 +65,15 @@
                         <div class="board-row">
                             <div class="front-title-hit">
                                 <strong>${boardVo.title}</strong><br>
-                                <img src="/img/icon/mdi-light_eye.svg" alt=""> ${boardVo.hit}<br>
                             </div>
-                            <div class="back-date-dept">
-                                ${boardVo.enrollDate}
-                                ${boardVo.nick}
+                            <div class="info-row">
+                                <div class="left-info">
+                                    <img src="/img/icon/mdi-light_eye.svg" alt=""> ${boardVo.hit}<br>
+                                </div>
+                                <div class="right-info">
+                                    ${boardVo.enrollDate}
+                                    ${boardVo.nick}
+                                </div>
                             </div>
                         </div>
                     </c:forEach>

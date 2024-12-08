@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #F2F2F2;
 }
 
 .main-container {
@@ -57,6 +57,10 @@ body {
     flex: 1;
     color: #555;
     text-align: left;
+}
+
+.detail-enrollDate{
+    font-size: 0.85rem;
 }
 
 .detail-header {
@@ -181,7 +185,8 @@ body {
 
 #comment-write-area{
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: 100%;
     border: 1px solid black;
     border-radius: 5px;
@@ -203,11 +208,12 @@ body {
     box-shadow: none; 
 }
 
-#comment-write-area button {
+#comment-write-area .btn-submit {
     margin-left: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-self: flex-end;
 }
 
 .comment-item {
@@ -216,13 +222,34 @@ body {
     align-items: center;
 }
 
-.comment-nick {
+.comment-author {
     font-weight: bold;
     float: 1;
 }
 
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 5px;
+}
+
+.comment-row {
+    display: flex;
+    justify-content: space-between; /* 삭제 버튼을 우측으로 배치 */
+    align-items: center;
+}
+
 .delete-btn {
-    flex-shrink: 0; /* 삭제 버튼 크기 고정 */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2); /* 삭제 버튼 크기 확대 */
 }
 
 

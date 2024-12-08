@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #F2F2F2;
 }
 
 .main-container {
@@ -59,6 +59,10 @@ body {
     flex: 1;
     color: #555;
     text-align: left;
+}
+
+.detail-enrollDate{
+    font-size: 0.85rem;
 }
 
 .detail-value.urgent {

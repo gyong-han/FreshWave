@@ -184,4 +184,12 @@ public interface BoardMapper {
             WHERE NO = #{no}
             """)
     int commentDel(CommentVo vo);
+
+    @Update("""
+            UPDATE BOARD_ATTACHMENT
+            SET CHANGE_NAME = #{changeName},
+            ORIGIN_NAME = #{originName}
+            WHERE REF_BOARD_NO = #{vo.no}
+            """)
+    int editAttachment(BoardVo vo, String originName, String changeName);
 }

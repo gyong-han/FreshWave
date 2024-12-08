@@ -2,12 +2,12 @@ package com.semi.gam.board.controller;
 
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.board.service.BoardService;
-import com.semi.gam.board.vo.AttachmentVo;
 import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.board.vo.CommentVo;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.FileUploader;
+import com.semi.gam.util.date.ChangeDate;
 import com.semi.gam.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +28,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService service;
+    private final ChangeDate date;
 
     @Value("#{pathInfo.getBoardAttachmentPath()}")
     private String path;
@@ -61,7 +62,7 @@ public class BoardController {
 
     //게시글 작성
     @PostMapping("write")
-    public void insert(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
+    public String insert(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
         System.out.println("loginMemberVo = " + loginMemberVo);
@@ -85,6 +86,7 @@ public class BoardController {
         }else {
             System.out.println("게시글 작성 실패 ...");
         }
+        return "redirect:/board/list";
     }
     // 게시글 목록조회
     @GetMapping("list")
@@ -108,6 +110,13 @@ public class BoardController {
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchValue", searchValue);
 
+        // 날짜 형식 변경
+        for(BoardVo vo : boardVoList){
+            if(vo.getEnrollDate() != null){
+                vo.setEnrollDate(date.changeDate2(vo.getEnrollDate()));
+            }
+        }
+
         System.out.println("boardVoList = " + boardVoList);
         System.out.println("listCount = " + listCount);
 
@@ -119,11 +128,15 @@ public class BoardController {
 
     // 게시글 상세조회 (제목 , 닉네임, 등록일, 조회수 , 첨부파일 , 내용 , 댓글내용 , 댓글닉네임, 댓글등록일)
     @GetMapping("detail")
-    public String detail(String bno, Model model){
+    public String detail(String bno, Model model , HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         BoardVo vo = service.getBoardDetail(bno);
-        List<AttachmentVo> attachmentVoList  = service.getAttachmentVoList(bno);
+//        List<AttachmentVo> attachmentVoList  = service.getAttachmentVoList(bno);
         model.addAttribute("vo" , vo);
-        model.addAttribute("attachmentVoList" , attachmentVoList);
+//        model.addAttribute("attachmentVoList" , attachmentVoList);
         return "board/detail";
     }
 
@@ -131,34 +144,33 @@ public class BoardController {
     @GetMapping("edit")
     public String edit(HttpSession session , Model model , @RequestParam String bno){
         BoardVo vo = service.getBoardDetail(bno);
-        List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
+//        List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
         System.out.println("bno = " + bno);
         System.out.println("vo1 = " + vo);
         if(session.getAttribute("loginMemberVo") == null){
             return "redirect:/member/login";
         }
         model.addAttribute("vo", vo);
-        model.addAttribute("attachmentVoList" , attachmentVoList);
+//        model.addAttribute("attachmentVoList" , attachmentVoList);
         return "board/edit";
     }
 
     // 게시글 수정(처리)
     @PostMapping("edit")
-    public String edit(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
+    public String edit(BoardVo vo , MultipartFile f, HttpSession session , Model model) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         System.out.println("loginMemberVo = " + loginMemberVo);
         vo.setWriterNo(loginMemberVo.getId());
-        List<String> changeNameList = new ArrayList<>();
 
-        for(MultipartFile f :fileList){
-            if(f.isEmpty()){break;}
-            String changeName = FileUploader.save(f,path);
-            changeNameList.add(changeName);
+        String changeName = "";
+        String originName = "";
+        if (f != null){
+            originName = f.getOriginalFilename();
+            changeName = FileUploader.save(f, path);
         }
-        System.out.println("changeNameList = " + changeNameList);
-        System.out.println("vo2 = " + vo);
-        service.edit( vo ,changeNameList);
-        session.setAttribute("alertMsg" , "게시글 수정 성공");
+        int result = service.edit( vo , originName , changeName);
+        session.setAttribute("alertNo" , result);
+        detail(vo.getNo(),model,session);
        return "redirect:/board/list";
     }
 
@@ -206,5 +218,6 @@ public class BoardController {
         }
         return "good";
     }
+
 }
 
