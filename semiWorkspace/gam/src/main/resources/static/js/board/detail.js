@@ -51,14 +51,19 @@ function paintCommentList(voList){
     for(const vo of voList){
         const commmentDiv = document.createElement("div");
         commmentDiv.classList.add("comment-item");
-
+        
+        const brDiv = document.createElement("br");
+        
         const div01 = document.createElement("div");
+        div01.classList.add("comment-author");
         div01.innerText = vo.nick;
 
         const div02 = document.createElement("div");
+        div02.classList.add("comment-content");
         div02.innerText = vo.content;
 
         const div03 = document.createElement("div");
+        div03.classList.add("comment-date");
         div03.innerText = vo.enrollDate;
 
         const deleteButton = document.createElement("img");
@@ -71,14 +76,17 @@ function paintCommentList(voList){
         deleteButton.classList.add("delete-btn");
         deleteButton.onclick = function(){
             deleteComment(vo.no);
-            console.log(vo.no);
-            
         };
 
+        const contentRow = document.createElement("div");
+        contentRow.classList.add("comment-row");
+        contentRow.appendChild(div02);
+        contentRow.appendChild(deleteButton);
+
+        commentListArea.appendChild(brDiv);
         commentListArea.appendChild(div01);
-        commentListArea.appendChild(div02);
+        commentListArea.appendChild(contentRow);
         commentListArea.appendChild(div03);
-        commentListArea.appendChild(deleteButton);
 
         commentListArea.appendChild(commmentDiv);
     }
@@ -108,4 +116,79 @@ function deleteComment(no){
 }
 
 loadComment();
+
+function editSuccess() {
+    Swal.fire({
+        title: "수정완료!",
+        icon: "success",
+        confirmButtonColor: "#1D64F2",
+        confirmButtonText: "확인"
+    });
+  }
+  
+  function editFail() {
+    Swal.fire({
+        title: "수정실패..",
+        icon: "error",
+        confirmButtonColor: "#1D64F2",
+        confirmButtonText: "확인"
+    })
+  }
+
+function imgOpen(changeName){
+    Swal.fire({
+      imageUrl: `/img/board/attachment/${changeName}`,
+      imageHeight: 700,
+      imageWidth : 700,
+      confirmButtonText: "닫기"
+    });
+  }
+
+  function boardDelete(bno){
+    Swal.fire({
+        title: "삭제하시겠습니까?", //alert창 문구
+        icon: "question", // 그림(error,success,warning,info,question)
+        showCancelButton: true, //취소버튼 여부
+        confirmButtonColor: "#1D64F2",
+        cancelButtonColor: "#121212",
+        confirmButtonText: "삭제", //취소 버튼 문구
+        cancelButtonText : "취소", //확인 버튼 문구
+        reverseButtons: true //취소,확인버튼 좌우 반전
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url : "/board/del",
+            data :{
+              bno
+            },
+            success : function(x){
+              if(x == 1){
+                Swal.fire({
+                    title: "삭제 실패...",
+                    icon: "error",
+                    confirmButtonText: "확인"
+                })
+                .then( () => {
+                    location.href = `/board/detail?bno=${bno}`;
+                } );
+            }else{
+                Swal.fire({
+                    title: "삭제 완료!",
+                    icon: "success",
+                    confirmButtonText: "확인"
+                })
+                .then( () => {
+                      location.href = "/board/list";
+                } );
+      
+              }
+            },
+            error : function(x){
+            }
+          })
+        }
+      })
+      ;
+  }
 

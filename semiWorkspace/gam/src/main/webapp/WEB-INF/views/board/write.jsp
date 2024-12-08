@@ -29,7 +29,7 @@
                 <div class="preview-area">
                 </div>
                 <div class="bottom-button-area">
-                    <button type="button" onclick="location.href='/board/list'">취소</button>
+                    <button type="button" onclick="goback();">취소</button>
                     <input type="submit" value="저장" onclick="submitContents(this)">
                 </div>
             </form>
@@ -56,6 +56,14 @@
                 editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
                 const content = document.getElementById("smarteditor").value;
                 document.getElementById("form").submit();
+            }
+
+            function goback() {
+                if (document.referrer) {
+                    history.back(); // 이전 페이지로 이동
+                } else {
+                    window.location.href = "/board/home"; // 기본 페이지로 이동
+                }
             }
 
         </script>

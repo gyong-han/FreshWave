@@ -21,13 +21,10 @@ public class NoticeService {
 
     private final NoticeMapper mapper;
 
-    public int write(NoticeVo vo , List<String> changeNameList) {
+    public int write(NoticeVo vo , String changeName, String originName) {
 
         int result1 = mapper.write(vo);
-        int result2 = 1;
-        if(changeNameList.size() > 0){
-            result2 = mapper.insertNoticeAttachment(changeNameList);
-        }
+        int result2 = mapper.insertNoticeAttachment(changeName , originName);
         return result1 * result2;
     }
 
@@ -49,16 +46,21 @@ public class NoticeService {
         return mapper.getNoticeDetail(bno);
     }
 
-    public int edit(NoticeVo vo) {
-        return mapper.edit(vo);
+    public int edit(NoticeVo vo ,String originName, String changeName) {
+        int result1 = mapper.edit(vo);
+        int result2 = 1;
+        if(!originName.isEmpty() && !changeName.isEmpty()){
+            result2 = mapper.editAttachment(vo,originName,changeName);
+        }
+        return result1 * result2;
     }
 
     public NoticeVo getNoticeByNo(String no) {
         return mapper.getNoticeByNo(no);
     }
 
-    public int del(NoticeVo vo) {
-        return mapper.del(vo);
+    public int del(String bno) {
+        return mapper.del(bno);
     }
 
     public List<AttachmentVo> getAttachmentVoList(String bno) {

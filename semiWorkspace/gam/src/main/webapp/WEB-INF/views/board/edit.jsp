@@ -8,7 +8,9 @@
 <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <title>게시글 수정</title>
 <link rel="stylesheet" href="/css/board/write.css">
-<script defer src="/js/board/write.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script defer src="/js/board/edit.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -23,15 +25,11 @@
                 <h2>게시판 내용</h2>
                 <textarea id="smarteditor" rows="20" cols="100" style="width: 100%;" name="content">${vo.content}</textarea>
                 <br>
-                <label for="fileInput">
-                    <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
-                </label>
-                <div class="board-img-area">
-                    <c:forEach items = "${attachmentVoList}" var="attachVo">
-                        <img src="/img/board/attachment/${attachVo.changeName}" alt="" width="80px" height="80px">
-                    </c:forEach>
-                </div>
-                <input type="file" id="fileInput" name="f" multiple>
+                    <label for="f" class="custom-file-button" id="file-label"> 
+                        <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
+                    </label>
+                    <input type="file" name="ff" id="f">
+                    <span id="fileName">${vo.originName}</span>
                 <div class="preview-area">
                 </div>
                 <div class="bottom-button-area">
@@ -64,7 +62,7 @@
                 document.getElementById("form").submit();
             }
 
-            function goBack() {
+            function goback() {
                 if (document.referrer) {
                     history.back(); // 이전 페이지로 이동
                 } else {

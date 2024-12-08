@@ -58,21 +58,20 @@ public class BoardService {
         return mapper.getNoticeHomeList();
     }
 
-    public void edit(BoardVo vo, List<String> changeNameList) {
+    public int edit(BoardVo vo, String originName , String changeName) {
         int result1 =  mapper.getBoardEdit(vo);
         if(result1 != 1){
             throw new IllegalStateException("ERROR > BOARD > UPDATE > result1");
         }
-        int result2= 1;
-        if(changeNameList.isEmpty()){
-            result2 = mapper.updateBoardAttachment(changeNameList , vo.getNo());
+        int result2 = 1;
+        if(!originName.isEmpty() && !changeName.isEmpty()){
+            result2 = mapper.editAttachment(vo, originName , changeName);
         }
-        if(result2 < 1){
-            throw new IllegalStateException("ERROR > BOARD > UPDATE > result2");
-        }
+        return result1 * result2;
     }
 
     public int del(String bno) {
+        int result = mapper.increseHit(bno);
         return mapper.del(bno);
     }
 
@@ -91,4 +90,6 @@ public class BoardService {
     public int commentDel(CommentVo vo) {
         return mapper.commentDel(vo);
     }
+
+
 }

@@ -14,28 +14,27 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
-        <div class="area-container">
+        <div class="content-wrapper">
             <div class="search-area">
                 <form action="/board/list" onsubmit="return submitSearchForm();">
-                    <select name="searchType">
+                    <select name="searchType" id="search-type">
                         <option value="title">제목</option>
                         <option value="nick">작성자</option>
                     </select>
-                    <input type="text" name="searchValue" placeholder="검색할 제목" value="${searchValue}">
-                        <button type="submit" id="searchButton">
-                            <img src="/img/icon/search.svg" alt="검색버튼">
-                        </button>
+                    <input type="text" name="searchValue" placeholder="검색어를 입력하세요" value="${searchValue}" id="search-value">
+                    <input type="submit" value=""><br>
                 </form>
             </div>
-            <div class="table-area">
-                <table>
+            <!--List-->
+            <div class="list-area">
+                <table class="list-table">
                     <thead>
                         <tr>
                             <th>글번호</th>
                             <th>제목</th>
-                            <th>작성자 ▼</th>
+                            <th>작성자</th>
                             <th>등록일</th>
-                            <th>조회수 ▼</th>
+                            <th>조회수</th>
                         </tr>
                     </thead>
                     <tbody>

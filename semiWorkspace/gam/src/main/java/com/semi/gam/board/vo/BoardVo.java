@@ -22,4 +22,5 @@ public class BoardVo {
     private String comModifyDate;
 
     private String originName;
+    private String changeName;
 }

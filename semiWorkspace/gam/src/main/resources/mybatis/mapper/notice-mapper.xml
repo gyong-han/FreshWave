@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.semi.gam.notice.mapper.NoticeMapper">
-    <insert id="insertNoticeAttachment">
-        INSERT ALL
-        <foreach collection="list" item="x">
-            INTO NOTICE_ATTACHMENT (NO,REF_NOTI_NO,CHANGE_NAME,STATUS ,ENROLL_DATE) VALUES((SELECT GET_NOTICE_ATTACHMENT_NO FROM DUAL), SEQ_NOTICE.CURRVAL, #{x} ,'Y' , SYSDATE)
-        </foreach>
-        SELECT 1 FROM DUAL
-    </insert>
+<!--    <insert id="insertNoticeAttachment">-->
+<!--        INSERT ALL-->
+<!--        <foreach collection="list" item="x">-->
+<!--            INTO NOTICE_ATTACHMENT (NO,REF_NOTI_NO,CHANGE_NAME,STATUS ,ENROLL_DATE) VALUES((SELECT GET_NOTICE_ATTACHMENT_NO FROM DUAL), SEQ_NOTICE.CURRVAL, #{x} ,'Y' , SYSDATE)-->
+<!--        </foreach>-->
+<!--        SELECT 1 FROM DUAL-->
+<!--    </insert>-->
 
 <!--    <select id="getNoticeList" parameterType="map" resultType="NoticeVo">-->
 <!--        SELECT-->

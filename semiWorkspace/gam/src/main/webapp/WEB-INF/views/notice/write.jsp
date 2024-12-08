@@ -37,7 +37,7 @@
                 <div class="preview-area">
                 </div>
                 <div class="bottom-button-area">
-                    <button type="button" onclick="location.href='/board/home'">취소</button>
+                    <button type="button" onclick="goback();">취소</button>
                     <input type="submit" value="저장" onclick="submitContents(this)">
                 </div>
             </form>
@@ -73,6 +73,14 @@
                         hiddenInput.disabled = false; // hidden 필드 활성화
                     }
                 }
+
+                function goback() {
+                if (document.referrer) {
+                    history.back(); // 이전 페이지로 이동
+                } else {
+                    window.location.href = "/board/home"; // 기본 페이지로 이동
+                }
+            }
         </script>
 
 
