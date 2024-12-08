@@ -4,8 +4,9 @@ function paintPageArea(pvo){
 
     // 이전버튼
     if(pvo.startPage != 1){
-        const preTag = document.createElement('a');
-        preTag.setAttribute('href', `/reservation/list?rno=${pvo.startPage-1}`);
+        const preTag = document.createElement('button');
+        preTag.setAttribute('class', 'page-btn');
+        preTag.setAttribute('onclick', `return loadReservationList(${pvo.startPage-1});`);
         preTag.innerText = '<';
         pageArea.appendChild(preTag);
     }
@@ -21,15 +22,16 @@ function paintPageArea(pvo){
 
     // 다음버튼
     if(pvo.endPage != pvo.maxPage){
-        const nextTag = document.createElement('a');
-        nextTag.setAttribute('href', `/reservation/list?rno=${pvo.endPage+1}`)
+        const nextTag = document.createElement('button');
+        nextTag.setAttribute('class', 'page-btn');
+        nextTag.setAttribute('onclick', `return loadReservationList(${pvo.endPage+1});`)
         nextTag.innerText = '>';
         pageArea.appendChild(nextTag);
     }
 }
 
 function loadReservationList(rno){
-    const tbodyTag = document.querySelector('.content-wrapper table tbody');
+    const tbodyTag = document.querySelector('.list-table tbody');
     
     //searchType, searchValue 준비
     const searchType = document.querySelector('select[name=searchType]').value;
@@ -66,10 +68,7 @@ function loadReservationList(rno){
             const pvo = x.p;
 
             paintPageArea(pvo);
-
-            console.log(reservationVoList);
             
-
             tbodyTag.innerHTML = '';
 
             for(const vo of reservationVoList){

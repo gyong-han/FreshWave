@@ -1,4 +1,6 @@
 body{
+    font-family: 'Pretendard';
+    font-weight: 400;
     background-color: #F2F2F2;
 }
 /* 메인 컨테이너: 사이드바와 콘텐츠를 가로로 배치 */

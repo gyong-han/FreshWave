@@ -1,7 +1,130 @@
+body{
+    background-color: #f2f2f2;
+}
+
 .main-container{
     display: flex;
+    position: relative;
 }
 
 .content-wrapper{
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px 1fr;
 }
+
+.content-wrapper {
+    display: grid;
+    flex-direction: row; /* 공지사항과 게시판 세로 배치 */
+    flex-grow: 1; /* 사이드바 제외 나머지 공간 사용 */
+    padding: 20px;
+    gap: 10px;
+    grid-template-columns: 1fr 8fr 1fr;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-left: 20px;
+}
+
+#content-area{
+    display: grid;
+    grid-column: 2;
+    border: 1.5px solid #121212;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+#content-area h1{
+    display: grid;
+    grid-row: 1;
+    margin-left: 20px;
+}
+
+.write-form {
+    /* display: grid;
+    grid-column: 2; */
+    gap: 20px;
+}
+
+input[name=title]{
+    border: none;
+    background-color: white;
+    width: 1000px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+input{
+    border: none;
+    background-color: white;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+textarea[name=content]{
+    height: 100px;
+    width: 1000px;
+    border : none;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#title-area{
+    margin-left: 20px;
+}
+
+#text-area{
+    margin-left: 20px;
+}
+
+#code-area{
+    margin-left: 20px;
+}
+
+#phone-area{
+    margin-left: 20px;
+}
+
+#date-area{
+    margin-left: 20px;
+}
+
+.btn-area{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+#cancel{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+#enroll{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor:pointer;
+    margin-top: 20px;
+}
+
+.write-form div{
+    height: 85px;
+}
+  
+.write-form div input{
+    margin-top: 5px;
+}
+
+
