@@ -24,44 +24,36 @@
                             부서
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <select name="deptCode"  class="input-contain" required>
                                 <c:forEach items="${deptVoList}" var="deptVo">
                                     <option value="${deptVo.deptCode}">${deptVo.deptName}</option>
                                 </c:forEach>
                             </select>
                         </label>
-                        <br><br>
 
                         <label>
                             이름
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <input type="text" class="input-contain" name="name" placeholder="이름을 입력하세요" required>
                         </label>
-                        <br><br>
 
                         <label>
                             전화번호
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <input type="tel" class="input-contain" name="phone" placeholder="01012345678" required>
                         </label>
-                        <br><br>
 
                         <label>
-                            닉네임<br>
+                            닉네임
                             <br>
                             <input type="text" class="input-contain" name="nick" placeholder="닉네임을 입력하세요">
                         </label>
-                        <br><br>
 
                         <!-- 주소 -->
                         <label>
                             주소
-                            <br>
                             <br>
                             <input type="text" class="input-address" id="sample4_roadAddress" name="roadAddress" placeholder="주소" size="30">
                             <input type="button" class="input-enroll" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
@@ -83,32 +75,28 @@
                             직급
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <select name="jobCode"  class="input-contain" required>
                                 <c:forEach items="${jobVoList}" var="jobVo">
                                     <option value="${jobVo.jobCode}">${jobVo.jobName}</option>
                                 </c:forEach>
                             </select>
                         </label>
-                        <br><br>
 
                         <label>
                             주민등록번호
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <input type="text" class="input-inNum" id="idNumFront" placeholder="앞자리" maxlength="6" required> -
                             <input type="password" class="input-inNum" id="idNumBack" placeholder="뒷자리" maxlength="7" required>
                             <input type="hidden" name="idNum" id="idNum"> <!-- 합친 주민등록번호를 저장 -->
                         </label>
-                        <br><br>
 
                         <div>
                             <label for="new-password">
                                 비밀번호
-                                <br><br>
                                 <label class="point">*</label>
                             </label>
+                            <br>
                                 <div class="password-wrapper">
                                     <input type="password" class="input-contain" name="pwd" id="new-password" placeholder="비밀번호를 입력해주세요">
                                     <button type="button" class="toggle-btn" onclick="togglePassword();">보기</button>
@@ -119,13 +107,12 @@
                             이메일
                             <label class="point">*</label>
                             <br>
-                            <br>
                             <input type="email" class="input-contain" name="email" placeholder="이메일을 입력하세요" required>
                         </label>
-                        <br><br>
 
                         <label id="label-gender">
-                            성별<br><br>
+                            성별
+                            <br>
                             여 <input type="radio" name="gender" value="F" required>
                             남 <input type="radio" name="gender" value="M" required>
                         </label>

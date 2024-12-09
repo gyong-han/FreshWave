@@ -72,12 +72,20 @@
                    </div>
                </div>
             </div>
-                
+
+
+            <div class="btn-area">
+                <div id="list-btn">
+                    <button id="list" onclick="location.href='/admin/list?pno=1'">목록</button>
+                </div>
+                <div id="edit-delete-btn">
+                            <button id="delete" onclick="location.href='/admin/del?no=${vo.empNo}'">삭제</button>
+                            <button id="edit" onclick="location.href='/admin/edit?no=${vo.empNo}'">수정</button>
+                </div>
+            </div>
 
             </div>
         </main>
-        <button id="list" onclick="location.href='/admin/list?pno=1'">목록</button>
-        <button id="del" onclick="location.href='/admin/del?no=${vo.empNo}'">삭제</button>
-        <button id="edit" onclick="location.href='/admin/edit?no=${vo.empNo}'">수정</button>
+
 </body>
 </html>

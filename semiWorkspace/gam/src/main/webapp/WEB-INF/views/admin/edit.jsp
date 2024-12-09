@@ -98,8 +98,8 @@
                    </div>
                 </div>
                 </div>
-                <input type="button" id="del" value="목록">
                 <input type="submit" id="edit" value="저장">
+                <input type="button" id="del" value="목록">
         </form>
         </main>
 
