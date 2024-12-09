@@ -44,28 +44,30 @@ public interface NoticeMapper {
 
     @Select("""
             SELECT DISTINCT
-                N.NO ,
-                N.WRITER_NO ,
-                N.TITLE ,
-                N.CONTENT ,
-                N.URGENT_YN ,
-                N.HIT ,
-                N.ENROLL_DATE ,
-                N.MODIFY_DATE ,
-                N.DEL_YN ,
-                M.NAME,
-                D.DEPT_NAME
-            FROM NOTICE N
-            JOIN EMPLOYEE E
-            ON N.WRITER_NO = E.EMP_NO
-            JOIN MEMBER M
-            ON E.EMP_NO = M.ID
-            JOIN DEPT D
-            ON E.DEPT_CODE = D.DEPT_CODE
-            LEFT JOIN NOTICE_ATTACHMENT A
-            ON N.NO = A.REF_NOTI_NO
-            WHERE N.NO = #{bno}
-            AND N.DEL_YN = 'N'
+                            N.NO ,
+                            N.WRITER_NO ,
+                            N.TITLE ,
+                            N.CONTENT ,
+                            N.URGENT_YN ,
+                            N.HIT ,
+                            N.ENROLL_DATE ,
+                            N.MODIFY_DATE ,
+                            N.DEL_YN ,
+                            M.NAME,
+                            D.DEPT_NAME,
+                            NA.ORIGIN_NAME,
+                            NA.CHANGE_NAME
+                        FROM NOTICE N
+                        JOIN EMPLOYEE E ON N.WRITER_NO = E.EMP_NO
+                        JOIN NOTICE_ATTACHMENT NA ON NA.REF_NOTI_NO = N.NO
+                        JOIN MEMBER M
+                        ON E.EMP_NO = M.ID
+                        JOIN DEPT D
+                        ON E.DEPT_CODE = D.DEPT_CODE
+                        LEFT JOIN NOTICE_ATTACHMENT A
+                        ON N.NO = A.REF_NOTI_NO
+                        WHERE N.NO = #{bno}
+                        AND N.DEL_YN = 'N'
             """)
     NoticeVo getNoticeDetail(String bno);
 

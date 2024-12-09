@@ -113,11 +113,12 @@ public class NoticeController {
         NoticeVo vo = service.getNoticeDetail(bno);
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         System.out.println("loginMemberVo.getId() = " + loginMemberVo.getId());
-        System.out.println("vo.getWriterNo() = " + vo.getWriterNo());
         List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
         model.addAttribute("vo", vo);
         model.addAttribute("attachmentVoList" , attachmentVoList);
         model.addAttribute("loginMemberVo" , loginMemberVo);
+        System.out.println("vo.getOriginName() = " + vo.getOriginName());
+        System.out.println("vo.getChangeName() = " + vo.getChangeName());
         return "notice/detail";
     }
 
@@ -134,21 +135,29 @@ public class NoticeController {
 
     // 공지사항 수정 처리
     @PostMapping("edit")
-    public String edit(NoticeVo vo , HttpSession session , Model model, MultipartFile f) throws IOException {
+    public String edit(NoticeVo vo ,  HttpSession session , @RequestParam(name = "urgentYn" , defaultValue = "N") String urgentYn, Model model, MultipartFile f) throws IOException {
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
+        vo.setUrgentYn(urgentYn);
 
         String changeName = "";
-        String  originName = "";
+        String originName = "";
         if(f != null){
             originName = f.getOriginalFilename();
             changeName = FileUploader.save(f,path);
         }
         int result = service.edit(vo ,originName , changeName);
         session.setAttribute("alertNo",result);
-        detail(vo.getNo(),model,session);
+        System.out.println("vo.getUrgentYn() = " + vo.getUrgentYn());
+        String bno = vo.getNo();
+        if (bno == null || bno.isEmpty()) {
+            throw new IllegalArgumentException("게시글 번호(bno)가 유효하지 않습니다."); // 예외 처리
+        }
 
-        return "redirect:/notice/list";
+        session.setAttribute("changeName" , changeName);
+        session.setAttribute("originName" , originName);
+
+        return "redirect:/notice/detail?bno=" +bno;
     }
 
     // 공지사항 삭제

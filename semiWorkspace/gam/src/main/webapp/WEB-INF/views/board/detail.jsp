@@ -81,7 +81,7 @@
                 <div id="comment-list-area" boardNo = "${vo.no}"></div>
             </div>
             <div class="button-container">
-                <button class="left-button" onclick="history.back()">목록</button>
+                <button class="left-button" onclick="location.href='/board/list'">목록</button>
                 <div class="right-buttons">
                     <c:if test="${loginMemberVo.id == vo.writerNo}">
                         <button class="btn-del" onclick="boardDelete(`${vo.no}`)" id="delete">삭제</button>

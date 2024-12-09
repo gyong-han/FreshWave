@@ -26,23 +26,13 @@ public class BoardService {
         return mapper.getBoardList(pvo , searchType, searchValue);
     }
 
-    public int write(BoardVo vo , List<String> changeNameList) {
-
-        int result1 =  mapper.write(vo);
-        int result2 = 1;
-        if(changeNameList.size() > 0 ){
-            result2 = mapper.insertBoardAttachment(changeNameList);
-        }
-        return result1 * result2;
-    }
-
     public BoardVo getBoardDetail(String bno) {
         int result = mapper.increseHit(bno);
-        if(result != 1){
-            String errMsg = "BOARD > SERVICE > 상세조회 > 조회수 에러";
-            log.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
+//        if(result != 1){
+//            String errMsg = "BOARD > SERVICE > 상세조회 > 조회수 에러";
+//            log.error(errMsg);
+//            throw new IllegalStateException(errMsg);
+//        }
         return mapper.getBoardDetail(bno);
     }
 
@@ -92,4 +82,10 @@ public class BoardService {
     }
 
 
+    public int write(BoardVo vo, String changeName, String originName) {
+
+        int result1 = mapper.write(vo);
+        int result2 = mapper.insertBoardAttachment(changeName , originName);
+        return result1 * result2;
+    }
 }

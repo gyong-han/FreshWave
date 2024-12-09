@@ -73,12 +73,12 @@
                         <!-- <c:forEach items = "${attachmentVoList}" var="attachVo">
                             <img src="/img/notice/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" height="80px">
                         </c:forEach> -->
-                        <a onclick="imgOpen(`${vo.changeName}`);">&nbsp${vo.originName}</a>
+                        <a onclick="imgOpen(`${vo.changeName}`);">&nbsp${vo.originName}에이태그</a>
                     </div>
                 </div>
             </div>
                 <div class="button-container">
-                <button class="left-button" onclick="history.back()">목록</button>
+                <button class="left-button" onclick="location.href='/notice/list'">목록</button>
                 <div class="right-buttons">
                     <c:if test="${loginMemberVo.id == vo.writerNo}">
                         <button class="btn-del" onclick="noticeDelete(`${vo.no}`)" id="delete">삭제</button>

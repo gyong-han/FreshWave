@@ -66,13 +66,13 @@
                 }
 
                 function goback() {
-                if (document.referrer) {
-                    history.back(); // 이전 페이지로 이동
-                } else {
-                    window.location.href = "/notice/detail?bno=${vo.no}"; // 기본 페이지로 이동
+                    if (document.referrer) {
+                        history.back(); // 이전 페이지로 이동
+                    } else {
+                        window.location.href = "/notice/detail?bno=${vo.no}"; // 기본 페이지로 이동
+                    }
                 }
-            }
-
+            
             </script>
 
 

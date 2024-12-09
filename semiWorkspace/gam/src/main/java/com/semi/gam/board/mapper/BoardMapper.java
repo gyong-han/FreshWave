@@ -49,6 +49,8 @@ public interface BoardMapper {
                 ,B.HIT
                 ,B.DEL_YN
                 ,M.NICK
+                ,A.ORIGIN_NAME
+                ,A.CHANGE_NAME
             FROM BOARD B
             JOIN EMPLOYEE E
             ON B.WRITER_NO = E.EMP_NO
@@ -109,7 +111,7 @@ public interface BoardMapper {
             """)
     List<NoticeVo> getNoticeHomeList();
 
-    int insertBoardAttachment(List<String> changeNameList);
+//    int insertBoardAttachment(List<String> changeNameList);
 
     @Update("""
                UPDATE BOARD
@@ -124,6 +126,7 @@ public interface BoardMapper {
             UPDATE BOARD
             SET TITLE = #{title}
                 ,CONTENT =#{content}
+                ,MODIFY_DATE = SYSDATE
             WHERE NO = #{no}
             """)
     int getBoardEdit(BoardVo vo);
@@ -175,7 +178,7 @@ public interface BoardMapper {
                 ,M.NICK
             FROM BOARD_COMMENT C
             JOIN MEMBER M ON (C.COM_WRI_NO = M.ID)
-            WHERE C.BOARD_NO = ${boardNo}
+            WHERE C.BOARD_NO = #{boardNo}
             """)
     List<CommentVo> getBoardCommentList(String boardNo);
 
@@ -192,4 +195,10 @@ public interface BoardMapper {
             WHERE REF_BOARD_NO = #{vo.no}
             """)
     int editAttachment(BoardVo vo, String originName, String changeName);
+
+    @Insert("""
+            INSERT INTO BOARD_ATTACHMENT (NO,REF_BOARD_NO,CHANGE_NAME,ORIGIN_NAME)
+            VALUES ((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL,#{changeName},#{originName})
+            """)
+    int insertBoardAttachment(String changeName, String originName);
 }
