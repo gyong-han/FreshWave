@@ -54,7 +54,7 @@
                           <textarea name="content">${vo.content}</textarea>
                     </div>
                     <div class="btn-area">
-                        <button type="button" id="cancel" onclick="cancel();">취소</button>
+                        <button type="button" id="back" onclick="cancel();">취소</button>
                         <button type="submit" id="enroll">수정</button>
                     </div>
                 </form>
