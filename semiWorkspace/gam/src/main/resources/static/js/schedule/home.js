@@ -276,6 +276,8 @@ function addEventToCalendar(calendar, info){
 
 // 일정 추가하기 - 중요도
 function getPriority(){
+    const priorityTemp = document.querySelector('#priority');
+    priorityTemp.innerHTML = '';
     $.ajax({
         url : '/schedule/priority',
         method : 'GET',
