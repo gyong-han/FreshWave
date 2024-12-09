@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script defer src="/js/notice/write.js"></script>
+<script defer src="/js/notice/edit.js"></script>
 <link rel="stylesheet" href="/css/notice/write.css">
 <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <title>공지사항 수정</title>
@@ -16,20 +16,23 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="area-container">
             <form action="/notice/edit" method="post" enctype="multipart/form-data">
+                <h2>공지사항 제목</h2>
                 <div class="input-checkbox-container">
                     <input type="hidden" name="no" value="${vo.no}">
                     <input type="hidden" name="writerNo" value="${vo.writerNo}">
-                    <input type="text" name="title" placeholder="제목을 입력하세요.">
+                    <input type="text" name="title" placeholder="제목을 입력하세요." value="${vo.title}">
                     <label>
                         <input type="checkbox" name="urgentYn" value="Y"> 긴급
                     </label>
                 </div>
-                <textarea id="smarteditor" rows="30" cols="100" style="width: 100%;" name="content"></textarea>
                 <br>
-                <label for="fileInput">
+                <h2>공지사항 내용</h2>
+                <textarea id="smarteditor" rows="20" cols="100" style="width: 100%;" name="content">${vo.content}</textarea>
+                <br>
+                <label for="f" class="custom-file-button" id="file-label">
                     <img src="/img/icon/attach-file.svg" alt="파일 첨부" class="attach-icon">
                 </label>
-                <input type="file" id="fileInput" name="f" multiple>
+                <input type="file" id="f" name="ff" multiple>
                 <div class="preview-area">
                 </div>
                 <div class="bottom-button-area">
@@ -61,6 +64,15 @@
                     const content = document.getElementById("smarteditor").value;
                     document.getElementById("form").submit();
                 }
+
+                function goback() {
+                if (document.referrer) {
+                    history.back(); // 이전 페이지로 이동
+                } else {
+                    window.location.href = "/notice/detail?bno=${vo.no}"; // 기본 페이지로 이동
+                }
+            }
+
             </script>
 
 

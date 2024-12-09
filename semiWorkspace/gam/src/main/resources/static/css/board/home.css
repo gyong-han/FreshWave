@@ -1,4 +1,7 @@
 /* 메인 컨테이너: 사이드바와 콘텐츠를 가로로 배치 */
+body{
+    background-color: #F2F2F2;
+}
 .main-container {
     display: flex;
 }
@@ -26,7 +29,6 @@ main > .sidebar {
     border: 1px solid #ddd;
     box-sizing: border-box;
     border-radius: 5px;
-    background-color: #f9f9f9;
     overflow-y: auto; /* 콘텐츠가 넘칠 경우 스크롤 */
     max-height: 600px; /* 높이 제한 */
     width: 100%;
@@ -46,7 +48,7 @@ main > .sidebar {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #ffffff;
-    justify-content: space-between;
+    flex-direction: column
 }
 
 /* 게시판 항목 */
@@ -63,7 +65,7 @@ main > .sidebar {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #ffffff;
-    justify-content: space-between;
+    flex-direction: column
 }
 
 .title-area{
@@ -95,10 +97,20 @@ main > .sidebar {
     vertical-align: middle;
 }
 
-.front-title-hit{
-    align-items: center;
+.info-row {
+    display: flex;
+    justify-content: space-between; /* 좌우 요소를 양쪽 끝으로 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    font-size: 14px; /* 글씨 크기 */
 }
 
-.front-title-hit img{
-    vertical-align: middle;
+.left-info {
+    display: flex; /* 아이콘과 조회수를 가로 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 5px; /* 아이콘과 숫자 간격 */
+}
+
+.right-info {
+    text-align: right; /* 오른쪽 정렬 */
+    font-size: 14px; /* 글씨 크기 */
 }

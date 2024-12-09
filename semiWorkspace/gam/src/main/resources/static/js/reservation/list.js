@@ -4,8 +4,9 @@ function paintPageArea(pvo){
 
     // 이전버튼
     if(pvo.startPage != 1){
-        const preTag = document.createElement('a');
-        preTag.setAttribute('href', `/reservation/list?rno=${pvo.startPage-1}`);
+        const preTag = document.createElement('button');
+        preTag.setAttribute('class', 'page-btn');
+        preTag.setAttribute('onclick', `return loadReservationList(${pvo.startPage-1});`);
         preTag.innerText = '<';
         pageArea.appendChild(preTag);
     }
@@ -13,6 +14,7 @@ function paintPageArea(pvo){
     // 페이지 버튼
     for(let i = pvo.startPage; i <= pvo.endPage; i++){
         const btnTag = document.createElement('button');
+        btnTag.setAttribute('class', 'page-btn');
         btnTag.setAttribute('onclick', `loadReservationList(${i});`);
         btnTag.innerText = i;
         pageArea.appendChild(btnTag);
@@ -20,15 +22,16 @@ function paintPageArea(pvo){
 
     // 다음버튼
     if(pvo.endPage != pvo.maxPage){
-        const nextTag = document.createElement('a');
-        nextTag.setAttribute('href', `/reservation/list?rno=${pvo.endPage+1}`)
+        const nextTag = document.createElement('button');
+        nextTag.setAttribute('class', 'page-btn');
+        nextTag.setAttribute('onclick', `return loadReservationList(${pvo.endPage+1});`)
         nextTag.innerText = '>';
         pageArea.appendChild(nextTag);
     }
 }
 
 function loadReservationList(rno){
-    const tbodyTag = document.querySelector('.content-wrapper table tbody');
+    const tbodyTag = document.querySelector('.list-table tbody');
     
     //searchType, searchValue 준비
     const searchType = document.querySelector('select[name=searchType]').value;
@@ -65,10 +68,7 @@ function loadReservationList(rno){
             const pvo = x.p;
 
             paintPageArea(pvo);
-
-            console.log(reservationVoList);
             
-
             tbodyTag.innerHTML = '';
 
             for(const vo of reservationVoList){
@@ -83,7 +83,8 @@ function loadReservationList(rno){
                 trTag.appendChild(titleTag);
 
                 const rdateTag = document.createElement('td');
-                rdateTag.innerText = vo.rdate;
+                const date = vo.rdate;
+                rdateTag.innerText = date;
                 trTag.appendChild(rdateTag);
 
                 const nameTag = document.createElement('td');
@@ -91,7 +92,7 @@ function loadReservationList(rno){
                 trTag.appendChild(nameTag);
 
                 const enrollDateTag = document.createElement('td');
-                enrollDateTag.innerText = vo.enrollDate;
+                enrollDateTag.innerText = vo.enrollDate.slice(0,10);
                 trTag.appendChild(enrollDateTag);
 
                 tbodyTag.appendChild(trTag);

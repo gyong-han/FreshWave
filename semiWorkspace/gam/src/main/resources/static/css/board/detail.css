@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #F2F2F2;
 }
 
 .main-container {
@@ -16,6 +16,51 @@ body {
     border: 1px solid #ddd;
     margin: 20px;
     border-radius: 10px;
+}
+
+.detail-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.detail-col{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    gap: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-row{
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    width: 50%;
+    align-items: center;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #333;
+    width: 150px; /* 항목 이름 고정 폭 */
+    text-align: left;
+}
+
+.detail-value {
+    flex: 1;
+    color: #555;
+    text-align: left;
+}
+
+.detail-enrollDate{
+    font-size: 0.85rem;
 }
 
 .detail-header {
@@ -86,6 +131,11 @@ body {
     resize: none;
 }
 
+.content-block .detail-value {
+    line-height: 1.6;
+    white-space: pre-wrap; /* 줄바꿈 유지 */
+    height: 300px;
+}
 
 .button-container {
     display: flex;
@@ -105,8 +155,27 @@ body {
     margin-right: auto;
 }
 
-.right-buttons button{
-    margin-left: 10px;
+.right-buttons .btn-del{
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: auto;
+}
+
+
+.right-buttons .btn-edit{
+    padding: 10px 20px;
+    background-color: #1D64F2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: auto;
 }
 
 #comment-list-area{
@@ -116,21 +185,71 @@ body {
 
 #comment-write-area{
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 #comment-write-area input[type="text"]{
     flex :1;
-    height: 300px;
+    height: 100px;
     width: 100%;
+    border-radius :5px;
+    border: none;
+    flex-direction: column;
+    outline: none;
 }
 
-#comment-write-area button {
+#comment-write-area input[type="text"]:focus {
+    outline: none; 
+    border: none; 
+    box-shadow: none; 
+}
+
+#comment-write-area .btn-submit {
     margin-left: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-self: flex-end;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-author {
+    font-weight: bold;
+    float: 1;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 5px;
+}
+
+.comment-row {
+    display: flex;
+    justify-content: space-between; /* 삭제 버튼을 우측으로 배치 */
+    align-items: center;
+}
+
+.delete-btn {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2); /* 삭제 버튼 크기 확대 */
 }
 
 

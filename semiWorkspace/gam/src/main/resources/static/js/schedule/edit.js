@@ -8,8 +8,8 @@ function kakaopost() {
     }).open();
   }
 
-  // cancel
-  function cancel(evt){
-    console.log("evt" , evt);
-    location.href='/schedule/home';
+// cancel
+function cancel(evt){
+  console.log("evt" , evt);
+  location.href='/schedule/home';
 }

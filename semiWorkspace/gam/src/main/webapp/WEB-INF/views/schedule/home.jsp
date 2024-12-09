@@ -10,9 +10,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- swal -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- address -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- home.js -->
 <script defer src="/js/schedule/home.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <link rel="stylesheet" href="/css/schedule/home.css">
 <title>FRESH WAVE</title>
 </head>
@@ -33,29 +38,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <label class="sch-label">일정 제목</label>
                 <input type="text" id="calTitle" name="title" placeholder="일정 제목을 입력해주세요!">
-                <br>
+                <div></div>
                 <input type="date" id="calStartDate" name="startDate">
-                <div class="faildate-msg1">시작일을 선택해주세요.</div>
                 <input type="time" id="calStartTime" name="startTime">
                 <span>-</span>
                 <input type="date" id="calEndDate" name="finishDate">
-                <div class="faildate-msg2">종료일을 선택해주세요.</div>
-                <div class="faildate-msg3">종료일이 시작일보다 빠릅니다. 일정을 다시 선택해주세요.</div>
                 <input type="time" id="calEndTime" name="finishTime">
                 <br>
-                <input type="text" name="location" placeholder="주소를 입력해주세요.">
+                <label class="sch-label">주소</label>
                 <br>
-                <label>중요도 : </label>
+                <input type="text" name="zipcode" id="zipcode" size="7" readonly>
+                <input type="button" id="address-btn" value="우편번호찾기" onclick="kakaopost();">
+                <br>
+                <input type="text" name="location" id="address" size="70">
+                <br>
+                <label class="sch-label">중요도</label>
                 <select name="priority" id="priority"></select>
-                <br>
-                <input type="text" name="userAdd">
                 <br>
                 <textarea name="content" id="calContent" placeholder="내용을 입력해주세요."></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="save-btn">Save changes</button>
+                <button type="button" class="close-btn" data-bs-dismiss="modal">목록</button>
+                <button type="button" class="save-btn">작성</button>
             </div>
         </div>
     </div>
@@ -72,10 +78,11 @@
         <div class="modal-body" id="detail-body">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="edit-btn" onclick="changeEvent(this);">수정하기</button>
-            <button type="button" class="del-btn" onclick="delEvent(this);">삭제하기</button>
-            <button type="button" class="save-btn">Save changes</button>
+            <button type="button" class="close-btn" data-bs-dismiss="modal">목록</button>
+            <button type="button" class="del-btn" onclick="delEvent(this);">삭제</button>
+            <!-- <button type="button" class="del-btn" onclick="scheduleDelete(`${vo.no}`);">삭제</button> -->
+            <button type="button" class="edit-btn" onclick="changeEvent(this);">수정</button>
+            <!-- <button type="button" class="save-btn">Save changes</button> -->
         </div>
       </div>
     </div>

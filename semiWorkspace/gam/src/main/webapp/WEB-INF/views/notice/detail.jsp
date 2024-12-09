@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,7 +6,25 @@
 <head>
     <meta charset="UTF-8">
     <title>상세조회</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="/js/notice/detail.js"></script>
     <link rel="stylesheet" href="/css/notice/detail.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            <c:if test="${not empty alertNo}">
+                console.log(${alertNo});
+
+                <c:if test="${alertNo == 1}">
+                    editSuccess();
+                </c:if>
+                <c:if test="${alertNo == 0}">
+                    editFail();
+                </c:if>
+                <c:remove var="alertNo" scope="session" />
+            </c:if>
+        });
+    </script>
 </head>
 <body>
     <!-- Header 포함 -->
@@ -17,40 +36,57 @@
         
         <!-- 상세 내용 -->
         <div class="content-container">
-            <div class="detail-section">
-                <h3>제목</h3>
-                <p>${vo.title}</p>
+            <div class="detail-container">
+                <div class="detail-col">
+                    <div class="detail-row">
+                        <div class="detail-label">제목</div>   
+                        <div class="detail-value">${vo.title}</div> 
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">조회수</div>   
+                        <div class="detail-value">${vo.hit}</div> 
+                    </div>
+                </div>
+                <div class="detail-col">
+                    <div class="detail-row">
+                        <div class="detail-label"></div>   
+                        <div class="detail-value">
+                            <div class="detail-name">
+                                ${vo.name}(${vo.deptName})<br>
+                            </div>
+                            <div class="detail-enrollDate">
+                                ${vo.enrollDate}</div> 
+                            </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">유형</div>   
+                        <div class="detail-value">${vo.urgentYn == 'Y' ? '긴급' : '일반'}</div> 
+                    </div>
+                </div>
+                <div class="detail-row content-block">
+                    <div class="detail-label">내용</div>   
+                    <div class="detail-value">${vo.content}</div> 
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">첨부파일</div>
+                    <div class="detail-value">
+                        <!-- <c:forEach items = "${attachmentVoList}" var="attachVo">
+                            <img src="/img/notice/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" height="80px">
+                        </c:forEach> -->
+                        <a onclick="imgOpen(`${vo.changeName}`);">&nbsp${vo.originName}</a>
+                    </div>
+                </div>
             </div>
-            
-            <div class="detail-section">
-                <h3>조회수</h3>
-                <p>${vo.hit}</p>
-            </div>
-            
-            <div class="detail-section">
-                <p>${vo.name} (${vo.deptName})</p>
-            </div>
-            
-            <div class="detail-section">
-                <h3>유형</h3>
-                <p>${vo.urgentYn == 'Y' ? '긴급' : '일반'}</p>
-            </div>
-            
-            <div class="detail-section">
-                <h3>내용</h3>
-                <p>${vo.content}</p>
-            </div>
-            <div class="detail-section">
-                <c:forEach items = "${attachmentVoList}" var="attachVo">
-                    <img src="/img/notice/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="80px" height="80px">
-                </c:forEach>
+                <div class="button-container">
+                <button class="left-button" onclick="history.back()">목록</button>
+                <div class="right-buttons">
+                    <c:if test="${loginMemberVo.id == vo.writerNo}">
+                        <button class="btn-del" onclick="noticeDelete(`${vo.no}`)" id="delete">삭제</button>
+                        <button class="btn-edit" onclick="location.href='/notice/edit?no=${vo.no}'" id="edit">수정</button>
+                    </c:if>
+                </div>
             </div>
         </div>
     </main>
-    <div class="button-container">
-        <button onclick="history.back()">목록</button>
-    </div>
-    <button onclick="location.href='/notice/edit?no=${vo.no}'">수정</button>
-    <button onclick="location.href='/notice/del?no=${vo.no}'">삭제</button>
 </body>
 </html>

@@ -64,7 +64,22 @@ public interface ScheduleMapper {
             """)
     int writePersonal(ScheduleVo vo);
 
-    int edit(ScheduleVo vo);
+    @Update("""
+            UPDATE SCHEDULE
+                SET
+                    TITLE = #{vo.title}
+                    , CONTENT = #{vo.content}
+                    , START_DATE = #{vo.startDate}
+                    , FINISH_DATE = #{vo.finishDate}
+                    , START_TIME = #{vo.startTime}
+                    , FINISH_TIME = #{vo.finishTime}
+                    , LOCATION = #{vo.location}
+                    , PRIORITY = #{vo.priority}
+                WHERE NO = #{sno}
+                AND SHARE_YN = 'N'
+                AND DEL_YN = 'N'
+            """)
+    int edit(ScheduleVo vo, String sno);
 
     @Update("""
             UPDATE SCHEDULE

@@ -1,5 +1,5 @@
 body{
-
+    background-color: #f2f2f2;
 }
 
 #calendar{
@@ -32,4 +32,99 @@ body{
 .fc-day-sat .fc-col-header-cell-cushion,
 .fc-day-sat a {
     color : blue;
+}
+
+#addModal{
+    gap: 10px;
+}
+
+input{
+    border: none;
+    background-color: #f2f2f2;
+    width: 110px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+input[name=title]{
+    border: none;
+    background-color: #f2f2f2;
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+input[name=location]{
+    border: none;
+    background-color: #f2f2f2;
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+textarea[name=content]{
+    height: 60px;
+    width: 400px;
+    border : none;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+#address-btn{
+    background-color: #BFF205;
+    border: none;
+    color: #121212;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor:pointer;
+    margin-top: 20px;
+}
+
+.close-btn{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+.save-btn{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    cursor:pointer;
+    margin-top: 20px;
+}
+
+.del-btn{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+.edit-btn{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    cursor:pointer;
+    margin-top: 20px;
 }

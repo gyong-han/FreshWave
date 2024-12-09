@@ -65,22 +65,25 @@ public class PhoneReservationController {
     }
 
     @PostMapping("edit")
-    public String edit(PhoneReservationVo vo, HttpSession session){
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        vo.setWriterNo(loginMemberVo.getId());
+    public String edit(PhoneReservationVo vo, HttpSession session, String rno){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getId());
 
-        int result = service.edit(vo);
+        int result = service.edit(vo, rno);
+        System.out.println("rno = " + rno);
+        System.out.println("vo = " + vo);
 
         if(result != 1){
             throw new IllegalStateException("[ERR-PRV-200 고객센터 수정하기 오류 발생]");
         }
 
-        return "redirect:/reservation/detail";
+        return "redirect:/reservation/detail?rno="+rno;
     }
 
     // 예약문의 삭제하기
     @GetMapping("del")
-    public String del(String rno, HttpSession session, PhoneReservationVo vo){
+    @ResponseBody
+    public int del(String rno, HttpSession session, PhoneReservationVo vo){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
 
@@ -90,7 +93,7 @@ public class PhoneReservationController {
             throw new IllegalStateException("[ERR-PRV-300] 고객센터 삭제하기 오류 발생");
         }
 
-        return "redirect:/reservation/list";
+        return result;
     }
 
 

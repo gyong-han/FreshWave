@@ -1,70 +1,125 @@
+body{
+    background-color: #F2F2F2;
+}
+
 .main-container {
     display: flex;
 }
 
-.area-container{
-    flex-grow:  1;
-    margin: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+main > .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    z-index: 1000;
 }
 
-.table-area{
+.content-wrapper{
+    display: grid;
+    flex-direction: row;
     flex-grow: 1;
-    width: 100%;
+    padding: 20px;
+    gap: 20px;
     justify-content: center;
 }
 
-.table-area table{
-    width: 100%;
-    height: 100%;
+.list-table{
     border-collapse: collapse;
+    width: 1300px;
 }
 
-.table-area th, .table-area td {
-    padding: 10px; /* 셀 내부 여백 */
-    text-align: center; /* 텍스트 정렬 */
-    border: 1px solid #ddd; /* 셀 경계선 */
+.list-table thead th{
+    text-align: center;;
+    border-bottom: 2px solid black;
+    width: 150px;
 }
 
-.search-area form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.list-table thead th:last-child{
+    text-align: center;
+    border-bottom: 2px solid black;
+    height: 50px;
 }
 
-.search-area select,
-.search-area input[type="text"]{
-    font-size: 16px;
-    
+.list-table tbody td{
+    text-align: center;
+    height: 47px;
 }
 
-.page-area a {
-    margin: 0 5px;
+input[name="searchValue"]{
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    width: 400px;
+    height: 30px;
+    padding: 0%;
+    margin-left: 20px;
+}
+
+input[type="submit"]{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 30px;
+    background-image: url('/img/icon/search.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+#search-type{
+    height: 30px;
+    width: 90px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.list-table tbody tr:hover td{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+.list-table tbody tr:hover td a {
+    color: #F2F2F2; /* 링크 색상을 흰색으로 변경 */
+}
+
+
+.list-table tbody tr:hover td:nth-child(1) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.list-table tbody tr:hover td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+a{
     text-decoration: none;
+    color: black;
 }
 
-.area-container .main-bottom-area{
+.main-bottom-area{
     display: flex;
-    justify-content: end;
-    position: relative;
+    justify-content: flex-end;
 }
 
 .main-bottom-area button{
     display: inline-block;
-    padding: 10px 20px; /* 버튼 내부 여백 */
     font-size: 16px; /* 글씨 크기 */
     color: #fff; /* 텍스트 색상 */
     background-color: #1D64F2; /* 파란색 배경 */
     border: none; /* 테두리 제거 */
     border-radius: 5px; /* 둥근 모서리 */
     cursor: pointer; /* 마우스 커서 변경 */
-    margin-top: 20px; /* 위 간격 */
+    height: 40px;
 }
 
-.area-container .page-area{
+.page-area{
     display: flex;
     justify-content: center;
 }

@@ -45,6 +45,7 @@ public interface NoticeMapper {
     @Select("""
             SELECT DISTINCT
                 N.NO ,
+                N.WRITER_NO ,
                 N.TITLE ,
                 N.CONTENT ,
                 N.URGENT_YN ,
@@ -68,7 +69,11 @@ public interface NoticeMapper {
             """)
     NoticeVo getNoticeDetail(String bno);
 
-    int insertNoticeAttachment(List<String> changeNameList);
+    @Insert("""
+            INSERT INTO NOTICE_ATTACHMENT (NO,REF_NOTI_NO,CHANGE_NAME,ORIGIN_NAME)
+            VALUES ((SELECT GET_NOTICE_ATTACHMENT_NO FROM DUAL), SEQ_NOTICE.CURRVAL,#{changeName},#{originName})
+            """)
+    int insertNoticeAttachment(String changeName, String originName);
 
     @Update("""
             UPDATE NOTICE
@@ -115,9 +120,9 @@ public interface NoticeMapper {
             UPDATE NOTICE
             SET DEL_YN = 'Y',
             MODIFY_DATE = SYSDATE
-            WHERE NO = #{no} AND DEL_YN = 'N'
+            WHERE NO = #{bno} AND DEL_YN = 'N'
             """)
-    int del(NoticeVo vo);
+    int del(String bno);
 
     @Select("""
             SELECT *
@@ -126,4 +131,12 @@ public interface NoticeMapper {
             ORDER BY NO DESC
             """)
     List<AttachmentVo> getAttachmentVoList(String bno);
+
+    @Update("""
+            UPDATE NOTICE_ATTACHMENT
+            SET CHANGE_NAME = #{changeName},
+            ORIGIN_NAME = #{originName}
+            WHERE REF_NOTI_NO = #{vo.no}
+            """)
+    int editAttachment(NoticeVo vo, String originName, String changeName);
 }

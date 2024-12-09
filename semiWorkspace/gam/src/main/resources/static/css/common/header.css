@@ -170,5 +170,6 @@ aside{
     outline: none; /* 포커스 시 외곽선 제거 */
 }
 
-
-
+#message-icon{
+    cursor: pointer;
+}
