@@ -22,10 +22,13 @@ public class ProjectMemoController {
 
     //메모 작성
     @GetMapping("write")
-    public void write(@RequestParam("projectNo") String key, Model model){
-
+    public String write(@RequestParam("projectNo") String key, Model model, HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         model.addAttribute("key" , key );
-
+        return "projectMemo/write";
     }
 
     @PostMapping("write")
@@ -41,11 +44,18 @@ public class ProjectMemoController {
 
     //메모 수정
     @GetMapping("edit")
-    public void edit(ProjectMemoVo vo, Model model){
+    public String edit(ProjectMemoVo vo, Model model, HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
+
         String key = vo.getPrjKey();
 
         model.addAttribute("vo" , vo);
         model.addAttribute("key" , key);
+
+        return "projectMemo/edit";
     }
 
     @PostMapping("edit")
@@ -58,18 +68,25 @@ public class ProjectMemoController {
 
     //메모 목록조회(카드)
     @GetMapping("cardList")
-    public void cardList(@RequestParam("projectNo") String key, Model model){
+    public String cardList(@RequestParam("projectNo") String key, Model model, HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         model.addAttribute("key", key);
+        return "projectMemo/cardList";
     }
     //메모 목록조회(카드 데이터)
     @GetMapping("cardListData")
     @ResponseBody
     public HashMap cardListData(HttpSession session, String key, Model model){
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        ProjectMemoVo prjName = service.getProjectName(key);
         List<ProjectMemoVo> waitList = service.getProjectMemoWaitList(loginMemberVo, key);
         List<ProjectMemoVo> ingList = service.getProjectMemoIngList(loginMemberVo, key);
         List<ProjectMemoVo> complateList = service.getProjectMemoComplateList(loginMemberVo, key);
         HashMap map = new HashMap();
+        map.put("name", prjName);
         map.put("wait" , waitList);
         map.put("ing" , ingList);
         map.put("com" , complateList);
@@ -80,7 +97,11 @@ public class ProjectMemoController {
 
     //메모 목록조회(리스트)
     @GetMapping("list")
-    public String list(@RequestParam("projectNo") String key, Model model){
+    public String list(@RequestParam("projectNo") String key, Model model, HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         model.addAttribute("key", key);
         return "projectMemo/list";
     }
@@ -106,7 +127,11 @@ public class ProjectMemoController {
 
     //메모 상세조회
     @GetMapping("detail")
-    public String detail(String no, Model model){
+    public String detail(String no, Model model, HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
        ProjectMemoVo memoVo =  service.getMemoVo(no);
        model.addAttribute("memoVo", memoVo);
        model.addAttribute("no" , no);

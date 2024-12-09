@@ -55,4 +55,8 @@ public class ProjectMemoService {
     public int getProjectMemoListCnt(MemberVo loginMemberVo, String key) {
         return mapper.getProjectMemoListCnt(loginMemberVo, key);
     }
+
+    public ProjectMemoVo getProjectName(String key) {
+        return mapper.getProjectName(key);
+    }
 }

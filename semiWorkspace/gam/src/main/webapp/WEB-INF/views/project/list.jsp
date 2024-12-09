@@ -20,7 +20,7 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
                 <div class="prj-list-area">
-                    <table>
+                    <table class="list-table">
                         <thead >
                             <tr>
                                 <td>프로젝트 이름</td>
@@ -35,19 +35,24 @@
 
                         <c:forEach items="${projectVoList}" var="vo">
                             <tr>
-                                <td><a href="/projectMemo/list?projectNo=${vo.key}">${vo.name}</a></td>
+                                <td id="fir" ><a href="/projectMemo/list?projectNo=${vo.key}">${vo.name}</a></td>
                                 <td>${vo.deptName}</td>
                                 <td>${vo.memberName}</td>
                                 <td>${vo.priorityName}</td>
                                 <td>${vo.startDate}</td>
-                                <td>${vo.endDate}</td>
+                                <td id="la" >${vo.endDate}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <div class="form-area">
                     <form action="/project/write">
+                        <span>
+                        <button type="button" class="btn1"value="카드조회"  onclick="location.href='/project/cardList'">카드조회</button>
+                        </span>
+                        <span>
                         <input class="button" type="submit" value="프로젝트 생성">
+                         </span>
                     </form>
                     </div>
                    <div class="page-area">

@@ -22,7 +22,7 @@
         <div class="content-wrapper">
             <div class="head">
                 <div class="title-area">
-                    <h1>크리스마스 프로모션 프로젝트</h1>
+                    <h1></h1>
                 </div>
                 <div class="btn-area">
                     <button id="btn1" onclick="location.href='/projectMemo/list?projectNo=${key}'">목록 조회</button>

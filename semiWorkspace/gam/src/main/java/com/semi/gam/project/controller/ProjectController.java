@@ -26,7 +26,10 @@ public class ProjectController {
     //프로젝트 작성
     @GetMapping("write")
     public String write(Model model , HttpSession session){
-        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         List<ProjectMemberVo> empVoList = service.getAddMemberVo();
         model.addAttribute("empVoList" , empVoList);
         return "project/write";
@@ -83,7 +86,10 @@ public class ProjectController {
     @GetMapping("detail")
     //프로젝트 상세조회
     public String selectOne(Model model,@RequestParam("projectNo") String key, HttpSession session){
-        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         ProjectVo projectVo = service.getProject(key,loginMemberVo);
         model.addAttribute("projectVo" , projectVo);
         List<ProjectMemberVo> vo = service.getAddMember(key);
@@ -96,7 +102,10 @@ public class ProjectController {
     //프로젝트 수정
     public String edit(Model model, @RequestParam("projectNo") String key, HttpSession session){
         //로그인 정보 가져오기
-        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
 
         //화면 정보 가져오기
         List<ProjectMemberVo> empVoList = service.getAddMemberVo();

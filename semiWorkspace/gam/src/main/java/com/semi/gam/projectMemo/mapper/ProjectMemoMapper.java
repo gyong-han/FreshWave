@@ -163,4 +163,11 @@ public interface ProjectMemoMapper {
             AND DEL_YN = 'N'
             """)
     int getProjectMemoListCnt(MemberVo loginMemberVo, String key);
+
+    @Select("""
+            SELECT NAME     AS  prjName
+            FROM PROJECT
+            WHERE KEY = #{key}
+            """)
+    ProjectMemoVo getProjectName(String key);
 }

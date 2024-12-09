@@ -40,7 +40,7 @@ function loadProjectList(){
                 button.innerText= "..."
                 button.className ="top2";
                 button.addEventListener("click" , function(x){
-                    
+                    event.stopPropagation();
                         const hiddenContent = button.parentNode.querySelector(".hidden-area");
 
                         if (hiddenContent.style.display === "none") {
