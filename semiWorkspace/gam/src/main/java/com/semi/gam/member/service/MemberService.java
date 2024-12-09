@@ -2,6 +2,7 @@ package com.semi.gam.member.service;
 
 import com.semi.gam.member.mapper.MemberMapper;
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import com.semi.gam.admin.vo.AdminVo;
 import com.semi.gam.dept.vo.DeptVo;
@@ -71,5 +72,17 @@ public class MemberService {
     public boolean checkDupNick(String nick) {
         MemberVo vo = mapper.checkDupNick(nick);
         return vo != null;
+    }
+
+    public int logOutFinish(MemberVo loginMemberVo) {
+        return mapper.logOutFinish(loginMemberVo);
+    }
+
+    public int getMemberCnt(String searchType, String searchValue) {
+        return mapper.getMemberCnt(searchType,searchValue);
+    }
+
+    public List<EmployeeVo> getMemberList(PageVo pvo, String searchType, String searchValue) {
+        return mapper.getMemberList(pvo,searchType,searchValue);
     }
 }

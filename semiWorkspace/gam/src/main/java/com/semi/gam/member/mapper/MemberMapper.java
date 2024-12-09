@@ -5,6 +5,7 @@ import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
 import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -70,6 +71,7 @@ public interface MemberMapper {
                 NO,
                 ID,
                 NAME,
+                NICK,
                 PWD,
                 ID_NUM,
                 GENDER,
@@ -82,6 +84,7 @@ public interface MemberMapper {
                 SEQ_MEMBER.NEXTVAL,
                 (SELECT MAX(EMP_NO) FROM EMPLOYEE),
                 #{name},
+                #{nick},
                 #{pwd},
                 #{idNum},
                 #{gender},
@@ -156,5 +159,18 @@ public interface MemberMapper {
             WHERE NICK = #{nick}
             """)
     MemberVo checkDupNick(String nick);
+
+    @Update("""
+            UPDATE EMPLOYEE
+                SET
+                    FINISH_DATE = SYSDATE
+            WHERE QUIT_YN = 'N'
+            AND EMP_NO = ${id}
+            """)
+    int logOutFinish(MemberVo loginMemberVo);
+
+    int getMemberCnt(String searchType, String searchValue);
+
+    List<EmployeeVo> getMemberList(PageVo pvo, String searchType, String searchValue);
 
 }

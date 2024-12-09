@@ -5,26 +5,29 @@ function paintPageArea(pvo){
 
     //이전버튼
     if(pvo.startPage != 1){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/admin/list?pno=${pvo.startPage-1}`);
-        aTag.innerText = "<";
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.innerText = "<";
+        btnTag.setAttribute("onclick" , `return loadBoardList(${pvo.startPage - 1});`);
+        btnTag.setAttribute("class", "page-btn");
+        pageArea.appendChild(btnTag);
     }
 
     //페이지버튼
     for(let i = pvo.startPage ; i <= pvo.endPage; ++i ){
         const btnTag = document.createElement("button");
         btnTag.setAttribute("onclick" , `loadBoardList(${i});`);
+        btnTag.setAttribute("class", "page-btn");
         btnTag.innerText = i;
         pageArea.appendChild(btnTag);
     }
 
     //다음버튼
     if(pvo.endPage != pvo.maxPage){
-        const aTag = document.createElement("a");
-        aTag.setAttribute("href" , `/admin/list?pno=${pvo.endPage + 1}`);
-        aTag.innerText = '>';
-        pageArea.appendChild(aTag);
+        const btnTag = document.createElement("button");
+        btnTag.innerText = ">";
+        btnTag.setAttribute("onclick" , `return loadBoardList(${pvo.endPage + 1});`);
+        btnTag.setAttribute("class", "page-btn");
+        pageArea.appendChild(btnTag);
     }
 
 }
@@ -123,7 +126,7 @@ function searchForm() {
 }
 
 //상세조회로 넘어가기
-const tbodyTag = document.querySelector("main .list-member tbody");
+const tbodyTag = document.querySelector("main .list-area tbody");
 
 tbodyTag.addEventListener("click" , function(evt){
     if(evt.target.tagName != "TD"){return;}

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="/js/admin/list.js"></script>
+    <script defer src="/js/member/list.js"></script>
     <link rel="stylesheet" href="/css/admin/list.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
             <div class="content-wrapper">
                 <div></div> <!--공란-->
                 <div class="search-area">
-                    <form action="/admin/list?pno=1" onsubmit="return searchForm();">
+                    <form action="/member/list?pno=1" onsubmit="return searchForm();">
                         <select name="searchType" onchange="formSearchType(this);">
                             <option value="memberName">이름</option>
                             <option value="dept">부서</option>

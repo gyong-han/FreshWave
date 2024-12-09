@@ -1,10 +1,15 @@
 package com.semi.gam.admin.controller;
 
 import com.semi.gam.admin.service.AdminService;
+import com.semi.gam.admin.vo.AdminVo;
+import com.semi.gam.board.service.BoardService;
+import com.semi.gam.board.vo.BoardVo;
 import com.semi.gam.dept.vo.DeptVo;
 import com.semi.gam.employee.vo.EmployeeVo;
 import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.service.MemberService;
+import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.notice.vo.NoticeVo;
 import com.semi.gam.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +29,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService service;
+    private final BoardService bs;
     private final MemberService ms;
     //직급 목록
     @GetMapping("job")
@@ -35,8 +41,19 @@ public class AdminController {
     @ResponseBody
     public List<DeptVo> dept(){return ms.getDeptVoList();}
 
-//    @Value("#{pathInfo.getProfilePath()}")
-//    private String profilePath;
+    @GetMapping("home")
+    public String home(Model model,HttpSession session){
+        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
+        if(loginAdminVo == null){
+            return "redirect:/member/login";
+        }
+        List<BoardVo> boardVoList = bs.getBoardHomeList();
+        List<EmployeeVo> employeeVoList = service.getMemberHomeList();
+
+        model.addAttribute("employeeVoList",employeeVoList);
+        model.addAttribute("boardVoList",boardVoList);
+        return "admin/home";
+    }
 
     @GetMapping("list")
     public String list(Model model){
@@ -156,7 +173,14 @@ public class AdminController {
         }
         return "redirect:/admin/listDel";
     }
-    
 
+    //로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        AdminVo loginMemberVo = (AdminVo) session.getAttribute(("loginAdminVo"));
+        session.setAttribute("loginAdminVo",null);
+
+        return "redirect:/member/login";
+    }
 
 }

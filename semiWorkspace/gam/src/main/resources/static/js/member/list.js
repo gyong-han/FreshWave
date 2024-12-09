@@ -56,7 +56,7 @@ function loadBoardList(pno){
     }
 
     $.ajax({
-        url : `/admin/list/data?pno=${pno}` ,
+        url : `/member/list/data?pno=${pno}` ,
         data : {
             searchType ,
             searchValue ,
@@ -124,13 +124,4 @@ function searchForm() {
     loadBoardList();
     return false;
 }
-
-//상세조회로 넘어가기
-const tbodyTag = document.querySelector("main .list-area tbody");
-
-tbodyTag.addEventListener("click" , function(evt){
-    if(evt.target.tagName != "TD"){return;}
-    const no = evt.target.parentNode.children[0].innerText;
-    location.href=`/admin/detail?no=${no}`;
-});
 

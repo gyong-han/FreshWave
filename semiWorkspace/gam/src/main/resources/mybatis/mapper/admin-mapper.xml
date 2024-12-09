@@ -39,7 +39,9 @@
             AND E.DEPT_CODE = #{searchValue}
         </if>
 
-    </select><select id="getMemberCntDel" resultType="int">
+    </select>
+
+    <select id="getMemberCntDel" resultType="int">
         SELECT COUNT(E.EMP_NO)
         FROM EMPLOYEE E
         LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)

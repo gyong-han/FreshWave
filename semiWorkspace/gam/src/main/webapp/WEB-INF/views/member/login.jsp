@@ -6,31 +6,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="/css/member/login.css">
 </head>
 <body>
-    <img src="/img/logo/logo.png" alt="logo">
-    <div class="form-container">
-        <form action="/member/login" method="post">
-            <div class="form-group">
-                <input type="text" name="cpCode" id="company-code" placeholder=" " required>
-                <label for="company-code">회사 코드를 입력하세요</label>
-            </div>
-            <div class="form-group">
-                <input type="text" name="id" id="user-id" placeholder=" " required>
-                <label for="user-id">아이디</label>
-            </div>
-            <div class="form-group">
-                <input type="password" name="pwd" id="password" placeholder=" " required>
-                <label for="password">비밀번호</label>
-            </div>
-            <div>
-                <label>
+    <div class="container">
+        <img src="/img/logo/logo.png" alt="logo" class="logo">
+        <div class="form-container">
+            <form action="/member/login" method="post">
+                <div class="form-group">
+                    <input type="text" name="cpCode" id="company-code" placeholder=" " required>
+                    <label for="company-code">COMPANY CODE</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="id" id="user-id" placeholder=" " required>
+                    <label for="user-id">ID</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="pwd" id="password" placeholder=" " required>
+                    <label for="password">PASSWORD</label>
+                </div>
+                <div class="form-check">
                     <input type="checkbox" id="startTime">
                     출근하기
-                </label>
-            </div>
-            <input type="submit" value="LOGIN">
-        </form>
+                </div>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
