@@ -33,7 +33,7 @@ public interface AdminMapper {
                 , M.EMAIL
                 , M.NICK
                 , SUBSTR(M.ID_NUM, 1, 6)        AS ID_NUM
-                , SUBSTR(E.HIRE_DATE, 1, 8)     AS HIRE_DATE
+                , SUBSTR(E.HIRE_DATE, 1, 10)     AS HIRE_DATE
                 , M.ADDRESS
                 , M.PWD
             FROM EMPLOYEE E

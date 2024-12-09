@@ -124,12 +124,17 @@ public class MemberController{
     //마이페이지에서 회원 수정
     @PostMapping("edit")
     public String edit(MemberVo vo, HttpSession session, MultipartFile f) throws Exception {
-        String changeName = FileUploader.save(f , profilePath);
+        String changeName = "";
         vo.setProfile(changeName);
+        if(f != null){
+            changeName = FileUploader.save(f , profilePath);
+            vo.setProfile(changeName);
+        }
 
         MemberVo loginMemberVo = (MemberVo)session.getAttribute(("loginMemberVo"));
         MemberVo updateMember = service.edit(vo);
         updateMember.setId(loginMemberVo.getId());
+
 
         session.setAttribute("loginMemberVo",updateMember);
 

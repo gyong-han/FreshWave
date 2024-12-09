@@ -29,7 +29,7 @@
                         <p>${loginMemberVo.deptName}(${loginMemberVo.jobName})</p>
                         <p>${loginMemberVo.email}</p>
                         <label for="file-upload" class="custom-file-upload">사진 변경</label>
-                        <input id="file-upload" name="f" type="file" accept=".png,.jpg,.jpeg,.svg">
+                        <input id="file-upload" name="f" type="file" accept=".png,.jpg,.jpeg,.svg" >
                     </div>
                     <br>
             <input type="hidden" name="id" value="${loginMemberVo.id}">
