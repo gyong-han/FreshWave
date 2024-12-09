@@ -16,7 +16,7 @@
             <div id="content-area">
                 <h1>상담 예약 문의</h1>
                 <br>
-                <form class="write-form" action="/reservation/edit" method="post">
+                <form class="write-form" action="/reservation/edit?rno=${vo.no}" method="post">
                     <div id="title-area">
                         <label class="re-label">문의 제목</label>
                         <br>

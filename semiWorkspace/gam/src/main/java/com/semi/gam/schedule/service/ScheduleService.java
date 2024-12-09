@@ -59,9 +59,9 @@ public class ScheduleService {
             return result;
         }
     // 일정 수정하기 서비스
-    public int edit(ScheduleVo vo) {
+    public int edit(ScheduleVo vo, String sno) {
 
-        int result = mapper.edit(vo);
+        int result = mapper.edit(vo, sno);
 
         if(result < 1){
             String errCode = "[ERROR-SCH-202] 일정 수정하기 오류 발생";

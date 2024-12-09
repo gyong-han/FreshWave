@@ -99,11 +99,11 @@ public class ScheduleController {
 
     // 일정 수정하기 프로세스
     @PostMapping("edit")
-    public String edit(ScheduleVo vo, HttpSession session, Model model){
+    public String edit(ScheduleVo vo, HttpSession session, Model model, String sno){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
 
-        int result = service.edit(vo);
+        int result = service.edit(vo, sno);
 
 
         if(result != 1){
@@ -115,16 +115,20 @@ public class ScheduleController {
 
     // 일정 삭제하기 (ajax)
     @GetMapping("del")
-    public String del(String sno, ScheduleVo vo, HttpSession session){
+    @ResponseBody
+    public int del(String sno, ScheduleVo vo, HttpSession session){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
+
+        System.out.println("vo.getNo() = " + vo.getNo());
+        System.out.println("sno = " + sno);
 
         int result = service.del(sno, vo);
 
         if(result != 1){
             throw new IllegalStateException("[ERROR-SCH-301]일정 삭제하기 에러");
         }
-        return "redirect:/schedule/home";
+        return result;
     }
 
     // 일정 상세조회

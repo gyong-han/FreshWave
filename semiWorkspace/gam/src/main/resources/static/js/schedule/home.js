@@ -113,7 +113,7 @@ function detailEvent(calendar, info){
             }
             const titleDiv = document.createElement('div');
             titleDiv.setAttribute('id', 'titleDiv');
-            titleDiv.innerText = data.title;
+            titleDiv.innerText = '일정제목 : '+ data.title;
             dbody.appendChild(titleDiv);
 
             // startDate
@@ -126,16 +126,6 @@ function detailEvent(calendar, info){
             startDateDiv.innerText = data.startDate;
             dbody.appendChild(startDateDiv);
 
-            // finishDate
-            if(document.querySelector('#finishDateDiv')){
-                const divTag1 = document.querySelector('#finishDateDiv')
-                divTag1.remove();
-            }
-            const finishDateDiv = document.createElement('div');
-            finishDateDiv.setAttribute('id', 'finishDateDiv');
-            finishDateDiv.innerText = data.finishDate;
-            dbody.appendChild(finishDateDiv);
-
             // startTime
             if(document.querySelector('#startTimeDiv')){
                 const divTag1 = document.querySelector('#startTimeDiv')
@@ -145,6 +135,16 @@ function detailEvent(calendar, info){
             startTimeDiv.setAttribute('id', 'startTimeDiv');
             startTimeDiv.innerText = data.startTime;
             dbody.appendChild(startTimeDiv);
+
+            // finishDate
+            if(document.querySelector('#finishDateDiv')){
+                const divTag1 = document.querySelector('#finishDateDiv')
+                divTag1.remove();
+            }
+            const finishDateDiv = document.createElement('div');
+            finishDateDiv.setAttribute('id', 'finishDateDiv');
+            finishDateDiv.innerText = data.finishDate;
+            dbody.appendChild(finishDateDiv);
 
             // finishTime
             if(document.querySelector('#finishTimeDiv')){
@@ -156,16 +156,6 @@ function detailEvent(calendar, info){
             finishTimeDiv.innerText = data.finishTime;
             dbody.appendChild(finishTimeDiv);
 
-            // content
-            if(document.querySelector('#contentDiv')){
-                const divTag1 = document.querySelector('#contentDiv')
-                divTag1.remove();
-            }
-            const contentDiv = document.createElement('div');
-            finishTimeDiv.setAttribute('id', 'contentDiv');
-            finishTimeDiv.innerText = data.finishTime;
-            dbody.appendChild(contentDiv);
-
             // location
             if(document.querySelector('#locationDiv')){
                 const divTag1 = document.querySelector('#locationDiv')
@@ -173,7 +163,7 @@ function detailEvent(calendar, info){
             }
             const locationDiv = document.createElement('div');
             locationDiv.setAttribute('id', 'locationDiv');
-            locationDiv.innerText = data.location;
+            locationDiv.innerText = '위치 : '+ data.location;
             dbody.appendChild(locationDiv);
 
             // priority
@@ -183,8 +173,19 @@ function detailEvent(calendar, info){
             }
             const priorityDiv = document.createElement('div');
             priorityDiv.setAttribute('id', 'priorityDiv');
-            priorityDiv.innerText = data.priorityName;
+            priorityDiv.innerText = '중요도 :'+ data.priorityName;
             dbody.appendChild(priorityDiv);
+
+            // content
+            if(document.querySelector('#contentDiv')){
+                const divTag1 = document.querySelector('#contentDiv')
+                divTag1.remove();
+            }
+            const contentDiv = document.createElement('div');
+            finishTimeDiv.setAttribute('id', 'contentDiv');
+            finishTimeDiv.innerText = '내용 : ' + data.finishTime;
+            dbody.appendChild(contentDiv);
+
 
             detailModal.show();
         },
@@ -347,13 +348,64 @@ function delEvent(delBtn){
             // const dmodal = document.querySelector('.modal-content');
             // event.remove();
             // detailModal.remove();
-            // location.reload();
+            location.reload();
         },
         error : function(){
             console.log("삭제하기 실행 안됨");
         }
     });
 }
+
+// 일정 삭제하기 (swal)
+// function scheduleDelete(sno) {
+//     // const tag = delBtn.parentNode.parentNode.parentNode.parentNode;
+//     // const sno = tag.getAttribute("sno");
+//     console.log(sno);
+    
+//     Swal.fire({
+//       title: "삭제하시겠습니까?", //alert창 문구
+//       icon: "question", // 그림(error,success,warning,info,question)
+//       showCancelButton: true, //취소버튼 여부
+//       confirmButtonColor: "#1D64F2",
+//       cancelButtonColor: "#121212",
+//       confirmButtonText: "삭제", //취소 버튼 문구
+//       cancelButtonText : "취소", //확인 버튼 문구
+//       reverseButtons: true //취소,확인버튼 좌우 반전
+//     })
+//     .then((result) => {
+//       if (result.isConfirmed) {
+//         $.ajax({
+//           url : "/schedule/del",
+//           data :{
+//             sno
+//           },
+//           success : function(x){
+//             if(x == 1){
+//               Swal.fire({
+//                 title: "삭제 완료!",
+//                 icon: "success",
+//                 confirmButtonText: "확인"
+//               })
+//               .then( () => {
+//                 location.href = "/schedule/home";
+//               } );
+//             }else{
+//               Swal.fire({
+//                 title: "삭제 실패...",
+//                 icon: "error",
+//                 confirmButtonText: "확인"
+//               })
+//               .then( () => {
+//                 location.href = `/schedule/home`;
+//               } );
+//             }
+//           },
+//           error : function(x){
+//           }
+//         })
+//       }
+//     });
+//   }
 
 // 유효성 검사
 const faildatemsg1 = document.querySelector('.faildate-msg1');

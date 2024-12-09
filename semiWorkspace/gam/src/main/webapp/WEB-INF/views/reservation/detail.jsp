@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,9 @@
 <title>FRESH WAVE</title>
 <link rel="stylesheet" href="/css/common/font.css">
 <link rel="stylesheet" href="/css/reservation/detail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="/js/reservation/detail.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -32,7 +36,7 @@
                 </div>
                 <div id="edit-delete-btn">
                         <c:if test="${loginMemberVo.id == vo.writerNo}">
-                            <button id="delete" onclick="location.href=`/reservation/del?rno=${vo.no}`">삭제</button>
+                            <button id="delete" onclick="reservationDelete(`${vo.no}`);">삭제</button>
                             <button id="edit" onclick="location.href=`/reservation/edit?rno=${vo.no}`">수정</button>
                         </c:if>
                 </div>

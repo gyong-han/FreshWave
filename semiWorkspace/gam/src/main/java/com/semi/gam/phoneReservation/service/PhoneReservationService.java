@@ -43,9 +43,9 @@ public class PhoneReservationService {
         return result;
     }
 
-    public int edit(PhoneReservationVo vo) {
+    public int edit(PhoneReservationVo vo, String rno) {
 
-        return mapper.edit(vo);
+        return mapper.edit(vo, rno);
     }
 
     public void verification(PhoneReservationVo vo){
