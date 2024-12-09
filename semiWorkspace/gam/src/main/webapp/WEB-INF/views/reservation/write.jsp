@@ -48,7 +48,7 @@
                         <input type="time" name="rtime">
                     </div>
                     <div class="btn-area">
-                        <button type="button" id="cancel" onclick="location.href='/reservation/list?rno=1'">취소</button>
+                        <button type="button" id="back" onclick="location.href='/reservation/list?rno=1'">취소</button>
                         <button type="submit" id="enroll">작성</button>
                     </div>
                 </form>

@@ -47,7 +47,7 @@
                         <input type="time" name="rtime" value="${vo.rtime}">
                     </div>
                     <div class="btn-area">
-                            <button type="button" id="cancel" onclick="location.href='/reservation/detail?rno=${vo.no}'">취소</button>
+                            <button type="button" id="back" onclick="location.href='/reservation/detail?rno=${vo.no}'">취소</button>
                             <button type="submit" id="enroll">수정</button>
                     </div>
                 </form>
