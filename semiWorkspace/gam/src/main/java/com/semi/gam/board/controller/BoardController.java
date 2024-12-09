@@ -42,11 +42,7 @@ public class BoardController {
         model.addAttribute("noticeVoList", noticeVoList);
 
         MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
-        AdminVo loginAdminVo = (AdminVo)session.getAttribute("loginAdminVo");
         model.addAttribute("jobCode" , loginMemberVo.getJobCode());
-        model.addAttribute("loginAdminVo" , loginAdminVo);
-
-        System.out.println("loginAdminVo = " + loginAdminVo);
         System.out.println("loginMemberVo = " + loginMemberVo);
         return "board/home";
     }
@@ -124,12 +120,7 @@ public class BoardController {
     // 게시글 상세조회 (제목 , 닉네임, 등록일, 조회수 , 첨부파일 , 내용 , 댓글내용 , 댓글닉네임, 댓글등록일)
     @GetMapping("detail")
     public String detail(String bno, Model model , HttpSession session ,String boardNo){
-        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
 
-
-        if(loginMemberVo == null){
-            return "redirect:/member/login";
-        }
         BoardVo vo = service.getBoardDetail(bno);
 //        List<AttachmentVo> attachmentVoList  = service.getAttachmentVoList(bno);
         model.addAttribute("vo" , vo);
