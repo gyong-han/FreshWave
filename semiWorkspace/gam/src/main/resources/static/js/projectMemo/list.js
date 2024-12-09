@@ -36,7 +36,8 @@ $.ajax({
             const inputTag = document.createElement("input");
 
             inputTag.type ="botton";
-            inputTag.value = vo.name;   
+            inputTag.value = vo.name;  
+            inputTag.setAttribute("readonly","true") 
             inputTag.onclick = function(){
                 location.href=`/projectMemo/detail?projectNo=${vo.prjKey}&no=${vo.no}`;
             };
