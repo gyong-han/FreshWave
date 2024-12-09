@@ -20,10 +20,16 @@
     <main class="main-container">
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
-                <div class="card-list">
-
-
+            <div>
+                <div id="btn1">
+                    <button type="button" class="btn1"value="카드조회"  onclick="location.href='/project/list'">목록조회</button>
                 </div>
+                <div class="card-list">
+        
+        
+                </div>
+            </div>
+  
         </div>
     </main>
 

@@ -88,3 +88,18 @@
     text-decoration: none;
 }
 
+#btn1{
+    display: flex;
+    justify-content: end;
+}
+
+#btn1 button{
+    background-color: black;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+    margin-right: 100px;
+}

@@ -56,3 +56,47 @@
 .form-area input:hover{
     cursor: pointer;
 }
+
+.list-table tbody tr:hover td{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+.list-table tbody tr:hover input{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+#fir a{
+    text-decoration: none;
+    color: black;
+}
+
+#fir a:hover{
+    text-decoration: none;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+#fir{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#la{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.btn1{
+    background-color: black;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+}

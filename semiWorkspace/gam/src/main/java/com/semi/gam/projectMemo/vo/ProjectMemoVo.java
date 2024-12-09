@@ -24,5 +24,6 @@ public class ProjectMemoVo {
     private String modifyDate;
     private String delYn;
     private String customer;
+    private String prjName;
 
 }

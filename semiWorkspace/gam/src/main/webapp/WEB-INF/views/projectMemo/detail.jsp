@@ -22,7 +22,7 @@
                 <div class="all">
                     <div class="margin">
                     <div class="prj-name">
-                        <h1>이벤트 페이지 디자인</h1>
+                        <h1>${memoVo.name}</h1>
                     </div>
                 <div class="prj-detail-box">
                     <div class="line">

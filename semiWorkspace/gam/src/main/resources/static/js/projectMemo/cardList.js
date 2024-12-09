@@ -7,6 +7,7 @@ function loadProjectMemoList(){
     const waitDiv = document.querySelector("#waitDiv");
     const ingDiv = document.querySelector("#ingDiv");
     const comDiv = document.querySelector("#comDiv");
+    const h1Tag = document.querySelector("h1");
 
     $.ajax({
 
@@ -20,9 +21,10 @@ function loadProjectMemoList(){
             const wait = m.wait;
             const ing = m.ing;
             const com = m.com;
-            console.log(wait);
-            console.log(ing);
-            console.log(com);
+            const prjName = m.name;
+
+            h1Tag.innerText = prjName.prjName;
+
             for(const vo of wait){
                const div1 = document.createElement("div");
                const div2 = document.createElement("div");
