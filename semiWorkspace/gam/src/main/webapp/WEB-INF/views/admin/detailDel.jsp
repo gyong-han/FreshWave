@@ -74,11 +74,16 @@
                    </div>
                </div>
             </div>
-                
+                <div class="btn-area">
+                <div id="list-btn">
+                </div>
+                <div id="edit-delete-btn">
+                            <button id="delete" onclick="location.href='/admin/listDel?pno=1'">목록</button>
+                            <button id="edit" onclick="location.href='/admin/out?no=${vo.empNo}'">삭제</button>
+                </div>
+                </div>
 
             </div>
         </main>
-        <button id="del" onclick="location.href='/admin/listDel?pno=1'">목록</button>
-        <button id="edit" onclick="location.href='/admin/out?no=${vo.empNo}'">삭제</button>
 </body>
 </html>

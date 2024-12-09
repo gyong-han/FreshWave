@@ -71,18 +71,6 @@ body {
     padding: 10px 15px; /* 안쪽 여백 추가 */
 }
 
-#list{
-    background-color: #121212;
-    border: none;
-    color: white;
-    border-radius: 7px;
-    height: 35px;
-    width: 100px;
-    cursor:pointer;
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 20px
-}
 
 #del{
     background-color: #121212;
@@ -110,15 +98,15 @@ body {
     margin-right: 20px
 }
 
-/* 목록 버튼: 가운데 정렬 */
-button:first-of-type {
-    display: block;
-    transform: translateX(300px); /* 버튼을 오른쪽으로 20px 이동 */
-}
 
-/* 삭제 및 수정 버튼: 오른쪽 정렬 */
-button:nth-of-type(2),
-button:nth-of-type(3) {
+
+/* 버튼 : 오른쪽 정렬 */
+input[type="button"]{
+    float: right;
+    margin-right: 5px;
+}
+/* 버튼 : 오른쪽 정렬 */
+input[type="submit"]{
     float: right;
     margin-right: 5px;
 }
