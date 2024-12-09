@@ -17,7 +17,7 @@
             <div></div>
             <!-- 검색 -->
             <div class="search-area">
-                <form action="/reservation/list?rno=1" onsubmit="return submitSearchForm();">
+                <form action="/reservation/list" onsubmit="return submitSearchForm();">
                     <select name="searchType">
                         <option value="title">제목</option>
                         <option value="writerName">작성자</option>

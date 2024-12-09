@@ -35,36 +35,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <label class="sch-label">일정 제목</label>
                 <input type="text" id="calTitle" name="title" placeholder="일정 제목을 입력해주세요!">
-                <br>
+                <div></div>
                 <input type="date" id="calStartDate" name="startDate">
                 <input type="time" id="calStartTime" name="startTime">
                 <span>-</span>
                 <input type="date" id="calEndDate" name="finishDate">
                 <input type="time" id="calEndTime" name="finishTime">
                 <br>
-                <table border="1">
-                    <tr>
-                      <td width="200">우편번호</td>
-                      <td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
-                        <input type="button" value="우편번호찾기" onclick="kakaopost();">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>주소</td>
-                      <td><input type="text" name="location" id="address" size="70">
-                      </td>
-                    </tr>
-                  </table>
+                <label class="sch-label">주소</label>
                 <br>
-                <label>중요도 : </label>
+                <input type="text" name="zipcode" id="zipcode" size="7" readonly>
+                <input type="button" id="address-btn" value="우편번호찾기" onclick="kakaopost();">
+                <br>
+                <input type="text" name="location" id="address" size="70">
+                <br>
+                <label class="sch-label">중요도</label>
                 <select name="priority" id="priority"></select>
                 <br>
                 <textarea name="content" id="calContent" placeholder="내용을 입력해주세요."></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="save-btn">Save changes</button>
+                <button type="button" class="close-btn" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="save-btn">작성</button>
             </div>
         </div>
     </div>
