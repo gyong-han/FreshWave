@@ -88,8 +88,17 @@ public class StoreController {
         List<StoreVo> storeVoList = service.getStoreVoList(pvo,searchType,searchValue);
         for (StoreVo storeVo : storeVoList) {
             if(storeVo.getPhone() != null){
-                String changePhone = storeVo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
-                storeVo.setPhone(changePhone);
+                if(storeVo.getPhone().length() == 9){
+                    String changePhone = storeVo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
+                    storeVo.setPhone(changePhone);
+                }else if(storeVo.getPhone().length() == 10){
+                    String changePhone = storeVo.getPhone().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
+                    storeVo.setPhone(changePhone);
+                }else{
+                    String changePhone = storeVo.getPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
+                    storeVo.setPhone(changePhone);
+                }
+
             }
 
         }
@@ -110,7 +119,13 @@ public class StoreController {
         StoreVo vo = service.detail(no);
         String changePhone = "";
         if(vo.getPhone() != null){
-            changePhone = vo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{6})", "$1-$2-$3");
+            if(vo.getPhone().length() == 9){
+                 changePhone = vo.getPhone().replaceFirst("(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3");
+            }else if(vo.getPhone().length() == 10){
+                 changePhone = vo.getPhone().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
+            }else{
+                 changePhone = vo.getPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
+            }
         }
         String changeBrn = vo.getBrn().replaceFirst("(\\d{3})(\\d{2})(\\d{5})", "$1-$2-$3");
         String changeCeoPhone = vo.getCeoPhone().replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");

@@ -26,7 +26,7 @@
                             <div>
                                 <label id="bu-label">영업상태</label><br>
                                 <select name="status">
-                                    <option value="영업 준비 중">영업 준비중</option>
+                                    <option value="영업 준비중">영업 준비중</option>
                                     <option value="영업중">영업중</option>
                                     <option value="휴업중">휴업중</option>
                                     <option value="폐업">폐업</option>

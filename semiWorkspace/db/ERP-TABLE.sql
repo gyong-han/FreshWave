@@ -73,6 +73,19 @@ CREATE SEQUENCE SEQ_BOARD_COMMENT NOCACHE NOCYCLE;
 
 DROP SEQUENCE SEQ_BOARD;
 CREATE SEQUENCE SEQ_BOARD NOCACHE NOCYCLE;
+
+--SCHEDULE
+DROP SEQUENCE SEQ_SCH_ATTACHMENT;
+CREATE SEQUENCE SEQ_SCH_ATTACHMENT NOCACHE NOCYCLE;
+
+DROP SEQUENCE SEQ_SCHEDULE;
+CREATE SEQUENCE SEQ_SCHEDULE NOCACHE NOCYCLE;
+
+DROP SEQUENCE SEQ_SCHEDULE_MEMBER;
+CREATE SEQUENCE SEQ_SCHEDULE_MEMBER NOCACHE NOCYCLE;
+
+DROP SEQUENCE SEQ_PHONE_RESERVATION;
+CREATE SEQUENCE SEQ_PHONE_RESERVATION NOCACHE NOCYCLE;
 --------------------------------------------------------------------------------
 ---------------------------------- FUCTION -------------------------------------
 --------------------------------------------------------------------------------
@@ -104,6 +117,35 @@ END
 ;
 /
 
+-- BOARD FUNCTION
+CREATE OR REPLACE FUNCTION GET_BOARD_ATTACHMENT_NO
+RETURN NUMBER
+AS
+  N NUMBER;
+BEGIN
+
+  SELECT SEQ_BOARD_ATTACHMENT.NEXTVAL
+  INTO N
+  FROM DUAL;
+  
+  RETURN N;
+END;
+/
+
+-- NOTICE FUCTION
+CREATE OR REPLACE FUNCTION GET_NOTICE_ATTACHMENT_NO
+RETURN NUMBER
+AS
+  N NUMBER;
+BEGIN
+
+  SELECT SEQ_NOTICE_ATTACHMENT.NEXTVAL
+  INTO N
+  FROM DUAL;
+  
+  RETURN N;
+END;
+/
 --------------------------------------------------------------------------------
 --------------------------------- TRIGGER -------------------------------------
 --------------------------------------------------------------------------------
@@ -336,7 +378,7 @@ DEPT_CODE   NUMBER                      NOT NULL PRIMARY KEY,
 DEPT_NAME   VARCHAR2(20)                NOT NULL
 );
 
---BOARD/LIST
+--BOARD/NOTICE
 DROP TABLE NOTICE CASCADE CONSTRAINTS;
 CREATE TABLE NOTICE (
     NO              NUMBER              NOT NULL PRIMARY KEY,
@@ -394,7 +436,61 @@ CREATE TABLE BOARD_COMMENT (
     MODIFY_DATE     TIMESTAMP           NULL
 );
 
+--SCHEDULE
+DROP TABLE SCHEDULE CASCADE CONSTRAINTS;
+CREATE TABLE SCHEDULE(
+    NO              NUMBER                      NOT NULL PRIMARY KEY
+    , WRITER_NO     NUMBER                      NOT NULL
+    , MEMO_NO       NUMBER
+    , BUSINESS_NO   NUMBER
+    , BUSIHIS_NO    NUMBER
+    , STORE_NO      NUMBER
+    , PRIORITY      NUMBER      DEFAULT 2
+    , TITLE         VARCHAR2(50)                NOT NULL
+    , CONTENT       VARCHAR2(500)
+    , LOCATION      VARCHAR2(200)               NULL
+    , START_DATE    CHAR(10)                    NOT NULL
+    , FINISH_DATE   CHAR(10)                    NOT NULL
+    , START_TIME    CHAR(5)
+    , FINISH_TIME   CHAR(5)
+    , ALLDAY        CHAR(1)     DEFAULT 'N' CHECK(ALLDAY IN('Y', 'N'))
+    , SHARE_YN      CHAR(1)     DEFAULT 'N' CHECK(SHARE_YN IN('Y','N'))
+    , DEL_YN        CHAR(1)     DEFAULT 'N' CHECK(DEL_YN IN('Y','N'))
+);
 
+DROP TABLE SCHEDULE_MEMBER CASCADE CONSTRAINTS;
+CREATE TABLE SCHEDULE_MEMBER (
+    NO	            NUMBER		                NOT NULL PRIMARY KEY
+    , SCH_NO	    NUMBER	                	NOT NULL
+    , EMP_NO	    NUMBER		                NOT NULL
+    , MODI_AUTH	    CHAR(1)	    DEFAULT 'N'	CHECK(MODI_AUTH IN('Y','N'))
+);
+
+DROP TABLE SCH_ATTACHMENT CASCADE CONSTRAINTS;
+CREATE TABLE SCH_ATTACHMENT (
+    NO	            NUMBER		                NULL PRIMARY KEY
+    , REF_NO	    NUMBER		                NOT NULL
+    , ORIGIN_NAME	VARCHAR2(2000)
+    , CHANGE_NAME	VARCHAR2(2000)
+    , FILE_PATH 	VARCHAR2(2000)
+    , STATUS	    CHAR(1) 	DEFAULT 'Y'
+    , ENROLL_DATE	TIMESTAMP	DEFAULT SYSDATE
+);
+
+DROP TABLE PHONE_RESERVATION CASCADE CONSTRAINTS;
+CREATE TABLE PHONE_RESERVATION (
+    NO	            NUMBER		                    NOT NULL PRIMARY KEY
+    , WRITER_NO     NUMBER                          NOT NULL
+    , CP_CODE	    CHAR(4)		                    NOT NULL
+    , RDATE         CHAR(10)                        NOT NULL
+    , RTIME	        CHAR(5)		                    NOT NULL
+    , PHONE	        CHAR(11)                        NOT NULL
+    , TITLE         VARCHAR2(500)                   NOT NULL
+    , CONTENT       VARCHAR2(1000)                  NOT NULL
+    , ENROLL_DATE   TIMESTAMP   DEFAULT SYSDATE
+    , MODIFY_DATE   TIMESTAMP
+    , DEL_YN        CHAR(1)     DEFAULT 'N' CHECK(DEL_YN IN('Y','N'))
+);
 --------------------------------------------------------------------------------
 --------------------------------- COMMENT --------------------------------------
 --------------------------------------------------------------------------------
