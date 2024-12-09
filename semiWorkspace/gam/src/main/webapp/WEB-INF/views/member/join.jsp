@@ -103,14 +103,17 @@
                         </label>
                         <br><br>
 
-                        <label>
-                            비밀번호
-                            <label class="point">*</label>
-                            <br>
-                            <br>
-                            <input type="password" class="input-contain" name="pwd" placeholder="비밀번호를 입력하세요" required>
-                        </label>
-                        <br><br>
+                        <div>
+                            <label for="new-password">
+                                비밀번호
+                                <br><br>
+                                <label class="point">*</label>
+                            </label>
+                                <div class="password-wrapper">
+                                    <input type="password" class="input-contain" name="pwd" id="new-password" placeholder="비밀번호를 입력해주세요">
+                                    <button type="button" class="toggle-btn" onclick="togglePassword();">보기</button>
+                                </div>
+                        </div>
 
                         <label>
                             이메일

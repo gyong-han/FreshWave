@@ -77,6 +77,7 @@ button {
     border: none;
     background-color: #FFFFFF;
     width: 300px;
+    height: 35px;
     gap: 10;
     height: 40px;
     border-radius: 10px;
@@ -154,5 +155,30 @@ main label-gender{
     font-family: "Pretendard-Regular";
     font-size: large;
     font-weight: bold;
+
+}
+
+  input[type="password"], input[type="text"] {
+    color: #000; /* 텍스트는 검정색 */
+    background-color: #fff; /* 배경은 흰색 */
+    font-size: 16px;
+    padding: 5px;
+    width: 300px;
+    height : 35px;
+    display: inline-block; /* 요소가 화면에 표시되도록 */
+    visibility: visible; /* 요소가 보이도록 */
+}
+.password-wrapper {
+    display: flex;
+    align-items: center;
+}
+.toggle-btn {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* 사이드바: 고정된 너비 */
+main > .sidebar {
+    width: 250px; /* 적절히 조정 가능 */
 
 }

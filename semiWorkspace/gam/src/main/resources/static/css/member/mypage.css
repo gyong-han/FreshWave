@@ -162,3 +162,22 @@ label{
   input[type="file"] {
     display: none; /* 기본 파일 업로드 버튼 숨기기 */
   }
+
+  input[type="password"], input[type="text"] {
+    color: #000; /* 텍스트는 검정색 */
+    background-color: #fff; /* 배경은 흰색 */
+    font-size: 16px;
+    padding: 5px;
+    width: 300px;
+    height: 40px;
+    display: inline-block; /* 요소가 화면에 표시되도록 */
+    visibility: visible; /* 요소가 보이도록 */
+}
+.password-wrapper {
+    display: flex;
+    align-items: center;
+}
+.toggle-btn {
+    margin-left: 10px;
+    cursor: pointer;
+}

@@ -132,3 +132,18 @@ pwdInputTag.addEventListener("input" , function(e){
         pwdResult.classList.remove("color-blue");
     }
 });
+
+function togglePassword() {
+  // 고유한 id를 사용하여 요소 선택
+  const passwordField = document.getElementById('new-password');
+  const toggleButton = document.querySelector('.toggle-btn');
+  
+  // 비밀번호 표시/숨기기 토글
+  if (passwordField.type === 'password') {
+      passwordField.type = 'text'; // 비밀번호 표시
+      toggleButton.textContent = '숨기기';
+  } else {
+      passwordField.type = 'password'; // 비밀번호 숨기기
+      toggleButton.textContent = '보기';
+  }
+}

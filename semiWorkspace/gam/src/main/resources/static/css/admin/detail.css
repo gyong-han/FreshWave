@@ -137,3 +137,8 @@ button:nth-of-type(3) {
 .group-under {
     margin-top: 20px; /* 위 테이블과 아래 테이블 사이 간격 */
 }
+/* 사이드바: 고정된 너비 */
+main > .sidebar {
+    width: 250px; /* 적절히 조정 가능 */
+    /* background-color: #f4f4f4; */
+}
