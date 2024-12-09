@@ -1,6 +1,7 @@
 package com.semi.gam.project.mapper;
 
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.project.vo.PageVo;
 import com.semi.gam.project.vo.ProjectMemberVo;
 import com.semi.gam.project.vo.ProjectVo;
 import org.apache.ibatis.annotations.Delete;
@@ -31,7 +32,7 @@ public interface ProjectMapper {
                 , #{vo.endDate}
                 , #{vo.disclosure}
             )
-            
+                
             """)
     int write(ProjectVo vo, MemberVo memberVo);
 
@@ -76,10 +77,33 @@ public interface ProjectMapper {
             JOIN DEPT D ON (E.DEPT_CODE = D.DEPT_CODE)
             JOIN MEMBER B ON (E.EMP_NO = B.ID)
             WHERE P.DEL_YN = 'N'
+            AND P.WRITER_NO = #{loginMemberVo.id}
+            ORDER BY P.ENROLL_DATE DESC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.projectLimit} ROWS ONLY
+            """)
+    List<ProjectVo> getProjectList(MemberVo loginMemberVo, PageVo pvo);
+
+    @Select("""
+            SELECT
+                    P.NAME
+                    , P.KEY
+                    , D.DEPT_NAME  AS deptName
+                    , B.NAME       AS memberName
+                    , R.NAME       AS priorityName
+                    , P.START_DATE
+                    , P.END_DATE
+                    , E.EMP_NO     AS memberNo
+            FROM PROJECT P
+            JOIN PRIORITY R ON (P.PRIORITY = R.NO)
+            JOIN EMPLOYEE E ON (P.WRITER_NO = E.EMP_NO)
+            JOIN DEPT D ON (E.DEPT_CODE = D.DEPT_CODE)
+            JOIN MEMBER B ON (E.EMP_NO = B.ID)
+            WHERE P.DEL_YN = 'N'
             AND P.WRITER_NO = #{id}
             ORDER BY P.ENROLL_DATE DESC
             """)
-    List<ProjectVo> getProjectList(MemberVo loginMemberVo);
+    List<ProjectVo> getProjectCardList(MemberVo loginMemberVo);
+
 
 
     @Select("""
@@ -118,10 +142,33 @@ public interface ProjectMapper {
             JOIN MEMBER B ON (B.ID = P.WRITER_NO)
             JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
             JOIN PRIORITY R ON (R.NO = P.PRIORITY)
+            WHERE M.EMP_NO = #{loginMemberVo.id}
+            AND P.DEL_YN = 'N'
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.projectLimit} ROWS ONLY
+            """)
+    List<ProjectVo> getProjectAddMemberVo(MemberVo loginMemberVo, PageVo pvo);
+
+    @Select("""
+            SELECT
+                P.NAME
+                , P.KEY
+                , D.DEPT_NAME   AS deptName
+                , B.NAME        AS memberName
+                , R.NAME        AS priorityName
+                , P.START_DATE
+                , P.END_DATE
+                , E.EMP_NO      AS memberNo
+            FROM PROJECT P
+            JOIN PROJECT_MEMBER M ON (M.PRJ_KEY = P.KEY)
+            JOIN EMPLOYEE E ON (E.EMP_NO = P.WRITER_NO)
+            JOIN MEMBER B ON (B.ID = P.WRITER_NO)
+            JOIN DEPT D ON (D.DEPT_CODE = E.DEPT_CODE)
+            JOIN PRIORITY R ON (R.NO = P.PRIORITY)
             WHERE M.EMP_NO = #{id}
             AND P.DEL_YN = 'N'
             """)
-    List<ProjectVo> getProjectAddMemberVo(MemberVo loginMemberVo);
+    List<ProjectVo> getProjectCardAddMemberVo(MemberVo loginMemberVo);
+
 
     @Select("""
             SELECT
@@ -225,4 +272,19 @@ public interface ProjectMapper {
              )
             """)
     int setAddMember(String s, String s1, String prjKey);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM PROJECT
+            WHERE WRITER_NO = #{id}
+            AND DEL_YN  = 'N'
+            """)
+    int getProjectListCnt(MemberVo loginMemberVo);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM PROJECT_MEMBER M
+            WHERE EMP_NO = #{id}
+            """)
+    int getProjectAddListCnt(MemberVo loginMemberVo);
 }

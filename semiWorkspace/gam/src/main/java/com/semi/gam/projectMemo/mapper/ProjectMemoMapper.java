@@ -1,6 +1,7 @@
 package com.semi.gam.projectMemo.mapper;
 
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.project.vo.PageVo;
 import com.semi.gam.projectMemo.vo.ProjectMemoVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -56,8 +57,10 @@ public interface ProjectMemoMapper {
             JOIN PRIORITY R ON (R.NO = P.PRIORITY)
             JOIN MEMBER B ON (B.ID = P.WRITER_NO)
             WHERE PRJ_KEY = #{key}
+            AND P.DEL_YN = 'N'
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.projectLimit} ROWS ONLY
             """)
-    List<ProjectMemoVo> list(String key);
+    List<ProjectMemoVo> list(String key, PageVo pvo);
 
     @Select("""
             SELECT
@@ -78,6 +81,7 @@ public interface ProjectMemoMapper {
             LEFT JOIN BUSINESS N ON (N.NO = M.BP_NO)
             LEFT JOIN STORE S ON (S.NO = M.ST_NO)
             WHERE M.NO = #{no}
+            AND M.DEL_YN = 'N'
             """)
     ProjectMemoVo getMemoVo(String no);
 
@@ -91,6 +95,72 @@ public interface ProjectMemoMapper {
                     , CONTENT = #{content}
                     , MODIFY_DATE = SYSDATE
             WHERE NO = #{no}
+            AND DEL_YN = 'N'
             """)
     int edit(ProjectMemoVo vo);
+
+    @Update("""
+            UPDATE PRJ_MEMO
+                SET
+                    DEL_YN = 'Y'
+            WHERE NO = #{no}
+            AND DEL_YN = 'N'
+            """)
+    int delete(String no);
+
+    @Select("""
+            SELECT 
+                    P.NAME
+                    , R.NAME AS priorityName
+                    , P.START_DATE
+                    , P.END_DATE 
+                    , P.NO
+                    , P.PRJ_KEY
+            FROM PRJ_MEMO P
+            JOIN PRIORITY R ON (R.NO = P.PRIORITY)
+            WHERE PRJ_KEY = #{key}
+            AND ING = '진행대기'
+            AND DEL_YN ='N'
+            """)
+    List<ProjectMemoVo> getProjectMemoWaitList(MemberVo loginMemberVo, String key);
+
+    @Select("""
+            SELECT 
+                    P.NAME
+                    , R.NAME AS priorityName
+                    , P.START_DATE
+                    , P.END_DATE 
+                    , P.NO
+                    , P.PRJ_KEY
+            FROM PRJ_MEMO P
+            JOIN PRIORITY R ON (R.NO = P.PRIORITY)
+            WHERE PRJ_KEY = #{key}
+            AND ING = '진행중'
+            AND DEL_YN ='N'
+            """)
+    List<ProjectMemoVo> getProjectMemoIngList(MemberVo loginMemberVo, String key);
+   
+    @Select("""
+            SELECT 
+                    P.NAME
+                    , R.NAME AS priorityName
+                    , P.START_DATE
+                    , P.END_DATE 
+                    , P.NO
+                    , P.PRJ_KEY
+            FROM PRJ_MEMO P
+            JOIN PRIORITY R ON (R.NO = P.PRIORITY)
+            WHERE PRJ_KEY = #{key}
+            AND ING = '진행완료'
+            AND DEL_YN ='N'
+            """)
+    List<ProjectMemoVo> getProjectMemoComplateList(MemberVo loginMemberVo, String key);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM PRJ_MEMO
+            WHERE PRJ_KEY = #{key}
+            AND DEL_YN = 'N'
+            """)
+    int getProjectMemoListCnt(MemberVo loginMemberVo, String key);
 }

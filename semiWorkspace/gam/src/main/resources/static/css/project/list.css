@@ -1,0 +1,58 @@
+.prj-list-area{
+    display: grid;
+    grid-template-rows: 6fr 0.7fr 0.3fr;
+    width: 72%;
+    height: 650px;
+}
+
+.prj-list-area table{
+    border-collapse: collapse;
+    text-align: center;
+    height: 100%;
+}
+
+.prj-list-area thead td{
+    font-size: 25px;
+    font-weight: 700;
+    border-bottom: 3px solid black;
+}
+
+.prj-list-area tbody{
+    border-spacing: 10px;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+
+.prj-list-area form{
+    text-align: end;
+    margin-right: 40px;
+    margin-top: 10px;
+    
+}
+
+.page-area{
+    text-align: center;
+    align-self: end;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.page-area a{
+    margin: 10px;
+    text-decoration: none;
+}
+
+.form-area input{
+    font-weight: 500;   
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+}
+
+.form-area input:hover{
+    cursor: pointer;
+}

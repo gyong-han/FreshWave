@@ -1,0 +1,136 @@
+.box{
+    width: 1420px;
+    height: 770px;
+    top: 181px;
+    left: 350px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+}
+
+.head{
+    width: 95%;
+    height: 90px;
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 40px;
+    border-bottom: 1px solid black;
+}
+
+.input-area select{
+    width: 180px;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    border: none;
+}
+
+.project{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 680px;
+    margin-left: 80px;
+    margin-top : 30px;
+}
+
+.title-area{
+
+    font-size: 25px;
+    font-weight: 700;
+    border: none;
+}
+
+.edit-date{
+    font-size: 25px;
+    font-weight: 700;
+    border: none;
+}
+
+.input-area input{
+    width: 180px;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 25px;
+    font-weight: 400;
+    border: none;
+}
+
+.input-area {
+    display: grid;
+    grid-auto-rows: 100px;
+}
+
+.add-area input{
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.add-area table{
+    width: 500px;
+    height: 600px;
+}
+
+.add-area tbody{
+    display: grid;
+    grid-auto-rows: 65px;
+    width: 100%;
+    height: 680px;
+    font-size : 25px;
+    font-weight: 500;
+}
+
+.button-area{
+    margin-top: 30px;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    gap: 10px;
+}
+
+.button-area button{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+}
+
+.spanBtn button{
+    background-color: black;
+    cursor: pointer;
+    order: 1;
+}
+
+.spanBtn input{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+    order: 2;
+}
+
+.add-area label{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#memberName{
+    border : none;
+    background-color:  #f2f2f2;
+}
+
+#add label{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#add input{
+    font-size: 20px;
+    font-weight: 400;
+}

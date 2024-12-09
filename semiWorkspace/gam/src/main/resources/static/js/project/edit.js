@@ -181,7 +181,7 @@ function addMember() {
 
                    tbodyTag.appendChild(trTag);
 
-                   nameTag.innerHTML = "";
+                   nameTag.value = "";
         }  ,
         error :  function(){
                console.log("통신 실패");

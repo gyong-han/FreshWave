@@ -1,6 +1,7 @@
 package com.semi.gam.projectMemo.service;
 
 import com.semi.gam.member.vo.MemberVo;
+import com.semi.gam.project.vo.PageVo;
 import com.semi.gam.projectMemo.mapper.ProjectMemoMapper;
 import com.semi.gam.projectMemo.vo.ProjectMemoVo;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,8 @@ public class ProjectMemoService {
         return mapper.write(vo, loginMemberVo);
     }
 
-    public List<ProjectMemoVo> list(String key) {
-        return mapper.list(key);
+    public List<ProjectMemoVo> list(String key, PageVo pvo) {
+        return mapper.list(key, pvo);
     }
 
     public ProjectMemoVo getMemoVo(String no) {
@@ -33,5 +34,25 @@ public class ProjectMemoService {
 
     public int edit(ProjectMemoVo vo) {
         return mapper.edit(vo);
+    }
+
+    public int delete(String no) {
+        return mapper.delete(no);
+    }
+
+    public List<ProjectMemoVo> getProjectMemoWaitList(MemberVo loginMemberVo, String key) {
+        return mapper.getProjectMemoWaitList(loginMemberVo, key);
+    }
+
+    public List<ProjectMemoVo> getProjectMemoIngList(MemberVo loginMemberVo, String key) {
+        return mapper.getProjectMemoIngList(loginMemberVo , key);
+    }
+
+    public List<ProjectMemoVo> getProjectMemoComplateList(MemberVo loginMemberVo, String key) {
+        return mapper.getProjectMemoComplateList(loginMemberVo, key);
+    }
+
+    public int getProjectMemoListCnt(MemberVo loginMemberVo, String key) {
+        return mapper.getProjectMemoListCnt(loginMemberVo, key);
     }
 }

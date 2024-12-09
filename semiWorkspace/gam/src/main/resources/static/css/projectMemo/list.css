@@ -1,0 +1,130 @@
+.all{
+    width: 1405px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.button-area{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.button-area button{
+
+    font-size: 25px;
+    font-weight: 700;
+
+}
+
+#btn1{
+    background-color: black;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+
+}
+
+#btn2{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+}
+.memo{
+    width: 100%;
+    height: 100%;
+}
+
+.memo-list-area{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    
+}
+
+.memo-list-area tbody > tr > td input{
+
+    font-size :25px;
+    font-weight: 400;
+    width: 400px;
+    background-color: #f2f2f2;
+    border: none;
+    text-align: center;
+    
+}
+
+.page-area{
+
+    display: flex;
+    justify-content: center;
+    gap : 10px;
+    margin-top : 30px;
+}
+
+
+.list-table{
+    border-collapse: collapse;
+    width: 1400px;
+}
+
+.list-table thead th{
+    text-align: center;;
+    border-bottom: 2px solid #121212;
+    width: 150px;
+}
+
+.list-table thead th:last-child{
+    text-align: center;
+    border-bottom: 2px solid #121212;
+    height: 50px;
+}
+
+.list-table tbody td{
+    text-align: center;
+    height: 47px;
+}
+
+.list-table tbody tr:hover td{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+.list-table tbody tr:hover input{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+
+.list-table tbody tr:hover td:nth-child(1) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.list-table tbody tr:hover td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.list-table thead th{
+    text-align: center;
+    border-bottom: 2px solid #121212;
+    width: 150px;
+}
+
+.list-table thead th:last-child{
+    text-align: center;
+    border-bottom: 2px solid #121212;
+    height: 50px;
+}
+
