@@ -62,24 +62,19 @@ public class BoardController {
 
     //게시글 작성
     @PostMapping("write")
-    public String insert(BoardVo vo , @RequestParam(name = "f") List<MultipartFile> fileList , HttpSession session) throws IOException {
+    public String insert(BoardVo vo , @RequestParam(name = "f") MultipartFile f, HttpSession session) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
         System.out.println("loginMemberVo = " + loginMemberVo);
 
-        List<String> changeNameList = new ArrayList<>();
-        List<String> originNameList = new ArrayList<>();
-
-        for (MultipartFile f : fileList){
-            if(f.isEmpty()){break;}
-            String originName = f.getOriginalFilename();
-            vo.setOriginName(originName);
-            String changeName = FileUploader.save(f, path);
-            changeNameList.add(changeName);
+        String changeName = "";
+        String originName = f.getOriginalFilename();
+        if(!f.isEmpty()){
+            changeName = FileUploader.save(f,path);
         }
         //service
-        int result = service.write(vo , changeNameList);
-        System.out.println("changeNameList = " + changeNameList);
+        int result = service.write(vo , changeName, originName);
+
         //result
         if(result == 1){
             System.out.println("게시글 작성 성공 !");
@@ -128,15 +123,29 @@ public class BoardController {
 
     // 게시글 상세조회 (제목 , 닉네임, 등록일, 조회수 , 첨부파일 , 내용 , 댓글내용 , 댓글닉네임, 댓글등록일)
     @GetMapping("detail")
-    public String detail(String bno, Model model , HttpSession session){
+    public String detail(String bno, Model model , HttpSession session ,String boardNo){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+
+
         if(loginMemberVo == null){
             return "redirect:/member/login";
         }
         BoardVo vo = service.getBoardDetail(bno);
 //        List<AttachmentVo> attachmentVoList  = service.getAttachmentVoList(bno);
         model.addAttribute("vo" , vo);
+
+        // 댓글 목록 조회 및 필터링
+        List<CommentVo> allComments = service.getBoardCommentList(boardNo);
+        List<CommentVo> filteredComments = new ArrayList<>();
+        for (CommentVo comment : allComments) {
+            if (comment.getBoardNo() != null && !comment.getBoardNo().isEmpty()) { // boardNo 유효성 체크
+                comment.setBoardNo(boardNo); // boardNo 설정
+                filteredComments.add(comment); // 유효한 댓글만 추가
+            }
+        }
+        model.addAttribute("boardCommentVoList", filteredComments);
 //        model.addAttribute("attachmentVoList" , attachmentVoList);
+
         return "board/detail";
     }
 
@@ -157,7 +166,7 @@ public class BoardController {
 
     // 게시글 수정(처리)
     @PostMapping("edit")
-    public String edit(BoardVo vo , MultipartFile f, HttpSession session , Model model) throws IOException {
+    public String edit(BoardVo vo , MultipartFile f, HttpSession session , Model model,String boardNo) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         System.out.println("loginMemberVo = " + loginMemberVo);
         vo.setWriterNo(loginMemberVo.getId());
@@ -170,8 +179,17 @@ public class BoardController {
         }
         int result = service.edit( vo , originName , changeName);
         session.setAttribute("alertNo" , result);
-        detail(vo.getNo(),model,session);
-       return "redirect:/board/list";
+        detail(vo.getNo(),model,session,boardNo);
+
+        String bno = vo.getNo();
+        if (bno == null || bno.isEmpty()) {
+            throw new IllegalArgumentException("게시글 번호(bno)가 유효하지 않습니다."); // 예외 처리
+        }
+
+        session.setAttribute("changeName" , changeName);
+        session.setAttribute("originName" , originName);
+
+        return "redirect:/board/detail?bno=" + bno;
     }
 
     // 게시글 삭제

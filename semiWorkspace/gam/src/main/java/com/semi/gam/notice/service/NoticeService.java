@@ -38,11 +38,11 @@ public class NoticeService {
 
     public NoticeVo getNoticeDetail(String bno) {
         int result = mapper.increseHit(bno);
-        if(result != 1){
-            String errMsg = "NOTICE > SERVICE > 상세조회 > 조회수 에러";
-            log.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
+//        if(result != 1){
+//            String errMsg = "NOTICE > SERVICE > 상세조회 > 조회수 에러";
+//            log.error(errMsg);
+//            throw new IllegalStateException(errMsg);
+//        }
         return mapper.getNoticeDetail(bno);
     }
 
