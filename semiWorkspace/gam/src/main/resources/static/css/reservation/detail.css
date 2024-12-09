@@ -40,20 +40,40 @@ body{
     justify-content: center;
 }
 
-#date-area{
+#line-area{
     margin-left: 50px;
+    margin-right: 50px;
+    border-bottom: 1px solid #121212;
+}
+
+#info-area{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#date-area{
+    place-items: center;
+    margin-left: 50px;
+    margin-top: 15px;
 }
 
 #time-area{
-    margin-left: 50px;
+    place-items: center;
+    margin-top: 15px;
 }
 
 #writer-area{
+    place-items: center;
     margin-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #phone-area{
-    margin-left: 50px;
+    place-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .btn-area{
