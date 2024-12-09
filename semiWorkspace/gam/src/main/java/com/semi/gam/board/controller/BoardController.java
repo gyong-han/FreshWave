@@ -42,12 +42,7 @@ public class BoardController {
         model.addAttribute("noticeVoList", noticeVoList);
 
         MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
-        AdminVo loginAdminVo = (AdminVo)session.getAttribute("loginAdminVo");
         model.addAttribute("jobCode" , loginMemberVo.getJobCode());
-        model.addAttribute("loginAdminVo" , loginAdminVo);
-
-        System.out.println("loginAdminVo = " + loginAdminVo);
-        System.out.println("loginMemberVo = " + loginMemberVo);
         return "board/home";
     }
 
@@ -65,7 +60,6 @@ public class BoardController {
     public String insert(BoardVo vo , @RequestParam(name = "f") MultipartFile f, HttpSession session) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginMemberVo.getId());
-        System.out.println("loginMemberVo = " + loginMemberVo);
 
         String changeName = "";
         String originName = f.getOriginalFilename();
@@ -124,12 +118,7 @@ public class BoardController {
     // 게시글 상세조회 (제목 , 닉네임, 등록일, 조회수 , 첨부파일 , 내용 , 댓글내용 , 댓글닉네임, 댓글등록일)
     @GetMapping("detail")
     public String detail(String bno, Model model , HttpSession session ,String boardNo){
-        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
 
-
-        if(loginMemberVo == null){
-            return "redirect:/member/login";
-        }
         BoardVo vo = service.getBoardDetail(bno);
 //        List<AttachmentVo> attachmentVoList  = service.getAttachmentVoList(bno);
         model.addAttribute("vo" , vo);
@@ -154,8 +143,6 @@ public class BoardController {
     public String edit(HttpSession session , Model model , @RequestParam String bno){
         BoardVo vo = service.getBoardDetail(bno);
 //        List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
-        System.out.println("bno = " + bno);
-        System.out.println("vo1 = " + vo);
         if(session.getAttribute("loginMemberVo") == null){
             return "redirect:/member/login";
         }
@@ -168,7 +155,6 @@ public class BoardController {
     @PostMapping("edit")
     public String edit(BoardVo vo , MultipartFile f, HttpSession session , Model model,String boardNo) throws IOException {
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        System.out.println("loginMemberVo = " + loginMemberVo);
         vo.setWriterNo(loginMemberVo.getId());
 
         String changeName = "";
@@ -219,7 +205,6 @@ public class BoardController {
     @ResponseBody
     public List<CommentVo> getBoardCommentList(String boardNo){
         List<CommentVo> BoardCommentVoList = service.getBoardCommentList(boardNo);
-        System.out.println("boardNo = " + boardNo);
         return BoardCommentVoList;
     }
 
@@ -228,7 +213,6 @@ public class BoardController {
     @ResponseBody
     public String commentDel(CommentVo vo , HttpSession session){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-        System.out.println("vo = " + vo);
         vo.setComWriNo(loginMemberVo.getId());
         int result  = service.commentDel(vo);
         if(result == 0){
