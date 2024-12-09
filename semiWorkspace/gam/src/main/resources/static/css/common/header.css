@@ -65,7 +65,8 @@ header img {
     border-radius: 50px;
 }
 
-aside{
+/* 기본 스타일 */
+aside {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -76,27 +77,39 @@ aside{
     font-size: 1.2rem;
 }
 
-.icon{
+.icon {
     display: flex;
     align-items: center;
+    padding: 10px 20px; /* 여백 추가 */
+    border-radius: 10px; /* 아이콘의 둥근 모서리 */
+    position: relative; /* 파란 배경 위치를 위해 설정 */
     cursor: pointer;
+    color: #121212; /* 기본 텍스트 색상 */
+    background-color: transparent; /* 기본 배경 투명 */
+    transition: all 0.3s ease; /* 부드러운 효과 */
 }
 
+/* Hover 시 스타일 */
+.icon:hover {
+    color: #ffffff; /* 글씨 색상 하얗게 */
+    background-color: #1D64F2; /* 파란색 배경 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+}
 
+/* 아이콘 이미지 Hover */
 .icon img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px; /* 텍스트와 이미지 간격 */
+    transition: filter 0.3s ease;
 }
 
-.icon:hover{
-    color: #f2f2f2;
-}
-
-.icon img:hover{
+.icon:hover img {
     filter: invert(100%) sepia(3%) saturate(611%) hue-rotate(308deg) brightness(115%) contrast(90%);
 }
 
-.bluediv{
+/* 블루박스 스타일 (선택 시 활성화 효과를 위해) */
+.bluediv {
     position: absolute;
     background-color: #1D64F2;
     width: 250px;
@@ -105,27 +118,24 @@ aside{
     border-bottom-right-radius: 20px;
     z-index: -1;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: all 0.3s ease;
+    opacity: 0; /* 기본 비활성화 상태 */
+    transform: scale(0.95); /* 살짝 작게 */
 }
 
-.list{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1px;
-    width: 250px;
-    height: 1px;
-    font-size: 0.9rem;
-    font-family: "Pretendard-Medium";
-    color: #121212;
+/* Hover 시 bluediv 활성화 */
+.icon:hover .bluediv {
+    opacity: 1;
+    transform: scale(1); /* 크기 정상화 */
 }
 
-.list ul li:hover{
+/* 리스트 텍스트 Hover 스타일 */
+.list ul li:hover {
     font-size: 1.0rem;
     font-family: "Pretendard-SemiBold";
     color: #1D64F2;
 }
+
 
 #dropdown-container {
     display: inline-block;

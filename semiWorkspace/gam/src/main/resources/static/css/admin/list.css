@@ -141,3 +141,9 @@ a{
 #search-type option {
     border-radius: 0px;
   }
+
+/* 사이드바: 고정된 너비 */
+main > .sidebar {
+    width: 250px; /* 적절히 조정 가능 */
+    /* background-color: #f4f4f4; */
+}

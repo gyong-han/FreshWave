@@ -44,22 +44,20 @@
                 <br>
 
                 <!-- 비밀번호 -->
-                <label id="password">
-                    비밀번호
-                    <br><br>
-                    <input type="password" class="input-contain" name="pwd" id="password" placeholder="비밀번호를 입력해주세요">
-                </label>
-                    <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
+                <div>
+                    <label for="new-password">
+                        비밀번호
+                        <br><br>
+                    </label>
+                        <div class="password-wrapper">
+                            <input type="password" class="input-contain" name="pwd" id="new-password" placeholder="변경할 비밀번호를 입력해주세요">
+                            <button type="button" class="toggle-btn" onclick="togglePassword();">보기</button>
+                        </div>
+                        <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
+                </div>
+                    
                 <br>
 
-                <!-- 비밀번호 재입력 -->
-                <label id="password-again">
-                    비밀번호 재입력
-                    <br><br>
-                    <input type="password" class="input-contain" id="password-retype" placeholder="비밀번호를 다시 입력해주세요">
-                </label>
-                  <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
-                <br>
 
                 <!-- 전화번호 -->
                 <label id="phone">
