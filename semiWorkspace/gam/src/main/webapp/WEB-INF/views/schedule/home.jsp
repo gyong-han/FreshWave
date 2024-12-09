@@ -10,11 +10,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- swal -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- address -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- home.js -->
 <script defer src="/js/schedule/home.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <link rel="stylesheet" href="/css/schedule/home.css">
 <title>FRESH WAVE</title>
 </head>
@@ -57,7 +60,7 @@
                 <textarea name="content" id="calContent" placeholder="내용을 입력해주세요."></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="close-btn" data-bs-dismiss="modal">목록</button>
                 <button type="button" class="save-btn">작성</button>
             </div>
         </div>
@@ -75,10 +78,11 @@
         <div class="modal-body" id="detail-body">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="edit-btn" onclick="changeEvent(this);">수정하기</button>
-            <button type="button" class="del-btn" onclick="delEvent(this);">삭제하기</button>
-            <button type="button" class="save-btn">Save changes</button>
+            <button type="button" class="close-btn" data-bs-dismiss="modal">목록</button>
+            <button type="button" class="del-btn" onclick="delEvent(this);">삭제</button>
+            <!-- <button type="button" class="del-btn" onclick="scheduleDelete(`${vo.no}`);">삭제</button> -->
+            <button type="button" class="edit-btn" onclick="changeEvent(this);">수정</button>
+            <!-- <button type="button" class="save-btn">Save changes</button> -->
         </div>
       </div>
     </div>

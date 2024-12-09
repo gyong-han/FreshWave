@@ -87,7 +87,7 @@ textarea[name=content]{
     color: #f2f2f2;
     border-radius: 7px;
     height: 30px;
-    width: 120px;
+    width: 80px;
     cursor: pointer;
     margin-top: 20px;
     margin-left: 50px;
@@ -100,7 +100,31 @@ textarea[name=content]{
     color: #f2f2f2;
     border-radius: 7px;
     height: 30px;
-    width: 120px;
+    width: 80px;
+    cursor:pointer;
+    margin-top: 20px;
+}
+
+.del-btn{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+.edit-btn{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 80px;
     cursor:pointer;
     margin-top: 20px;
 }

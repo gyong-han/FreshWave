@@ -17,7 +17,7 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
             <div id="content-area">
-                <form class="write-form" action="/schedule/edit" method="post">
+                <form class="write-form" action="/schedule/edit?sno=${vo.no}" method="post">
                     <div id="title-area">
                         <label class="sch-label">일정 제목</label>
                         <br>
@@ -54,7 +54,7 @@
                           <textarea name="content">${vo.content}</textarea>
                     </div>
                     <div class="btn-area">
-                        <button type="button" id="cancel" onclick="location.href='/schedule/home'">취소</button>
+                        <button type="button" id="cancel" onclick="cancel();">취소</button>
                         <button type="submit" id="enroll">수정</button>
                     </div>
                 </form>

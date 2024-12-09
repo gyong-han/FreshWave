@@ -42,16 +42,16 @@ public interface PhoneReservationMapper {
             UPDATE PHONE_RESERVATION
                 SET
                     MODIFY_DATE = SYSDATE
-                    , CP_CODE = #{cpCode}
-                    , RDATE = #{rdate}
-                    , RTIME = #{rtime}
-                    , PHONE = #{phone}
-                    , TITLE = #{title}
-                    , CONTENT = #{content}
-            WHERE NO = #{no}
+                    , CP_CODE = #{vo.cpCode}
+                    , RDATE = #{vo.rdate}
+                    , RTIME = #{vo.rtime}
+                    , PHONE = #{vo.phone}
+                    , TITLE = #{vo.title}
+                    , CONTENT = #{vo.content}
+            WHERE NO = #{rno}
                 AND DEL_YN = 'N'
             """)
-    int edit(PhoneReservationVo vo);
+    int edit(PhoneReservationVo vo, String rno);
 
     int getReservationCnt(String searchType, String searchValue);
 

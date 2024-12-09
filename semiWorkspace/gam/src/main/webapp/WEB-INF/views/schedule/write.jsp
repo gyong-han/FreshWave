@@ -17,7 +17,7 @@
         <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="content-wrapper">
             <div id="content-area">
-                <form class="write-form" action="/schedule/write" method="post">
+                <form class="write-form" action="/schedule/write" method="post" onsubmit="return false">
                     <div id="title-area">
                         <label class="sch-label">일정 제목</label>
                         <br>
@@ -54,7 +54,7 @@
                           <textarea name="content" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                     <div class="btn-area">
-                        <button type="button" id="cancel" onclick="location.href='/schedule/home'">취소</button>
+                        <button type="button" id="cancel" onclick="cancel();">취소</button>
                         <button type="submit" id="enroll">작성</button>
                     </div>
                 </form>
