@@ -3,6 +3,7 @@ package com.semi.gam.project.controller;
 
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.service.ProjectService;
+import com.semi.gam.project.vo.PageVo;
 import com.semi.gam.project.vo.ProjectMemberVo;
 import com.semi.gam.project.vo.ProjectVo;
 import jakarta.servlet.http.HttpSession;
@@ -41,24 +42,41 @@ public class ProjectController {
         if(result != 1){
             return "redirect:/error";
         }
-        return "redirect:/project/cardList";
+        return "redirect:/project/list";
     }
 
     @GetMapping("cardList")
     //프로젝트 목록(카드)
-    public String cardList(){
+    public String cardList(HttpSession session){
+        MemberVo loginMemberVo  = (MemberVo) session.getAttribute("loginMemberVo");
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
         return "/project/cardList";
+    }
+
+    @GetMapping("cardListData")
+    @ResponseBody
+    public List<ProjectVo> cardListData(HttpSession session){
+        MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
+        return service.getProjectCardList(loginMemberVo);
     }
 
     @GetMapping("list")
     //프로젝트 목록 (리스트)
-    public String list(Model model, HttpSession session){
+    public String list(Model model, HttpSession session, @RequestParam(name="pno" , defaultValue = "1", required = false) int currentPage){
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        List<ProjectVo> projectVoList = service.getProjectList(loginMemberVo);
-        List<ProjectVo> projectVoList1 = service.getProjectAddMemberVo(loginMemberVo);
-
+        if(loginMemberVo == null){
+            return "redirect:/member/login";
+        }
+        int listCount = service.getProjectListCnt(loginMemberVo);
+        int pageLimit = 5;
+        int projectLimit = 8;
+        PageVo pvo = new PageVo(currentPage, listCount, pageLimit, projectLimit);
+        List<ProjectVo> projectVoList = service.getProjectList(loginMemberVo, pvo);
         model.addAttribute("projectVoList" , projectVoList);
-        model.addAttribute("projectVoList1" , projectVoList1);
+        model.addAttribute("pvo" , pvo);
+
         return "project/list";
     }
 

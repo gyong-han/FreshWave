@@ -77,3 +77,9 @@ main > .sidebar {
 #home-btn{
     font-family: "Pretendard-Bold"
 }
+
+.re textarea{
+    width: 1300px;
+    height: 80px;
+    border-radius: 20px;
+}

@@ -2,6 +2,7 @@ package com.semi.gam.project.service;
 
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.project.mapper.ProjectMapper;
+import com.semi.gam.project.vo.PageVo;
 import com.semi.gam.project.vo.ProjectMemberVo;
 import com.semi.gam.project.vo.ProjectVo;
 import lombok.RequiredArgsConstructor;
@@ -44,18 +45,29 @@ public class ProjectService {
 
     }
 
-    public List<ProjectVo> getProjectList(MemberVo loginMemberVo) {
-        return mapper.getProjectList(loginMemberVo);
+    public List<ProjectVo> getProjectList(MemberVo loginMemberVo, PageVo pvo) {
+
+        List<ProjectVo> projectVoList1 = mapper.getProjectAddMemberVo(loginMemberVo, pvo);
+
+        List<ProjectVo> projectVoList2 = mapper.getProjectList(loginMemberVo, pvo);
+        projectVoList1.addAll(projectVoList2);
+        return projectVoList1;
+    }
+
+    public List<ProjectVo> getProjectCardList(MemberVo loginMemberVo) {
+
+        List<ProjectVo> projectVoList1 = mapper.getProjectCardAddMemberVo(loginMemberVo);
+        List<ProjectVo> projectVoList2 = mapper.getProjectCardList(loginMemberVo);
+
+        projectVoList1.addAll(projectVoList2);
+
+        return projectVoList1;
     }
 
     public ProjectVo getProject(String key, MemberVo loginMemberVo) {
         return mapper.getProject(key,loginMemberVo);
     }
 
-
-    public List<ProjectVo> getProjectAddMemberVo(MemberVo loginMemberVo) {
-        return mapper.getProjectAddMemberVo(loginMemberVo);
-    }
 
     public List<ProjectMemberVo> getAddMember(String key) {
         return mapper.getAddMember(key);
@@ -93,6 +105,13 @@ public class ProjectService {
             }
         }
 
+        return result;
+    }
+
+    public int getProjectListCnt(MemberVo loginMemberVo) {
+        int result1 = mapper.getProjectListCnt(loginMemberVo);
+        int result2 = mapper.getProjectAddListCnt(loginMemberVo);
+        int result = result1 + result2;
         return result;
     }
 }

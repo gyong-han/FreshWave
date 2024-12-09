@@ -1,0 +1,88 @@
+.box{
+    width: 1420px;
+    height: 770px;
+    top: 181px;
+    left: 350px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+}
+
+.head{
+    width: 95%;
+    height: 90px;
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 40px;
+    border-bottom: 1px solid black;
+}
+
+.project{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 680px;
+    margin-left: 80px;
+    margin-top : 30px;
+}
+
+.title-area{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.input-area input{
+    font-size: 25px;
+    font-weight: 400;
+    border: none;
+    background-color: #f2f2f2;
+    pointer-events: none;
+}
+
+.input-area {
+    display: grid;
+    grid-auto-rows: 100px;
+}
+
+.add-area table{
+    width: 500px;
+    height: 600px;
+}
+
+.add-area tbody{
+    display: grid;
+    grid-auto-rows: 65px;
+    width: 100%;
+    height: 680px;
+    font-size : 25px;
+    font-weight: 500;
+}
+
+.button-area{
+    margin-top: 30px;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+#mouse {
+    cursor: pointer;
+}
+
+.button-area button{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+}
+
+#btn{
+    margin-right: 1050px;
+}
+
+.spanBtn button{
+    background-color: black;
+    cursor: pointer;
+}

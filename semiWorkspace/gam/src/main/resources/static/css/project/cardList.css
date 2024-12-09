@@ -1,0 +1,90 @@
+.card-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    gap:100px;
+
+}
+
+.card-list > div{
+    width: 350px;
+    height: 350px;
+    border-radius: 25px;
+}
+
+.high{
+    position: relative;
+    background-color: #1d64f2;   
+    color: #f2f2f2;
+    grid-template-rows: 5fr 1fr;
+    grid-template-columns: 5fr 1fr;
+    display: grid;
+
+}
+
+.mid{
+    position: relative;
+    display: grid;
+    grid-template-rows: 5fr 1fr;
+    grid-template-columns: 5fr 1fr;
+    background-color: #BFF205;
+    color: #121212;
+}
+
+.low{
+    position: relative;
+    display: grid;
+    background-color: #f25d1d;
+    grid-template-rows: 5fr 1fr;
+    grid-template-columns: 5fr 1fr;
+    color: #f2f2f2;
+}
+
+.bot{
+    grid-column: span 2;    
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    justify-items: end;
+}
+
+
+.top1{
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.top2{
+    font-size:25px;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-right: 10px;
+
+}
+
+.hidden-area{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    position: absolute;
+    z-index: 1000;
+    background-color: #ffffff;
+    margin-top: 10px;
+    width: 188px;
+    height: 122px;
+    font-size: 25px;
+    font-weight: 400;
+    margin-left: 200px;
+    margin-top: 60px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+.hidden-area a{
+    text-decoration: none;
+}
+

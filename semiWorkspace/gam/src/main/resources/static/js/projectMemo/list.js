@@ -1,19 +1,30 @@
-const tbodyTag = document.querySelector(".memo-list-area tbody");
-const hiddenTag = document.querySelector(".memo-list-area input[type=hidden]").value;
+function loadMemoList(){
+    const tbodyTag = document.querySelector(".memo-list-area tbody");
+    const hiddenTag = document.querySelector(".memo-list-area input[type=hidden]").value;
+
+
+
+    const url = new URL(location);
+    let pno = url.searchParams.get("pno");
+    if(pno == null){
+        pno = 1;
+    }
 
 
 $.ajax({
-    url :   `/projectMemo/list?projectNo=${hiddenTag}` ,
+    url :   `/projectMemo/list?projectNo=${hiddenTag}&pno=${pno}` ,
     method : "post" ,
     data : {
 
         "key" : hiddenTag
 
     } ,
-    success : function(x){
-        console.log(x);
-
-        let i = 0;
+    success : function(m){
+        console.log(m);
+        const pvo = m.pvo;
+        const x = m.memoList;
+        paintPageArea(pvo, x)
+        
         for(const vo of x){
             const trTag = document.createElement("tr");
             const tdTag1 = document.createElement("td");
@@ -22,7 +33,6 @@ $.ajax({
             const tdTag4 = document.createElement("td");
             const tdTag5 = document.createElement("td");
             const tdTag6 = document.createElement("td");
-            const tdTag7 = document.createElement("td");
             const inputTag = document.createElement("input");
 
             inputTag.type ="botton";
@@ -30,7 +40,7 @@ $.ajax({
             inputTag.onclick = function(){
                 location.href=`/projectMemo/detail?projectNo=${vo.prjKey}&no=${vo.no}`;
             };
-
+            tdTag1.className="td1";
             tdTag1.appendChild(inputTag);
             trTag.appendChild(tdTag1);
             tdTag2.innerText = vo.ing;
@@ -51,7 +61,35 @@ $.ajax({
     error : function(){
         console.log("통신실패");
     } ,
-
-
-
 })
+}
+
+loadMemoList();
+
+
+function paintPageArea(pvo, x){
+    const page = document.querySelector(".page-area");
+    page.innerHTML = "";
+
+    if(pvo.startPage != 1){
+        const aTag = document.createElement("a");
+        aTag.setAttribute("href" , `/projectMemo/list?projectNo=${x[0].prjKey}&pno=${pvo.startPage-1}`);
+        aTag.innerText = " < ";
+        page.appendChild(aTag);
+    }
+    
+    for(let i = pvo.startPage; i <= pvo.endPage; i++){
+        const aTag = document.createElement("a");
+        aTag.setAttribute("href" , `/projectMemo/list?projectNo=${x[0].prjKey}&pno=${i}`);
+        aTag.innerText = i;
+        page.appendChild(aTag);
+    }
+    
+    if(pvo.endPage != pvo.maxPage){
+        const aTag = document.createElement("a");
+        aTag.setAttribute("href" , `/projectMemo/list?projectNo=${x[0].prjKey}&pno=${pvo.endPage + 1}`);
+        aTag.innerText = " > ";
+        page.appendChild(aTag);
+    }
+
+}

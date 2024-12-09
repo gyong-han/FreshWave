@@ -1,8 +1,76 @@
-const selectTag = document.querySelector("select[#writer-select]");
+input.in, select.in {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0 10px;
+    width: 500px;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    appearance: none;
+}
 
-const optionTag = document.createElement("option");
+input[type="date"].start, input[type="date"].end {
+    border: 1px solid #000;
+    border-radius: 15px;
+    width: 500px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    appearance: none;
+}
 
-optionTag.setAttribute("value" , 1);
-optionTag.innerText = "홍길동"
+.content1, .content2 {
+    display: grid;
+    gap: 15px; 
+}
 
-selectTag.appendChild(optionTag);
+.button-area{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    justify-items: end;
+    align-items: end;
+    margin-right: 80px;
+}
+
+
+.content-wrapper button , .button-area input{
+    background-color: #1D64F2;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+}
+
+.content-wrapper button:hover , .button-area input:hover{
+    cursor: pointer;
+}
+.content3 {
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    gap: 20px;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.button-area button{
+    margin-right: 10px;
+}
+
+.content2 label{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#cancle{
+    background-color: black;
+    cursor: pointer;
+
+}
+
+#addMember-area button{
+    background-color: transparent;
+    color: inherit;
+    width: 0px;
+}
