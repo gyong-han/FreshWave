@@ -11,7 +11,9 @@
         NICK = #{nick}
         , PHONE = #{phone}
         , ADDRESS = #{address}
-        , PROFILE = #{profile}
+        <if test="profile != null">
+            ,PROFILE = #{profile}
+        </if>
         <if test="pwd != ''">
             ,PWD = #{pwd}
         </if>

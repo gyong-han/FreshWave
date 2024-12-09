@@ -85,7 +85,7 @@
                                </tr>
                                <tr>
                                    <th>입사일</th>
-                                   <td><input class="input-contain" type="input" name="hireDate" value="${vo.hireDate}"></td>
+                                   <td><input class="input-contain" type="date" name="hireDate" value="${vo.hireDate}"></td>
                                </tr>
                                <tr>
                                    <th>주소</th>
@@ -99,7 +99,7 @@
                 </div>
                 </div>
                 <input type="submit" id="edit" value="저장">
-                <input type="button" id="del" value="목록">
+                <input type="button" id="del" value="목록" onclick="location.href='/admin/list?pno=1'">
         </form>
         </main>
 
