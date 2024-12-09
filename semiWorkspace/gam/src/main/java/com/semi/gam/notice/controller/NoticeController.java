@@ -53,7 +53,6 @@ public class NoticeController {
             changeName = FileUploader.save(f,path);
         }
 
-        System.out.println("urgentYn = " + urgentYn);
         int result = service.write(vo , changeName , originName);
 
         if(result != 1) {
@@ -112,13 +111,10 @@ public class NoticeController {
     public String detail(String bno, Model model , HttpSession session){
         NoticeVo vo = service.getNoticeDetail(bno);
         MemberVo loginMemberVo = (MemberVo)session.getAttribute("loginMemberVo");
-        System.out.println("loginMemberVo.getId() = " + loginMemberVo.getId());
         List<AttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
         model.addAttribute("vo", vo);
         model.addAttribute("attachmentVoList" , attachmentVoList);
         model.addAttribute("loginMemberVo" , loginMemberVo);
-        System.out.println("vo.getOriginName() = " + vo.getOriginName());
-        System.out.println("vo.getChangeName() = " + vo.getChangeName());
         return "notice/detail";
     }
 
@@ -148,7 +144,6 @@ public class NoticeController {
         }
         int result = service.edit(vo ,originName , changeName);
         session.setAttribute("alertNo",result);
-        System.out.println("vo.getUrgentYn() = " + vo.getUrgentYn());
         String bno = vo.getNo();
         if (bno == null || bno.isEmpty()) {
             throw new IllegalArgumentException("게시글 번호(bno)가 유효하지 않습니다."); // 예외 처리
