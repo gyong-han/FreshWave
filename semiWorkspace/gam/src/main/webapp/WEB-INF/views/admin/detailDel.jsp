@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>detail</title>
+    <link rel="stylesheet" href="/css/admin/detail.css">
     <style>
         .form-contain{
             border: 1px solid black;
@@ -14,61 +15,70 @@
     </style>
 </head>
 <body>
-    <main>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <main class="main-container">
+        <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
         <div class="form-contain">
-                <div class="group-detail">
-                    ${vo.profile}
-                    <h3>${vo.memberName}</h3>
-                </div>
-                <div class="group-detail">
-                    <table>
-                        <tr>
-                            <th>성별</th>
-                            <td>${vo.gender}</td>
-                            <th>사번</th>
-                            <td>${vo.empNo}</td>
-                        </tr>
-                        <tr>
-                            <th>부서</th>
-                            <td>${vo.deptName}</td>
-                            <th>직급</th>
-                            <td>${vo.jobName}</td>
-                        </tr>
-                    </table>
-                </div>
-                <hr>
-                <div class="group-detail">
-                    <table>
-                        <tr>
-                            <th>전화번호</th>
-                            <td>${vo.phone}</td>
-                            <th>이메일</th>
-                            <td>${vo.email}</td>
-                        </tr>
-                        <tr>
-                            <th>닉네임</th>
-                            <td>${vo.nick}</td>
-                            <th>생년월일</th>
-                            <td>${vo.idNum}</td>
-                        </tr>
-                        <tr>
-                            <th>입사일</th>
-                            <td>${vo.hireDate}</td>
-                            <th>퇴사일</th>
-                            <td>${vo.quitDate}</td>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td>${vo.address}</td>
-                            <th>비밀번호</th>
-                            <td>${vo.pwd}</td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="content-wrapper">
+                <div></div>
+                <div class="group-one">
+                    <div class="profile">
+                        <img src="http://127.0.0.1/img/profile/${vo.profile}" width="100px" height="100px">
+                    </div>
+                   <h3>${vo.memberName}</h3>
+               </div>
+               <div class="group-two">
+                    <div class="group-up">
+                        <table class="table-area">
+                            <tr>
+                                <th>성별</th>
+                                <td>${vo.gender}</td>
+                                <th>사번</th>
+                                <td>${vo.empNo}</td>
+                            </tr>
+                            <tr>
+                                <th>부서</th>
+                                <td>${vo.deptName}</td>
+                                <th>직급</th>
+                                <td>${vo.jobName}</td>
+                            </tr>
+                        </table>
+                    </div>
+                   <div class="group-under">
+                       <table class="table-area">
+                           <tr>
+                               <th>전화번호</th>
+                               <td>${vo.phone}</td>
+                               <th>이메일</th>
+                               <td>${vo.email}</td>
+                           </tr>
+                           <tr>
+                               <th>닉네임</th>
+                               <td>${vo.nick}</td>
+                               <th>생년월일</th>
+                               <td>${vo.idNum}</td>
+                           </tr>
+                           <tr>
+                               <th>입사일</th>
+                               <td>${vo.hireDate}</td>
+                               <th>퇴사일</th>
+                               <td>${vo.quitDate}</td>
+                           </tr>
+                           <tr>
+                               <th>주소</th>
+                               <td>${vo.address}</td>
+                               <th>비밀번호</th>
+                               <td>${vo.pwd}</td>
+                           </tr>
+                       </table>
+                   </div>
+               </div>
+            </div>
+                
 
             </div>
         </main>
-        <button onclick="location.href='/admin/listDel?pno=1'">목록</button>
-        <button onclick="location.href='/admin/out?no=${vo.empNo}'">삭제</button>
+        <button id="del" onclick="location.href='/admin/listDel?pno=1'">목록</button>
+        <button id="edit" onclick="location.href='/admin/out?no=${vo.empNo}'">삭제</button>
 </body>
 </html>

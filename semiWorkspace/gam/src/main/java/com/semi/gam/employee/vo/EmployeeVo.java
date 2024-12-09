@@ -11,6 +11,7 @@ public class EmployeeVo {
     private String gender;
     private String phone;
     private String nick;
+    private String name;
     private String idNum;
     private String address;
     private String pwd;

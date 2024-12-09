@@ -56,4 +56,8 @@ public class AdminService {
     public int out(String no) {
         return mapper.out(no);
     }
+
+    public List<EmployeeVo> getMemberHomeList() {
+        return mapper.getMemberHomeList();
+    }
 }

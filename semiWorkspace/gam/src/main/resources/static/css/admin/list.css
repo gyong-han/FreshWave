@@ -1,0 +1,143 @@
+body{
+    font-family: 'Pretendard';
+    font-weight: 400;
+    background-color: #F2F2F2;
+}
+/* 메인 컨테이너: 사이드바와 콘텐츠를 가로로 배치 */
+.main-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+
+.content-wrapper {
+    display: grid;
+    flex-grow: 1; /* 사이드바 제외 나머지 공간 사용 */
+    padding: 20px;
+    gap: 20px;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-rows: 0.5fr 5fr 0.3fr 0.3fr;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.list-table{
+    border-collapse: collapse;
+    width: 1300px;
+}
+
+.list-table thead th{
+    text-align: center;;
+    border-bottom: 2px solid #121212;
+    width: 150px;
+}
+
+.list-table thead th:last-child{
+    text-align: center;
+    border-bottom: 2px solid #121212;
+    height: 50px;
+}
+
+.list-table tbody td{
+    text-align: center;
+    height: 47px;
+}
+
+input[name="searchValue"]{
+    background-color: #F2F2F2;
+    border: none;
+    border-bottom: 1px solid #121212;
+    outline: none;
+    width: 400px;
+    height: 30px;
+    padding: 0%;
+    margin-left: 20px;
+}
+
+input[type="submit"]{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 30px;
+    background-image: url('/img/icon/search.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.list-table tbody tr:hover td{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+
+
+.list-table tbody tr:hover td:nth-child(1) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.list-table tbody tr:hover td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#write-btn{
+    background-color: #1D64F2;
+    color: #F2F2F2;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 90px;
+    margin-right: 30px;
+}
+
+#write-btn:hover{
+    cursor: pointer;
+}
+
+#search-type{
+    height: 30px;
+    width: 90px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#insert-area{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-area{
+    display: flex;
+    justify-content: center;
+}
+
+.page-btn{
+    background: none;       /* 배경색 제거 */
+    border: none;           /* 테두리 제거 */
+    padding: 0;             /* 기본 여백 제거 */
+    margin: 5px;              /* 기본 여백 제거 */
+    box-shadow: none;       /* 그림자 제거 */
+    font: inherit;          /* 상위 요소의 폰트 상속 */
+    color: inherit;         /* 상위 요소의 색상 상속 */
+    outline: none;          /* 포커스 시 테두리 제거 */
+    cursor: pointer;        /* 클릭 가능한 버튼처럼 유지 */
+}
+
+#search-value{
+    background-color: initial;
+}
+
+#search-type option {
+    border-radius: 0px;
+  }

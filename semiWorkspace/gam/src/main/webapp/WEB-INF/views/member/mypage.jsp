@@ -8,40 +8,24 @@
     <title>UPDATE</title>
     <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer src="/js/member/mypage.js"></script>
+    <link rel="stylesheet" href="/css/member/mypage.css">
 
-    <style>
-        .custom-file-upload {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #BFF205; /* 버튼 색상 */
-          border-radius: 15px;
-          color: #121212; /* 텍스트 색상 */
-          cursor: pointer;
-          text-align: center;
-        }
 
-        .hide {
-        display: none;
-        }
-
-        input[type="file"] {
-          display: none; /* 기본 파일 업로드 버튼 숨기기 */
-        }
-    </style>
 </head>
 <body>
-
-
-        <!-- 메인 폼 -->
-        <form id="edit-member" action="/member/edit" method="post" class="form-container" enctype="multipart/form-data">
-            <div class="container">
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <main class="main-container">
+    <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
+    <div class="form-join-container">
+         <!-- 메인 폼 -->
+         <form id="edit-member" action="/member/edit" method="post" class="form-container" enctype="multipart/form-data">
+            <div class="join-contain">
                     <!-- 프로필 섹션 -->
-                    <div class="member-profile">
+                    <div class="left-join">
                         <div class="profile">
                             <img src="http://127.0.0.1/img/profile/${loginMemberVo.profile}" width="100px" height="100px">
                         </div>
                         <h2>${loginMemberVo.name}</h2>
-                        <br>
                         <p>${loginMemberVo.deptName}(${loginMemberVo.jobName})</p>
                         <p>${loginMemberVo.email}</p>
                         <label for="file-upload" class="custom-file-upload">사진 변경</label>
@@ -49,21 +33,21 @@
                     </div>
                     <br>
             <input type="hidden" name="id" value="${loginMemberVo.id}">
+
             <!-- 닉네임 -->
-            <div class="member-detail">
+            <div class="right-join">
                 <label id="nick">
                     닉네임
-                    <br>
-                    <input type="text" name="nick" value="${loginMemberVo.nick}" placeholder="닉네임을 입력해주세요" oninput="disableSubmitBtn();">
-                    <input type="button" value="중복확인" class="semi-btn-nick" onclick="checkDupNick();">
+                    <br><br>
+                    <input type="text" class="input-contain" name="nick" value="${loginMemberVo.nick}" placeholder="닉네임을 입력해주세요" oninput="disableSubmitBtn();">
                 </label>
                 <br>
 
                 <!-- 비밀번호 -->
                 <label id="password">
                     비밀번호
-                    <br>
-                    <input type="password" name="pwd" id="password" placeholder="비밀번호를 입력해주세요">
+                    <br><br>
+                    <input type="password" class="input-contain" name="pwd" id="password" placeholder="비밀번호를 입력해주세요">
                 </label>
                     <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
                 <br>
@@ -71,8 +55,8 @@
                 <!-- 비밀번호 재입력 -->
                 <label id="password-again">
                     비밀번호 재입력
-                    <br>
-                    <input type="password" id="password-retype" placeholder="비밀번호를 다시 입력해주세요">
+                    <br><br>
+                    <input type="password" class="input-contain" id="password-retype" placeholder="비밀번호를 다시 입력해주세요">
                 </label>
                   <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
                 <br>
@@ -80,18 +64,18 @@
                 <!-- 전화번호 -->
                 <label id="phone">
                     전화번호
-                    <br>
-                    <input type="tel" name="phone" value="${loginMemberVo.phone}" placeholder="전화번호를 입력해주세요" required>
+                    <br><br>
+                    <input type="tel" class="input-contain" name="phone" value="${loginMemberVo.phone}" placeholder="전화번호를 입력해주세요" required>
                 </label>
                 <br>
 
                 <!-- 주소 -->
                 <label>
                     주소
-                    <br>
-                    <input type="text" id="sample4_roadAddress" name="roadAddress" value="${loginMemberVo.address}" placeholder="주소" size="30">
-                    <input type="button" onclick="sample4_execDaumPostcode();" value="주소 찾기"><br>
-                    <input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소"><br>
+                    <br><br>
+                    <input type="text" class="input-address" id="sample4_roadAddress" name="roadAddress" value="${loginMemberVo.address}" placeholder="주소" size="30">
+                    <input type="button" class="input-enroll" onclick="sample4_execDaumPostcode();" value="주소 찾기"><br><br>
+                    <input type="text" class="input-address" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소"><br>
 
                     <input type="hidden" id="address" name="address">
 
@@ -104,13 +88,16 @@
             <br>
 
             <!-- 버튼 -->
-            <div>
-                <button type="button" onclick="location.href='/home'">취소</button>
-                <button type="submit" onclick="combineAddress();">저장</button>
+            <div class="button-contain">
+                <button type="button" onclick="location.href='/home'" id="cancel">취소</button>
+                <button type="submit" onclick="combineAddress();" id="enroll">저장</button>
             </div>
         </form>
     </div>
+       
+    </main>
 
+        
 
 </body>
 </html>

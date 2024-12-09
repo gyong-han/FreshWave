@@ -1,0 +1,158 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body{
+    background-color: #F2F2F2;
+    font-family: "Pretendard-Regular";
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 300px 3fr;
+}
+
+.form-join-container{
+    display: grid;
+    grid-column: 2;
+    place-items: center;
+    
+}
+
+.join-contain {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr; /* 왼쪽과 오른쪽 열을 각각 나누기 */
+    gap: 20px; 
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+.left-join{
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 입력 요소 간 간격 */
+    padding: 20px;
+}
+
+.right-join {
+    display: grid;
+    grid-column: 3;
+    flex-direction: column;
+    gap: 15px; /* 입력 요소 간 간격 */
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.join-buttons {
+    grid-column: span 3; 
+    text-align: right;
+    margin-top: 20px;
+}
+
+.point{
+    color:#1D64F2;
+    font-size: large;
+    font-weight: bold;
+}
+
+.input-contain{
+    border: none;
+    background-color: #FFFFFF;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.input-address{
+    border: none;
+    background-color: #FFFFFF;
+    width: 300px;
+    gap: 10;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#cancel{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+#enroll{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor:pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+}
+
+label{
+    font-size: large;
+    font-weight: bold;
+}
+
+.input-button{
+    background-color: #F25D1D;
+    color: #FFFFFF;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 30px;
+    width: 100px;
+    cursor:pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+}
+
+.input-inNum{
+    border: none;
+    background-color: #FFFFFF;
+    width: 150px;
+    gap: 10;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.input-enroll{
+    background-color: #F25D1D;
+    color: #ffff;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor:pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+}
+
+main label-gender{
+    font-family: "Pretendard-Regular";
+    font-size: large;
+    font-weight: bold;
+
+}

@@ -8,16 +8,14 @@ import com.semi.gam.job.vo.JobVo;
 import com.semi.gam.member.service.MemberService;
 import com.semi.gam.member.vo.MemberVo;
 import com.semi.gam.util.FileUploader;
+import com.semi.gam.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -56,6 +54,7 @@ public class MemberController{
            if(loginAdminVo == null){
                throw new IllegalStateException("error-admin");
            }
+           session.setAttribute("loginMemberVo",null);
            session.setAttribute("loginAdminVo",loginAdminVo);
            return "redirect:/admin/home";
        }
@@ -64,6 +63,7 @@ public class MemberController{
         if(loginMemberVo == null){
             throw new IllegalStateException("error-member");
         }
+        session.setAttribute("loginAdminVo",null);
         session.setAttribute("loginMemberVo",loginMemberVo);
         System.out.println("loginMemberVo = " + loginMemberVo);
         return "redirect:/home";
@@ -140,7 +140,7 @@ public class MemberController{
     }
 
     //로그아웃
-    @PostMapping("logout")
+    @GetMapping("logout")
     public String logout(HttpSession session){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute(("loginMemberVo"));
         session.setAttribute("loginMemberVo",null);
@@ -149,9 +149,44 @@ public class MemberController{
     }
 
     //퇴근버튼 누르고 로그아웃
-    @PostMapping("finishLogOut")
-    public void finishLogOut(HttpSession session, EmployeeVo vo){
+    @GetMapping("logOutFinish")
+    @ResponseBody
+    public int finishLogOut(HttpSession session){
         MemberVo loginMemberVo = (MemberVo) session.getAttribute(("loginMemberVo"));
+        System.out.println("loginMemberVo = " + loginMemberVo);
+        int result = service.logOutFinish(loginMemberVo);
+        if(result != 1){
+            throw new IllegalStateException("ERROR-MEMBER-logOutFinish");
+        }
+        session.setAttribute("loginMemberVo",null);
+
+        return result;
+
+    }
+
+    //회원이 회원 목록조회
+    @GetMapping("list")
+    public String list(Model model){
+        List<DeptVo> deptVoList = service.getDeptVoList();
+        model.addAttribute("deptVoList" , deptVoList);
+        return "member/list";
+    }
+
+
+    @GetMapping("list/data")
+    @ResponseBody
+    public HashMap list(@RequestParam(name="pno", required = false, defaultValue = "1")int currentPage ,
+                        String searchType , String searchValue){
+        int listCount = service.getMemberCnt(searchType,searchValue);
+        int pageLimit = 5;
+        int boardLimit = 10;
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+        List<EmployeeVo> employeeVoList = service.getMemberList(pvo,searchType,searchValue);
+
+        HashMap map = new HashMap();
+        map.put("a" , employeeVoList);
+        map.put("b" , pvo);
+        return map;
 
     }
 

@@ -1,0 +1,164 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body{
+    background-color: #F2F2F2;
+    font-family: "Pretendard-Regular";
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 300px 3fr;
+}
+
+.form-join-container{
+    display: grid;
+    grid-column: 2;
+    place-items: center;
+    
+}
+
+.join-contain {
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.5fr 2fr; /* 왼쪽과 오른쪽 열을 각각 나누기 */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+.left-join{
+    display: flex;
+    grid-column: 2;
+    flex-direction: column;
+    gap: 15px; /* 입력 요소 간 간격 */
+    padding: 20px;
+}
+
+.right-join {
+    display: grid;
+    grid-column: 4;
+    flex-direction: column;
+    gap: 15px; /* 입력 요소 간 간격 */
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-contain{
+    display: grid;
+    grid-column: 4;
+}
+
+.join-buttons {
+    text-align: right;
+    margin-top: 20px;
+}
+
+
+.input-contain{
+    border: none;
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.input-address{
+    border: none;
+    background-color: #FFFFFF;
+    width: 300px;
+    gap: 10;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#cancel{
+    background-color: #121212;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+#enroll{
+    background-color: #1D64F2;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor:pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+}
+
+label{
+    font-size: large;
+    font-weight: bold;
+}
+
+
+
+.input-enroll{
+    background-color: #F25D1D;
+    color: #ffff;
+    border: none;
+    color: #f2f2f2;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    cursor:pointer;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 2px solid #D2D2D2;
+}
+
+.button-contain{
+    display: flex;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    background-color: #BFF205; /* 버튼 색상 */
+    color: #121212; /* 텍스트 색상 */
+    font-size: medium;
+    font-weight: 100;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 20px
+  }
+
+  .hide {
+  display: none;
+  }
+
+  input[type="file"] {
+    display: none; /* 기본 파일 업로드 버튼 숨기기 */
+  }

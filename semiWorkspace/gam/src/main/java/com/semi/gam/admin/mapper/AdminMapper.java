@@ -104,4 +104,18 @@ public interface AdminMapper {
             AND QUIT_YN = 'Y'
             """)
     int out(String no);
+
+    @Select("""
+            SELECT
+                M.NAME
+                ,D.DEPT_NAME
+                ,J.JOB_NAME
+            FROM EMPLOYEE E
+            LEFT OUTER JOIN MEMBER M ON (M.ID = E.EMP_NO)
+            LEFT OUTER JOIN DEPT D ON(D.DEPT_CODE = E.DEPT_CODE)
+            LEFT OUTER JOIN JOB J ON(J.JOB_CODE = E.JOB_CODE)
+            WHERE QUIT_YN = 'N'
+            """)
+    List<EmployeeVo> getMemberHomeList();
+
 }
