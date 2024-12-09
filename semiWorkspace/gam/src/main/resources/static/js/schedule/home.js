@@ -154,7 +154,7 @@ function detailEvent(calendar, info){
             const finishTimeDiv = document.createElement('div');
             finishTimeDiv.setAttribute('id', 'finishTimeDiv');
             finishTimeDiv.innerText = data.finishTime;
-            dbody.appendChild(finishTimeDiv);
+            dbody.appendChild(finishTimeDiv);          
 
             // location
             if(document.querySelector('#locationDiv')){
@@ -182,8 +182,8 @@ function detailEvent(calendar, info){
                 divTag1.remove();
             }
             const contentDiv = document.createElement('div');
-            finishTimeDiv.setAttribute('id', 'contentDiv');
-            finishTimeDiv.innerText = '내용 : ' + data.finishTime;
+            contentDiv.setAttribute('id', 'contentDiv');
+            contentDiv.innerText = '내용 : ' + data.content;
             dbody.appendChild(contentDiv);
 
 
@@ -326,86 +326,86 @@ function updateEvent(event, revertFunc){
 }
 
 // 일정 삭제하기 함수
-function delEvent(delBtn){
-    const tag = delBtn.parentNode.parentNode.parentNode.parentNode;
-    const sno = tag.getAttribute("sno");
+// function delEvent(delBtn){
+//     const tag = delBtn.parentNode.parentNode.parentNode.parentNode;
+//     const sno = tag.getAttribute("sno");
 
-    const result = confirm("일정을 삭제하시겠습니까?");
-        if(result == false){
-            return;
-        }
-    $.ajax({
-        url : '/schedule/del',
-        method : 'GET',
-        data : {
-            sno
-        },
-        success : function(){
-            // no로 이벤트 객체 찾기
-            const event = calendar.getEventById(sno);
+//     const result = confirm("일정을 삭제하시겠습니까?");
+//         if(result == false){
+//             return;
+//         }
+//     $.ajax({
+//         url : '/schedule/del',
+//         method : 'GET',
+//         data : {
+//             sno
+//         },
+//         success : function(){
+//             // no로 이벤트 객체 찾기
+//             const event = calendar.getEventById(sno);
 
-            $("#detailModal").modal('hide');
-            // const dmodal = document.querySelector('.modal-content');
-            // event.remove();
-            // detailModal.remove();
-            location.reload();
-        },
-        error : function(){
-            console.log("삭제하기 실행 안됨");
-        }
-    });
-}
+//             $("#detailModal").modal('hide');
+//             // const dmodal = document.querySelector('.modal-content');
+//             // event.remove();
+//             // detailModal.remove();
+//             location.reload();
+//         },
+//         error : function(){
+//             console.log("삭제하기 실행 안됨");
+//         }
+//     });
+// }
 
 // 일정 삭제하기 (swal)
-// function scheduleDelete(sno) {
-//     // const tag = delBtn.parentNode.parentNode.parentNode.parentNode;
-//     // const sno = tag.getAttribute("sno");
-//     console.log(sno);
+function delEvent(delBtn) {
+    const tag = delBtn.parentNode.parentNode.parentNode.parentNode;
+    const sno = tag.getAttribute("sno");
+    console.log(sno);
     
-//     Swal.fire({
-//       title: "삭제하시겠습니까?", //alert창 문구
-//       icon: "question", // 그림(error,success,warning,info,question)
-//       showCancelButton: true, //취소버튼 여부
-//       confirmButtonColor: "#1D64F2",
-//       cancelButtonColor: "#121212",
-//       confirmButtonText: "삭제", //취소 버튼 문구
-//       cancelButtonText : "취소", //확인 버튼 문구
-//       reverseButtons: true //취소,확인버튼 좌우 반전
-//     })
-//     .then((result) => {
-//       if (result.isConfirmed) {
-//         $.ajax({
-//           url : "/schedule/del",
-//           data :{
-//             sno
-//           },
-//           success : function(x){
-//             if(x == 1){
-//               Swal.fire({
-//                 title: "삭제 완료!",
-//                 icon: "success",
-//                 confirmButtonText: "확인"
-//               })
-//               .then( () => {
-//                 location.href = "/schedule/home";
-//               } );
-//             }else{
-//               Swal.fire({
-//                 title: "삭제 실패...",
-//                 icon: "error",
-//                 confirmButtonText: "확인"
-//               })
-//               .then( () => {
-//                 location.href = `/schedule/home`;
-//               } );
-//             }
-//           },
-//           error : function(x){
-//           }
-//         })
-//       }
-//     });
-//   }
+    Swal.fire({
+      title: "삭제하시겠습니까?", //alert창 문구
+      icon: "question", // 그림(error,success,warning,info,question)
+      showCancelButton: true, //취소버튼 여부
+      confirmButtonColor: "#1D64F2",
+      cancelButtonColor: "#121212",
+      confirmButtonText: "삭제", //취소 버튼 문구
+      cancelButtonText : "취소", //확인 버튼 문구
+      reverseButtons: true //취소,확인버튼 좌우 반전
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url : "/schedule/del",
+          data :{
+            sno
+          },
+          success : function(x){
+            if(x == 1){
+              Swal.fire({
+                title: "삭제 완료!",
+                icon: "success",
+                confirmButtonText: "확인"
+              })
+              .then( () => {
+                location.href = "/schedule/home";
+              } );
+            }else{
+              Swal.fire({
+                title: "삭제 실패...",
+                icon: "error",
+                confirmButtonText: "확인"
+              })
+              .then( () => {
+                location.href = `/schedule/home`;
+              } );
+            }
+          },
+          error : function(x){
+          }
+        })
+      }
+    });
+  }
 
 // 유효성 검사
 const faildatemsg1 = document.querySelector('.faildate-msg1');

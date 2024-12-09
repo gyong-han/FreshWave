@@ -24,10 +24,13 @@
                     <h1>${vo.title}</h1>
                     <div id="enroll-area">작성일 : ${vo.enrollDate}</div>
                     <div id="content-area">${vo.content}</div>
-                    <div id="date-area">예약일 : ${vo.rdate}</div>
-                    <div id="time-area">예약 시간 : ${vo.rtime}</div>
-                    <div id="writer-area">에약자 : ${vo.writerName}</div>
-                    <div id="phone-area">전화번호 : ${vo.phone}</div>
+                    <div id="line-area"></div>
+                    <div id="info-area">
+                        <div id="date-area">예약일 : ${vo.rdate}</div>
+                        <div id="time-area">예약 시간 : ${vo.rtime}</div>
+                        <div id="writer-area">예약자 : ${vo.writerName}</div>
+                        <div id="phone-area">전화번호 : ${vo.phone}</div>
+                    </div>
                 </div>
             </div>
             <div class="btn-area">

@@ -80,7 +80,6 @@
         <div class="modal-footer">
             <button type="button" class="close-btn" data-bs-dismiss="modal">목록</button>
             <button type="button" class="del-btn" onclick="delEvent(this);">삭제</button>
-            <!-- <button type="button" class="del-btn" onclick="scheduleDelete(`${vo.no}`);">삭제</button> -->
             <button type="button" class="edit-btn" onclick="changeEvent(this);">수정</button>
             <!-- <button type="button" class="save-btn">Save changes</button> -->
         </div>
