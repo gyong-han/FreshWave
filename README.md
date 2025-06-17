@@ -1,7 +1,7 @@
 ## 📚 FreshWave
 
 - 2024 KH정보교육원 Semi 프로젝트
-- 프로젝트 및 거래처 관리 등을 위한 사내 ERP 시스템 FreshWave
+- 프로젝트 및 거래처 관리 등을 위한 사내 ERP 시스템
 
 ## 📌 Project
 
